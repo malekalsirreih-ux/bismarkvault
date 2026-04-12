@@ -1,5 +1,5 @@
 
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -10,19 +10,17 @@
 body {
     background: #0a0a0a;
     color: #fff;
-    font-family: Arial, sans-serif;
-    margin: 0;
+    font-family: Arial;
+    text-align: center;
     padding: 20px;
 }
 
 h1 {
     color: gold;
-    text-align: center;
 }
 
 .container {
-    text-align: center;
-    margin-top: 40px;
+    margin-top: 50px;
 }
 
 input {
@@ -30,6 +28,7 @@ input {
     border-radius: 10px;
     border: none;
     margin: 10px;
+    width: 220px;
 }
 
 button {
@@ -41,123 +40,40 @@ button {
     cursor: pointer;
 }
 
-#vault {
-    display: none;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
-    gap: 15px;
+.file-box {
     margin-top: 30px;
-}
-
-.card {
-    background: #111;
-    padding: 10px;
-    border-radius: 10px;
-    border: 1px solid #333;
-}
-
-.category {
-    font-size: 12px;
-    color: gold;
-}
-
-.search {
-    text-align: center;
-    margin-top: 20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>BismarkVault 🔐</h1>
+<h1>🔐 BismarkVault</h1>
 
+<!-- LOGIN -->
 <div class="container" id="login">
     <input type="password" id="password" placeholder="Enter Password">
     <br>
     <button onclick="login()">Unlock</button>
 </div>
 
-<div id="vault">
-
-    <div class="search">
-        <input type="text" id="search" placeholder="Search files..." oninput="searchFiles()">
-    </div>
-
-    <div class="container">
-        <input type="file" id="fileInput" multiple onchange="uploadFiles()">
-    </div>
-
-    <div class="grid" id="fileGrid"></div>
-
+<!-- VAULT -->
+<div class="container" id="vault" style="display:none;">
+    <h2>Your Files</h2>
+    <input type="file" multiple>
+    <div class="file-box" id="files"></div>
 </div>
 
 <script>
-let files = [];
-
 function login(){
     const pass = document.getElementById("password").value;
+
     if(pass === "1234"){
         document.getElementById("login").style.display = "none";
         document.getElementById("vault").style.display = "block";
     } else {
         alert("Wrong Password ❌");
     }
-}
-
-function classify(name){
-    name = name.toLowerCase();
-
-    if(name.includes("invoice") || name.includes("bank")) return "Financial";
-    if(name.includes("medical") || name.includes("doctor")) return "Medical";
-    if(name.includes("contract") || name.includes("law")) return "Legal";
-
-    return "General";
-}
-
-function uploadFiles(){
-    const input = document.getElementById("fileInput");
-
-    for(let file of input.files){
-        files.push({
-            name: file.name,
-            category: classify(file.name)
-        });
-    }
-
-    render();
-}
-
-function render(){
-    const grid = document.getElementById("fileGrid");
-    grid.innerHTML = "";
-
-    files.forEach(f => {
-        grid.innerHTML += `
-        <div class="card">
-            <div>${f.name}</div>
-            <div class="category">${f.category}</div>
-        </div>`;
-    });
-}
-
-function searchFiles(){
-    const q = document.getElementById("search").value.toLowerCase();
-    const grid = document.getElementById("fileGrid");
-
-    grid.innerHTML = "";
-
-    files.filter(f => f.name.toLowerCase().includes(q))
-    .forEach(f => {
-        grid.innerHTML += `
-        <div class="card">
-            <div>${f.name}</div>
-            <div class="category">${f.category}</div>
-        </div>`;
-    });
 }
 </script>
 
