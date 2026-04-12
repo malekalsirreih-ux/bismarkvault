@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BismarkVault</title>
+
+<style>
+body {
+    background: black;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: gold;
+}
+
+button {
+    padding: 15px;
+    background: gold;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>BismarkVault 🔐</h1>
+
+<div id="login">
+    <input type="password" id="pass" placeholder="Password">
+    <br>
+    <button onclick="login()">Enter</button>
+</div>
+
+<div id="vault" style="display:none;">
+    <h2>Your Files</h2>
+    <input type="file" id="fileInput">
+</div>
+
+<script>
+function login(){
+    let p = document.getElementById("pass").value;
+    if(p === "1234"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("vault").style.display="block";
+    } else {
+        alert("Wrong password");
+    }
+}
+</script>
+
+</body>
+</html>
