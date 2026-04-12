@@ -1,25 +1,39 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+  <!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault</title>
+<title>BismarkVault 🔐</title>
 
 <style>
 body {
-    background: black;
-    color: white;
-    font-family: Arial;
-    text-align: center;
+    background: #0a0a0a;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin: 0;
     padding: 20px;
 }
 
 h1 {
     color: gold;
+    text-align: center;
+}
+
+.container {
+    text-align: center;
+    margin-top: 40px;
+}
+
+input {
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    margin: 10px;
 }
 
 button {
-    padding: 15px;
+    padding: 12px 25px;
     background: gold;
     border: none;
     border-radius: 10px;
@@ -27,10 +41,32 @@ button {
     cursor: pointer;
 }
 
-input {
+#vault {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill,minmax(200px,1fr));
+    gap: 15px;
+    margin-top: 30px;
+}
+
+.card {
+    background: #111;
     padding: 10px;
-    margin: 10px;
     border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.category {
+    font-size: 12px;
+    color: gold;
+}
+
+.search {
+    text-align: center;
+    margin-top: 20px;
 }
 </style>
 </head>
@@ -39,26 +75,89 @@ input {
 
 <h1>BismarkVault 🔐</h1>
 
-<div id="login">
-    <input type="password" id="pass" placeholder="Password">
+<div class="container" id="login">
+    <input type="password" id="password" placeholder="Enter Password">
     <br>
-    <button onclick="login()">Enter</button>
+    <button onclick="login()">Unlock</button>
 </div>
 
-<div id="vault" style="display:none;">
-    <h2>Your Files</h2>
-    <input type="file" id="fileInput">
+<div id="vault">
+
+    <div class="search">
+        <input type="text" id="search" placeholder="Search files..." oninput="searchFiles()">
+    </div>
+
+    <div class="container">
+        <input type="file" id="fileInput" multiple onchange="uploadFiles()">
+    </div>
+
+    <div class="grid" id="fileGrid"></div>
+
 </div>
 
 <script>
+let files = [];
+
 function login(){
-    let p = document.getElementById("pass").value;
-    if(p === "1234"){
-        document.getElementById("login").style.display="none";
-        document.getElementById("vault").style.display="block";
+    const pass = document.getElementById("password").value;
+    if(pass === "1234"){
+        document.getElementById("login").style.display = "none";
+        document.getElementById("vault").style.display = "block";
     } else {
-        alert("Wrong password");
+        alert("Wrong Password ❌");
     }
+}
+
+function classify(name){
+    name = name.toLowerCase();
+
+    if(name.includes("invoice") || name.includes("bank")) return "Financial";
+    if(name.includes("medical") || name.includes("doctor")) return "Medical";
+    if(name.includes("contract") || name.includes("law")) return "Legal";
+
+    return "General";
+}
+
+function uploadFiles(){
+    const input = document.getElementById("fileInput");
+
+    for(let file of input.files){
+        files.push({
+            name: file.name,
+            category: classify(file.name)
+        });
+    }
+
+    render();
+}
+
+function render(){
+    const grid = document.getElementById("fileGrid");
+    grid.innerHTML = "";
+
+    files.forEach(f => {
+        grid.innerHTML += `
+        <div class="card">
+            <div>${f.name}</div>
+            <div class="category">${f.category}</div>
+        </div>`;
+    });
+}
+
+function searchFiles(){
+    const q = document.getElementById("search").value.toLowerCase();
+    const grid = document.getElementById("fileGrid");
+
+    grid.innerHTML = "";
+
+    files.filter(f => f.name.toLowerCase().includes(q))
+    .forEach(f => {
+        grid.innerHTML += `
+        <div class="card">
+            <div>${f.name}</div>
+            <div class="category">${f.category}</div>
+        </div>`;
+    });
 }
 </script>
 
