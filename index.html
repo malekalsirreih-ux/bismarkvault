@@ -1,287 +1,614 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BismarkVault</title>
+  <title>BismarkVault — Secure Archiving</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
+    :root {
+      --gold:       #C9A84C;
+      --gold-light: #F0D080;
+      --gold-dim:   #7A6130;
+      --bg-deep:    #080808;
+      --bg-panel:   #111010;
+      --bg-card:    #161514;
+      --border:     rgba(201,168,76,0.18);
+      --border-hover: rgba(201,168,76,0.5);
+      --text:       #E8E0D0;
+      --text-muted: #8A8070;
+      --danger:     #9B2335;
+      --danger-light:#C0392B;
+      --radius:     14px;
     }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      background: radial-gradient(circle at top, #1b1b1b 0%, #0a0a0a 60%, #050505 100%);
-      color: #ffffff;
-      font-family: Arial, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.028;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glow-orb {
+      position: fixed;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
+      top: -200px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px 60px;
+    }
+
+    .brand {
       text-align: center;
+      margin-bottom: 36px;
+      animation: fadeDown 0.8s ease both;
     }
 
-    .page {
-      width: 100%;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 32px 20px 60px;
+    .brand-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 16px;
+      background: linear-gradient(135deg, #1e1c18, #2a2720);
+      border: 1px solid var(--gold-dim);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(201,168,76,0.12), inset 0 1px 0 rgba(201,168,76,0.15);
     }
 
-    .logo {
-      width: 160px;
-      max-width: 70vw;
-      margin-top: 10px;
-      margin-bottom: 14px;
-      border-radius: 18px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-      object-fit: cover;
+    .brand-icon svg { width: 36px; height: 36px; }
+
+    .brand-name {
+      font-family: 'Cinzel', serif;
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), #9A7A30);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
-    h1 {
-      margin: 0 0 24px;
-      color: #ffd700;
-      font-size: 42px;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.18);
+    .brand-tagline {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 300;
     }
 
     .card {
       width: 100%;
-      max-width: 430px;
-      margin: 0 auto 22px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 18px;
-      padding: 24px 20px;
-      box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+      max-width: 440px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+      animation: fadeUp 0.7s ease both 0.1s;
     }
 
-    .subtitle {
-      margin-top: 0;
-      margin-bottom: 18px;
-      color: #d4d4d4;
-    }
-
-    input[type="password"],
-    input[type="file"] {
-      width: 100%;
-      max-width: 320px;
-      padding: 12px 14px;
-      border-radius: 10px;
-      border: 1px solid #333;
-      margin: 10px auto;
-      display: block;
+    .card-title {
+      font-family: 'Cinzel', serif;
       font-size: 15px;
-      background: #ffffff;
-      color: #111111;
-    }
-
-    button {
-      border: none;
-      border-radius: 10px;
-      padding: 11px 18px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s ease;
-      margin: 6px;
-    }
-
-    button:hover {
-      opacity: 0.92;
-      transform: translateY(-1px);
-    }
-
-    .primary-btn {
-      background: linear-gradient(135deg, #ffd700, #ffb800);
-      color: #111111;
-    }
-
-    .danger-btn {
-      background: #d62828;
-      color: #ffffff;
-    }
-
-    .secondary-btn {
-      background: #444444;
-      color: #ffffff;
-    }
-
-    .hint {
-      margin-top: 10px;
-      font-size: 14px;
-      color: #bdbdbd;
-    }
-
-    .section-title {
-      margin-top: 0;
-      margin-bottom: 14px;
-      color: #ffffff;
-    }
-
-    .actions {
-      margin-top: 12px;
-      margin-bottom: 10px;
-    }
-
-    .files-wrap {
-      width: 100%;
-      max-width: 600px;
-      margin: 20px auto 0;
-      text-align: left;
-    }
-
-    .empty {
+      letter-spacing: 2px;
+      color: var(--gold);
       text-align: center;
-      color: #c9c9c9;
-      padding: 18px 10px 4px;
+      margin-bottom: 28px;
+      text-transform: uppercase;
     }
 
-    .file-box {
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      margin-top: 12px;
-      padding: 14px;
-      border-radius: 14px;
-      box-shadow: 0 0 12px rgba(255, 215, 0, 0.06);
+    .input-group { position: relative; margin-bottom: 16px; }
+
+    .input-group label {
+      display: block;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
     }
+
+    .input-group input[type="password"] {
+      width: 100%;
+      padding: 14px 48px 14px 18px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-family: 'Cairo', sans-serif;
+      font-size: 15px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      outline: none;
+    }
+
+    .input-group input[type="password"]:focus {
+      border-color: var(--gold-dim);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+    }
+
+    .input-icon {
+      position: absolute;
+      bottom: 14px;
+      left: 16px;
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: var(--radius);
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-transform: uppercase;
+    }
+
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #A8891E 100%);
+      color: #0D0B07;
+      box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(201,168,76,0.4);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .btn-ghost:hover { border-color: var(--border-hover); color: var(--text); }
+
+    .btn-danger { background: var(--danger); color: #fff; }
+    .btn-danger:hover { background: var(--danger-light); transform: translateY(-1px); }
+
+    .btn-sm { width: auto; padding: 8px 16px; font-size: 12px; }
+
+    .vault-card { max-width: 620px; }
+
+    .vault-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .vault-header h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 14px;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+
+    .header-actions { display: flex; gap: 8px; }
+
+    .upload-zone {
+      border: 1px dashed var(--border);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--gold-dim);
+      background: rgba(201,168,76,0.04);
+    }
+
+    .upload-zone input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon { font-size: 28px; margin-bottom: 10px; display: block; }
+
+    .upload-label { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+    .upload-label span { color: var(--gold); font-weight: 600; }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .stat-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-family: 'Cinzel', serif;
+      font-size: 20px;
+      color: var(--gold);
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+      display: block;
+    }
+
+    .file-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-height: 380px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+
+    .file-list::-webkit-scrollbar { width: 4px; }
+    .file-list::-webkit-scrollbar-track { background: transparent; }
+    .file-list::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
+
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      transition: border-color 0.2s, transform 0.15s;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .file-item:hover { border-color: var(--border-hover); transform: translateX(-2px); }
+
+    .file-type-badge {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #1e1c18, #2a2720);
+      border: 1px solid var(--gold-dim);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .file-info { flex: 1; min-width: 0; }
 
     .file-name {
-      font-size: 17px;
-      font-weight: bold;
-      margin-bottom: 8px;
-      word-break: break-word;
-    }
-
-    .file-meta {
-      color: #d7d7d7;
-      line-height: 1.6;
       font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 3px;
     }
 
-    @media (max-width: 600px) {
-      h1 {
-        font-size: 34px;
-      }
+    .file-meta { font-size: 11px; color: var(--text-muted); }
 
-      .logo {
-        width: 130px;
-      }
+    .file-delete {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      background: rgba(155,35,53,0.15);
+      border: 1px solid rgba(155,35,53,0.3);
+      border-radius: 8px;
+      color: #E05060;
+      font-size: 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-      .card {
-        padding: 20px 16px;
-      }
+    .file-delete:hover { background: var(--danger); border-color: var(--danger); color: #fff; }
+
+    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+    .empty-state .empty-icon { font-size: 40px; display: block; margin-bottom: 12px; opacity: 0.5; }
+    .empty-state p { font-size: 13px; line-height: 1.6; }
+
+    .footer {
+      margin-top: 28px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--text-muted);
+      text-align: center;
+      animation: fadeUp 0.8s ease both 0.3s;
+    }
+
+    .footer span { color: var(--gold-dim); }
+
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50px;
+      padding: 10px 22px;
+      font-size: 13px;
+      color: var(--text);
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 999;
+      white-space: nowrap;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+    }
+
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+    @media (max-width: 500px) {
+      .card { padding: 28px 20px; }
+      .brand-name { font-size: 24px; }
+      .stats-bar { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
-  <div class="page">
-    <img src="./logo.png" class="logo" alt="BismarkVault Logo" />
-    <h1>BismarkVault</h1>
 
-    <!-- LOGIN -->
-    <div class="card" id="login">
-      <p class="subtitle">Secure your files like a vault.</p>
-      <input type="password" id="password" placeholder="Enter Password" />
-      <button class="primary-btn" onclick="login()">Unlock</button>
-      <p class="hint">Password: 1234</p>
+<div class="glow-orb"></div>
+
+<div class="wrap">
+
+  <div class="brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="6" y="14" width="24" height="18" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
+        <path d="M12 14V11a6 6 0 0 1 12 0v3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="22" r="2.5" fill="#C9A84C"/>
+        <line x1="18" y1="24.5" x2="18" y2="27" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
     </div>
-
-    <!-- VAULT -->
-    <div class="card" id="vault" style="display: none;">
-      <h2 class="section-title">Your Files</h2>
-
-      <input type="file" id="fileInput" multiple onchange="saveFiles(event)" />
-
-      <div class="actions">
-        <button class="danger-btn" onclick="clearFiles()">Delete All</button>
-        <button class="secondary-btn" onclick="logout()">Logout</button>
-      </div>
-
-      <div id="files" class="files-wrap"></div>
-    </div>
+    <div class="brand-name">BismarkVault</div>
+    <div class="brand-tagline">Secure · Archive · Intelligent</div>
   </div>
 
-  <script>
-    const STORAGE_KEY = "bismarkvault_files";
-    const PASSWORD = "1234";
+  <!-- LOGIN -->
+  <div class="card" id="loginCard">
+    <p class="card-title">Access Vault</p>
+    <div class="input-group">
+      <label>كلمة المرور</label>
+      <input type="password" id="passwordInput" placeholder="••••••••"
+             onkeydown="if(event.key==='Enter') login()" autocomplete="current-password" />
+      <span class="input-icon">🔑</span>
+    </div>
+    <div class="divider"></div>
+    <button class="btn btn-gold" onclick="login()">فتح القبو</button>
+  </div>
 
-    function login() {
-      const pass = document.getElementById("password").value.trim();
+  <!-- VAULT -->
+  <div class="card vault-card" id="vaultCard" style="display:none">
+    <div class="vault-header">
+      <h2>القبو الآمن</h2>
+      <div class="header-actions">
+        <button class="btn btn-danger btn-sm" onclick="clearFiles()">حذف الكل</button>
+        <button class="btn btn-ghost btn-sm" onclick="logout()">خروج</button>
+      </div>
+    </div>
 
-      if (pass === PASSWORD) {
-        document.getElementById("login").style.display = "none";
-        document.getElementById("vault").style.display = "block";
-        displayFiles();
-      } else {
-        alert("Wrong Password ❌");
-      }
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-value" id="statCount">0</span>
+        <span class="stat-label">ملف</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="statSize">0</span>
+        <span class="stat-label">ميغابايت</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="statTypes">0</span>
+        <span class="stat-label">نوع</span>
+      </div>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <input type="file" id="fileInput" multiple onchange="saveFiles(event)" />
+      <span class="upload-icon">📂</span>
+      <div class="upload-label">
+        <span>اسحب الملفات هنا</span> أو انقر للرفع<br>
+        يدعم جميع أنواع الملفات
+      </div>
+    </div>
+
+    <div class="file-list" id="fileList"></div>
+  </div>
+
+  <div class="footer">
+    © 2026 <span>BismarkVault</span> — Malek Alsirreih · Mettmann, Germany
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const KEY = "bismarkvault_files";
+  const PASS = "1234";
+
+  function toast(msg, dur = 2500) {
+    const el = document.getElementById("toast");
+    el.textContent = msg;
+    el.classList.add("show");
+    setTimeout(() => el.classList.remove("show"), dur);
+  }
+
+  function login() {
+    const v = document.getElementById("passwordInput").value.trim();
+    if (v === PASS) {
+      document.getElementById("loginCard").style.display = "none";
+      document.getElementById("vaultCard").style.display = "block";
+      render();
+      toast("✅ مرحباً بك في BismarkVault");
+    } else {
+      toast("❌ كلمة المرور غير صحيحة");
+      document.getElementById("passwordInput").value = "";
+      document.getElementById("passwordInput").focus();
+    }
+  }
+
+  function logout() {
+    document.getElementById("vaultCard").style.display = "none";
+    document.getElementById("loginCard").style.display = "block";
+    document.getElementById("passwordInput").value = "";
+    toast("👋 تم تسجيل الخروج بأمان");
+  }
+
+  function load() { return JSON.parse(localStorage.getItem(KEY)) || []; }
+  function save(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+
+  function fileEmoji(type) {
+    if (!type) return "📄";
+    if (type.startsWith("image/")) return "🖼️";
+    if (type.includes("pdf")) return "📕";
+    if (type.includes("word") || type.includes("document")) return "📝";
+    if (type.includes("sheet") || type.includes("excel") || type.includes("csv")) return "📊";
+    if (type.includes("zip") || type.includes("rar") || type.includes("7z")) return "📦";
+    if (type.startsWith("video/")) return "🎬";
+    if (type.startsWith("audio/")) return "🎵";
+    if (type.includes("text")) return "📃";
+    return "📄";
+  }
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + " B";
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
+    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
+  }
+
+  function saveFiles(e) {
+    const files = e.target.files;
+    const data = load();
+    for (const f of files) {
+      data.push({ name: f.name, size: f.size, type: f.type || "Unknown", date: new Date().toLocaleDateString("ar-EG") });
+    }
+    save(data);
+    render();
+    document.getElementById("fileInput").value = "";
+    toast(`✅ تم رفع ${files.length} ملف`);
+  }
+
+  function deleteFile(i) {
+    const data = load();
+    const name = data[i].name;
+    data.splice(i, 1);
+    save(data);
+    render();
+    toast(`🗑️ تم حذف "${name}"`);
+  }
+
+  function clearFiles() {
+    if (!confirm("هل أنت متأكد من حذف جميع الملفات؟")) return;
+    localStorage.removeItem(KEY);
+    render();
+    toast("🗑️ تم حذف جميع الملفات");
+  }
+
+  function render() {
+    const data = load();
+    const list = document.getElementById("fileList");
+    const totalSize = data.reduce((s, f) => s + (f.size || 0), 0);
+    const types = new Set(data.map(f => (f.type || "").split("/")[0])).size;
+    document.getElementById("statCount").textContent = data.length;
+    document.getElementById("statSize").textContent = (totalSize / (1024 * 1024)).toFixed(2);
+    document.getElementById("statTypes").textContent = types;
+
+    if (data.length === 0) {
+      list.innerHTML = `
+        <div class="empty-state">
+          <span class="empty-icon">🗄️</span>
+          <p>القبو فارغ<br>ارفع ملفاتك الأولى الآن</p>
+        </div>`;
+      return;
     }
 
-    function logout() {
-      document.getElementById("vault").style.display = "none";
-      document.getElementById("login").style.display = "block";
-      document.getElementById("password").value = "";
-    }
+    list.innerHTML = data.map((f, i) => `
+      <div class="file-item">
+        <div class="file-type-badge">${fileEmoji(f.type)}</div>
+        <div class="file-info">
+          <div class="file-name">${f.name}</div>
+          <div class="file-meta">${formatSize(f.size)} · ${f.type || "غير معروف"} · ${f.date || ""}</div>
+        </div>
+        <button class="file-delete" title="حذف" onclick="deleteFile(${i})">✕</button>
+      </div>
+    `).join("");
+  }
 
-    function saveFiles(event) {
-      const files = event.target.files;
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-      for (let i = 0; i < files.length; i++) {
-        const file = files[i];
-        saved.push({
-          name: file.name,
-          size: file.size,
-          type: file.type || "Unknown"
-        });
-      }
-
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-      displayFiles();
-      document.getElementById("fileInput").value = "";
-    }
-
-    function displayFiles() {
-      const box = document.getElementById("files");
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-
-      box.innerHTML = "";
-
-      if (saved.length === 0) {
-        box.innerHTML = '<div class="empty">No files saved yet.</div>';
-        return;
-      }
-
-      saved.forEach((file, index) => {
-        const div = document.createElement("div");
-        div.className = "file-box";
-
-        div.innerHTML = `
-          <div class="file-name">📄 ${file.name}</div>
-          <div class="file-meta">
-            Size: ${Math.round(file.size / 1024)} KB<br>
-            Type: ${file.type}
-          </div>
-          <button class="danger-btn" onclick="deleteFile(${index})">Delete</button>
-        `;
-
-        box.appendChild(div);
-      });
-    }
-
-    function deleteFile(index) {
-      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-      saved.splice(index, 1);
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-      displayFiles();
-    }
-
-    function clearFiles() {
-      const ok = confirm("Are you sure you want to delete all files?");
-      if (!ok) return;
-
-      localStorage.removeItem(STORAGE_KEY);
-      displayFiles();
-    }
-  </script>
+  const zone = document.getElementById("uploadZone");
+  zone.addEventListener("dragover", e => { e.preventDefault(); zone.classList.add("dragover"); });
+  zone.addEventListener("dragleave", () => zone.classList.remove("dragover"));
+  zone.addEventListener("drop", e => {
+    e.preventDefault();
+    zone.classList.remove("dragover");
+    const fakeEvt = { target: { files: e.dataTransfer.files } };
+    saveFiles(fakeEvt);
+  });
+</script>
 </body>
 </html>
