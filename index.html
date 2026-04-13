@@ -2,80 +2,128 @@
  <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault 🔐</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BismarkVault 🔐</title>
 
-<style>
-body {
-    background: #0a0a0a;
-    color: #fff;
-    font-family: Arial;
-    text-align: center;
-    padding: 20px;
-}
+  <style>
+    body {
+      background: #0a0a0a;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      margin: 0;
+    }
 
-h1 {
-    color: gold;
-}
+    h1 {
+      color: gold;
+      margin-top: 30px;
+    }
 
-.container {
-    margin-top: 50px;
-}
+    .container {
+      margin-top: 40px;
+    }
 
-input {
-    padding: 12px;
-    border-radius: 10px;
-    border: none;
-    margin: 10px;
-    width: 220px;
-}
+    input {
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      margin: 10px;
+      width: 240px;
+      font-size: 16px;
+    }
 
-button {
-    padding: 12px 25px;
-    background: gold;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    cursor: pointer;
-}
+    button {
+      padding: 12px 25px;
+      background: gold;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 16px;
+    }
 
-.file-box {
-    margin-top: 30px;
-}
-</style>
+    .file-box {
+      margin-top: 30px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      text-align: left;
+    }
+
+    .file-item {
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+
+    .hint {
+      color: #bbb;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+  </style>
 </head>
-
 <body>
 
-<h1>🔐 BismarkVault</h1>
+  <h1>🔐 BismarkVault</h1>
 
-<!-- LOGIN -->
-<div class="container" id="login">
-    <input type="password" id="password" placeholder="Enter Password">
-    <br>
+  <!-- LOGIN -->
+  <div class="container" id="login">
+    <input type="password" id="password" placeholder="Enter Password" />
+    <br />
     <button onclick="login()">Unlock</button>
-</div>
+    <p class="hint">Password: 1234</p>
+  </div>
 
-<!-- VAULT -->
-<div class="container" id="vault" style="display:none;">
+  <!-- VAULT -->
+  <div class="container" id="vault" style="display: none;">
     <h2>Your Files</h2>
-    <input type="file" multiple>
+    <input type="file" id="fileInput" multiple onchange="showFiles(event)" />
     <div class="file-box" id="files"></div>
-</div>
+  </div>
 
-<script>
-function login(){
-    const pass = document.getElementById("password").value;
+  <script>
+    function login() {
+      const pass = document.getElementById("password").value.trim();
 
-    if(pass === "1234"){
+      if (pass === "1234") {
         document.getElementById("login").style.display = "none";
         document.getElementById("vault").style.display = "block";
-    } else {
+      } else {
         alert("Wrong Password ❌");
+      }
     }
-}
-</script>
+
+    function showFiles(event) {
+      const files = event.target.files;
+      const fileBox = document.getElementById("files");
+
+      fileBox.innerHTML = "";
+
+      if (!files || files.length === 0) {
+        fileBox.innerHTML = "<p>No files selected.</p>";
+        return;
+      }
+
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+
+        const div = document.createElement("div");
+        div.className = "file-item";
+        div.innerHTML = `
+          <strong>📄 ${file.name}</strong><br>
+          <small>Size: ${Math.round(file.size / 1024)} KB</small><br>
+          <small>Type: ${file.type || "Unknown"}</small>
+        `;
+
+        fileBox.appendChild(div);
+      }
+    }
+  </script>
 
 </body>
 </html>
