@@ -2,205 +2,286 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BismarkVault</title>
 
-<style>
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: radial-gradient(circle at top, #1b1b1b 0%, #0a0a0a 60%, #050505 100%);
-  color: white;
-  font-family: Arial, sans-serif;
-  text-align: center;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-/* LOGO */
-.logo {
-  width: 160px;
-  margin-top: 40px;
-  margin-bottom: 10px;
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at top, #1b1b1b 0%, #0a0a0a 60%, #050505 100%);
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
 
-/* TITLE */
-h1 {
-  color: #ffd700;
-  font-size: 38px;
-  margin-bottom: 20px;
-  text-shadow: 0 0 15px rgba(255,215,0,0.3);
-}
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 32px 20px 60px;
+    }
 
-/* BOX */
-.container {
-  background: rgba(255,255,255,0.05);
-  width: 320px;
-  margin: auto;
-  padding: 20px;
-  border-radius: 15px;
-  box-shadow: 0 0 20px rgba(255,215,0,0.2);
-}
+    .logo {
+      width: 160px;
+      max-width: 70vw;
+      margin-top: 10px;
+      margin-bottom: 14px;
+      border-radius: 18px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+      object-fit: cover;
+    }
 
-/* INPUT */
-input {
-  width: 90%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  margin-bottom: 10px;
-}
+    h1 {
+      margin: 0 0 24px;
+      color: #ffd700;
+      font-size: 42px;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.18);
+    }
 
-/* BUTTONS */
-button {
-  padding: 10px 20px;
-  border-radius: 8px;
-  border: none;
-  background: gold;
-  cursor: pointer;
-  font-weight: bold;
-}
+    .card {
+      width: 100%;
+      max-width: 430px;
+      margin: 0 auto 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+    }
 
-button:hover {
-  background: orange;
-}
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 18px;
+      color: #d4d4d4;
+    }
 
-/* FILE BOX */
-.file-box {
-  background: rgba(255,255,255,0.08);
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 10px;
-}
+    input[type="password"],
+    input[type="file"] {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #333;
+      margin: 10px auto;
+      display: block;
+      font-size: 15px;
+      background: #ffffff;
+      color: #111111;
+    }
 
-/* DELETE BUTTON */
-.delete-btn {
-  background: red;
-  color: white;
-  margin-top: 5px;
-}
+    button {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 18px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s ease;
+      margin: 6px;
+    }
 
-/* LOGOUT */
-.logout-btn {
-  background: #444;
-  color: white;
-}
-</style>
+    button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
 
+    .primary-btn {
+      background: linear-gradient(135deg, #ffd700, #ffb800);
+      color: #111111;
+    }
+
+    .danger-btn {
+      background: #d62828;
+      color: #ffffff;
+    }
+
+    .secondary-btn {
+      background: #444444;
+      color: #ffffff;
+    }
+
+    .hint {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #bdbdbd;
+    }
+
+    .section-title {
+      margin-top: 0;
+      margin-bottom: 14px;
+      color: #ffffff;
+    }
+
+    .actions {
+      margin-top: 12px;
+      margin-bottom: 10px;
+    }
+
+    .files-wrap {
+      width: 100%;
+      max-width: 600px;
+      margin: 20px auto 0;
+      text-align: left;
+    }
+
+    .empty {
+      text-align: center;
+      color: #c9c9c9;
+      padding: 18px 10px 4px;
+    }
+
+    .file-box {
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 14px;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.06);
+    }
+
+    .file-name {
+      font-size: 17px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      word-break: break-word;
+    }
+
+    .file-meta {
+      color: #d7d7d7;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 34px;
+      }
+
+      .logo {
+        width: 130px;
+      }
+
+      .card {
+        padding: 20px 16px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <div class="page">
+    <img src="./logo.png" class="logo" alt="BismarkVault Logo" />
+    <h1>BismarkVault</h1>
 
-<img src="logo.png" class="logo">
-<h1>BismarkVault</h1>
+    <!-- LOGIN -->
+    <div class="card" id="login">
+      <p class="subtitle">Secure your files like a vault.</p>
+      <input type="password" id="password" placeholder="Enter Password" />
+      <button class="primary-btn" onclick="login()">Unlock</button>
+      <p class="hint">Password: 1234</p>
+    </div>
 
-<!-- LOGIN -->
-<div class="container" id="login">
-  <input type="password" id="password" placeholder="Enter Password">
-  <br>
-  <button onclick="login()">Unlock</button>
-  <p>Password: 1234</p>
-</div>
+    <!-- VAULT -->
+    <div class="card" id="vault" style="display: none;">
+      <h2 class="section-title">Your Files</h2>
 
-<!-- VAULT -->
-<div class="container" id="vault" style="display:none;">
+      <input type="file" id="fileInput" multiple onchange="saveFiles(event)" />
 
-  <h3>Your Files</h3>
+      <div class="actions">
+        <button class="danger-btn" onclick="clearFiles()">Delete All</button>
+        <button class="secondary-btn" onclick="logout()">Logout</button>
+      </div>
 
-  <input type="file" id="fileInput" multiple onchange="saveFiles(event)">
-  <br><br>
+      <div id="files" class="files-wrap"></div>
+    </div>
+  </div>
 
-  <button onclick="clearFiles()" class="delete-btn">Delete All</button>
-  <button onclick="logout()" class="logout-btn">Logout</button>
+  <script>
+    const STORAGE_KEY = "bismarkvault_files";
+    const PASSWORD = "1234";
 
-  <div id="files"></div>
+    function login() {
+      const pass = document.getElementById("password").value.trim();
 
-</div>
+      if (pass === PASSWORD) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("vault").style.display = "block";
+        displayFiles();
+      } else {
+        alert("Wrong Password ❌");
+      }
+    }
 
-<script>
-const STORAGE_KEY = "vault_files";
+    function logout() {
+      document.getElementById("vault").style.display = "none";
+      document.getElementById("login").style.display = "block";
+      document.getElementById("password").value = "";
+    }
 
-// LOGIN
-function login() {
-  const pass = document.getElementById("password").value;
+    function saveFiles(event) {
+      const files = event.target.files;
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-  if (pass === "1234") {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("vault").style.display = "block";
-    displayFiles();
-  } else {
-    alert("Wrong Password ❌");
-  }
-}
+      for (let i = 0; i < files.length; i++) {
+        const file = files[i];
+        saved.push({
+          name: file.name,
+          size: file.size,
+          type: file.type || "Unknown"
+        });
+      }
 
-// LOGOUT
-function logout() {
-  document.getElementById("login").style.display = "block";
-  document.getElementById("vault").style.display = "none";
-}
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      displayFiles();
+      document.getElementById("fileInput").value = "";
+    }
 
-// SAVE FILES
-function saveFiles(event) {
-  let files = event.target.files;
-  let saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    function displayFiles() {
+      const box = document.getElementById("files");
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
 
-  for (let i = 0; i < files.length; i++) {
-    let file = files[i];
+      box.innerHTML = "";
 
-    saved.push({
-      name: file.name,
-      size: file.size,
-      type: file.type
-    });
-  }
+      if (saved.length === 0) {
+        box.innerHTML = '<div class="empty">No files saved yet.</div>';
+        return;
+      }
 
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-  displayFiles();
-}
+      saved.forEach((file, index) => {
+        const div = document.createElement("div");
+        div.className = "file-box";
 
-// DISPLAY FILES
-function displayFiles() {
-  let box = document.getElementById("files");
-  let saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+        div.innerHTML = `
+          <div class="file-name">📄 ${file.name}</div>
+          <div class="file-meta">
+            Size: ${Math.round(file.size / 1024)} KB<br>
+            Type: ${file.type}
+          </div>
+          <button class="danger-btn" onclick="deleteFile(${index})">Delete</button>
+        `;
 
-  box.innerHTML = "";
+        box.appendChild(div);
+      });
+    }
 
-  if (saved.length === 0) {
-    box.innerHTML = "<p>No files saved yet.</p>";
-    return;
-  }
+    function deleteFile(index) {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+      saved.splice(index, 1);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      displayFiles();
+    }
 
-  saved.forEach((file, index) => {
-    let div = document.createElement("div");
-    div.className = "file-box";
+    function clearFiles() {
+      const ok = confirm("Are you sure you want to delete all files?");
+      if (!ok) return;
 
-    div.innerHTML = `
-      <b>${file.name}</b><br>
-      Size: ${Math.round(file.size / 1024)} KB<br>
-      Type: ${file.type}<br>
-      <button class="delete-btn" onclick="deleteFile(${index})">Delete</button>
-    `;
-
-    box.appendChild(div);
-  });
-}
-
-// DELETE FILE
-function deleteFile(index) {
-  let saved = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-  saved.splice(index, 1);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
-  displayFiles();
-}
-
-// DELETE ALL
-function clearFiles() {
-  if (!confirm("Are you sure?")) return;
-  localStorage.removeItem(STORAGE_KEY);
-  displayFiles();
-}
-</script>
-
+      localStorage.removeItem(STORAGE_KEY);
+      displayFiles();
+    }
+  </script>
 </body>
 </html>
