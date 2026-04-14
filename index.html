@@ -9,48 +9,67 @@
 
   <style>
     :root {
-      --gold:       #C9A84C;
-      --gold-light: #F0D080;
-      --gold-dim:   #7A6130;
-      --bg-deep:    #080808;
-      --bg-panel:   #111010;
-      --bg-card:    #161514;
-      --border:     rgba(201,168,76,0.18);
-      --border-hover: rgba(201,168,76,0.5);
-      --text:       #E8E0D0;
-      --text-muted: #8A8070;
-      --danger:     #9B2335;
-      --danger-light:#C0392B;
-      --radius:     14px;
+      --gold: #c9a84c;
+      --gold-light: #f0d080;
+      --gold-soft: #e0c06d;
+      --gold-dim: #7a6130;
+      --bg-deep: #070707;
+      --bg-panel: #0d0c0b;
+      --bg-card: #141311;
+      --bg-card-2: #181715;
+      --border: rgba(201, 168, 76, 0.18);
+      --border-hover: rgba(201, 168, 76, 0.45);
+      --text: #ebe4d6;
+      --text-muted: #958a78;
+      --danger: #9b2335;
+      --danger-light: #c0392b;
+      --success: #3c8f5c;
+      --radius: 16px;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     body {
       min-height: 100vh;
-      background: var(--bg-deep);
+      background:
+        radial-gradient(circle at top, rgba(201,168,76,0.08) 0%, transparent 28%),
+        linear-gradient(180deg, #090909 0%, #070707 100%);
       color: var(--text);
       font-family: 'Cairo', sans-serif;
       overflow-x: hidden;
     }
 
     body::before {
-      content: '';
+      content: "";
       position: fixed;
       inset: 0;
       background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.028;
+      opacity: 0.025;
       pointer-events: none;
       z-index: 0;
     }
 
+    .gold-line {
+      position: fixed;
+      inset: auto 0 0 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
+      z-index: 0;
+      opacity: 0.45;
+    }
+
     .glow-orb {
       position: fixed;
-      width: 600px;
-      height: 600px;
+      width: 720px;
+      height: 720px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%);
-      top: -200px;
+      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+      top: -280px;
       left: 50%;
       transform: translateX(-50%);
       pointer-events: none;
@@ -65,36 +84,46 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px 60px;
+      padding: 34px 20px 56px;
     }
 
     .brand {
       text-align: center;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
       animation: fadeDown 0.8s ease both;
     }
 
-    .brand-icon {
-      width: 72px;
-      height: 72px;
-      margin: 0 auto 16px;
-      background: linear-gradient(135deg, #1e1c18, #2a2720);
-      border: 1px solid var(--gold-dim);
-      border-radius: 20px;
+    .brand-logo {
+      width: 126px;
+      height: 126px;
+      margin: 0 auto 18px;
+      padding: 10px;
+      border-radius: 28px;
+      background:
+        linear-gradient(145deg, #0b0b0b, #191714);
+      border: 1px solid rgba(201,168,76,0.35);
+      box-shadow:
+        0 0 28px rgba(201,168,76,0.16),
+        inset 0 1px 0 rgba(255,255,255,0.03),
+        inset 0 0 20px rgba(201,168,76,0.05);
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 40px rgba(201,168,76,0.12), inset 0 1px 0 rgba(201,168,76,0.15);
     }
 
-    .brand-icon svg { width: 36px; height: 36px; }
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 18px;
+    }
 
     .brand-name {
       font-family: 'Cinzel', serif;
-      font-size: 30px;
+      font-size: 34px;
       font-weight: 700;
-      letter-spacing: 3px;
-      background: linear-gradient(135deg, var(--gold-light), var(--gold), #9A7A30);
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, #fff4cf 0%, var(--gold-light) 24%, var(--gold) 55%, #967327 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -105,19 +134,32 @@
       letter-spacing: 4px;
       text-transform: uppercase;
       color: var(--text-muted);
-      margin-top: 6px;
+      margin-top: 8px;
       font-weight: 300;
+    }
+
+    .brand-subline {
+      margin-top: 12px;
+      font-size: 13px;
+      color: #b8ac98;
     }
 
     .card {
       width: 100%;
-      max-width: 440px;
-      background: var(--bg-card);
+      max-width: 460px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
+        var(--bg-card);
       border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 36px 32px;
-      box-shadow: 0 24px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.03);
+      border-radius: 24px;
+      padding: 34px 30px;
+      box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,0.02);
+      backdrop-filter: blur(6px);
       animation: fadeUp 0.7s ease both 0.1s;
+    }
+
+    .vault-card {
+      max-width: 760px;
     }
 
     .card-title {
@@ -126,11 +168,28 @@
       letter-spacing: 2px;
       color: var(--gold);
       text-align: center;
-      margin-bottom: 28px;
+      margin-bottom: 24px;
       text-transform: uppercase;
     }
 
-    .input-group { position: relative; margin-bottom: 16px; }
+    .card-note {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 22px;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
+      margin: 20px 0;
+    }
+
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+    }
 
     .input-group label {
       display: block;
@@ -143,20 +202,21 @@
 
     .input-group input[type="password"] {
       width: 100%;
-      padding: 14px 48px 14px 18px;
+      padding: 15px 48px 15px 18px;
       background: rgba(255,255,255,0.04);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       color: var(--text);
       font-family: 'Cairo', sans-serif;
       font-size: 15px;
-      transition: border-color 0.25s, box-shadow 0.25s;
+      transition: 0.25s;
       outline: none;
     }
 
     .input-group input[type="password"]:focus {
       border-color: var(--gold-dim);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
+      background: rgba(255,255,255,0.05);
     }
 
     .input-icon {
@@ -168,28 +228,31 @@
     }
 
     .btn {
-      width: 100%;
-      padding: 14px;
       border: none;
       border-radius: var(--radius);
       font-family: 'Cairo', sans-serif;
       font-size: 14px;
       font-weight: 700;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       cursor: pointer;
       transition: all 0.2s ease;
       text-transform: uppercase;
     }
 
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
     .btn-gold {
-      background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, #A8891E 100%);
-      color: #0D0B07;
-      box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #ffe8a2 0%, var(--gold-light) 20%, var(--gold) 55%, #a17e24 100%);
+      color: #0d0b07;
+      box-shadow: 0 8px 24px rgba(201,168,76,0.22);
     }
 
     .btn-gold:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 28px rgba(201,168,76,0.4);
+      box-shadow: 0 12px 30px rgba(201,168,76,0.35);
     }
 
     .btn-ghost {
@@ -198,48 +261,123 @@
       color: var(--text-muted);
     }
 
-    .btn-ghost:hover { border-color: var(--border-hover); color: var(--text); }
+    .btn-ghost:hover {
+      border-color: var(--border-hover);
+      color: var(--text);
+    }
 
-    .btn-danger { background: var(--danger); color: #fff; }
-    .btn-danger:hover { background: var(--danger-light); transform: translateY(-1px); }
+    .btn-danger {
+      background: var(--danger);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
 
-    .btn-sm { width: auto; padding: 8px 16px; font-size: 12px; }
+    .btn-danger:hover {
+      background: var(--danger-light);
+    }
 
-    .vault-card { max-width: 620px; }
+    .btn-sm {
+      width: auto;
+      padding: 9px 16px;
+      font-size: 12px;
+    }
 
     .vault-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 14px;
       margin-bottom: 24px;
-      padding-bottom: 20px;
+      padding-bottom: 18px;
       border-bottom: 1px solid var(--border);
     }
 
-    .vault-header h2 {
+    .vault-title-wrap h2 {
       font-family: 'Cinzel', serif;
-      font-size: 14px;
-      letter-spacing: 2px;
+      font-size: 18px;
+      letter-spacing: 1.5px;
       color: var(--gold);
+      margin-bottom: 4px;
     }
 
-    .header-actions { display: flex; gap: 8px; }
+    .vault-title-wrap p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 22px;
+    }
+
+    .stat-item {
+      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 14px;
+      text-align: center;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
+
+    .stat-value {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      color: var(--gold-light);
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .stat-label {
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      display: block;
+    }
 
     .upload-zone {
-      border: 1px dashed var(--border);
-      border-radius: var(--radius);
-      padding: 28px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.25s;
-      margin-bottom: 24px;
       position: relative;
       overflow: hidden;
+      border: 1px dashed rgba(201,168,76,0.35);
+      border-radius: 18px;
+      padding: 30px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.25s;
+      margin-bottom: 24px;
+      background:
+        linear-gradient(180deg, rgba(201,168,76,0.035), rgba(255,255,255,0.015));
     }
 
-    .upload-zone:hover, .upload-zone.dragover {
-      border-color: var(--gold-dim);
-      background: rgba(201,168,76,0.04);
+    .upload-zone::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 60%);
+      opacity: 0;
+      transition: 0.25s;
+      pointer-events: none;
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: var(--gold);
+      background: rgba(201,168,76,0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(201,168,76,0.08);
+    }
+
+    .upload-zone:hover::before,
+    .upload-zone.dragover::before {
+      opacity: 1;
     }
 
     .upload-zone input[type="file"] {
@@ -249,196 +387,287 @@
       cursor: pointer;
     }
 
-    .upload-icon { font-size: 28px; margin-bottom: 10px; display: block; }
-
-    .upload-label { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
-    .upload-label span { color: var(--gold); font-weight: 600; }
-
-    .stats-bar {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-
-    .stat-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      text-align: center;
-    }
-
-    .stat-value {
-      font-family: 'Cinzel', serif;
-      font-size: 20px;
-      color: var(--gold);
+    .upload-icon {
+      font-size: 34px;
+      margin-bottom: 10px;
       display: block;
     }
 
-    .stat-label {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
+    .upload-title {
+      font-size: 15px;
+      color: var(--gold-light);
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .upload-label {
+      font-size: 13px;
       color: var(--text-muted);
-      margin-top: 3px;
-      display: block;
+      line-height: 1.7;
+    }
+
+    .upload-label span {
+      color: var(--gold);
+      font-weight: 600;
     }
 
     .file-list {
       display: flex;
       flex-direction: column;
-      gap: 10px;
-      max-height: 380px;
+      gap: 12px;
+      max-height: 400px;
       overflow-y: auto;
-      padding-right: 4px;
+      padding-left: 2px;
     }
 
-    .file-list::-webkit-scrollbar { width: 4px; }
-    .file-list::-webkit-scrollbar-track { background: transparent; }
-    .file-list::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 4px; }
+    .file-list::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .file-list::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .file-list::-webkit-scrollbar-thumb {
+      background: var(--gold-dim);
+      border-radius: 5px;
+    }
 
     .file-item {
       display: flex;
       align-items: center;
       gap: 14px;
-      background: rgba(255,255,255,0.03);
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.018));
       border: 1px solid var(--border);
-      border-radius: var(--radius);
+      border-right: 3px solid rgba(201,168,76,0.38);
+      border-radius: 16px;
       padding: 14px 16px;
-      transition: border-color 0.2s, transform 0.15s;
+      transition: 0.2s;
       animation: fadeUp 0.4s ease both;
     }
 
-    .file-item:hover { border-color: var(--border-hover); transform: translateX(-2px); }
+    .file-item:hover {
+      border-color: var(--border-hover);
+      border-right-color: var(--gold);
+      transform: translateX(-2px);
+      background: rgba(255,255,255,0.04);
+    }
 
     .file-type-badge {
       flex-shrink: 0;
-      width: 40px;
-      height: 40px;
+      width: 44px;
+      height: 44px;
       background: linear-gradient(135deg, #1e1c18, #2a2720);
-      border: 1px solid var(--gold-dim);
-      border-radius: 10px;
+      border: 1px solid rgba(201,168,76,0.35);
+      border-radius: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 18px;
+      font-size: 19px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
     }
 
-    .file-info { flex: 1; min-width: 0; }
+    .file-info {
+      flex: 1;
+      min-width: 0;
+    }
 
     .file-name {
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       color: var(--text);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-bottom: 3px;
+      margin-bottom: 4px;
     }
 
-    .file-meta { font-size: 11px; color: var(--text-muted); }
+    .file-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
 
     .file-delete {
       flex-shrink: 0;
-      width: 30px;
-      height: 30px;
-      background: rgba(155,35,53,0.15);
-      border: 1px solid rgba(155,35,53,0.3);
-      border-radius: 8px;
-      color: #E05060;
+      width: 34px;
+      height: 34px;
+      background: rgba(155,35,53,0.13);
+      border: 1px solid rgba(155,35,53,0.35);
+      border-radius: 10px;
+      color: #e86a78;
       font-size: 15px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: 0.2s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .file-delete:hover { background: var(--danger); border-color: var(--danger); color: #fff; }
+    .file-delete:hover {
+      background: var(--danger);
+      border-color: var(--danger);
+      color: #fff;
+    }
 
-    .empty-state { text-align: center; padding: 40px 20px; color: var(--text-muted); }
-    .empty-state .empty-icon { font-size: 40px; display: block; margin-bottom: 12px; opacity: 0.5; }
-    .empty-state p { font-size: 13px; line-height: 1.6; }
+    .empty-state {
+      text-align: center;
+      padding: 42px 20px;
+      color: var(--text-muted);
+      border: 1px dashed rgba(201,168,76,0.18);
+      border-radius: 16px;
+      background: rgba(255,255,255,0.015);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 42px;
+      display: block;
+      margin-bottom: 12px;
+      opacity: 0.55;
+    }
+
+    .empty-state p {
+      font-size: 13px;
+      line-height: 1.8;
+    }
 
     .footer {
-      margin-top: 28px;
+      margin-top: 30px;
       font-size: 11px;
-      letter-spacing: 1.5px;
+      letter-spacing: 1.2px;
       color: var(--text-muted);
       text-align: center;
       animation: fadeUp 0.8s ease both 0.3s;
+      line-height: 1.8;
     }
 
-    .footer span { color: var(--gold-dim); }
+    .footer span {
+      color: var(--gold);
+      font-weight: 600;
+    }
 
     .toast {
       position: fixed;
-      bottom: 30px;
+      bottom: 28px;
       left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--bg-card);
+      background: #141311;
       border: 1px solid var(--border);
       border-radius: 50px;
-      padding: 10px 22px;
+      padding: 11px 22px;
       font-size: 13px;
       color: var(--text);
       opacity: 0;
-      transition: all 0.3s ease;
+      transition: 0.3s ease;
       z-index: 999;
       white-space: nowrap;
       box-shadow: 0 8px 30px rgba(0,0,0,0.4);
     }
 
-    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
 
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(16px); }
-      to   { opacity: 1; transform: translateY(0); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    @media (max-width: 700px) {
+      .vault-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .header-actions {
+        justify-content: flex-start;
+      }
+
+      .stats-bar {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
 
     @media (max-width: 500px) {
-      .card { padding: 28px 20px; }
-      .brand-name { font-size: 24px; }
-      .stats-bar { grid-template-columns: 1fr 1fr; }
+      .wrap {
+        padding-top: 26px;
+      }
+
+      .brand-logo {
+        width: 108px;
+        height: 108px;
+      }
+
+      .brand-name {
+        font-size: 26px;
+      }
+
+      .brand-tagline {
+        font-size: 10px;
+        letter-spacing: 3px;
+      }
+
+      .card {
+        padding: 26px 18px;
+        border-radius: 20px;
+      }
+
+      .stats-bar {
+        grid-template-columns: 1fr;
+      }
+
+      .btn-sm {
+        width: 100%;
+      }
+
+      .header-actions {
+        flex-direction: column;
+      }
     }
   </style>
 </head>
 <body>
 
 <div class="glow-orb"></div>
+<div class="gold-line"></div>
 
 <div class="wrap">
 
   <div class="brand">
-    <div class="brand-icon">
-      <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect x="6" y="14" width="24" height="18" rx="3" stroke="#C9A84C" stroke-width="1.5"/>
-        <path d="M12 14V11a6 6 0 0 1 12 0v3" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-        <circle cx="18" cy="22" r="2.5" fill="#C9A84C"/>
-        <line x1="18" y1="24.5" x2="18" y2="27" stroke="#C9A84C" stroke-width="1.5" stroke-linecap="round"/>
-      </svg>
+    <div class="brand-logo">
+      <img src="logo.png" alt="BismarkVault Logo" />
     </div>
     <div class="brand-name">BismarkVault</div>
     <div class="brand-tagline">Secure · Archive · Intelligent</div>
+    <div class="brand-subline">AI-powered secure vault for modern companies</div>
   </div>
 
   <!-- LOGIN -->
   <div class="card" id="loginCard">
     <p class="card-title">Access Vault</p>
+    <p class="card-note">
+      مساحة آمنة ومنظمة لإدارة ملفاتك باحترافية.<br>
+      ادخل إلى القبو لمتابعة الملفات، التنبيهات، والميزات الذكية.
+    </p>
+
     <div class="input-group">
       <label>كلمة المرور</label>
-      <input type="password" id="passwordInput" placeholder="••••••••"
-             onkeydown="if(event.key==='Enter') login()" autocomplete="current-password" />
+      <input
+        type="password"
+        id="passwordInput"
+        placeholder="••••••••"
+        onkeydown="if(event.key==='Enter') login()"
+        autocomplete="current-password"
+      />
       <span class="input-icon">🔑</span>
     </div>
+
     <div class="divider"></div>
     <button class="btn btn-gold" onclick="login()">فتح القبو</button>
   </div>
@@ -446,7 +675,11 @@
   <!-- VAULT -->
   <div class="card vault-card" id="vaultCard" style="display:none">
     <div class="vault-header">
-      <h2>القبو الآمن</h2>
+      <div class="vault-title-wrap">
+        <h2>القبو الآمن</h2>
+        <p>إدارة الملفات، الإحصائيات، والرفع الذكي في مكان واحد</p>
+      </div>
+
       <div class="header-actions">
         <button class="btn btn-danger btn-sm" onclick="clearFiles()">حذف الكل</button>
         <button class="btn btn-ghost btn-sm" onclick="logout()">خروج</button>
@@ -471,9 +704,10 @@
     <div class="upload-zone" id="uploadZone">
       <input type="file" id="fileInput" multiple onchange="saveFiles(event)" />
       <span class="upload-icon">📂</span>
+      <div class="upload-title">Upload Documents Securely</div>
       <div class="upload-label">
         <span>اسحب الملفات هنا</span> أو انقر للرفع<br>
-        يدعم جميع أنواع الملفات
+        يدعم جميع أنواع الملفات والوثائق
       </div>
     </div>
 
@@ -481,7 +715,8 @@
   </div>
 
   <div class="footer">
-    © 2026 <span>BismarkVault</span> — Malek Alsirreih · Mettmann, Germany
+    © 2026 <span>BismarkVault</span><br>
+    Property & Developed by <span>Malek Alsirreih</span> · Mettmann, Germany
   </div>
 
 </div>
@@ -520,8 +755,13 @@
     toast("👋 تم تسجيل الخروج بأمان");
   }
 
-  function load() { return JSON.parse(localStorage.getItem(KEY)) || []; }
-  function save(d) { localStorage.setItem(KEY, JSON.stringify(d)); }
+  function load() {
+    return JSON.parse(localStorage.getItem(KEY)) || [];
+  }
+
+  function save(data) {
+    localStorage.setItem(KEY, JSON.stringify(data));
+  }
 
   function fileEmoji(type) {
     if (!type) return "📄";
@@ -545,9 +785,16 @@
   function saveFiles(e) {
     const files = e.target.files;
     const data = load();
+
     for (const f of files) {
-      data.push({ name: f.name, size: f.size, type: f.type || "Unknown", date: new Date().toLocaleDateString("ar-EG") });
+      data.push({
+        name: f.name,
+        size: f.size,
+        type: f.type || "Unknown",
+        date: new Date().toLocaleDateString("ar-EG")
+      });
     }
+
     save(data);
     render();
     document.getElementById("fileInput").value = "";
@@ -575,6 +822,7 @@
     const list = document.getElementById("fileList");
     const totalSize = data.reduce((s, f) => s + (f.size || 0), 0);
     const types = new Set(data.map(f => (f.type || "").split("/")[0])).size;
+
     document.getElementById("statCount").textContent = data.length;
     document.getElementById("statSize").textContent = (totalSize / (1024 * 1024)).toFixed(2);
     document.getElementById("statTypes").textContent = types;
@@ -584,7 +832,8 @@
         <div class="empty-state">
           <span class="empty-icon">🗄️</span>
           <p>القبو فارغ<br>ارفع ملفاتك الأولى الآن</p>
-        </div>`;
+        </div>
+      `;
       return;
     }
 
@@ -601,8 +850,15 @@
   }
 
   const zone = document.getElementById("uploadZone");
-  zone.addEventListener("dragover", e => { e.preventDefault(); zone.classList.add("dragover"); });
-  zone.addEventListener("dragleave", () => zone.classList.remove("dragover"));
+  zone.addEventListener("dragover", e => {
+    e.preventDefault();
+    zone.classList.add("dragover");
+  });
+
+  zone.addEventListener("dragleave", () => {
+    zone.classList.remove("dragover");
+  });
+
   zone.addEventListener("drop", e => {
     e.preventDefault();
     zone.classList.remove("dragover");
