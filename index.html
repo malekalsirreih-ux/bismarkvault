@@ -1,169 +1,104 @@
-/* ═════ BismarkVault AI FINAL ═════ */
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BismarkVault AI</title>
 
-const AK = "bv_apikey";
-
-function fetchWithTimeout(url, options, timeout = 15000){
-  return Promise.race([
-    fetch(url, options),
-    new Promise((_, reject) =>
-      setTimeout(() => reject(new Error("Timeout")), timeout)
-    )
-  ]);
+<style>
+body {
+  background: #0b0b0b;
+  color: gold;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 50px;
 }
 
-/* ===== ANALYZE ===== */
-function analyzeFile(i){
-  const files = load();
-  const file = files[i];
+h1 {
+  font-size: 32px;
+}
 
-  if (!file) {
-    toast("⚠️ File not found");
+input {
+  width: 300px;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+button {
+  padding: 12px 25px;
+  background: gold;
+  color: black;
+  border: none;
+  margin-top: 15px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+#result {
+  margin-top: 25px;
+  color: white;
+  white-space: pre-wrap;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>🔐 BismarkVault AI</h1>
+
+<input id="api" placeholder="Paste API Key هنا"><br>
+
+<button onclick="askAI()">Analyze</button>
+
+<div id="result"></div>
+
+<script>
+async function askAI() {
+  const key = document.getElementById("api").value;
+  const result = document.getElementById("result");
+
+  if (!key) {
+    result.innerHTML = "❌ أدخل API Key أولاً";
     return;
   }
 
-  document.querySelectorAll('.tab')[1].click();
+  result.innerHTML = "⏳ جاري التحليل...";
 
-  const prompt = `
-You are BismarkVault AI.
-
-Analyze this file professionally:
-
-Name: ${file.name}
-Type: ${file.type || 'Unknown'}
-Size: ${fmtB(file.size)}
-
-Give:
-1. File type
-2. Content guess
-3. Archive location
-4. Risk level
-5. Next action
-`;
-
-  document.getElementById('aiIn').value = prompt;
-  sendAI();
-}
-
-/* ===== API KEY ===== */
-function saveKey(){
-  const k = document.getElementById('apiKey').value.trim();
-  if(!k){ toast("⚠️ Enter API key"); return; }
-
-  localStorage.setItem(AK, k);
-  loadKeySt();
-}
-
-function loadKeySt(){
-  const k = localStorage.getItem(AK);
-  const el = document.getElementById('keySt');
-
-  if(k && k.startsWith("sk-")){
-    el.className = 'key-st ok';
-    el.innerHTML = '✅ API key active';
-    document.getElementById('apiKey').value = k;
-  } else {
-    el.className = 'key-st no';
-    el.innerHTML = '🔑 No key';
-  }
-}
-
-/* ===== CHAT ===== */
-function addMsg(role, text){
-  const box = document.getElementById('aiMsgs');
-
-  const div = document.createElement('div');
-  div.className = 'amsg ' + (role === 'user' ? 'u' : '');
-
-  div.innerHTML = `
-    <div class="aav ${role === 'assistant' ? 'b' : 'u2'}">
-      ${role === 'assistant' ? '🤖' : '👤'}
-    </div>
-    <div class="abbl ${role === 'assistant' ? 'b' : 'u2'}">
-      ${text.replace(/\n/g, "<br>")}
-    </div>
-  `;
-
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-function showTyping(){
-  const box = document.getElementById('aiMsgs');
-
-  const div = document.createElement('div');
-  div.id = "typing";
-  div.className = "amsg";
-
-  div.innerHTML = `
-    <div class="aav b">🤖</div>
-    <div class="abbl b">...</div>
-  `;
-
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
-}
-
-function rmTyping(){
-  document.getElementById("typing")?.remove();
-}
-
-/* ===== SEND AI ===== */
-async function sendAI(){
-  const input = document.getElementById('aiIn');
-  const msg = input.value.trim();
-
-  if(!msg) return;
-
-  const key = localStorage.getItem(AK);
-
-  if(!key){
-    toast("⚠️ Enter API key first");
-    return;
-  }
-
-  input.value = "";
-  addMsg('user', msg);
-
-  showTyping();
-
-  try{
-    const res = await fetchWithTimeout(
-      "https://api.anthropic.com/v1/messages",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-api-key": key,
-          "anthropic-version": "2023-06-01"
-        },
-        body: JSON.stringify({
-          model: "claude-3-haiku-20240307",
-          max_tokens: 800,
-          messages: [
-            { role: "user", content: msg }
-          ]
-        })
+  try {
+    const res = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-api-key": key,
+        "anthropic-version": "2023-06-01"
       },
-      15000
-    );
+      body: JSON.stringify({
+        model: "claude-3-haiku-20240307",
+        max_tokens: 300,
+        messages: [
+          {
+            role: "user",
+            content: "Analyze this file professionally and give clear suggestions"
+          }
+        ]
+      })
+    });
 
     const data = await res.json();
 
-    rmTyping();
-
-    if(data.content && data.content[0]){
-      addMsg("assistant", data.content[0].text);
-    } else {
-      addMsg("assistant", "⚠️ AI error");
+    if (data.error) {
+      result.innerHTML = "❌ Error: " + data.error.message;
+      return;
     }
 
-  }catch(e){
-    rmTyping();
+    result.innerHTML = data.content?.[0]?.text || "⚠️ لا يوجد رد";
 
-    if(e.message === "Timeout"){
-      addMsg("assistant", "⚠️ AI is slow, try again");
-    } else {
-      addMsg("assistant", "⚠️ Connection error");
-    }
+  } catch (e) {
+    result.innerHTML = "❌ مشكلة في الاتصال";
   }
 }
+</script>
+
+</body>
+</html>
