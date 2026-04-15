@@ -1,870 +1,169 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BismarkVault — Secure Archiving</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    :root {
-      --gold: #c9a84c;
-      --gold-light: #f0d080;
-      --gold-soft: #e0c06d;
-      --gold-dim: #7a6130;
-      --bg-deep: #070707;
-      --bg-panel: #0d0c0b;
-      --bg-card: #141311;
-      --bg-card-2: #181715;
-      --border: rgba(201, 168, 76, 0.18);
-      --border-hover: rgba(201, 168, 76, 0.45);
-      --text: #ebe4d6;
-      --text-muted: #958a78;
-      --danger: #9b2335;
-      --danger-light: #c0392b;
-      --success: #3c8f5c;
-      --radius: 16px;
-      --shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
-    }
-
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(201,168,76,0.08) 0%, transparent 28%),
-        linear-gradient(180deg, #090909 0%, #070707 100%);
-      color: var(--text);
-      font-family: 'Cairo', sans-serif;
-      overflow-x: hidden;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-      opacity: 0.025;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .gold-line {
-      position: fixed;
-      inset: auto 0 0 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.5), transparent);
-      z-index: 0;
-      opacity: 0.45;
-    }
-
-    .glow-orb {
-      position: fixed;
-      width: 720px;
-      height: 720px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
-      top: -280px;
-      left: 50%;
-      transform: translateX(-50%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .wrap {
-      position: relative;
-      z-index: 1;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 34px 20px 56px;
-    }
-
-    .brand {
-      text-align: center;
-      margin-bottom: 28px;
-      animation: fadeDown 0.8s ease both;
-    }
-
-    .brand-logo {
-      width: 126px;
-      height: 126px;
-      margin: 0 auto 18px;
-      padding: 10px;
-      border-radius: 28px;
-      background:
-        linear-gradient(145deg, #0b0b0b, #191714);
-      border: 1px solid rgba(201,168,76,0.35);
-      box-shadow:
-        0 0 28px rgba(201,168,76,0.16),
-        inset 0 1px 0 rgba(255,255,255,0.03),
-        inset 0 0 20px rgba(201,168,76,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .brand-logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      border-radius: 18px;
-    }
-
-    .brand-name {
-      font-family: 'Cinzel', serif;
-      font-size: 34px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      background: linear-gradient(135deg, #fff4cf 0%, var(--gold-light) 24%, var(--gold) 55%, #967327 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .brand-tagline {
-      font-size: 12px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-top: 8px;
-      font-weight: 300;
-    }
-
-    .brand-subline {
-      margin-top: 12px;
-      font-size: 13px;
-      color: #b8ac98;
-    }
-
-    .card {
-      width: 100%;
-      max-width: 460px;
-      background:
-        linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)),
-        var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 34px 30px;
-      box-shadow: var(--shadow), 0 0 0 1px rgba(255,255,255,0.02);
-      backdrop-filter: blur(6px);
-      animation: fadeUp 0.7s ease both 0.1s;
-    }
-
-    .vault-card {
-      max-width: 760px;
-    }
-
-    .card-title {
-      font-family: 'Cinzel', serif;
-      font-size: 15px;
-      letter-spacing: 2px;
-      color: var(--gold);
-      text-align: center;
-      margin-bottom: 24px;
-      text-transform: uppercase;
-    }
-
-    .card-note {
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 13px;
-      line-height: 1.8;
-      margin-bottom: 22px;
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,168,76,0.25), transparent);
-      margin: 20px 0;
-    }
-
-    .input-group {
-      position: relative;
-      margin-bottom: 16px;
-    }
-
-    .input-group label {
-      display: block;
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      margin-bottom: 8px;
-    }
-
-    .input-group input[type="password"] {
-      width: 100%;
-      padding: 15px 48px 15px 18px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      color: var(--text);
-      font-family: 'Cairo', sans-serif;
-      font-size: 15px;
-      transition: 0.25s;
-      outline: none;
-    }
-
-    .input-group input[type="password"]:focus {
-      border-color: var(--gold-dim);
-      box-shadow: 0 0 0 3px rgba(201,168,76,0.08);
-      background: rgba(255,255,255,0.05);
-    }
-
-    .input-icon {
-      position: absolute;
-      bottom: 14px;
-      left: 16px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
-    .btn {
-      border: none;
-      border-radius: var(--radius);
-      font-family: 'Cairo', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 1.2px;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-transform: uppercase;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-    }
-
-    .btn-gold {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #ffe8a2 0%, var(--gold-light) 20%, var(--gold) 55%, #a17e24 100%);
-      color: #0d0b07;
-      box-shadow: 0 8px 24px rgba(201,168,76,0.22);
-    }
-
-    .btn-gold:hover {
-      box-shadow: 0 12px 30px rgba(201,168,76,0.35);
-    }
-
-    .btn-ghost {
-      background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text-muted);
-    }
-
-    .btn-ghost:hover {
-      border-color: var(--border-hover);
-      color: var(--text);
-    }
-
-    .btn-danger {
-      background: var(--danger);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .btn-danger:hover {
-      background: var(--danger-light);
-    }
-
-    .btn-sm {
-      width: auto;
-      padding: 9px 16px;
-      font-size: 12px;
-    }
-
-    .vault-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 14px;
-      margin-bottom: 24px;
-      padding-bottom: 18px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .vault-title-wrap h2 {
-      font-family: 'Cinzel', serif;
-      font-size: 18px;
-      letter-spacing: 1.5px;
-      color: var(--gold);
-      margin-bottom: 4px;
-    }
-
-    .vault-title-wrap p {
-      font-size: 12px;
-      color: var(--text-muted);
-    }
-
-    .header-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-bottom: 22px;
-    }
-
-    .stat-item {
-      background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.02));
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
-      text-align: center;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-
-    .stat-value {
-      font-family: 'Cinzel', serif;
-      font-size: 22px;
-      color: var(--gold-light);
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .stat-label {
-      font-size: 10px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      display: block;
-    }
-
-    .upload-zone {
-      position: relative;
-      overflow: hidden;
-      border: 1px dashed rgba(201,168,76,0.35);
-      border-radius: 18px;
-      padding: 30px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: 0.25s;
-      margin-bottom: 24px;
-      background:
-        linear-gradient(180deg, rgba(201,168,76,0.035), rgba(255,255,255,0.015));
-    }
-
-    .upload-zone::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(201,168,76,0.08), transparent 60%);
-      opacity: 0;
-      transition: 0.25s;
-      pointer-events: none;
-    }
-
-    .upload-zone:hover,
-    .upload-zone.dragover {
-      border-color: var(--gold);
-      background: rgba(201,168,76,0.05);
-      transform: translateY(-1px);
-      box-shadow: 0 12px 30px rgba(201,168,76,0.08);
-    }
-
-    .upload-zone:hover::before,
-    .upload-zone.dragover::before {
-      opacity: 1;
-    }
-
-    .upload-zone input[type="file"] {
-      position: absolute;
-      inset: 0;
-      opacity: 0;
-      cursor: pointer;
-    }
-
-    .upload-icon {
-      font-size: 34px;
-      margin-bottom: 10px;
-      display: block;
-    }
-
-    .upload-title {
-      font-size: 15px;
-      color: var(--gold-light);
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .upload-label {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.7;
-    }
-
-    .upload-label span {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .file-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      max-height: 400px;
-      overflow-y: auto;
-      padding-left: 2px;
-    }
-
-    .file-list::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .file-list::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    .file-list::-webkit-scrollbar-thumb {
-      background: var(--gold-dim);
-      border-radius: 5px;
-    }
-
-    .file-item {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.018));
-      border: 1px solid var(--border);
-      border-right: 3px solid rgba(201,168,76,0.38);
-      border-radius: 16px;
-      padding: 14px 16px;
-      transition: 0.2s;
-      animation: fadeUp 0.4s ease both;
-    }
-
-    .file-item:hover {
-      border-color: var(--border-hover);
-      border-right-color: var(--gold);
-      transform: translateX(-2px);
-      background: rgba(255,255,255,0.04);
-    }
-
-    .file-type-badge {
-      flex-shrink: 0;
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #1e1c18, #2a2720);
-      border: 1px solid rgba(201,168,76,0.35);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 19px;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
-    }
-
-    .file-info {
-      flex: 1;
-      min-width: 0;
-    }
-
-    .file-name {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin-bottom: 4px;
-    }
-
-    .file-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    .file-delete {
-      flex-shrink: 0;
-      width: 34px;
-      height: 34px;
-      background: rgba(155,35,53,0.13);
-      border: 1px solid rgba(155,35,53,0.35);
-      border-radius: 10px;
-      color: #e86a78;
-      font-size: 15px;
-      cursor: pointer;
-      transition: 0.2s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .file-delete:hover {
-      background: var(--danger);
-      border-color: var(--danger);
-      color: #fff;
-    }
-
-    .empty-state {
-      text-align: center;
-      padding: 42px 20px;
-      color: var(--text-muted);
-      border: 1px dashed rgba(201,168,76,0.18);
-      border-radius: 16px;
-      background: rgba(255,255,255,0.015);
-    }
-
-    .empty-state .empty-icon {
-      font-size: 42px;
-      display: block;
-      margin-bottom: 12px;
-      opacity: 0.55;
-    }
-
-    .empty-state p {
-      font-size: 13px;
-      line-height: 1.8;
-    }
-
-    .footer {
-      margin-top: 30px;
-      font-size: 11px;
-      letter-spacing: 1.2px;
-      color: var(--text-muted);
-      text-align: center;
-      animation: fadeUp 0.8s ease both 0.3s;
-      line-height: 1.8;
-    }
-
-    .footer span {
-      color: var(--gold);
-      font-weight: 600;
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background: #141311;
-      border: 1px solid var(--border);
-      border-radius: 50px;
-      padding: 11px 22px;
-      font-size: 13px;
-      color: var(--text);
-      opacity: 0;
-      transition: 0.3s ease;
-      z-index: 999;
-      white-space: nowrap;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.4);
-    }
-
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(16px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 700px) {
-      .vault-header {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .header-actions {
-        justify-content: flex-start;
-      }
-
-      .stats-bar {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 500px) {
-      .wrap {
-        padding-top: 26px;
-      }
-
-      .brand-logo {
-        width: 108px;
-        height: 108px;
-      }
-
-      .brand-name {
-        font-size: 26px;
-      }
-
-      .brand-tagline {
-        font-size: 10px;
-        letter-spacing: 3px;
-      }
-
-      .card {
-        padding: 26px 18px;
-        border-radius: 20px;
-      }
-
-      .stats-bar {
-        grid-template-columns: 1fr;
-      }
-
-      .btn-sm {
-        width: 100%;
-      }
-
-      .header-actions {
-        flex-direction: column;
-      }
-    }
-  </style>
-</head>
-<body>
-
-<div class="glow-orb"></div>
-<div class="gold-line"></div>
-
-<div class="wrap">
-
-  <div class="brand">
-    <div class="brand-logo">
-      <img src="logo.png" alt="BismarkVault Logo" />
-    </div>
-    <div class="brand-name">BismarkVault</div>
-    <div class="brand-tagline">Secure · Archive · Intelligent</div>
-    <div class="brand-subline">AI-powered secure vault for modern companies</div>
-  </div>
-
-  <!-- LOGIN -->
-  <div class="card" id="loginCard">
-    <p class="card-title">Access Vault</p>
-    <p class="card-note">
-      مساحة آمنة ومنظمة لإدارة ملفاتك باحترافية.<br>
-      ادخل إلى القبو لمتابعة الملفات، التنبيهات، والميزات الذكية.
-    </p>
-
-    <div class="input-group">
-      <label>كلمة المرور</label>
-      <input
-        type="password"
-        id="passwordInput"
-        placeholder="••••••••"
-        onkeydown="if(event.key==='Enter') login()"
-        autocomplete="current-password"
-      />
-      <span class="input-icon">🔑</span>
-    </div>
-
-    <div class="divider"></div>
-    <button class="btn btn-gold" onclick="login()">فتح القبو</button>
-  </div>
-
-  <!-- VAULT -->
-  <div class="card vault-card" id="vaultCard" style="display:none">
-    <div class="vault-header">
-      <div class="vault-title-wrap">
-        <h2>القبو الآمن</h2>
-        <p>إدارة الملفات، الإحصائيات، والرفع الذكي في مكان واحد</p>
-      </div>
-
-      <div class="header-actions">
-        <button class="btn btn-danger btn-sm" onclick="clearFiles()">حذف الكل</button>
-        <button class="btn btn-ghost btn-sm" onclick="logout()">خروج</button>
-      </div>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat-item">
-        <span class="stat-value" id="statCount">0</span>
-        <span class="stat-label">ملف</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="statSize">0</span>
-        <span class="stat-label">ميغابايت</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="statTypes">0</span>
-        <span class="stat-label">نوع</span>
-      </div>
-    </div>
-
-    <div class="upload-zone" id="uploadZone">
-      <input type="file" id="fileInput" multiple onchange="saveFiles(event)" />
-      <span class="upload-icon">📂</span>
-      <div class="upload-title">Upload Documents Securely</div>
-      <div class="upload-label">
-        <span>اسحب الملفات هنا</span> أو انقر للرفع<br>
-        يدعم جميع أنواع الملفات والوثائق
-      </div>
-    </div>
-
-    <div class="file-list" id="fileList"></div>
-  </div>
-
-  <div class="footer">
-    © 2026 <span>BismarkVault</span><br>
-    Property & Developed by <span>Malek Alsirreih</span> · Mettmann, Germany
-  </div>
-
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-  const KEY = "bismarkvault_files";
-  const PASS = "1234";
-
-  function toast(msg, dur = 2500) {
-    const el = document.getElementById("toast");
-    el.textContent = msg;
-    el.classList.add("show");
-    setTimeout(() => el.classList.remove("show"), dur);
+/* ═════ BismarkVault AI FINAL ═════ */
+
+const AK = "bv_apikey";
+
+function fetchWithTimeout(url, options, timeout = 15000){
+  return Promise.race([
+    fetch(url, options),
+    new Promise((_, reject) =>
+      setTimeout(() => reject(new Error("Timeout")), timeout)
+    )
+  ]);
+}
+
+/* ===== ANALYZE ===== */
+function analyzeFile(i){
+  const files = load();
+  const file = files[i];
+
+  if (!file) {
+    toast("⚠️ File not found");
+    return;
   }
 
-  function login() {
-    const v = document.getElementById("passwordInput").value.trim();
-    if (v === PASS) {
-      document.getElementById("loginCard").style.display = "none";
-      document.getElementById("vaultCard").style.display = "block";
-      render();
-      toast("✅ مرحباً بك في BismarkVault");
+  document.querySelectorAll('.tab')[1].click();
+
+  const prompt = `
+You are BismarkVault AI.
+
+Analyze this file professionally:
+
+Name: ${file.name}
+Type: ${file.type || 'Unknown'}
+Size: ${fmtB(file.size)}
+
+Give:
+1. File type
+2. Content guess
+3. Archive location
+4. Risk level
+5. Next action
+`;
+
+  document.getElementById('aiIn').value = prompt;
+  sendAI();
+}
+
+/* ===== API KEY ===== */
+function saveKey(){
+  const k = document.getElementById('apiKey').value.trim();
+  if(!k){ toast("⚠️ Enter API key"); return; }
+
+  localStorage.setItem(AK, k);
+  loadKeySt();
+}
+
+function loadKeySt(){
+  const k = localStorage.getItem(AK);
+  const el = document.getElementById('keySt');
+
+  if(k && k.startsWith("sk-")){
+    el.className = 'key-st ok';
+    el.innerHTML = '✅ API key active';
+    document.getElementById('apiKey').value = k;
+  } else {
+    el.className = 'key-st no';
+    el.innerHTML = '🔑 No key';
+  }
+}
+
+/* ===== CHAT ===== */
+function addMsg(role, text){
+  const box = document.getElementById('aiMsgs');
+
+  const div = document.createElement('div');
+  div.className = 'amsg ' + (role === 'user' ? 'u' : '');
+
+  div.innerHTML = `
+    <div class="aav ${role === 'assistant' ? 'b' : 'u2'}">
+      ${role === 'assistant' ? '🤖' : '👤'}
+    </div>
+    <div class="abbl ${role === 'assistant' ? 'b' : 'u2'}">
+      ${text.replace(/\n/g, "<br>")}
+    </div>
+  `;
+
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showTyping(){
+  const box = document.getElementById('aiMsgs');
+
+  const div = document.createElement('div');
+  div.id = "typing";
+  div.className = "amsg";
+
+  div.innerHTML = `
+    <div class="aav b">🤖</div>
+    <div class="abbl b">...</div>
+  `;
+
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function rmTyping(){
+  document.getElementById("typing")?.remove();
+}
+
+/* ===== SEND AI ===== */
+async function sendAI(){
+  const input = document.getElementById('aiIn');
+  const msg = input.value.trim();
+
+  if(!msg) return;
+
+  const key = localStorage.getItem(AK);
+
+  if(!key){
+    toast("⚠️ Enter API key first");
+    return;
+  }
+
+  input.value = "";
+  addMsg('user', msg);
+
+  showTyping();
+
+  try{
+    const res = await fetchWithTimeout(
+      "https://api.anthropic.com/v1/messages",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": key,
+          "anthropic-version": "2023-06-01"
+        },
+        body: JSON.stringify({
+          model: "claude-3-haiku-20240307",
+          max_tokens: 800,
+          messages: [
+            { role: "user", content: msg }
+          ]
+        })
+      },
+      15000
+    );
+
+    const data = await res.json();
+
+    rmTyping();
+
+    if(data.content && data.content[0]){
+      addMsg("assistant", data.content[0].text);
     } else {
-      toast("❌ كلمة المرور غير صحيحة");
-      document.getElementById("passwordInput").value = "";
-      document.getElementById("passwordInput").focus();
-    }
-  }
-
-  function logout() {
-    document.getElementById("vaultCard").style.display = "none";
-    document.getElementById("loginCard").style.display = "block";
-    document.getElementById("passwordInput").value = "";
-    toast("👋 تم تسجيل الخروج بأمان");
-  }
-
-  function load() {
-    return JSON.parse(localStorage.getItem(KEY)) || [];
-  }
-
-  function save(data) {
-    localStorage.setItem(KEY, JSON.stringify(data));
-  }
-
-  function fileEmoji(type) {
-    if (!type) return "📄";
-    if (type.startsWith("image/")) return "🖼️";
-    if (type.includes("pdf")) return "📕";
-    if (type.includes("word") || type.includes("document")) return "📝";
-    if (type.includes("sheet") || type.includes("excel") || type.includes("csv")) return "📊";
-    if (type.includes("zip") || type.includes("rar") || type.includes("7z")) return "📦";
-    if (type.startsWith("video/")) return "🎬";
-    if (type.startsWith("audio/")) return "🎵";
-    if (type.includes("text")) return "📃";
-    return "📄";
-  }
-
-  function formatSize(bytes) {
-    if (bytes < 1024) return bytes + " B";
-    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + " KB";
-    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
-  }
-
-  function saveFiles(e) {
-    const files = e.target.files;
-    const data = load();
-
-    for (const f of files) {
-      data.push({
-        name: f.name,
-        size: f.size,
-        type: f.type || "Unknown",
-        date: new Date().toLocaleDateString("ar-EG")
-      });
+      addMsg("assistant", "⚠️ AI error");
     }
 
-    save(data);
-    render();
-    document.getElementById("fileInput").value = "";
-    toast(`✅ تم رفع ${files.length} ملف`);
-  }
+  }catch(e){
+    rmTyping();
 
-  function deleteFile(i) {
-    const data = load();
-    const name = data[i].name;
-    data.splice(i, 1);
-    save(data);
-    render();
-    toast(`🗑️ تم حذف "${name}"`);
-  }
-
-  function clearFiles() {
-    if (!confirm("هل أنت متأكد من حذف جميع الملفات؟")) return;
-    localStorage.removeItem(KEY);
-    render();
-    toast("🗑️ تم حذف جميع الملفات");
-  }
-
-  function render() {
-    const data = load();
-    const list = document.getElementById("fileList");
-    const totalSize = data.reduce((s, f) => s + (f.size || 0), 0);
-    const types = new Set(data.map(f => (f.type || "").split("/")[0])).size;
-
-    document.getElementById("statCount").textContent = data.length;
-    document.getElementById("statSize").textContent = (totalSize / (1024 * 1024)).toFixed(2);
-    document.getElementById("statTypes").textContent = types;
-
-    if (data.length === 0) {
-      list.innerHTML = `
-        <div class="empty-state">
-          <span class="empty-icon">🗄️</span>
-          <p>القبو فارغ<br>ارفع ملفاتك الأولى الآن</p>
-        </div>
-      `;
-      return;
+    if(e.message === "Timeout"){
+      addMsg("assistant", "⚠️ AI is slow, try again");
+    } else {
+      addMsg("assistant", "⚠️ Connection error");
     }
-
-    list.innerHTML = data.map((f, i) => `
-      <div class="file-item">
-        <div class="file-type-badge">${fileEmoji(f.type)}</div>
-        <div class="file-info">
-          <div class="file-name">${f.name}</div>
-          <div class="file-meta">${formatSize(f.size)} · ${f.type || "غير معروف"} · ${f.date || ""}</div>
-        </div>
-        <button class="file-delete" title="حذف" onclick="deleteFile(${i})">✕</button>
-      </div>
-    `).join("");
   }
-
-  const zone = document.getElementById("uploadZone");
-  zone.addEventListener("dragover", e => {
-    e.preventDefault();
-    zone.classList.add("dragover");
-  });
-
-  zone.addEventListener("dragleave", () => {
-    zone.classList.remove("dragover");
-  });
-
-  zone.addEventListener("drop", e => {
-    e.preventDefault();
-    zone.classList.remove("dragover");
-    const fakeEvt = { target: { files: e.dataTransfer.files } };
-    saveFiles(fakeEvt);
-  });
-</script>
-</body>
-</html>
+}
