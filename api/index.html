@@ -1,634 +1,131 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BismarkVault V8 | Mail AI Sync</title>
-  <meta name="description" content="BismarkVault Mail AI Sync — Smart email triage, vault recommendations, and action-driven legal workflow." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;500;600;700;800&family=Cinzel:wght@700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#060607;
-      --bg2:#0c0d10;
-      --panel:#111217;
-      --panel2:#171920;
-      --line:rgba(200,168,75,.16);
-      --gold:#c8a84b;
-      --gold2:#f2d88e;
-      --text:#f5efe3;
-      --muted:#afa690;
-      --blue:#58a6ff;
-      --green:#3ccf91;
-      --red:#ff6d7c;
-      --shadow:0 25px 70px rgba(0,0,0,.45);
-      --radius:22px;
-    }
-
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      color:var(--text);
-      font-family:"Cairo","Inter",sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(200,168,75,.09), transparent 25%),
-        radial-gradient(circle at bottom right, rgba(88,166,255,.06), transparent 22%),
-        linear-gradient(180deg,#050506 0%, #0b0c10 55%, #050506 100%);
-      min-height:100vh;
-      overflow-x:hidden;
-    }
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      background-image:
-        linear-gradient(rgba(255,255,255,.015) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.015) 1px, transparent 1px);
-      background-size:42px 42px;
-      mask-image:radial-gradient(circle at center, black 40%, transparent 90%);
-      opacity:.16;
-    }
-
-    .container{width:min(1240px, calc(100% - 36px)); margin-inline:auto; position:relative; z-index:1}
-    .btn{
-      border:none; outline:none; cursor:pointer; transition:.2s ease;
-      font-family:inherit; font-weight:700; border-radius:14px;
-      padding:12px 18px;
-    }
-    .btn-gold{
-      background:linear-gradient(135deg,var(--gold2),var(--gold));
-      color:#121212;
-      box-shadow:0 10px 24px rgba(200,168,75,.2);
-    }
-    .btn-gold:hover{transform:translateY(-1px)}
-    .btn-outline{
-      background:transparent;
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.08);
-    }
-    .btn-outline:hover{border-color:var(--line); background:rgba(255,255,255,.03)}
-    .btn-sm{padding:9px 14px; border-radius:12px; font-size:.88rem}
-
-    nav{
-      position:sticky; top:0; z-index:20;
-      backdrop-filter:blur(14px);
-      background:rgba(6,6,7,.72);
-      border-bottom:1px solid rgba(255,255,255,.05);
-    }
-    .nav-inner{
-      width:min(1240px, calc(100% - 36px));
-      margin-inline:auto;
-      height:78px;
-      display:flex; align-items:center; justify-content:space-between;
-      gap:16px;
-    }
-    .brand{display:flex; align-items:center; gap:14px}
-    .mark{
-      width:48px; height:48px; display:grid; place-items:center;
-      border-radius:16px;
-      background:linear-gradient(145deg,#191a1f,#0a0a0c);
-      border:1px solid var(--line);
-      box-shadow:inset 0 1px 0 rgba(255,255,255,.03),0 10px 20px rgba(0,0,0,.25);
-      color:var(--gold2);
-      font-size:22px;
-    }
-    .brand h1{
-      margin:0;
-      font-size:1rem;
-      letter-spacing:2px;
-      font-family:"Cinzel",serif;
-      background:linear-gradient(90deg,var(--gold2),var(--gold));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .brand p{margin:2px 0 0; color:var(--muted); font-size:.78rem}
-    .nav-right{display:flex; gap:10px; align-items:center}
-
-    .hero{padding:42px 0 18px}
-    .hero-grid{
-      display:grid; grid-template-columns:1.08fr .92fr; gap:24px;
-    }
-    .glass{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-    }
-    .hero-card{padding:34px}
-    .pill{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 14px;
-      border-radius:999px;
-      color:var(--gold2);
-      background:rgba(200,168,75,.08);
-      border:1px solid var(--line);
-      margin-bottom:18px;
-      font-size:.82rem; font-weight:700;
-    }
-    .dot{
-      width:8px; height:8px; border-radius:50%;
-      background:var(--gold2);
-      box-shadow:0 0 18px rgba(242,216,142,.7);
-    }
-    .hero-card h2{
-      margin:0 0 14px;
-      font-family:"Cinzel",serif;
-      line-height:1.08;
-      font-size:clamp(2rem,4.4vw,4rem);
-    }
-    .gold{
-      background:linear-gradient(90deg,var(--gold2),var(--gold));
-      -webkit-background-clip:text; background-clip:text; color:transparent;
-    }
-    .hero-card p{
-      margin:0 0 24px;
-      color:var(--muted);
-      line-height:1.9;
-      font-size:1rem;
-    }
-    .hero-actions{display:flex; flex-wrap:wrap; gap:12px}
-    .hero-preview{padding:20px}
-    .preview-top{
-      display:flex; justify-content:space-between; align-items:center; gap:12px;
-      padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.06);
-      margin-bottom:16px;
-    }
-    .live-badge{
-      color:var(--green);
-      border:1px solid rgba(60,207,145,.2);
-      background:rgba(60,207,145,.08);
-      padding:7px 10px; border-radius:999px; font-size:.78rem; font-weight:700;
-    }
-    .preview-cards{display:grid; gap:12px}
-    .mini{
-      background:var(--panel2); border:1px solid rgba(255,255,255,.05);
-      border-radius:18px; padding:14px; display:flex; gap:12px; align-items:center; justify-content:space-between;
-    }
-    .mini-left{display:flex; gap:12px; align-items:center}
-    .mini-icon{
-      width:42px; height:42px; display:grid; place-items:center;
-      border-radius:14px; color:var(--gold2);
-      background:rgba(200,168,75,.09); border:1px solid var(--line);
-    }
-    .mini-title{font-weight:700}
-    .mini-sub{font-size:.83rem; color:var(--muted)}
-    .mini-tag{
-      padding:7px 10px; border-radius:999px; font-size:.74rem; font-weight:700;
-      white-space:nowrap;
-    }
-    .tag-vault{background:rgba(200,168,75,.12); color:var(--gold2); border:1px solid var(--line)}
-    .tag-print{background:rgba(88,166,255,.11); color:#9dcbff; border:1px solid rgba(88,166,255,.22)}
-    .tag-review{background:rgba(255,109,124,.1); color:#ffb0b9; border:1px solid rgba(255,109,124,.2)}
-
-    .section-head{
-      display:flex; align-items:center; gap:12px; margin:38px 0 16px;
-    }
-    .section-head h3{margin:0; font-size:1.45rem; font-family:"Cinzel",serif}
-    .line{flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--line), transparent)}
-
-    .stats{
-      display:grid; grid-template-columns:repeat(4,1fr); gap:14px;
-      margin-bottom:18px;
-    }
-    .stat{
-      padding:20px;
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;
-      box-shadow:var(--shadow);
-    }
-    .stat-number{
-      color:var(--gold2);
-      font-size:1.7rem;
-      margin-bottom:6px;
-      font-family:"Cinzel",serif;
-    }
-    .stat-label{color:var(--muted); font-size:.9rem}
-
-    .workspace{
-      display:grid; grid-template-columns:310px 1fr; gap:18px;
-      margin-bottom:36px;
-    }
-    .sidebar, .main{
-      background:var(--panel);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:24px;
-      box-shadow:var(--shadow);
-    }
-    .sidebar{padding:20px; display:grid; gap:14px; align-content:start}
-    .sidebar-head h4{margin:0 0 4px; font-size:1.05rem}
-    .sidebar-head p{margin:0; color:var(--muted); font-size:.84rem}
-    .connect-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:18px;
-      padding:16px;
-      display:grid; gap:12px;
-    }
-    .provider-list{display:grid; gap:10px}
-    .provider{
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding:12px 14px;
-      border-radius:16px;
-      background:var(--bg2);
-      border:1px solid rgba(255,255,255,.05);
-    }
-    .provider strong{font-size:.95rem}
-    .provider span{font-size:.82rem; color:var(--muted)}
-    .status{
-      padding:6px 10px; border-radius:999px; font-size:.74rem; font-weight:700;
-      border:1px solid rgba(60,207,145,.2); color:var(--green); background:rgba(60,207,145,.08);
-    }
-    .status.off{
-      border-color:rgba(255,255,255,.08); color:var(--muted); background:rgba(255,255,255,.03);
-    }
-    .insight{
-      background:rgba(255,255,255,.02);
-      border:1px dashed rgba(255,255,255,.08);
-      border-radius:18px;
-      padding:14px;
-      color:var(--muted);
-      font-size:.86rem;
-      line-height:1.85;
-    }
-
-    .main{padding:22px}
-    .mail-top{
-      display:flex; justify-content:space-between; align-items:flex-start; gap:16px;
-      margin-bottom:16px;
-    }
-    .mail-top h4{margin:0 0 6px; font-size:1.35rem}
-    .mail-top p{margin:0; color:var(--muted); line-height:1.8}
-    .sync-pill{
-      white-space:nowrap;
-      background:rgba(200,168,75,.08);
-      color:var(--gold2);
-      border:1px solid var(--line);
-      padding:9px 12px; border-radius:999px; font-size:.8rem; font-weight:700;
-    }
-
-    .toolbar{
-      display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap;
-      margin-bottom:16px;
-    }
-    .toolbar-left{display:flex; gap:10px; flex-wrap:wrap}
-    .search{
-      background:var(--bg2);
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:14px;
-      color:var(--text);
-      padding:12px 14px;
-      min-width:260px;
-      outline:none;
-      font-family:inherit;
-    }
-    .feed{display:grid; gap:14px}
-    .mail-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-      border:1px solid rgba(255,255,255,.06);
-      border-radius:20px;
-      padding:18px;
-      position:relative;
-      overflow:hidden;
-    }
-    .mail-card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,.02), transparent);
-      transform:translateX(-100%);
-      transition:.4s ease;
-    }
-    .mail-card:hover::before{transform:translateX(100%)}
-    .mail-head{
-      display:flex; justify-content:space-between; gap:12px; align-items:flex-start;
-      margin-bottom:12px;
-    }
-    .mail-from{font-weight:800}
-    .mail-subject{font-size:.9rem; color:var(--muted); margin-top:4px}
-    .mail-time{font-size:.82rem; color:var(--muted); white-space:nowrap}
-    .mail-tags{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px}
-    .tag{
-      padding:6px 10px; border-radius:999px; font-size:.73rem; font-weight:700;
-    }
-    .summary-box{
-      background:rgba(255,255,255,.025);
-      border:1px solid rgba(255,255,255,.05);
-      border-right:4px solid var(--gold);
-      border-radius:16px;
-      padding:14px;
-      color:#efe8da;
-      line-height:1.9;
-      font-size:.95rem;
-      margin-bottom:12px;
-    }
-    .action-row{display:flex; gap:10px; flex-wrap:wrap}
-    .subtle{color:var(--muted)}
-
-    .footer{
-      text-align:center;
-      color:var(--muted);
-      padding:6px 0 40px;
-      font-size:.88rem;
-    }
-
-    @media (max-width: 1100px){
-      .hero-grid,.workspace{grid-template-columns:1fr}
-      .stats{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width: 640px){
-      .container{width:min(100% - 22px, 1240px)}
-      .hero-card,.hero-preview,.sidebar,.main,.stat{padding:16px}
-      .stats{grid-template-columns:1fr}
-      .search{min-width:100%}
-      .mail-top{flex-direction:column}
-      .nav-right .btn-outline{display:none}
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BismarkVault AI | تحليل الوثائق الذكي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #c8a84b;
+            --black: #060607;
+            --panel: #111217;
+            --text: #f5fef3;
+        }
+        body {
+            background-color: var(--black);
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            margin: 0;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: var(--panel);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        h1 { color: var(--gold); text-align: center; }
+        .upload-section {
+            border: 2px dashed var(--gold);
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-radius: 10px;
+        }
+        input[type="file"] { margin: 15px 0; }
+        button {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            font-size: 16px;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(200, 168, 75, 0.1);
+            border-right: 4px solid var(--gold);
+            min-height: 100px;
+            white-space: pre-wrap;
+        }
+        .status { color: #ff4d4d; margin-top: 10px; display: none; }
+    </style>
 </head>
 <body>
-  <nav>
-    <div class="nav-inner">
-      <div class="brand">
-        <div class="mark">✦</div>
-        <div>
-          <h1>BismarkVault</h1>
-          <p>Mail AI Sync • Smart Triage • Secure Vault Actions</p>
+    <div class="container">
+        <h1>🔐 BismarkVault AI</h1>
+        <div class="upload-section">
+            <p>ارفع ملفك الآن (عقد، رسالة، وثيقة) ليقوم الذكاء الاصطناعي بتحليله</p>
+            <input type="file" id="fileInput">
+            <button onclick="analyzeDocument()" id="btn">Analyze File | تحليل الملف</button>
+            <div id="statusMsg" class="status"></div>
         </div>
-      </div>
-      <div class="nav-right">
-        <button class="btn btn-outline">لوحة التحكم</button>
-        <button class="btn btn-gold">ربط حساب جديد +</button>
-      </div>
-    </div>
-  </nav>
-
-  <main class="container">
-    <section class="hero">
-      <div class="hero-grid">
-        <div class="hero-card glass">
-          <div class="pill"><span class="dot"></span> Advanced Mail Intelligence Layer</div>
-          <h2>حوّل البريد الإلكتروني إلى <span class="gold">قرارات ذكية</span></h2>
-          <p>
-            Mail AI Sync يجعل البريد جزءًا من الخزنة الذكية. النظام يقرأ الرسائل المهمة،
-            يختصرها، يقترح حفظ المرفقات في الخزنة، ويرشدك إلى الإجراء الصحيح:
-            طباعة، مراجعة قانونية، أو حفظ في المسار المناسب.
-          </p>
-          <div class="hero-actions">
-            <button class="btn btn-gold" onclick="scrollToSection('mailWorkspace')">استعراض البريد الذكي</button>
-            <button class="btn btn-outline" onclick="showToast('هذه النسخة مهيأة كعرض احترافي للميزة الجديدة.')">معاينة سريعة</button>
-          </div>
-        </div>
-
-        <div class="hero-preview glass">
-          <div class="preview-top">
-            <div>
-              <div style="font-weight:800">Mail Sync Preview</div>
-              <div class="subtle" style="font-size:.84rem">Connected workflow with AI decisions</div>
-            </div>
-            <div class="live-badge">● Live Concept</div>
-          </div>
-
-          <div class="preview-cards">
-            <div class="mini">
-              <div class="mini-left">
-                <div class="mini-icon">📩</div>
-                <div>
-                  <div class="mini-title">Incoming Contract Update</div>
-                  <div class="mini-sub">HR email • attachment detected</div>
-                </div>
-              </div>
-              <div class="mini-tag tag-vault">Save to Vault</div>
-            </div>
-
-            <div class="mini">
-              <div class="mini-left">
-                <div class="mini-icon">⚖️</div>
-                <div>
-                  <div class="mini-title">Regulatory Notice</div>
-                  <div class="mini-sub">Requires legal review</div>
-                </div>
-              </div>
-              <div class="mini-tag tag-review">Legal Review</div>
-            </div>
-
-            <div class="mini">
-              <div class="mini-left">
-                <div class="mini-icon">🖨️</div>
-                <div>
-                  <div class="mini-title">Tax Office Document</div>
-                  <div class="mini-sub">Action recommended by AI</div>
-                </div>
-              </div>
-              <div class="mini-tag tag-print">Print Now</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="section-head">
-      <div class="line"></div>
-      <h3>مؤشرات النظام</h3>
-      <div class="line"></div>
+        <div id="result">بانتظار رفع الملف...</div>
     </div>
 
-    <section class="stats">
-      <div class="stat">
-        <div class="stat-number">14</div>
-        <div class="stat-label">رسالة تم تحليلها اليوم</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">6</div>
-        <div class="stat-label">مرفقات تم اقتراح حفظها في الخزنة</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">3</div>
-        <div class="stat-label">رسائل تحتاج مراجعة قانونية</div>
-      </div>
-      <div class="stat">
-        <div class="stat-number">99%</div>
-        <div class="stat-label">دقة الفرز الأولي الذكي</div>
-      </div>
-    </section>
+    <script>
+        async function analyzeDocument() {
+            const fileInput = document.getElementById('fileInput');
+            const resultDiv = document.getElementById('result');
+            const statusMsg = document.getElementById('statusMsg');
+            const btn = document.getElementById('btn');
 
-    <div class="section-head" id="mailWorkspace">
-      <div class="line"></div>
-      <h3>لوحة البريد الذكي</h3>
-      <div class="line"></div>
-    </div>
+            if (!fileInput.files[0]) {
+                statusMsg.innerText = "❌ يرجى اختيار ملف أولاً";
+                statusMsg.style.display = "block";
+                return;
+            }
 
-    <section class="workspace">
-      <aside class="sidebar">
-        <div class="sidebar-head">
-          <h4>حالة الربط</h4>
-          <p>واجهة احترافية لعرض جاهزية التكامل</p>
-        </div>
+            const file = fileInput.files[0];
+            const reader = new FileReader();
 
-        <div class="connect-card">
-          <div class="provider-list">
-            <div class="provider">
-              <div>
-                <strong>Gmail Workspace</strong>
-                <span>OAuth2 secure connection</span>
-              </div>
-              <div class="status">Connected</div>
-            </div>
+            reader.onload = async function(e) {
+                const content = e.target.result;
+                
+                resultDiv.innerText = "جاري التحليل... يرجى الانتظار";
+                btn.disabled = true;
+                statusMsg.style.display = "none";
 
-            <div class="provider">
-              <div>
-                <strong>Outlook 365</strong>
-                <span>Secondary integration layer</span>
-              </div>
-              <div class="status off">Standby</div>
-            </div>
-          </div>
+                try {
+                    // السطر السحري: الاتصال بالـ API الجديد الذي أنشأناه
+                    const response = await fetch('/api/analyze', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            fileName: file.name,
+                            fileType: file.type,
+                            fileContent: content.substring(0, 5000) // نرسل أول 5000 حرف للتحليل
+                        })
+                    });
 
-          <button class="btn btn-gold btn-sm" onclick="showToast('سيتم لاحقًا فتح تدفق OAuth الحقيقي لربط Gmail وOutlook.')">ربط حساب جديد</button>
-        </div>
+                    const data = await response.json();
+                    if (data.analysis) {
+                        resultDiv.innerText = data.analysis;
+                    } else {
+                        throw new Error(data.error || "خطأ غير معروف");
+                    }
+                } catch (error) {
+                    statusMsg.innerText = "❌ فشل الاتصال: " + error.message;
+                    statusMsg.style.display = "block";
+                    resultDiv.innerText = "حدث خطأ أثناء الاتصال بالخادم.";
+                } finally {
+                    btn.disabled = false;
+                }
+            };
 
-        <div class="insight">
-          <strong style="color:var(--gold2)">ملاحظة منتج:</strong>
-          هذه النسخة مطورة بصريًا لتبدو كميزة Enterprise حقيقية.
-          من الناحية التقنية ما زال endpoint
-          <code style="color:#fff">api/mail-sync.js</code>
-          تمهيديًا ويحتاج لاحقًا OAuth + token storage + sync pipeline.
-        </div>
-      </aside>
-
-      <section class="main">
-        <div class="mail-top">
-          <div>
-            <h4>📥 الرسائل الواردة حديثًا (تحليل AI)</h4>
-            <p>ترتيب أحدث وأكثر احترافية للبريد مع اقتراحات إجراءات ذكية ومظهر مناسب للعرض أمام العميل أو المستثمر.</p>
-          </div>
-          <div class="sync-pill">Encrypted Mail Mode Active</div>
-        </div>
-
-        <div class="toolbar">
-          <div class="toolbar-left">
-            <button class="btn btn-outline btn-sm" onclick="filterCards('all')">الكل</button>
-            <button class="btn btn-outline btn-sm" onclick="filterCards('vault')">حفظ في الخزنة</button>
-            <button class="btn btn-outline btn-sm" onclick="filterCards('print')">طباعة</button>
-            <button class="btn btn-outline btn-sm" onclick="filterCards('review')">مراجعة قانونية</button>
-          </div>
-          <input id="searchInput" class="search" type="text" placeholder="ابحث في الرسائل أو الموضوع..." oninput="searchCards()" />
-        </div>
-
-        <div class="feed" id="feed">
-          <article class="mail-card" data-type="vault" data-search="hr european homecare update contract annual">
-            <div class="mail-head">
-              <div>
-                <div class="mail-from">من: HR - European Homecare</div>
-                <div class="mail-subject">الموضوع: تحديث بنود العقد السنوي</div>
-              </div>
-              <div class="mail-time">منذ 12 دقيقة</div>
-            </div>
-
-            <div class="mail-tags">
-              <span class="tag tag-vault">توصية: حفظ في الخزنة</span>
-              <span class="tag tag-review">تحليل قانوني مقترح</span>
-            </div>
-
-            <div class="summary-box">
-              <strong>ملخص الذكاء الاصطناعي:</strong>
-              يحتوي البريد على نسخة محدثة من عقد العمل مع تعديل واضح في ساعات العمل
-              وآلية الدوام. يُنصح بحفظ المرفق في قسم العقود وإجراء تحليل قانوني للتأكد من
-              سلامة البنود الجديدة قبل الاعتماد.
-            </div>
-
-            <div class="action-row">
-              <button class="btn btn-gold btn-sm" onclick="showToast('تم تنفيذ إجراء تجريبي: حفظ في الخزنة.')">📁 حفظ في الخزنة</button>
-              <button class="btn btn-outline btn-sm" onclick="showToast('تم فتح سيناريو المراجعة القانونية.')">⚖️ تحليل قانوني</button>
-              <button class="btn btn-outline btn-sm" onclick="showToast('تم نسخ ملخص الرسالة.')">📋 نسخ الملخص</button>
-            </div>
-          </article>
-
-          <article class="mail-card" data-type="print" data-search="finanzamt mettmann steuerbescheid tax office print">
-            <div class="mail-head">
-              <div>
-                <div class="mail-from">من: Finanzamt Mettmann</div>
-                <div class="mail-subject">الموضوع: إشعار ضريبي (Steuerbescheid)</div>
-              </div>
-              <div class="mail-time">منذ 47 دقيقة</div>
-            </div>
-
-            <div class="mail-tags">
-              <span class="tag tag-print">توصية: طباعة</span>
-              <span class="tag tag-vault">نسخة رقمية مطلوبة</span>
-            </div>
-
-            <div class="summary-box">
-              <strong>ملخص الذكاء الاصطناعي:</strong>
-              الوثيقة الرسمية تحتاج غالبًا إلى طباعة ومراجعة يدوية أو توقيع، مع الاحتفاظ
-              بنسخة رقمية آمنة داخل الخزنة. يُفضل طباعة الوثيقة فورًا وتخزين النسخة الممسوحة لاحقًا.
-            </div>
-
-            <div class="action-row">
-              <button class="btn btn-gold btn-sm" onclick="window.print()">🖨️ طباعة الآن</button>
-              <button class="btn btn-outline btn-sm" onclick="showToast('تم تنفيذ إجراء تجريبي: حفظ نسخة رقمية.')">📁 حفظ نسخة</button>
-            </div>
-          </article>
-
-          <article class="mail-card" data-type="review" data-search="client nda confidential disclosure legal review">
-            <div class="mail-head">
-              <div>
-                <div class="mail-from">من: Corporate Client</div>
-                <div class="mail-subject">الموضوع: NDA update for cross-border collaboration</div>
-              </div>
-              <div class="mail-time">منذ ساعة</div>
-            </div>
-
-            <div class="mail-tags">
-              <span class="tag tag-review">مراجعة قانونية</span>
-              <span class="tag tag-vault">Archive Recommended</span>
-            </div>
-
-            <div class="summary-box">
-              <strong>ملخص الذكاء الاصطناعي:</strong>
-              الرسالة تحتوي على تحديث لاتفاقية سرية مع عنصر مشاركة معلومات عبر الحدود.
-              يُنصح بمراجعة البند الخاص بالإفصاح العرضي وبنطاق الاختصاص القضائي قبل التوقيع.
-            </div>
-
-            <div class="action-row">
-              <button class="btn btn-gold btn-sm" onclick="showToast('تم فتح إجراء مراجعة قانونية.')">⚖️ فتح للمراجعة</button>
-              <button class="btn btn-outline btn-sm" onclick="showToast('تم تنفيذ إجراء تجريبي: حفظ في NDA Vault.')">📁 حفظ في NDA Vault</button>
-            </div>
-          </article>
-        </div>
-      </section>
-    </section>
-
-    <div class="footer">
-      BismarkVault V8 Mail AI Sync • High-End Visual Revision • Tomorrow-ready deployment
-    </div>
-  </main>
-
-  <script>
-    function showToast(message){
-      alert(message);
-    }
-
-    function filterCards(type){
-      const cards = document.querySelectorAll('.mail-card');
-      cards.forEach(card => {
-        card.style.display = (type === 'all' || card.dataset.type === type) ? 'block' : 'none';
-      });
-    }
-
-    function searchCards(){
-      const term = document.getElementById('searchInput').value.trim().toLowerCase();
-      const cards = document.querySelectorAll('.mail-card');
-
-      cards.forEach(card => {
-        const haystack = card.dataset.search || '';
-        const visibleByType = card.style.display !== 'none' || true;
-        card.style.display = haystack.includes(term) ? 'block' : 'none';
-      });
-
-      if (!term) filterCards('all');
-    }
-  </script>
+            reader.readAsText(file);
+        }
+    </script>
 </body>
 </html>
