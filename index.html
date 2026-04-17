@@ -2,44 +2,112 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>BismarkVault AI</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BismarkVault AI | Control Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
     <style>
-        body { background: #060607; color: white; font-family: sans-serif; text-align: center; padding: 50px; }
-        .box { border: 2px solid #c8a84b; padding: 30px; border-radius: 15px; max-width: 500px; margin: auto; background: #111217; }
-        button { background: #c8a84b; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; }
-        #result { margin-top: 20px; text-align: right; white-space: pre-wrap; color: #f5fef3; }
+        :root { --gold: #c8a84b; --bg: #060607; --panel: #111217; --text: #f5fef3; }
+        body { margin: 0; font-family: 'Cairo', sans-serif; background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
+        
+        /* Sidebar - لوحة الإعدادات */
+        .sidebar { width: 280px; background: var(--panel); border-left: 1px solid var(--gold); padding: 20px; display: flex; flex-direction: column; gap: 20px; }
+        .sidebar h3 { color: var(--gold); border-bottom: 1px solid #333; padding-bottom: 10px; }
+        .setting-group { display: flex; flex-direction: column; gap: 10px; }
+        select, input[type="range"] { background: #1a1b20; border: 1px solid var(--gold); color: white; padding: 8px; border-radius: 5px; }
+
+        /* Main Content - منطقة العمل */
+        .main-content { flex: 1; display: flex; flex-direction: column; padding: 40px; overflow-y: auto; }
+        .glass-card { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(200, 168, 75, 0.3); border-radius: 20px; padding: 40px; backdrop-filter: blur(10px); }
+        
+        .upload-area { border: 2px dashed var(--gold); padding: 40px; border-radius: 15px; cursor: pointer; transition: 0.3s; margin-bottom: 30px; }
+        .upload-area:hover { background: rgba(200, 168, 75, 0.05); }
+        
+        button { background: var(--gold); color: black; border: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; width: 100%; font-size: 18px; }
+        button:disabled { background: #555; }
+
+        #resultArea { margin-top: 30px; background: #000; padding: 25px; border-radius: 10px; border-right: 5px solid var(--gold); line-height: 1.8; font-size: 17px; min-height: 200px; }
+        .status-dot { width: 10px; height: 10px; background: #00ff00; border-radius: 50%; display: inline-block; margin-left: 10px; }
     </style>
 </head>
 <body>
-    <div class="box">
-        <h2 style="color:#c8a84b">🔐 BismarkVault AI</h2>
-        <input type="file" id="uploadFile" style="margin-bottom: 20px;">
-        <button onclick="start()">تحليل الوثيقة الآن</button>
-        <div id="result">النتيجة ستظهر هنا...</div>
+
+    <div class="sidebar">
+        <h3>⚙️ الإعدادات</h3>
+        <div class="setting-group">
+            <label>لغة الرد المفضلة:</label>
+            <select id="langPref">
+                <option value="ar">العربية</option>
+                <option value="de">الألمانية (Deutsch)</option>
+                <option value="both" selected>كلتا اللغتين</option>
+            </select>
+        </div>
+        <div class="setting-group">
+            <label>نمط الذكاء:</label>
+            <select id="aiModel">
+                <option value="precise">دقيق (للعقود والأوراق)</option>
+                <option value="creative">إبداعي (للملخصات)</option>
+            </select>
+        </div>
+        <div class="setting-group">
+            <label>دقة التحليل:</label>
+            <input type="range" min="1" max="100" value="80">
+        </div>
+        <hr style="border: 0.1px solid #333; width: 100%;">
+        <p style="font-size: 12px; color: #888;">الحالة: <span class="status-dot"></span> متصل بـ Vercel</p>
+    </div>
+
+    <div class="main-content">
+        <div class="glass-card">
+            <h1 style="color: var(--gold); text-align: center; margin-top: 0;">BismarkVault Pro AI</h1>
+            
+            <div class="upload-area" onclick="document.getElementById('fileIn').click()">
+                <p id="fileNameDisplay">اسحب الملف هنا أو اضغط للاختيار</p>
+                <input type="file" id="fileIn" hidden onchange="updateName()">
+            </div>
+
+            <button id="mainBtn" onclick="processFile()">بدء التحليل الذكي</button>
+
+            <div id="resultArea">بانتظار تعليماتك يا مالك...</div>
+        </div>
     </div>
 
     <script>
-        async function start() {
-            const file = document.getElementById('uploadFile').files[0];
-            if (!file) return alert("اختر ملفاً أولاً");
+        function updateName() {
+            const file = document.getElementById('fileIn').files[0];
+            if(file) document.getElementById('fileNameDisplay').innerText = "تم اختيار: " + file.name;
+        }
 
-            document.getElementById('result').innerText = "جاري التحليل... يرجى الانتظار";
-            
+        async function processFile() {
+            const file = document.getElementById('fileIn').files[0];
+            const resultArea = document.getElementById('resultArea');
+            const btn = document.getElementById('mainBtn');
+            const lang = document.getElementById('langPref').value;
+
+            if(!file) return alert("اختر ملفاً أولاً");
+
+            btn.disabled = true;
+            btn.innerText = "جاري الاتصال بالعقل الإلكتروني...";
+            resultArea.innerText = "يتم الآن معالجة البيانات وفقاً للإعدادات المختارة...";
+
             const reader = new FileReader();
             reader.onload = async (e) => {
                 try {
                     const response = await fetch('/api/analyze', {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
-                            fileName: file.name, 
-                            fileContent: e.target.result.substring(0, 4000) 
+                        headers: {'Content-Type': 'application/json'},
+                        body: JSON.stringify({
+                            fileName: file.name,
+                            fileContent: e.target.result.substring(0, 5000),
+                            options: { language: lang }
                         })
                     });
                     const data = await response.json();
-                    document.getElementById('result').innerText = data.analysis || "حدث خطأ في الرد";
+                    resultArea.innerText = data.analysis || "حدث خطأ غير متوقع";
                 } catch (err) {
-                    document.getElementById('result').innerText = "مشكلة في الاتصال بالخادم. تأكد من حذف الملف الزائد من مجلد api.";
+                    resultArea.innerText = "فشل في الاتصال. تأكد من إعدادات الـ API";
+                } finally {
+                    btn.disabled = false;
+                    btn.innerText = "بدء التحليل الذكي";
                 }
             };
             reader.readAsText(file);
