@@ -1,222 +1,49 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault AI</title>
-<style>
-  body{
-    margin:0;
-    background:#0b0b0b;
-    color:#f4e7b7;
-    font-family:Arial,sans-serif;
-    text-align:center;
-    padding:50px 20px;
-  }
-
-  .container{
-    max-width:700px;
-    margin:0 auto;
-  }
-
-  h1{
-    color:#e0c14f;
-    margin-bottom:25px;
-    font-size:42px;
-  }
-
-  input[type="password"],
-  input[type="file"]{
-    width:100%;
-    max-width:420px;
-    padding:12px;
-    margin:10px auto;
-    display:block;
-    border:none;
-    border-radius:8px;
-    font-size:15px;
-  }
-
-  button{
-    padding:12px 24px;
-    background:#e0c14f;
-    color:#111;
-    border:none;
-    border-radius:8px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:12px;
-    font-size:15px;
-  }
-
-  button:hover{
-    opacity:.92;
-  }
-
-  .chat-box{
-    margin-top:30px;
-    background:#151515;
-    border:1px solid #2a2a2a;
-    border-radius:14px;
-    padding:18px;
-    min-height:220px;
-    text-align:left;
-    box-shadow:0 0 25px rgba(224,193,79,.08);
-  }
-
-  .msg{
-    margin:12px 0;
-    padding:12px 14px;
-    border-radius:10px;
-    line-height:1.7;
-    white-space:pre-wrap;
-  }
-
-  .user{
-    background:#2a2412;
-    color:#fff2b0;
-  }
-
-  .ai{
-    background:#1b1b1b;
-    color:#f5f5f5;
-    border:1px solid #2f2f2f;
-  }
-
-  .muted{
-    color:#999;
-    font-size:14px;
-    margin-top:12px;
-  }
-
-  .file-info{
-    margin-top:12px;
-    color:#cfcfcf;
-    font-size:14px;
-  }
-
-  .typing{
-    display:inline-block;
-    color:#bbb;
-  }
-</style>
+    <meta charset="UTF-8">
+    <title>BismarkVault AI</title>
+    <style>
+        body { background: #060607; color: white; font-family: sans-serif; text-align: center; padding: 50px; }
+        .box { border: 2px solid #c8a84b; padding: 30px; border-radius: 15px; max-width: 500px; margin: auto; background: #111217; }
+        button { background: #c8a84b; border: none; padding: 15px; width: 100%; cursor: pointer; font-weight: bold; border-radius: 5px; }
+        #result { margin-top: 20px; text-align: right; white-space: pre-wrap; color: #f5fef3; }
+    </style>
 </head>
 <body>
+    <div class="box">
+        <h2 style="color:#c8a84b">🔐 BismarkVault AI</h2>
+        <input type="file" id="uploadFile" style="margin-bottom: 20px;">
+        <button onclick="start()">تحليل الوثيقة الآن</button>
+        <div id="result">النتيجة ستظهر هنا...</div>
+    </div>
 
-<div class="container">
-  <h1>🔐 BismarkVault AI</h1>
+    <script>
+        async function start() {
+            const file = document.getElementById('uploadFile').files[0];
+            if (!file) return alert("اختر ملفاً أولاً");
 
-  <input id="apiKey" type="password" placeholder="Paste API Key هنا">
-  <input id="fileInput" type="file">
-
-  <button onclick="analyzeFile()">Analyze File</button>
-
-  <div class="file-info" id="fileInfo">لم يتم اختيار ملف بعد</div>
-
-  <div class="chat-box" id="chatBox">
-    <div class="msg ai">مرحبًا، أنا BismarkVault AI. ارفع ملفًا واضغط Analyze File.</div>
-  </div>
-
-  <div class="muted">هذه نسخة تجريبية. لا تضع API Key في موقع عام لاحقًا.</div>
-</div>
-
-<script>
-let selectedFile = null;
-
-document.getElementById("fileInput").addEventListener("change", function(e){
-  selectedFile = e.target.files[0] || null;
-
-  const fileInfo = document.getElementById("fileInfo");
-  if(selectedFile){
-    fileInfo.textContent = `الملف المختار: ${selectedFile.name} | الحجم: ${(selectedFile.size/1024).toFixed(1)} KB | النوع: ${selectedFile.type || "Unknown"}`;
-  } else {
-    fileInfo.textContent = "لم يتم اختيار ملف بعد";
-  }
-});
-
-function addMessage(text, type){
-  const chatBox = document.getElementById("chatBox");
-  const msg = document.createElement("div");
-  msg.className = "msg " + type;
-  msg.textContent = text;
-  chatBox.appendChild(msg);
-  chatBox.scrollTop = chatBox.scrollHeight;
-  return msg;
-}
-
-async function streamText(element, text, speed = 12){
-  element.textContent = "";
-  for(let i = 0; i < text.length; i++){
-    element.textContent += text[i];
-    await new Promise(r => setTimeout(r, speed));
-  }
-}
-
-async function analyzeFile(){
-  const key = document.getElementById("apiKey").value.trim();
-
-  if(!key){
-    addMessage("❌ أدخل API Key أولاً", "ai");
-    return;
-  }
-
-  if(!selectedFile){
-    addMessage("❌ اختر ملفًا أولاً", "ai");
-    return;
-  }
-
-  const userPrompt = `حلل هذا الملف باحترافية:
-الاسم: ${selectedFile.name}
-النوع: ${selectedFile.type || "Unknown"}
-الحجم: ${(selectedFile.size/1024).toFixed(1)} KB
-
-أعطني:
-1. نوع الملف المتوقع
-2. ما الذي قد يحتويه
-3. أين يجب أرشفته
-4. هل توجد مخاطر أو ملاحظات
-5. ما هو الإجراء التالي المناسب`;
-
-  addMessage(`👤 ${userPrompt}`, "user");
-
-  const typingMsg = addMessage("BismarkVault AI يكتب...", "ai");
-
-  try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-api-key": key,
-        "anthropic-version": "2023-06-01"
-      },
-      body: JSON.stringify({
-        model: "claude-3-haiku-20240307",
-        max_tokens: 500,
-        messages: [
-          {
-            role: "user",
-            content: userPrompt
-          }
-        ]
-      })
-    });
-
-    const data = await res.json();
-
-    let reply = "⚠️ لا يوجد رد";
-    if(data.error){
-      reply = "❌ Error: " + data.error.message;
-    } else if(data.content && data.content[0] && data.content[0].text){
-      reply = data.content[0].text;
-    }
-
-    await streamText(typingMsg, "🤖 " + reply, 10);
-
-  } catch (e) {
-    typingMsg.textContent = "❌ مشكلة في الاتصال";
-  }
-}
-</script>
-
+            document.getElementById('result').innerText = "جاري التحليل... يرجى الانتظار";
+            
+            const reader = new FileReader();
+            reader.onload = async (e) => {
+                try {
+                    const response = await fetch('/api/analyze', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ 
+                            fileName: file.name, 
+                            fileContent: e.target.result.substring(0, 4000) 
+                        })
+                    });
+                    const data = await response.json();
+                    document.getElementById('result').innerText = data.analysis || "حدث خطأ في الرد";
+                } catch (err) {
+                    document.getElementById('result').innerText = "مشكلة في الاتصال بالخادم. تأكد من حذف الملف الزائد من مجلد api.";
+                }
+            };
+            reader.readAsText(file);
+        }
+    </script>
 </body>
 </html>
