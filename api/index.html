@@ -1,130 +1,61 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BismarkVault AI | تحليل الوثائق الذكي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>BismarkVault AI | المحلل الذكي</title>
     <style>
-        :root {
-            --gold: #c8a84b;
-            --black: #060607;
-            --panel: #111217;
-            --text: #f5fef3;
-        }
-        body {
-            background-color: var(--black);
-            color: var(--text);
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 40px 20px;
-            margin: 0;
-        }
-        .container {
-            max-width: 800px;
-            width: 100%;
-            background: var(--panel);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid var(--gold);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        h1 { color: var(--gold); text-align: center; }
-        .upload-section {
-            border: 2px dashed var(--gold);
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-            border-radius: 10px;
-        }
-        input[type="file"] { margin: 15px 0; }
-        button {
-            background: var(--gold);
-            color: black;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            width: 100%;
-            font-size: 16px;
-        }
-        #result {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(200, 168, 75, 0.1);
-            border-right: 4px solid var(--gold);
-            min-height: 100px;
-            white-space: pre-wrap;
-        }
-        .status { color: #ff4d4d; margin-top: 10px; display: none; }
+        body { background: #060607; color: #f5fef3; font-family: sans-serif; text-align: center; padding: 50px; }
+        .box { border: 1px solid #c8a84b; padding: 30px; border-radius: 15px; max-width: 600px; margin: auto; background: #111217; }
+        button { background: #c8a84b; border: none; padding: 10px 20px; cursor: pointer; font-weight: bold; width: 100%; }
+        #result { margin-top: 20px; text-align: right; border-top: 1px solid #c8a84b; padding-top: 10px; white-space: pre-wrap; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔐 BismarkVault AI</h1>
-        <div class="upload-section">
-            <p>ارفع ملفك الآن (عقد، رسالة، وثيقة) ليقوم الذكاء الاصطناعي بتحليله</p>
-            <input type="file" id="fileInput">
-            <button onclick="analyzeDocument()" id="btn">Analyze File | تحليل الملف</button>
-            <div id="statusMsg" class="status"></div>
-        </div>
-        <div id="result">بانتظار رفع الملف...</div>
+    <div class="box">
+        <h2 style="color:#c8a84b">🔐 BismarkVault AI</h2>
+        <input type="file" id="fileInput" style="margin-bottom:20px">
+        <button onclick="startAnalysis()" id="btn">تحليل الوثيقة الآن</button>
+        <div id="result">النتيجة ستظهر هنا...</div>
     </div>
 
     <script>
-        async function analyzeDocument() {
-            const fileInput = document.getElementById('fileInput');
+        async function startAnalysis() {
+            const file = document.getElementById('fileInput').files[0];
             const resultDiv = document.getElementById('result');
-            const statusMsg = document.getElementById('statusMsg');
             const btn = document.getElementById('btn');
 
-            if (!fileInput.files[0]) {
-                statusMsg.innerText = "❌ يرجى اختيار ملف أولاً";
-                statusMsg.style.display = "block";
-                return;
-            }
+            if (!file) return alert("اختر ملفاً أولاً");
 
-            const file = fileInput.files[0];
+            btn.innerText = "جاري التحليل... انتظر قليلاً";
+            btn.disabled = true;
+
             const reader = new FileReader();
-
-            reader.onload = async function(e) {
-                const content = e.target.result;
-                
-                resultDiv.innerText = "جاري التحليل... يرجى الانتظار";
-                btn.disabled = true;
-                statusMsg.style.display = "none";
+            reader.onload = async function() {
+                const base64Content = reader.result.split(',')[1]; // تحويل الملف لصيغة يفهمها الذكاء الاصطناعي
 
                 try {
-                    // السطر السحري: الاتصال بالـ API الجديد الذي أنشأناه
                     const response = await fetch('/api/analyze', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             fileName: file.name,
-                            fileType: file.type,
-                            fileContent: content.substring(0, 5000) // نرسل أول 5000 حرف للتحليل
+                            fileContent: base64Content, // إرسال محتوى الملف كاملاً
+                            isImage: file.type.includes('image')
                         })
                     });
 
                     const data = await response.json();
-                    if (data.analysis) {
-                        resultDiv.innerText = data.analysis;
-                    } else {
-                        throw new Error(data.error || "خطأ غير معروف");
-                    }
-                } catch (error) {
-                    statusMsg.innerText = "❌ فشل الاتصال: " + error.message;
-                    statusMsg.style.display = "block";
-                    resultDiv.innerText = "حدث خطأ أثناء الاتصال بالخادم.";
+                    resultDiv.innerText = data.analysis || "خطأ: " + data.error;
+                } catch (e) {
+                    resultDiv.innerText = "حدث خطأ في الاتصال بالسيرفر.";
                 } finally {
+                    btn.innerText = "تحليل الوثيقة الآن";
                     btn.disabled = false;
                 }
             };
-
-            reader.readAsText(file);
+            
+            // قراءة الملف كـ DataURL ليدعم الصور والنصوص معاً
+            reader.readAsDataURL(file);
         }
     </script>
 </body>
