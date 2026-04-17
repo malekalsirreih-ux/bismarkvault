@@ -1,2140 +1,782 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl" id="mainHtml">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BismarkVault Pro | AI Vault OS</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <title>BismarkVault Pro | Bismark AI Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg: #060607;
-      --bg2: #0c0d11;
-      --panel: #111217;
-      --panel-2: #161922;
-      --gold: #c8a84b;
-      --gold-2: #e7cc78;
-      --text: #f6f3e9;
-      --muted: #8b8d97;
-      --border: rgba(200, 168, 75, 0.14);
-      --success: #12c27a;
-      --danger: #ef4444;
-      --warning: #f59e0b;
-      --info: #60a5fa;
-      --radius: 22px;
-      --shadow: 0 20px 60px rgba(0,0,0,.45);
-      --sidebar-w: 300px;
-      --transition: .25s ease;
-    }
-
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; height: 100%; }
-    body {
-      font-family: 'Cairo', sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(200,168,75,.08), transparent 22%),
-        radial-gradient(circle at bottom left, rgba(200,168,75,.04), transparent 25%),
-        linear-gradient(180deg, #0a0a0c, #050507 45%, #07070a);
-      color: var(--text);
-      overflow: hidden;
-      display: flex;
-    }
-
-    body.en-mode { direction: ltr; }
-
-    .hidden { display: none !important; }
-    .fade-in { animation: fadeIn .45s ease; }
-    .slide-up { animation: slideUp .45s ease; }
-    .typing::after { content: '▋'; animation: blink 1s infinite; color: var(--gold); }
-
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    @keyframes slideUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
-    @keyframes pulse { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
-    @keyframes blink { 0%,50% { opacity: 1; } 51%,100% { opacity: 0; } }
-    @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-    #bootScreen, #lockScreen, #modal, #toastContainer {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-    }
-
-    #bootScreen {
-      background:
-        radial-gradient(circle at center, rgba(200,168,75,.09), transparent 28%),
-        linear-gradient(180deg, #050506, #0a0b0f);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: .6s ease;
-    }
-
-    .boot-box {
-      width: min(540px, 92vw);
-      background: rgba(17,18,23,.72);
-      border: 1px solid var(--border);
-      border-radius: 30px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      text-align: center;
-      backdrop-filter: blur(18px);
-    }
-
-    .brand-mark {
-      width: 88px;
-      height: 88px;
-      border-radius: 24px;
-      margin: 0 auto 18px;
-      display: grid;
-      place-items: center;
-      color: #000;
-      font-weight: 900;
-      font-size: 34px;
-      background: linear-gradient(135deg, var(--gold-2), var(--gold));
-      box-shadow: 0 0 30px rgba(200,168,75,.25);
-    }
-
-    .boot-title {
-      margin: 0 0 8px;
-      font-size: 30px;
-      color: var(--gold-2);
-      letter-spacing: .6px;
-    }
-
-    .boot-sub {
-      color: var(--muted);
-      margin-bottom: 22px;
-      font-size: 14px;
-    }
-
-    .progress-wrap {
-      width: 100%;
-      height: 10px;
-      border-radius: 999px;
-      background: #090a0d;
-      border: 1px solid rgba(255,255,255,.06);
-      overflow: hidden;
+    :root{
+      --gold:#c8a84b;
+      --gold-light:#e7cc84;
+      --bg:#060607;
+      --panel:#111217;
+      --panel-2:#0c0d11;
+      --text:#f5fef3;
+      --muted:#9aa09f;
+      --border:rgba(200,168,75,0.2);
+      --sidebar-w:270px;
+      --green:#17c964;
+      --red:#f31260;
+      --blue:#3b82f6;
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      font-family:'Cairo',sans-serif;
+      background:linear-gradient(180deg,#060607 0%,#090b0f 100%);
+      color:var(--text);
+      display:flex;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .sidebar{
+      width:var(--sidebar-w);
+      background:linear-gradient(180deg,#101116,#0b0c10);
+      border-left:1px solid var(--border);
+      display:flex;
+      flex-direction:column;
+      padding:20px;
+      gap:16px;
+    }
+
+    .logo{
+      color:var(--gold);
+      font-size:22px;
+      font-weight:800;
+      margin-bottom:20px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .logo small{
+      display:block;
+      color:var(--muted);
+      font-size:12px;
+      font-weight:400;
+    }
+
+    .nav-item{
+      padding:12px 15px;
+      margin-bottom:6px;
+      border-radius:10px;
+      cursor:pointer;
+      transition:.25s;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#aaa;
+      border:1px solid transparent;
+    }
+
+    .nav-item:hover,
+    .nav-item.active{
+      background:rgba(200,168,75,.08);
+      color:var(--gold);
+      border-color:rgba(200,168,75,.12);
+    }
+
+    .sidebar-card{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:14px;
+      padding:14px;
+    }
+
+    .sidebar-card h4{
+      margin:0 0 10px;
+      color:var(--gold-light);
+      font-size:14px;
+    }
+
+    .setting-group{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .setting-group label{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    select,input[type="range"]{
+      background:#1a1b20;
+      border:1px solid rgba(200,168,75,.25);
+      color:white;
+      padding:10px;
+      border-radius:8px;
+      width:100%;
     }
 
-    .progress-bar {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #7d6729, var(--gold), var(--gold-2));
-      transition: width .35s ease;
-    }
-
-    .boot-steps {
-      margin-top: 18px;
-      color: var(--muted);
-      font-size: 13px;
-      min-height: 22px;
-    }
+    .browser-window{
+      flex:1;
+      display:flex;
+      flex-direction:column;
+      background:var(--bg);
+      position:relative;
+    }
+
+    .top-bar{
+      height:72px;
+      background:rgba(12,13,17,.96);
+      border-bottom:1px solid rgba(255,255,255,.05);
+      display:flex;
+      align-items:center;
+      padding:0 24px;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .address-bar{
+      background:#15171c;
+      border:1px solid #2a2d34;
+      flex:.6;
+      padding:10px 18px;
+      border-radius:30px;
+      color:#888;
+      font-size:14px;
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
 
-    #lockScreen {
-      background: rgba(6,6,7,.84);
-      backdrop-filter: blur(18px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: .45s ease;
+    .top-tools{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    .clock-box{
+      background:rgba(255,255,255,.03);
+      padding:8px 14px;
+      border-radius:12px;
+      border:1px solid rgba(200,168,75,.14);
+      text-align:right;
+      min-width:220px;
     }
 
-    .lock-box {
-      width: min(420px, 92vw);
-      background: rgba(17,18,23,.9);
-      border: 1px solid var(--border);
-      border-radius: 28px;
-      padding: 34px;
-      box-shadow: var(--shadow);
-      text-align: center;
-    }
-
-    .lock-box h2 { margin: 0 0 10px; color: var(--gold-2); }
-    .lock-box p { margin: 0 0 18px; color: var(--muted); font-size: 14px; }
-
-    .input, .select, .textarea {
-      width: 100%;
-      background: #090a0d;
-      border: 1px solid rgba(255,255,255,.08);
-      color: var(--text);
-      border-radius: 14px;
-      padding: 14px 16px;
-      outline: none;
-      font-family: inherit;
-      transition: var(--transition);
-    }
-
-    .textarea { min-height: 120px; resize: vertical; }
-    .input:focus, .select:focus, .textarea:focus {
-      border-color: rgba(200,168,75,.55);
-      box-shadow: 0 0 0 3px rgba(200,168,75,.09);
-    }
+    #date{
+      font-size:11px;
+      color:#b5b5b5;
+      margin-bottom:4px;
+    }
 
-    .btn, .btn-outline, .btn-danger, .btn-soft {
-      border: none;
-      border-radius: 14px;
-      padding: 13px 16px;
-      cursor: pointer;
-      font-family: inherit;
-      font-weight: 800;
-      transition: var(--transition);
-    }
-
-    .btn {
-      background: linear-gradient(135deg, var(--gold-2), var(--gold));
-      color: #0b0b0c;
-      box-shadow: 0 10px 30px rgba(200,168,75,.16);
-    }
-
-    .btn:hover { transform: translateY(-1px); }
+    #clock{
+      color:var(--gold);
+      font-weight:bold;
+      font-size:15px;
+    }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--gold-2);
-      border: 1px solid rgba(200,168,75,.45);
-    }
-
-    .btn-soft {
-      background: rgba(200,168,75,.08);
-      color: var(--gold-2);
-      border: 1px solid rgba(200,168,75,.16);
+    .avatar{
+      width:38px;
+      height:38px;
+      background:var(--gold);
+      border-radius:50%;
+      display:grid;
+      place-items:center;
+      color:black;
+      font-weight:bold;
     }
 
-    .btn-danger {
-      background: rgba(239,68,68,.12);
-      color: #ffb4b4;
-      border: 1px solid rgba(239,68,68,.22);
-    }
-
-    .app-shell {
-      width: 100%;
-      display: flex;
-      min-height: 100vh;
-    }
-
-    .sidebar {
-      width: var(--sidebar-w);
-      min-width: var(--sidebar-w);
-      background: rgba(14,15,19,.95);
-      border-left: 1px solid var(--border);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      position: relative;
-      z-index: 5;
-    }
-
-    body.en-mode .sidebar {
-      border-left: none;
-      border-right: 1px solid var(--border);
-    }
-
-    .logo-box {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 6px 2px 14px;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-
-    .logo-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--gold-2), var(--gold));
-      display: grid;
-      place-items: center;
-      color: #0b0c0e;
-      font-weight: 900;
-      font-size: 24px;
-      box-shadow: 0 0 22px rgba(200,168,75,.15);
-      flex-shrink: 0;
-    }
-
-    .logo-meta h1 {
-      margin: 0;
-      font-size: 20px;
-      color: var(--gold-2);
-      line-height: 1.1;
-    }
-
-    .logo-meta p {
-      margin: 4px 0 0;
-      font-size: 11px;
-      color: var(--muted);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-    }
-
-    .nav-group { display: grid; gap: 8px; }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 15px;
-      border-radius: 16px;
-      color: #a2a4ad;
-      cursor: pointer;
-      transition: var(--transition);
-      border: 1px solid transparent;
-      user-select: none;
-    }
-
-    .nav-item:hover {
-      background: rgba(255,255,255,.03);
-      color: #f3e8c5;
-    }
-
-    .nav-item.active {
-      color: var(--gold-2);
-      background: rgba(200,168,75,.08);
-      border-color: rgba(200,168,75,.16);
-      box-shadow: inset 0 0 0 1px rgba(200,168,75,.08);
-    }
-
-    .nav-emoji { font-size: 18px; width: 22px; text-align: center; }
-
-    .mini-status {
-      background: linear-gradient(180deg, rgba(200,168,75,.08), rgba(255,255,255,.015));
-      border: 1px solid var(--border);
-      border-radius: 20px;
-      padding: 16px;
-      display: grid;
-      gap: 8px;
-    }
-
-    .mini-status .k { color: var(--muted); font-size: 12px; }
-    .mini-status .v { color: var(--gold-2); font-weight: 800; }
-
-    .credits {
-      margin-top: auto;
-      padding-top: 16px;
-      border-top: 1px solid rgba(255,255,255,.05);
-      color: #6e7078;
-      font-size: 11px;
-      text-align: center;
-      line-height: 1.8;
-    }
-
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
-    }
-
-    .topbar {
-      height: 76px;
-      background: rgba(10,11,15,.72);
-      border-bottom: 1px solid rgba(255,255,255,.05);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 24px;
-      backdrop-filter: blur(12px);
-      gap: 16px;
-    }
-
-    .top-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .chip {
-      padding: 8px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.08);
-      color: #cfd1d7;
-      font-size: 12px;
-      background: rgba(255,255,255,.02);
-    }
-
-    .chip strong { color: var(--gold-2); }
-    .clock { color: var(--gold-2); font-weight: 900; font-family: monospace; font-size: 16px; }
-
-    .toolbar {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .workspace {
-      flex: 1;
-      overflow: auto;
-      padding: 24px;
-    }
-
-    .page { display: none; }
-    .page.active { display: block; animation: slideUp .35s ease; }
-
-    .hero {
-      display: grid;
-      grid-template-columns: 1.3fr .9fr;
-      gap: 18px;
-      margin-bottom: 18px;
-    }
-
-    .card {
-      background: linear-gradient(180deg, rgba(20,22,28,.86), rgba(11,12,16,.92));
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      padding: 20px;
-    }
-
-    .card h2, .card h3, .card h4 { margin-top: 0; }
-
-    .section-title {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .section-title h2, .section-title h3 {
-      margin: 0;
-      color: var(--gold-2);
-    }
-
-    .subtext { color: var(--muted); font-size: 14px; line-height: 1.8; }
-    .grid-2, .grid-3, .grid-4 { display: grid; gap: 16px; }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-
-    .metric {
-      background: rgba(255,255,255,.02);
-      border: 1px solid rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 16px;
-    }
-
-    .metric .label { color: var(--muted); font-size: 12px; }
-    .metric .value { color: var(--gold-2); font-size: 26px; font-weight: 900; margin-top: 6px; }
-    .metric .note { color: #b9bbc2; font-size: 12px; margin-top: 4px; }
-
-    .dropzone {
-      min-height: 190px;
-      border-radius: 22px;
-      border: 2px dashed rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.015), rgba(200,168,75,.02));
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 20px;
-      transition: var(--transition);
-      cursor: pointer;
+    .content-area{
+      flex:1;
+      padding:28px;
+      overflow-y:auto;
+      display:none;
     }
 
-    .dropzone.drag {
-      border-color: rgba(200,168,75,.8);
-      background: rgba(200,168,75,.05);
-      transform: scale(1.01);
-    }
-
-    .dropzone h3 { color: var(--gold-2); margin-bottom: 8px; }
-    .dropzone p { margin: 0; color: var(--muted); }
-
-    .actions-row {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 16px;
-    }
-
-    .result-box {
-      background: #090a0d;
-      border: 1px solid rgba(255,255,255,.06);
-      border-right: 4px solid var(--gold);
-      border-radius: 18px;
-      padding: 18px;
-      min-height: 180px;
-      white-space: pre-wrap;
-      line-height: 1.9;
-      font-size: 15px;
-      overflow: auto;
-    }
+    .content-area.active{display:block}
 
-    body.en-mode .result-box { border-right: 1px solid rgba(255,255,255,.06); border-left: 4px solid var(--gold); }
-
-    .tag-row, .quick-actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(200,168,75,.08);
-      border: 1px solid rgba(200,168,75,.16);
-      color: var(--gold-2);
-      font-size: 12px;
-      font-weight: 700;
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:1.6fr .9fr;
+      gap:20px;
     }
 
-    .mail-list, .archive-list, .risk-list, .action-list, .audit-list {
-      display: grid;
-      gap: 12px;
-      margin-top: 14px;
+    .card{
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(200,168,75,.12);
+      border-radius:18px;
+      padding:20px;
+      backdrop-filter:blur(10px);
+    }
+
+    .card h2,.card h3{
+      margin-top:0;
+      color:var(--gold);
     }
-
-    .item {
-      background: rgba(255,255,255,.02);
-      border: 1px solid rgba(255,255,255,.05);
-      border-radius: 18px;
-      padding: 16px;
-    }
+
+    .upload-area{
+      border:2px dashed rgba(200,168,75,.5);
+      padding:36px;
+      text-align:center;
+      border-radius:16px;
+      cursor:pointer;
+      transition:.3s;
+      margin-bottom:20px;
+      background:rgba(200,168,75,.03);
+    }
 
-    .item h4 {
-      margin: 0 0 6px;
-      color: #f3e6be;
-      font-size: 15px;
+    .upload-area:hover{
+      background:rgba(200,168,75,.06);
     }
-
-    .item p { margin: 0; color: #cfd1d7; font-size: 14px; line-height: 1.8; }
-    .item small { color: var(--muted); }
 
-    .severity {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 8px;
+    .btn-gold{
+      background:var(--gold);
+      color:black;
+      border:none;
+      padding:14px 20px;
+      border-radius:10px;
+      font-weight:bold;
+      cursor:pointer;
+      width:100%;
+      font-size:16px;
+      transition:.25s;
     }
 
-    .sev-high { background: rgba(239,68,68,.1); color: #ffb8b8; border: 1px solid rgba(239,68,68,.18); }
-    .sev-med { background: rgba(245,158,11,.1); color: #ffd591; border: 1px solid rgba(245,158,11,.18); }
-    .sev-low { background: rgba(18,194,122,.1); color: #aef2d1; border: 1px solid rgba(18,194,122,.18); }
-    .sev-info { background: rgba(96,165,250,.1); color: #b9d9ff; border: 1px solid rgba(96,165,250,.18); }
-
-    .chat-box {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      max-height: 500px;
-      overflow: auto;
-      padding-right: 4px;
+    .btn-gold:hover{
+      filter:brightness(1.05);
+      transform:translateY(-1px);
     }
 
-    .bubble {
-      max-width: 86%;
-      padding: 14px 16px;
-      border-radius: 18px;
-      line-height: 1.85;
-      font-size: 14px;
-      white-space: pre-wrap;
+    .btn-gold:disabled{
+      background:#555;
+      color:#ccc;
+      cursor:not-allowed;
+      transform:none;
     }
 
-    .bubble.user {
-      align-self: flex-end;
-      background: linear-gradient(135deg, rgba(200,168,75,.16), rgba(200,168,75,.08));
-      border: 1px solid rgba(200,168,75,.18);
+    .search-bar-wrap{
+      margin-bottom:18px;
     }
 
-    .bubble.ai {
-      align-self: flex-start;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.06);
+    .search-bar{
+      width:100%;
+      background:#15171c;
+      border:1px solid rgba(200,168,75,.2);
+      color:white;
+      padding:14px 18px;
+      border-radius:14px;
+      font-size:15px;
+      outline:none;
     }
 
-    .bubble .sender {
-      display: block;
-      color: var(--gold-2);
-      font-weight: 800;
-      margin-bottom: 6px;
-      font-size: 12px;
+    .search-help{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:12px;
     }
 
-    .chat-input-row {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 12px;
-      margin-top: 14px;
+    .smart-results{
+      margin-top:18px;
+      display:grid;
+      gap:14px;
     }
-
-    .settings-grid .item { min-height: 100%; }
 
-    .switch {
-      position: relative;
-      width: 52px;
-      height: 30px;
-      border-radius: 999px;
-      background: #24262d;
-      border: 1px solid rgba(255,255,255,.08);
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .switch span {
-      position: absolute;
-      top: 3px;
-      right: 3px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #a5a7b1;
-      transition: var(--transition);
-    }
-
-    body.en-mode .switch span { right: auto; left: 3px; }
-
-    .switch.active {
-      background: rgba(200,168,75,.18);
-      border-color: rgba(200,168,75,.4);
-    }
-
-    .switch.active span {
-      background: var(--gold-2);
-      transform: translateX(-22px);
-    }
-
-    body.en-mode .switch.active span { transform: translateX(22px); }
-
-    .table {
-      width: 100%;
-      border-collapse: collapse;
-      overflow: hidden;
-      border-radius: 16px;
-    }
-
-    .table th, .table td {
-      padding: 12px 10px;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-      text-align: start;
-      font-size: 14px;
-    }
-
-    .table th { color: var(--gold-2); font-size: 12px; }
-    .table td { color: #d6d8de; }
-
-    #modal {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      background: rgba(4,4,6,.72);
-      padding: 18px;
-    }
-
-    .modal-box {
-      width: min(760px, 100%);
-      max-height: 88vh;
-      overflow: auto;
-      background: linear-gradient(180deg, #111217, #0b0c10);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      box-shadow: var(--shadow);
-      padding: 22px;
-    }
-
-    .toast-wrap {
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      right: 14px;
-      z-index: 10001;
-      display: grid;
-      gap: 10px;
-      pointer-events: none;
-    }
-
-    .toast {
-      width: fit-content;
-      max-width: min(480px, 96vw);
-      margin-inline-start: auto;
-      background: rgba(17,18,23,.96);
-      border: 1px solid rgba(255,255,255,.08);
-      border-radius: 16px;
-      padding: 13px 15px;
-      color: #f3f4f8;
-      box-shadow: var(--shadow);
-      pointer-events: auto;
-    }
-
-    .toast.success { border-color: rgba(18,194,122,.28); }
-    .toast.warn { border-color: rgba(245,158,11,.28); }
-    .toast.error { border-color: rgba(239,68,68,.28); }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.03);
-      border: 1px solid rgba(255,255,255,.06);
-      color: #d9dde6;
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .spinner {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      border: 2px solid rgba(255,255,255,.16);
-      border-top-color: var(--gold-2);
-      animation: spin 1s linear infinite;
-      display: inline-block;
-      vertical-align: middle;
-    }
-
-    @media (max-width: 1100px) {
-      .hero, .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
-      .sidebar { width: 88px; min-width: 88px; padding: 16px 12px; }
-      .logo-meta, .nav-label, .mini-status, .credits { display: none; }
-      .nav-item { justify-content: center; }
-      .topbar { padding: 0 14px; height: auto; min-height: 76px; flex-wrap: wrap; padding-block: 10px; }
-      .workspace { padding: 14px; }
+    .result-box{
+      background:#090a0d;
+      border-radius:14px;
+      padding:18px;
+      border-right:4px solid var(--gold);
+      min-height:90px;
+      line-height:1.9;
+      white-space:pre-wrap;
+    }
+
+    .section-title{
+      color:var(--gold-light);
+      font-size:18px;
+      margin-bottom:10px;
+      font-weight:700;
+    }
+
+    .risk-indicator{
+      margin-bottom:14px;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.05);
+      padding:8px 12px;
+      border-radius:999px;
+      font-size:13px;
+    }
+
+    .risk-dot{
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--green);
+    }
+
+    .mini-box{
+      padding:16px;
+      border-radius:14px;
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      margin-bottom:14px;
+    }
+
+    .muted{
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .archive-list{
+      display:grid;
+      gap:12px;
+    }
+
+    .archive-item{
+      background:rgba(255,255,255,.02);
+      border:1px solid rgba(255,255,255,.05);
+      border-radius:12px;
+      padding:14px;
+    }
+
+    .status-line{
+      margin-top:auto;
+      padding-top:12px;
+      border-top:1px solid #222;
+      font-size:12px;
+      color:#777;
+      line-height:1.9;
+    }
+
+    .status-dot{
+      width:10px;
+      height:10px;
+      background:#00ff88;
+      border-radius:50%;
+      display:inline-block;
+      margin-left:8px;
+      box-shadow:0 0 10px rgba(0,255,136,.5);
+    }
+
+    @media (max-width:980px){
+      body{
+        flex-direction:column;
+        height:auto;
+      }
+
+      .sidebar{
+        width:100%;
+        border-left:none;
+        border-bottom:1px solid var(--border);
+      }
+
+      .dashboard-grid{
+        grid-template-columns:1fr;
+      }
+
+      .top-bar{
+        flex-direction:column;
+        height:auto;
+        padding:16px;
+        align-items:stretch;
+      }
+
+      .address-bar{flex:1}
+
+      .top-tools{
+        justify-content:space-between;
+      }
     }
   </style>
 </head>
-<body id="mainBody">
-  <div id="bootScreen">
-    <div class="boot-box fade-in">
-      <div class="brand-mark">B</div>
-      <h1 class="boot-title">BismarkVault Pro</h1>
-      <div class="boot-sub" id="bootSub">Launching Sovereign AI Vault OS...</div>
-      <div class="progress-wrap"><div class="progress-bar" id="bootBar"></div></div>
-      <div class="boot-steps" id="bootSteps"></div>
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+      🛡️ BismarkVault
+      <small>Bismark AI Assistant</small>
     </div>
-  </div>
 
-  <div id="lockScreen" class="hidden">
-    <div class="lock-box fade-in">
-      <div class="brand-mark" style="width:74px;height:74px;font-size:28px;margin-bottom:14px;">B</div>
-      <h2 id="lockTitle">BismarkVault Secure Access</h2>
-      <p id="lockSub">Enter vault passcode to unlock local workspace.</p>
-      <input class="input" type="password" id="passCode" placeholder="••••••••" />
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px;">
-        <button class="btn" onclick="validateAccess()" id="unlockBtn">UNSEAL VAULT</button>
-        <button class="btn-outline" onclick="demoFillPass()" id="demoBtn">DEMO ACCESS</button>
-      </div>
-      <div style="margin-top:14px;color:#696c75;font-size:11px;letter-spacing:.8px;">Made in Germany 🇩🇪 | Malek Alsirreih</div>
-    </div>
-  </div>
+    <div class="nav-item active" onclick="showTab('vault', this)">📁 خزنة الملفات</div>
+    <div class="nav-item" onclick="showTab('mail', this)">📧 بريد AI</div>
+    <div class="nav-item" onclick="showTab('archive', this)">📚 الأرشيف الذكي</div>
+    <div class="nav-item" onclick="showTab('settings', this)">⚙️ مركز التحكم</div>
 
-  <div class="toast-wrap" id="toastContainer"></div>
+    <div class="sidebar-card">
+      <h4>إعدادات الذكاء</h4>
 
-  <div class="app-shell hidden" id="appShell">
-    <aside class="sidebar">
-      <div class="logo-box">
-        <div class="logo-icon">B</div>
-        <div class="logo-meta">
-          <h1>BISMARKVAULT</h1>
-          <p id="logoSub">SOVEREIGN AI OS</p>
-        </div>
-      </div>
-
-      <div class="nav-group">
-        <div class="nav-item active" onclick="switchPage('dashboard', this)"><span class="nav-emoji">🏠</span><span class="nav-label" data-i18n="navDashboard"></span></div>
-        <div class="nav-item" onclick="switchPage('vault', this)"><span class="nav-emoji">📁</span><span class="nav-label" data-i18n="navVault"></span></div>
-        <div class="nav-item" onclick="switchPage('compliance', this)"><span class="nav-emoji">⚖️</span><span class="nav-label" data-i18n="navCompliance"></span></div>
-        <div class="nav-item" onclick="switchPage('risk', this)"><span class="nav-emoji">📡</span><span class="nav-label" data-i18n="navRisk"></span></div>
-        <div class="nav-item" onclick="switchPage('actions', this)"><span class="nav-emoji">⚡</span><span class="nav-label" data-i18n="navActions"></span></div>
-        <div class="nav-item" onclick="switchPage('mail', this)"><span class="nav-emoji">📧</span><span class="nav-label" data-i18n="navMail"></span></div>
-        <div class="nav-item" onclick="switchPage('archive', this)"><span class="nav-emoji">🗃️</span><span class="nav-label" data-i18n="navArchive"></span></div>
-        <div class="nav-item" onclick="switchPage('assistant', this)"><span class="nav-emoji">🤖</span><span class="nav-label" data-i18n="navAssistant"></span></div>
-        <div class="nav-item" onclick="switchPage('audit', this)"><span class="nav-emoji">🛡️</span><span class="nav-label" data-i18n="navAudit"></span></div>
-        <div class="nav-item" onclick="switchPage('settings', this)"><span class="nav-emoji">⚙️</span><span class="nav-label" data-i18n="navSettings"></span></div>
-      </div>
-
-      <div class="mini-status">
-        <div class="k" data-i18n="statusVault"></div>
-        <div class="v" id="miniVaultStatus">Locked Local Vault</div>
-        <div class="k" data-i18n="statusAi"></div>
-        <div class="v" id="miniAiStatus">Ready</div>
-        <div class="k" data-i18n="statusMode"></div>
-        <div class="v" id="miniSecurityMode">Local Demo</div>
-      </div>
-
-      <div class="credits">
-        <div>Made in Germany 🇩🇪</div>
-        <div style="color:var(--gold-2);font-weight:800;">Malek Alsirreih</div>
-        <div id="copyText">Intellectual Property © 2026</div>
-      </div>
-    </aside>
-
-    <section class="main">
-      <header class="topbar">
-        <div class="top-meta">
-          <div class="chip"><span data-i18n="securityLevel"></span>: <strong id="securityLevelText">Maximum</strong></div>
-          <div class="chip"><span data-i18n="activeProfile"></span>: <strong id="profileName">Founder</strong></div>
-          <div class="chip"><span data-i18n="storageState"></span>: <strong id="storageStateText">Encrypted Local</strong></div>
-        </div>
-        <div class="toolbar">
-          <button class="btn-soft" onclick="toggleLanguage()" id="langSwitcher">English</button>
-          <button class="btn-outline" onclick="toggleThemeGlow()" data-i18n="cinematicMode"></button>
-          <button class="btn-outline" onclick="exportVaultData()" data-i18n="exportData"></button>
-          <button class="btn-outline" onclick="openQuickCreate()" data-i18n="quickCreate"></button>
-          <div class="clock" id="digitalClock"></div>
-        </div>
-      </header>
-
-      <main class="workspace">
-        <section class="page active" id="dashboard">
-          <div class="hero">
-            <div class="card">
-              <div class="section-title">
-                <h2 data-i18n="dashTitle"></h2>
-                <span class="pill" id="systemPulse">● LIVE CORE</span>
-              </div>
-              <p class="subtext" data-i18n="dashSub"></p>
-              <div class="grid-4" style="margin-top:16px;">
-                <div class="metric"><div class="label" data-i18n="metricDocs"></div><div class="value" id="metricDocs">0</div><div class="note" data-i18n="metricDocsNote"></div></div>
-                <div class="metric"><div class="label" data-i18n="metricRisks"></div><div class="value" id="metricRisks">0</div><div class="note" data-i18n="metricRisksNote"></div></div>
-                <div class="metric"><div class="label" data-i18n="metricActions"></div><div class="value" id="metricActions">0</div><div class="note" data-i18n="metricActionsNote"></div></div>
-                <div class="metric"><div class="label" data-i18n="metricMails"></div><div class="value" id="metricMails">3</div><div class="note" data-i18n="metricMailsNote"></div></div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="section-title">
-                <h3 data-i18n="coreModules"></h3>
-              </div>
-              <div class="tag-row">
-                <div class="tag">AI Analyze</div>
-                <div class="tag">Compliance Vault</div>
-                <div class="tag">Risk Radar</div>
-                <div class="tag">Smart Actions</div>
-                <div class="tag">AI Mail</div>
-                <div class="tag">Encrypted Archive</div>
-                <div class="tag">Audit Trail</div>
-                <div class="tag">Bilingual UI</div>
-              </div>
-              <div class="actions-row">
-                <button class="btn" onclick="switchPageById('vault')" data-i18n="uploadAndAnalyze"></button>
-                <button class="btn-outline" onclick="switchPageById('assistant')" data-i18n="talkToAssistant"></button>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid-2">
-            <div class="card">
-              <div class="section-title"><h3 data-i18n="recentSignals"></h3></div>
-              <div class="risk-list" id="recentSignals"></div>
-            </div>
-            <div class="card">
-              <div class="section-title"><h3 data-i18n="recommendedActions"></h3></div>
-              <div class="action-list" id="recommendedActions"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="page" id="vault">
-          <div class="grid-2">
-            <div class="card">
-              <div class="section-title"><h2 data-i18n="vaultTitle"></h2></div>
-              <p class="subtext" data-i18n="vaultSub"></p>
-              <div class="dropzone" id="dropZone" onclick="document.getElementById('docInput').click()">
-                <div>
-                  <h3 data-i18n="dropTitle"></h3>
-                  <p id="fileName" data-i18n="dropSub"></p>
-                </div>
-              </div>
-              <input type="file" id="docInput" hidden />
-
-              <div class="grid-2" style="margin-top:16px;">
-                <div>
-                  <label class="subtext" data-i18n="docType"></label>
-                  <select class="select" id="docTypeSelect">
-                    <option value="auto">Auto Detect</option>
-                    <option value="contract">Contract</option>
-                    <option value="invoice">Invoice</option>
-                    <option value="id">Identity</option>
-                    <option value="policy">Policy</option>
-                    <option value="letter">Official Letter</option>
-                  </select>
-                </div>
-                <div>
-                  <label class="subtext" data-i18n="analysisDepth"></label>
-                  <select class="select" id="analysisDepthSelect">
-                    <option value="fast">Fast</option>
-                    <option value="balanced" selected>Balanced</option>
-                    <option value="deep">Deep</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="quick-actions" style="margin-top:16px;">
-                <button class="btn" onclick="startAIProcess()" data-i18n="analyzeNow"></button>
-                <button class="btn-soft" onclick="runComplianceScan()" data-i18n="runCompliance"></button>
-                <button class="btn-soft" onclick="runRiskRadar()" data-i18n="runRiskRadar"></button>
-                <button class="btn-outline" onclick="encryptCurrentDocument()" data-i18n="encryptNow"></button>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="section-title"><h3 data-i18n="analysisOutput"></h3></div>
-              <div class="result-box" id="resultDisplay"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="page" id="compliance">
-          <div class="card">
-            <div class="section-title">
-              <h2 data-i18n="complianceTitle"></h2>
-              <button class="btn" onclick="runComplianceScan()" data-i18n="scanSelectedDocument"></button>
-            </div>
-            <p class="subtext" data-i18n="complianceSub"></p>
-            <div class="risk-list" id="complianceList"></div>
-          </div>
-        </section>
-
-        <section class="page" id="risk">
-          <div class="card">
-            <div class="section-title">
-              <h2 data-i18n="riskTitle"></h2>
-              <button class="btn" onclick="runRiskRadar()" data-i18n="refreshRadar"></button>
-            </div>
-            <p class="subtext" data-i18n="riskSub"></p>
-            <div class="risk-list" id="riskList"></div>
-          </div>
-        </section>
-
-        <section class="page" id="actions">
-          <div class="card">
-            <div class="section-title"><h2 data-i18n="actionsTitle"></h2></div>
-            <p class="subtext" data-i18n="actionsSub"></p>
-            <div class="action-list" id="actionList"></div>
-          </div>
-        </section>
-
-        <section class="page" id="mail">
-          <div class="grid-2">
-            <div class="card">
-              <div class="section-title"><h2 data-i18n="mailTitle"></h2><button class="btn" onclick="mockSyncMail()" data-i18n="syncMail"></button></div>
-              <p class="subtext" data-i18n="mailSub"></p>
-              <div class="mail-list" id="mailList"></div>
-            </div>
-            <div class="card">
-              <div class="section-title"><h3 data-i18n="mailAssistantTitle"></h3></div>
-              <div class="result-box" id="mailSummaryBox"></div>
-              <div class="actions-row">
-                <button class="btn-soft" onclick="generateMailSummary()" data-i18n="summarizeInbox"></button>
-                <button class="btn-soft" onclick="extractMailTasks()" data-i18n="extractTasks"></button>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="page" id="archive">
-          <div class="card">
-            <div class="section-title">
-              <h2 data-i18n="archiveTitle"></h2>
-              <div style="display:flex;gap:10px;flex-wrap:wrap;">
-                <button class="btn-outline" onclick="saveCurrentToArchive()" data-i18n="saveCurrent"></button>
-                <button class="btn-danger" onclick="clearArchive()" data-i18n="clearArchive"></button>
-              </div>
-            </div>
-            <p class="subtext" data-i18n="archiveSub"></p>
-            <div class="archive-list" id="archiveList"></div>
-          </div>
-        </section>
-
-        <section class="page" id="assistant">
-          <div class="grid-2">
-            <div class="card">
-              <div class="section-title"><h2 data-i18n="assistantTitle"></h2></div>
-              <p class="subtext" data-i18n="assistantSub"></p>
-              <div class="chat-box" id="chatBox"></div>
-              <div class="chat-input-row">
-                <input class="input" id="chatInput" />
-                <button class="btn" onclick="sendAssistantMessage()" data-i18n="send"></button>
-              </div>
-            </div>
-            <div class="card">
-              <div class="section-title"><h3 data-i18n="assistantTools"></h3></div>
-              <div class="action-list" id="assistantToolsList"></div>
-            </div>
-          </div>
-        </section>
-
-        <section class="page" id="audit">
-          <div class="card">
-            <div class="section-title"><h2 data-i18n="auditTitle"></h2></div>
-            <p class="subtext" data-i18n="auditSub"></p>
-            <div class="audit-list" id="auditList"></div>
-          </div>
-        </section>
-
-        <section class="page" id="settings">
-          <div class="grid-2 settings-grid">
-            <div class="card item">
-              <h3 data-i18n="settingsSecurity"></h3>
-              <p class="subtext" data-i18n="settingsSecuritySub"></p>
-              <div class="actions-row">
-                <div class="switch active" id="swEncryption" onclick="toggleSwitch(this, 'encryptionEnabled')"><span></span></div>
-                <div class="switch active" id="swAudit" onclick="toggleSwitch(this, 'auditEnabled')"><span></span></div>
-                <div class="switch" id="swStreaming" onclick="toggleSwitch(this, 'streamingEnabled')"><span></span></div>
-              </div>
-            </div>
-            <div class="card item">
-              <h3 data-i18n="settingsVault"></h3>
-              <p class="subtext" data-i18n="settingsVaultSub"></p>
-              <div class="grid-2">
-                <input class="input" id="ownerNameInput" placeholder="Owner Name" />
-                <input class="input" id="workspaceNameInput" placeholder="Workspace Name" />
-              </div>
-              <div class="actions-row">
-                <button class="btn" onclick="saveSettings()" data-i18n="saveSettings"></button>
-                <button class="btn-outline" onclick="resetDemoData()" data-i18n="resetDemo"></button>
-              </div>
-            </div>
-            <div class="card item">
-              <h3 data-i18n="settingsIntegrations"></h3>
-              <p class="subtext" data-i18n="settingsIntegrationsSub"></p>
-              <table class="table">
-                <thead><tr><th>Module</th><th>Status</th><th>Mode</th></tr></thead>
-                <tbody>
-                  <tr><td>OpenAI / AI Core</td><td id="intAi">Frontend Mock</td><td>Needs API</td></tr>
-                  <tr><td>Gmail / Outlook</td><td id="intMail">Prototype UI</td><td>Needs OAuth</td></tr>
-                  <tr><td>Cloud Storage</td><td>Not Connected</td><td>Future</td></tr>
-                  <tr><td>Encryption</td><td>Local Web Crypto</td><td>Demo Active</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="card item">
-              <h3 data-i18n="settingsRoadmap"></h3>
-              <p class="subtext" data-i18n="settingsRoadmapSub"></p>
-              <div class="tag-row">
-                <span class="tag">Phase 1: Analyze Core</span>
-                <span class="tag">Phase 2: Multi-User MVP</span>
-                <span class="tag">Phase 3: Smart Actions</span>
-                <span class="tag">Phase 4: B2B & Compliance</span>
-                <span class="tag">Phase 5: SaaS Growth</span>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </section>
-  </div>
-
-  <div id="modal">
-    <div class="modal-box">
-      <div class="section-title">
-        <h3 id="modalTitle">Quick Create</h3>
-        <button class="btn-outline" onclick="closeModal()">Close</button>
-      </div>
-      <div class="grid-2">
-        <input class="input" id="quickDocTitle" placeholder="Document title" />
-        <select class="select" id="quickDocCategory">
-          <option value="General">General</option>
-          <option value="Contract">Contract</option>
-          <option value="Invoice">Invoice</option>
-          <option value="ID">ID</option>
-          <option value="Legal">Legal</option>
+      <div class="setting-group">
+        <label>لغة الرد المفضلة:</label>
+        <select id="langPref">
+          <option value="ar">العربية</option>
+          <option value="de">Deutsch</option>
+          <option value="en">English</option>
+          <option value="all" selected>العربية + Deutsch + English</option>
         </select>
       </div>
-      <textarea class="textarea" id="quickDocContent" style="margin-top:14px;" placeholder="Paste or write content..."></textarea>
-      <div class="actions-row">
-        <button class="btn" onclick="createQuickDocument()">Create Document</button>
-        <button class="btn-soft" onclick="closeModal()">Cancel</button>
+
+      <div class="setting-group">
+        <label>نمط الذكاء:</label>
+        <select id="aiMode">
+          <option value="precise">دقيق</option>
+          <option value="balanced" selected>متوازن</option>
+          <option value="executive">تنفيذي مختصر</option>
+        </select>
+      </div>
+
+      <div class="setting-group">
+        <label>دقة التحليل:</label>
+        <input type="range" min="1" max="100" value="80" id="accuracyRange">
+      </div>
+    </div>
+
+    <div class="status-line">
+      <div>الحالة: <span class="status-dot"></span> متصل</div>
+      <div>الذكاء: OpenAI / Vercel</div>
+      <div>الموقع: Mettmann, Germany</div>
+    </div>
+  </div>
+
+  <div class="browser-window">
+    <div class="top-bar">
+      <div class="address-bar">https://bismarkvault.pro/control-center</div>
+
+      <div class="top-tools">
+        <div class="clock-box">
+          <div id="date"></div>
+          <div id="clock"></div>
+        </div>
+        <div class="avatar">M</div>
+      </div>
+    </div>
+
+    <div id="vault" class="content-area active">
+      <div class="dashboard-grid">
+        <div class="card">
+          <h2>التحليل المتقدم للوثائق</h2>
+
+          <div class="search-bar-wrap">
+            <input
+              type="text"
+              class="search-bar"
+              id="smartSearch"
+              placeholder="Ask Bismark AI... ابحث في خزنتك أو اسأل عن عقد أو ملف أو خطر محتمل"
+              oninput="runSmartSearch()"
+            >
+            <div class="search-help" id="searchHelp">
+              أمثلة: عقد العمل • التأمين • Kündigung • contract deadline
+            </div>
+          </div>
+
+          <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+            <p id="fileLabel">اسحب الملف هنا أو اضغط للاختيار (TXT / JSON / CSV / Plain Text)</p>
+            <input type="file" id="fileInput" hidden onchange="updateFileLabel()">
+          </div>
+
+          <button class="btn-gold" id="mainBtn" onclick="runAnalysis()">بدء التحليل الذكي</button>
+
+          <div class="smart-results">
+            <div class="risk-indicator">
+              <span class="risk-dot" id="riskDot"></span>
+              <span id="riskLevel">Risk Level: Waiting</span>
+            </div>
+
+            <div>
+              <div class="section-title">📄 Summary</div>
+              <div id="summaryBox" class="result-box">الملخص سيظهر هنا...</div>
+            </div>
+
+            <div>
+              <div class="section-title">⚠️ Risks</div>
+              <div id="risksBox" class="result-box">المخاطر المحتملة ستظهر هنا...</div>
+            </div>
+
+            <div>
+              <div class="section-title">💡 Recommendations</div>
+              <div id="recommendationsBox" class="result-box">التوصيات ستظهر هنا...</div>
+            </div>
+
+            <div>
+              <div class="section-title">📅 Important Dates</div>
+              <div id="datesBox" class="result-box">التواريخ المهمة ستظهر هنا...</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="card mini-box">
+            <h3>💡 نصيحة اليوم</h3>
+            <p class="muted">
+              راجع العقود التي لا تحتوي على مواعيد نهائية واضحة أو بنود تأخير.
+              هذه من أكثر النقاط التي يصنفها Bismark AI كمصدر خطر.
+            </p>
+          </div>
+
+          <div class="card mini-box">
+            <h3>📊 مؤشرات سريعة</h3>
+            <p class="muted">الملفات المحللة: 12</p>
+            <p class="muted">المخاطر المفتوحة: 3</p>
+            <p class="muted">التوصيات النشطة: 5</p>
+          </div>
+
+          <div class="card mini-box">
+            <h3>🔎 نتائج البحث الذكي</h3>
+            <div id="smartSearchOutput" class="muted">
+              لا توجد نتائج بعد. اكتب في خانة البحث بالأعلى.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="mail" class="content-area">
+      <div class="card">
+        <h2>📧 Bismark AI Mail Sync</h2>
+        <p class="muted">
+          هذه المرحلة جاهزة بصريًا للمستقبل. لاحقًا سيتم ربط Gmail / Outlook
+          لجلب الرسائل وتصنيفها وتحديد الرسائل الحكومية أو القانونية المهمة.
+        </p>
+        <div class="result-box">
+          أمثلة مستقبلية:
+          - رسالة من Finanzamt
+          - إشعار من Jobcenter
+          - عقد مرفق يحتاج حفظ في الخزنة
+        </div>
+      </div>
+    </div>
+
+    <div id="archive" class="content-area">
+      <div class="card">
+        <h2>📚 الأرشيف الذكي</h2>
+        <div class="archive-list" id="archiveList">
+          <div class="archive-item">لا توجد تحليلات محفوظة بعد.</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings" class="content-area">
+      <div class="card">
+        <h2>⚙️ مركز التحكم</h2>
+        <p class="muted">
+          يستخدم المشروع إعدادات خادم آمنة للمفتاح. لا يظهر المفتاح داخل الواجهة.
+        </p>
+
+        <div class="mini-box">
+          <strong>اللغات المدعومة:</strong>
+          <div class="muted">العربية • Deutsch • English</div>
+        </div>
+
+        <div class="mini-box">
+          <strong>Bismark AI Assistant</strong>
+          <div class="muted">
+            محرك التحليل الحالي مضبوط لعرض:
+            Summary / Risks / Recommendations / Important Dates
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
-    const state = {
-      currentLang: 'ar',
-      currentPage: 'dashboard',
-      cinematic: false,
-      settings: {
-        encryptionEnabled: true,
-        auditEnabled: true,
-        streamingEnabled: false,
-        ownerName: 'Malek Alsirreih',
-        workspaceName: 'BismarkVault Pro',
-        passcode: '1234'
-      },
-      currentDocument: null,
-      archive: [],
-      risks: [],
-      compliance: [],
-      actions: [],
-      audit: [],
-      mails: [],
-      chat: []
-    };
-
-    const i18n = {
-      ar: {
-        navDashboard: 'الرئيسية',
-        navVault: 'الخزنة الذكية',
-        navCompliance: 'الامتثال القانوني',
-        navRisk: 'رادار المخاطر',
-        navActions: 'المحرّك الذكي',
-        navMail: 'بريد AI',
-        navArchive: 'الأرشيف',
-        navAssistant: 'المساعد',
-        navAudit: 'السجل الأمني',
-        navSettings: 'الإعدادات',
-        statusVault: 'حالة الخزنة',
-        statusAi: 'حالة الذكاء',
-        statusMode: 'الوضع',
-        securityLevel: 'مستوى الحماية',
-        activeProfile: 'الملف النشط',
-        storageState: 'التخزين',
-        cinematicMode: 'الوضع السينمائي',
-        exportData: 'تصدير البيانات',
-        quickCreate: 'إنشاء سريع',
-        dashTitle: 'مركز قيادة BismarkVault',
-        dashSub: 'منصة سيادية لإدارة الوثائق، التحليل الذكي، الامتثال، رصد المخاطر، الأرشفة المشفرة، والبريد الذكي ضمن تجربة موحدة.',
-        metricDocs: 'الوثائق',
-        metricDocsNote: 'الملفات داخل الجلسة',
-        metricRisks: 'المخاطر',
-        metricRisksNote: 'إشارات مرصودة',
-        metricActions: 'الإجراءات',
-        metricActionsNote: 'اقتراحات تنفيذ',
-        metricMails: 'البريد',
-        metricMailsNote: 'رسائل تحتاج متابعة',
-        coreModules: 'الوحدات الأساسية',
-        uploadAndAnalyze: 'رفع وتحليل',
-        talkToAssistant: 'التحدث مع المساعد',
-        recentSignals: 'أحدث الإشارات',
-        recommendedActions: 'إجراءات مقترحة',
-        vaultTitle: 'خزنة تحليل الوثائق',
-        vaultSub: 'ارفع مستندًا أو أنشئ وثيقة داخلية، ثم فعّل التحليل، الامتثال، رادار المخاطر، والتشفير المحلي.',
-        dropTitle: 'اسحب الوثيقة هنا أو اضغط للرفع',
-        dropSub: 'يدعم TXT / MD / JSON / CSV في هذه النسخة التجريبية',
-        docType: 'نوع الوثيقة',
-        analysisDepth: 'عمق التحليل',
-        analyzeNow: 'تحليل الآن',
-        runCompliance: 'فحص الامتثال',
-        runRiskRadar: 'تشغيل الرادار',
-        encryptNow: 'تشفير الآن',
-        analysisOutput: 'مخرجات التحليل',
-        complianceTitle: 'AI Compliance Vault',
-        complianceSub: 'محاكاة تحليل قانوني/GDPR واكتشاف الثغرات المحتملة داخل النصوص والوثائق.',
-        scanSelectedDocument: 'فحص الوثيقة الحالية',
-        riskTitle: 'Digital Risk Radar',
-        riskSub: 'رصد المخاطر التشغيلية والقانونية والمالية انطلاقًا من الوثائق والرسائل والأنشطة الحالية.',
-        refreshRadar: 'تحديث الرادار',
-        actionsTitle: 'Smart Action Engine',
-        actionsSub: 'اقتراح الإجراءات التالية: إرسال بريد، إنشاء تذكير، أرشفة، تصعيد قانوني، أو مراجعة بشرية.',
-        mailTitle: 'AI Mail Integration',
-        mailSub: 'واجهة بريد ذكية تجريبية. الربط الحقيقي مع Gmail/Outlook يحتاج Backend + OAuth.',
-        syncMail: 'مزامنة تجريبية',
-        mailAssistantTitle: 'مساعد البريد',
-        summarizeInbox: 'تلخيص الوارد',
-        extractTasks: 'استخراج المهام',
-        archiveTitle: 'الأرشيف المشفر',
-        archiveSub: 'حفظ نتائج التحليل والوثائق داخل localStorage كأرشيف محلي تجريبي.',
-        saveCurrent: 'حفظ الحالي',
-        clearArchive: 'مسح الأرشيف',
-        assistantTitle: 'BismarkVault AI Assistant',
-        assistantSub: 'واجهة حوار محلية مع تأثير كتابة متدرج لتجربة شبيهة بالأنظمة الحديثة.',
-        assistantTools: 'أدوات ذكية متاحة',
-        send: 'إرسال',
-        auditTitle: 'Audit & Security Log',
-        auditSub: 'سجل النشاطات داخل الواجهة: تحليل، تشفير، حفظ، مزامنة بريد، وتغيير الإعدادات.',
-        settingsSecurity: 'الأمان والحماية',
-        settingsSecuritySub: 'يمكنك تبديل بعض الخصائص محليًا. الحماية الحقيقية الكاملة تحتاج Backend وجلسات مصادقة.',
-        settingsVault: 'بيانات الخزنة',
-        settingsVaultSub: 'اسم المالك واسم مساحة العمل المحلية.',
-        saveSettings: 'حفظ الإعدادات',
-        resetDemo: 'إعادة ضبط تجريبية',
-        settingsIntegrations: 'التكاملات',
-        settingsIntegrationsSub: 'حالة الوحدات الحالية وما يحتاج ربط API لاحقًا.',
-        settingsRoadmap: 'خارطة التطوير',
-        settingsRoadmapSub: 'النسخة الحالية توحّد أفكار المشروع في Prototype واحد قابل للتوسعة.',
-        lockTitle: 'وصول آمن إلى BismarkVault',
-        lockSub: 'أدخل رمز فتح الخزنة لبدء مساحة العمل المحلية.',
-        unlockBtn: 'فتح الخزنة',
-        demoBtn: 'وضع تجريبي',
-        bootSub: 'جاري تشغيل نظام الخزنة السيادية...',
-        noData: 'لا توجد بيانات بعد.',
-        waiting: 'بانتظار أوامرك يا مالك...',
-        fileSelected: 'تم اختيار الملف',
-        selectFile: 'اختر ملفًا أولاً.',
-        accessDenied: 'تم رفض الوصول!',
-        unlocked: 'تم فتح الخزنة بنجاح.',
-        analyzing: 'جاري تحليل الوثيقة...',
-        complianceDone: 'تم إنشاء تقرير الامتثال.',
-        riskDone: 'تم تحديث رادار المخاطر.',
-        encrypted: 'تم التشفير المحلي بنجاح.',
-        savedArchive: 'تمت إضافة العنصر إلى الأرشيف.',
-        archiveCleared: 'تم مسح الأرشيف.',
-        settingsSaved: 'تم حفظ الإعدادات.',
-        mailSynced: 'تمت المزامنة التجريبية للبريد.',
-        taskExtracted: 'تم استخراج المهام من البريد.',
-        exportReady: 'تم تصدير بيانات الجلسة.',
-        demoReset: 'تمت إعادة ضبط البيانات التجريبية.',
-        quickDocCreated: 'تم إنشاء الوثيقة الداخلية.',
-        needsDoc: 'هذه العملية تحتاج وثيقة حالية.',
-        assistantPlaceholder: 'اكتب سؤالك أو أمرك...',
-        ownerPlaceholder: 'اسم المالك',
-        workspacePlaceholder: 'اسم مساحة العمل'
-      },
-      en: {
-        navDashboard: 'Dashboard',
-        navVault: 'AI Vault',
-        navCompliance: 'Compliance',
-        navRisk: 'Risk Radar',
-        navActions: 'Smart Actions',
-        navMail: 'AI Mail',
-        navArchive: 'Archive',
-        navAssistant: 'Assistant',
-        navAudit: 'Audit Log',
-        navSettings: 'Settings',
-        statusVault: 'Vault Status',
-        statusAi: 'AI Status',
-        statusMode: 'Mode',
-        securityLevel: 'Security Level',
-        activeProfile: 'Active Profile',
-        storageState: 'Storage',
-        cinematicMode: 'Cinematic Mode',
-        exportData: 'Export Data',
-        quickCreate: 'Quick Create',
-        dashTitle: 'BismarkVault Command Center',
-        dashSub: 'A sovereign workspace for documents, AI analysis, compliance checks, risk monitoring, encrypted archive, and intelligent mail workflows.',
-        metricDocs: 'Documents',
-        metricDocsNote: 'Files in current session',
-        metricRisks: 'Risks',
-        metricRisksNote: 'Detected signals',
-        metricActions: 'Actions',
-        metricActionsNote: 'Execution suggestions',
-        metricMails: 'Mail',
-        metricMailsNote: 'Items needing review',
-        coreModules: 'Core Modules',
-        uploadAndAnalyze: 'Upload & Analyze',
-        talkToAssistant: 'Talk to Assistant',
-        recentSignals: 'Recent Signals',
-        recommendedActions: 'Recommended Actions',
-        vaultTitle: 'Document Intelligence Vault',
-        vaultSub: 'Upload a file or create an internal document, then run AI analysis, compliance, risk radar, and local encryption.',
-        dropTitle: 'Drop document here or click to upload',
-        dropSub: 'Supports TXT / MD / JSON / CSV in this prototype',
-        docType: 'Document Type',
-        analysisDepth: 'Analysis Depth',
-        analyzeNow: 'Analyze Now',
-        runCompliance: 'Run Compliance',
-        runRiskRadar: 'Run Risk Radar',
-        encryptNow: 'Encrypt Now',
-        analysisOutput: 'Analysis Output',
-        complianceTitle: 'AI Compliance Vault',
-        complianceSub: 'Prototype legal/GDPR-oriented analysis that flags potentially sensitive or incomplete elements in text and documents.',
-        scanSelectedDocument: 'Scan Current Document',
-        riskTitle: 'Digital Risk Radar',
-        riskSub: 'Monitors operational, legal, and financial risks inferred from current documents, emails, and activity.',
-        refreshRadar: 'Refresh Radar',
-        actionsTitle: 'Smart Action Engine',
-        actionsSub: 'Suggests next steps such as send email, set reminder, archive, escalate legal review, or request human validation.',
-        mailTitle: 'AI Mail Integration',
-        mailSub: 'Smart mail prototype UI. Real Gmail/Outlook connection requires Backend + OAuth.',
-        syncMail: 'Mock Sync',
-        mailAssistantTitle: 'Mail Assistant',
-        summarizeInbox: 'Summarize Inbox',
-        extractTasks: 'Extract Tasks',
-        archiveTitle: 'Encrypted Archive',
-        archiveSub: 'Stores documents and analysis snapshots in localStorage as a local prototype archive.',
-        saveCurrent: 'Save Current',
-        clearArchive: 'Clear Archive',
-        assistantTitle: 'BismarkVault AI Assistant',
-        assistantSub: 'Local conversational layer with staged typing effect for a modern streaming-like experience.',
-        assistantTools: 'Available Smart Tools',
-        send: 'Send',
-        auditTitle: 'Audit & Security Log',
-        auditSub: 'Tracks UI actions such as analysis, encryption, save, mail sync, and settings changes.',
-        settingsSecurity: 'Security & Protection',
-        settingsSecuritySub: 'You can toggle some local features. Full production security still needs backend auth, sessions, and server policies.',
-        settingsVault: 'Vault Identity',
-        settingsVaultSub: 'Owner name and local workspace label.',
-        saveSettings: 'Save Settings',
-        resetDemo: 'Reset Demo',
-        settingsIntegrations: 'Integrations',
-        settingsIntegrationsSub: 'Current module states and what still needs live API integration.',
-        settingsRoadmap: 'Roadmap',
-        settingsRoadmapSub: 'This version unifies the project ideas into a single expandable prototype.',
-        lockTitle: 'Secure BismarkVault Access',
-        lockSub: 'Enter vault passcode to unlock the local workspace.',
-        unlockBtn: 'UNSEAL VAULT',
-        demoBtn: 'DEMO ACCESS',
-        bootSub: 'Launching sovereign AI vault system...',
-        noData: 'No data yet.',
-        waiting: 'Awaiting your command, Malek...',
-        fileSelected: 'Selected file',
-        selectFile: 'Select a file first.',
-        accessDenied: 'ACCESS DENIED!',
-        unlocked: 'Vault unlocked successfully.',
-        analyzing: 'Analyzing document...',
-        complianceDone: 'Compliance report created.',
-        riskDone: 'Risk radar updated.',
-        encrypted: 'Local encryption completed.',
-        savedArchive: 'Item added to archive.',
-        archiveCleared: 'Archive cleared.',
-        settingsSaved: 'Settings saved.',
-        mailSynced: 'Mock mail sync completed.',
-        taskExtracted: 'Tasks extracted from mail.',
-        exportReady: 'Session data exported.',
-        demoReset: 'Demo data has been reset.',
-        quickDocCreated: 'Internal document created.',
-        needsDoc: 'This action needs a current document.',
-        assistantPlaceholder: 'Type your question or command...',
-        ownerPlaceholder: 'Owner name',
-        workspacePlaceholder: 'Workspace name'
-      }
-    };
-
-    const demoMailData = [
-      {
-        id: crypto.randomUUID(),
-        from: 'Legal Department',
-        subject: 'Contract requires signature before Friday',
-        snippet: 'The updated supplier contract must be reviewed and signed before the deadline.',
-        priority: 'high'
-      },
-      {
-        id: crypto.randomUUID(),
-        from: 'Client Success',
-        subject: 'Customer requested data deletion confirmation',
-        snippet: 'Please confirm whether the user data deletion request was completed under GDPR workflow.',
-        priority: 'medium'
-      },
-      {
-        id: crypto.randomUUID(),
-        from: 'Finance Team',
-        subject: 'Invoice discrepancy found in March batch',
-        snippet: 'Two invoices have mismatched totals and require validation before approval.',
-        priority: 'medium'
-      }
-    ];
-
-    function t(key) {
-      return i18n[state.currentLang][key] || key;
-    }
-
-    function toast(message, type = 'success') {
-      const el = document.createElement('div');
-      el.className = `toast ${type} slide-up`;
-      el.textContent = message;
-      document.getElementById('toastContainer').appendChild(el);
-      setTimeout(() => el.remove(), 3200);
-    }
-
-    function addAudit(event, details = '') {
-      const entry = {
-        id: crypto.randomUUID(),
-        event,
-        details,
-        time: new Date().toLocaleString(state.currentLang === 'ar' ? 'ar-EG' : 'en-GB')
-      };
-      state.audit.unshift(entry);
-      persist();
-      renderAudit();
-    }
-
-    async function bootSequence() {
-      const steps = [
-        'Initializing secure shell...',
-        'Loading AI orchestration layer...',
-        'Mounting encrypted workspace...',
-        'Preparing compliance and risk modules...',
-        'Finalizing sovereign vault interface...'
-      ];
-      const stepsEl = document.getElementById('bootSteps');
-      const bar = document.getElementById('bootBar');
-
-      for (let i = 0; i < steps.length; i++) {
-        stepsEl.textContent = steps[i];
-        bar.style.width = `${((i + 1) / steps.length) * 100}%`;
-        await new Promise(r => setTimeout(r, 520));
-      }
-
-      document.getElementById('bootScreen').style.opacity = '0';
-      setTimeout(() => {
-        document.getElementById('bootScreen').style.display = 'none';
-        document.getElementById('lockScreen').classList.remove('hidden');
-      }, 520);
-    }
-
-    function demoFillPass() {
-      document.getElementById('passCode').value = state.settings.passcode;
-      validateAccess();
-    }
-
-    function validateAccess() {
-      const pass = document.getElementById('passCode').value.trim();
-      if (pass === state.settings.passcode) {
-        const lock = document.getElementById('lockScreen');
-        lock.style.opacity = '0';
-        lock.style.pointerEvents = 'none';
-        setTimeout(() => {
-          lock.style.display = 'none';
-          document.getElementById('appShell').classList.remove('hidden');
-          updateStatus();
-          toast(t('unlocked'));
-        }, 420);
-        addAudit('vault_unlock', 'Local workspace unlocked');
-      } else {
-        toast(t('accessDenied'), 'error');
-      }
-    }
-
-    function switchPage(id, el) {
-      state.currentPage = id;
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+    function showTab(tabId, el) {
+      document.querySelectorAll('.content-area').forEach(t => t.classList.remove('active'));
       document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-      if (el) el.classList.add('active');
-    }
-
-    function switchPageById(id) {
-      const target = Array.from(document.querySelectorAll('.nav-item')).find(n => n.getAttribute('onclick')?.includes(`'${id}'`));
-      switchPage(id, target);
+      document.getElementById(tabId).classList.add('active');
+      el.classList.add('active');
     }
 
     function updateClock() {
-      document.getElementById('digitalClock').textContent = new Date().toLocaleTimeString('en-GB', { hour12: false });
-    }
-
-    function toggleLanguage() {
-      state.currentLang = state.currentLang === 'ar' ? 'en' : 'ar';
-      const isEn = state.currentLang === 'en';
-      document.getElementById('mainHtml').dir = isEn ? 'ltr' : 'rtl';
-      document.getElementById('mainHtml').lang = isEn ? 'en' : 'ar';
-      document.getElementById('mainBody').classList.toggle('en-mode', isEn);
-      document.getElementById('langSwitcher').textContent = isEn ? 'العربية' : 'English';
-      applyTranslations();
-      renderAll();
-      persist();
-    }
-
-    function applyTranslations() {
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        el.textContent = t(key);
+      const now = new Date();
+      const time = now.toLocaleTimeString('ar-EG');
+      const date = now.toLocaleDateString('ar-EG', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
       });
-      document.getElementById('bootSub').textContent = t('bootSub');
-      document.getElementById('lockTitle').textContent = t('lockTitle');
-      document.getElementById('lockSub').textContent = t('lockSub');
-      document.getElementById('unlockBtn').textContent = t('unlockBtn');
-      document.getElementById('demoBtn').textContent = t('demoBtn');
-      document.getElementById('copyText').textContent = state.currentLang === 'ar' ? 'الملكية الفكرية © 2026' : 'Intellectual Property © 2026';
-      document.getElementById('resultDisplay').textContent = state.currentDocument?.analysis || t('waiting');
-      document.getElementById('chatInput').placeholder = t('assistantPlaceholder');
-      document.getElementById('ownerNameInput').placeholder = t('ownerPlaceholder');
-      document.getElementById('workspaceNameInput').placeholder = t('workspacePlaceholder');
-      document.getElementById('ownerNameInput').value = state.settings.ownerName;
-      document.getElementById('workspaceNameInput').value = state.settings.workspaceName;
-      if (!state.currentDocument) {
-        document.getElementById('fileName').textContent = t('dropSub');
-      }
+
+      document.getElementById('clock').innerText = "⏰ " + time;
+      document.getElementById('date').innerText = "🗓️ " + date;
     }
 
-    function toggleThemeGlow() {
-      state.cinematic = !state.cinematic;
-      document.body.style.filter = state.cinematic ? 'contrast(1.03) saturate(1.08)' : 'none';
-      toast(state.cinematic ? 'Cinematic mode enabled.' : 'Cinematic mode disabled.', 'warn');
-      persist();
-    }
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    function formatSeverity(sev) {
-      return sev === 'high' ? 'sev-high' : sev === 'medium' ? 'sev-med' : sev === 'low' ? 'sev-low' : 'sev-info';
-    }
-
-    function smartExtractInsights(text) {
-      const content = text.toLowerCase();
-      const findings = [];
-      const risks = [];
-      const actions = [];
-      const compliance = [];
-
-      if (content.includes('contract') || content.includes('agreement') || content.includes('عقد')) {
-        findings.push('Detected legal/contractual language and obligations.');
-        actions.push({ title: 'Legal review recommended', desc: 'Send the document to a legal reviewer before signing.', level: 'high' });
-      }
-      if (content.includes('invoice') || content.includes('payment') || content.includes('فاتورة')) {
-        findings.push('Financial indicators found inside the document.');
-        risks.push({ title: 'Payment discrepancy risk', desc: 'Amounts, due dates, or totals should be validated before approval.', level: 'medium' });
-      }
-      if (content.includes('gdpr') || content.includes('personal data') || content.includes('passport') || content.includes('address') || content.includes('phone') || content.includes('email') || content.includes('بيانات') || content.includes('عنوان')) {
-        findings.push('Possible personal data detected in the content.');
-        compliance.push({ title: 'Personal data exposure', desc: 'This document may contain regulated personal information requiring controlled access and retention policy.', level: 'high' });
-      }
-      if (content.includes('deadline') || content.includes('urgent') || content.includes('immediately') || content.includes('deadline') || content.includes('فوراً') || content.includes('عاجل')) {
-        findings.push('Urgency markers detected.');
-        actions.push({ title: 'Create priority follow-up', desc: 'Generate reminder and notify responsible owner.', level: 'high' });
-      }
-      if (content.includes('signature') || content.includes('signed') || content.includes('توقيع')) {
-        findings.push('Signature-related workflow detected.');
-        actions.push({ title: 'Prepare signing workflow', desc: 'Mark document as awaiting signature and store signed copy in archive.', level: 'medium' });
-      }
-      if (content.includes('delete') || content.includes('removal') || content.includes('data deletion') || content.includes('حذف')) {
-        compliance.push({ title: 'Data subject request', desc: 'Potential deletion request identified. Review GDPR workflow and proof of completion.', level: 'high' });
-      }
-      if (content.length > 1200) {
-        risks.push({ title: 'Complex document load', desc: 'Long content may require chunked AI analysis and structured segmentation.', level: 'low' });
-      }
-      if (!findings.length) findings.push('General administrative or unclassified document detected.');
-      if (!actions.length) actions.push({ title: 'Archive after review', desc: 'Store the analyzed result in encrypted archive for future retrieval.', level: 'low' });
-      if (!risks.length) risks.push({ title: 'No critical risk pattern', desc: 'No strong high-risk pattern was detected in this local prototype scan.', level: 'low' });
-      if (!compliance.length) compliance.push({ title: 'No explicit compliance trigger', desc: 'No strong GDPR/legal trigger found in local heuristic scan.', level: 'info' });
-
-      return { findings, risks, actions, compliance };
-    }
-
-    function typeWriter(el, text, speed = 14) {
-      return new Promise(resolve => {
-        el.textContent = '';
-        let i = 0;
-        const tick = () => {
-          el.textContent += text.charAt(i);
-          i++;
-          if (i < text.length) {
-            setTimeout(tick, speed);
-          } else {
-            resolve();
-          }
-        };
-        tick();
-      });
-    }
-
-    async function startAIProcess() {
-      const fileInput = document.getElementById('docInput');
-      const file = fileInput.files[0];
-      const output = document.getElementById('resultDisplay');
-
-      if (!file && !state.currentDocument) {
-        toast(t('selectFile'), 'error');
-        return;
-      }
-
-      output.innerHTML = `<span class="spinner"></span> ${t('analyzing')}`;
-
+    function updateFileLabel() {
+      const file = document.getElementById('fileInput').files[0];
       if (file) {
-        const content = await readFileAsText(file);
-        if (!content) {
-          output.textContent = 'Could not read file content in this prototype.';
-          return;
-        }
-        state.currentDocument = {
-          id: crypto.randomUUID(),
-          name: file.name,
-          content,
-          type: document.getElementById('docTypeSelect').value,
-          depth: document.getElementById('analysisDepthSelect').value,
-          createdAt: new Date().toISOString()
-        };
-        document.getElementById('fileName').textContent = `${t('fileSelected')}: ${file.name}`;
+        document.getElementById('fileLabel').innerText = "تم اختيار: " + file.name;
       }
-
-      const { findings, risks, actions, compliance } = smartExtractInsights(state.currentDocument.content);
-      state.risks = risks;
-      state.actions = actions;
-      state.compliance = compliance;
-
-      const analysisText = [
-        `BismarkVault AI Analysis`,
-        `━━━━━━━━━━━━━━━━━━`,
-        `Document: ${state.currentDocument.name || 'Internal Document'}`,
-        `Type: ${state.currentDocument.type}`,
-        `Depth: ${state.currentDocument.depth}`,
-        '',
-        'Key Findings:',
-        ...findings.map((f, i) => `${i + 1}. ${f}`),
-        '',
-        'Executive Summary:',
-        'This document was processed by the BismarkVault local intelligence layer. The prototype identified operational, compliance, and workflow signals based on content heuristics. For production, replace this layer with a secure backend AI route and structured model prompts.',
-        '',
-        'Recommended Next Step:',
-        actions[0]?.desc || 'Archive and review.'
-      ].join('\n');
-
-      state.currentDocument.analysis = analysisText;
-      state.currentDocument.risks = risks;
-      state.currentDocument.actions = actions;
-      state.currentDocument.compliance = compliance;
-
-      if (state.settings.streamingEnabled) {
-        await typeWriter(output, analysisText, 8);
-      } else {
-        output.textContent = analysisText;
-      }
-
-      updateMetrics();
-      renderAll();
-      addAudit('document_analyzed', state.currentDocument.name || 'Internal document analyzed');
-      persist();
     }
 
-    function readFileAsText(file) {
-      const supported = ['txt', 'md', 'json', 'csv'];
-      const ext = file.name.split('.').pop().toLowerCase();
-      return new Promise(resolve => {
-        if (!supported.includes(ext) && !file.type.startsWith('text/')) {
-          resolve(`Prototype note: binary file "${file.name}" selected. Real PDF/DOCX extraction requires backend parser.`);
-          return;
-        }
-        const reader = new FileReader();
-        reader.onload = e => resolve(String(e.target.result).slice(0, 12000));
-        reader.onerror = () => resolve('');
-        reader.readAsText(file, 'UTF-8');
-      });
-    }
+    function runSmartSearch() {
+      const q = document.getElementById('smartSearch').value.trim().toLowerCase();
+      const out = document.getElementById('smartSearchOutput');
 
-    function renderCompliance() {
-      const container = document.getElementById('complianceList');
-      container.innerHTML = '';
-      if (!state.compliance.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
+      if (!q) {
+        out.innerHTML = "لا توجد نتائج بعد. اكتب في خانة البحث بالأعلى.";
         return;
       }
-      state.compliance.forEach(item => {
-        container.innerHTML += `
-          <div class="item">
-            <div class="severity ${formatSeverity(item.level)}">${item.level.toUpperCase()}</div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
-          </div>`;
-      });
-    }
 
-    function renderRisk() {
-      const container = document.getElementById('riskList');
-      container.innerHTML = '';
-      if (!state.risks.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
+      const results = [];
+
+      if (q.includes("عقد") || q.includes("contract")) {
+        results.push("📄 Employment Contract — ملف عقد محتمل مرتبط بالبحث.");
+      }
+      if (q.includes("تأمين") || q.includes("insurance")) {
+        results.push("⚠️ Insurance File — يوجد احتمال وجود ملف تأمين يحتاج مراجعة.");
+      }
+      if (q.includes("kündigung") || q.includes("cancel")) {
+        results.push("📅 Cancellation / Kündigung — يوجد بحث متعلق بالإلغاء أو الإشعار.");
+      }
+      if (q.includes("jobcenter") || q.includes("finanzamt")) {
+        results.push("📧 Government Mail — نتيجة مرتبطة برسائل حكومية أو إدارية.");
+      }
+
+      if (!results.length) {
+        out.innerHTML = "لم يتم العثور على نتيجة دقيقة. جرّب كلمات مثل: contract, Kündigung, insurance, Finanzamt";
         return;
       }
-      state.risks.forEach(item => {
-        container.innerHTML += `
-          <div class="item">
-            <div class="severity ${formatSeverity(item.level)}">${item.level.toUpperCase()}</div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
-          </div>`;
-      });
+
+      out.innerHTML = results.join("<br><br>");
     }
 
-    function renderActions() {
-      const container = document.getElementById('actionList');
-      const dashboard = document.getElementById('recommendedActions');
-      container.innerHTML = '';
-      dashboard.innerHTML = '';
-      const list = state.actions.length ? state.actions : [];
-      if (!list.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
-        dashboard.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
-        return;
-      }
-      list.forEach((item, idx) => {
-        const block = `
-          <div class="item">
-            <div class="severity ${formatSeverity(item.level)}">${item.level.toUpperCase()}</div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
-            <div class="actions-row">
-              <button class="btn-soft" onclick="performSmartAction(${idx})">Execute</button>
-            </div>
-          </div>`;
-        container.innerHTML += block;
-        dashboard.innerHTML += block;
-      });
+    function extractSection(text, labels) {
+      const escaped = labels.map(l => l.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+      const pattern = new RegExp(`(?:${escaped.join("|")})\\s*:?\\s*([\\s\\S]*?)(?=(?:📄|⚠️|💡|📅|Summary|Risks|Recommendations|Important Dates|$))`, "i");
+      const match = text.match(pattern);
+      return match ? match[1].trim() : "";
     }
 
-    function renderSignals() {
-      const container = document.getElementById('recentSignals');
-      container.innerHTML = '';
-      const items = state.risks.slice(0, 3).concat(state.compliance.slice(0, 2));
-      if (!items.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
-        return;
-      }
-      items.forEach(item => {
-        container.innerHTML += `
-          <div class="item">
-            <div class="severity ${formatSeverity(item.level)}">${item.level.toUpperCase()}</div>
-            <h4>${item.title}</h4>
-            <p>${item.desc}</p>
-          </div>`;
-      });
-    }
-
-    function runComplianceScan() {
-      if (!state.currentDocument) {
-        toast(t('needsDoc'), 'error');
-        return;
-      }
-      const scan = smartExtractInsights(state.currentDocument.content);
-      state.compliance = scan.compliance;
-      renderCompliance();
-      renderSignals();
-      updateMetrics();
-      addAudit('compliance_scan', state.currentDocument.name || 'Internal document');
-      toast(t('complianceDone'));
-      persist();
-    }
-
-    function runRiskRadar() {
-      if (!state.currentDocument) {
-        toast(t('needsDoc'), 'error');
-        return;
-      }
-      const scan = smartExtractInsights(state.currentDocument.content);
-      state.risks = scan.risks;
-      renderRisk();
-      renderSignals();
-      updateMetrics();
-      addAudit('risk_radar_scan', state.currentDocument.name || 'Internal document');
-      toast(t('riskDone'));
-      persist();
-    }
-
-    async function encryptCurrentDocument() {
-      if (!state.currentDocument) {
-        toast(t('needsDoc'), 'error');
-        return;
-      }
-      const encrypted = await encryptText(state.currentDocument.content, state.settings.passcode);
-      state.currentDocument.encryptedPayload = encrypted;
-      addAudit('document_encrypted', state.currentDocument.name || 'Internal document');
-      toast(t('encrypted'));
-      persist();
-    }
-
-    async function encryptText(plainText, password) {
-      const enc = new TextEncoder();
-      const data = enc.encode(plainText);
-      const salt = crypto.getRandomValues(new Uint8Array(16));
-      const iv = crypto.getRandomValues(new Uint8Array(12));
-      const keyMaterial = await crypto.subtle.importKey('raw', enc.encode(password), { name: 'PBKDF2' }, false, ['deriveKey']);
-      const key = await crypto.subtle.deriveKey(
-        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
-        keyMaterial,
-        { name: 'AES-GCM', length: 256 },
-        false,
-        ['encrypt']
-      );
-      const cipher = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, data);
+    function parseAnalysis(text) {
       return {
-        salt: Array.from(salt),
-        iv: Array.from(iv),
-        cipher: Array.from(new Uint8Array(cipher))
+        summary: extractSection(text, ["📄 Summary", "Summary", "ملخص", "Zusammenfassung"]) || text,
+        risks: extractSection(text, ["⚠️ Risks", "Risks", "المخاطر", "Risiken"]) || "لم يتم العثور على مخاطر محددة.",
+        recommendations: extractSection(text, ["💡 Recommendations", "Recommendations", "التوصيات", "Empfehlungen"]) || "لا توجد توصيات إضافية.",
+        dates: extractSection(text, ["📅 Important Dates", "Important Dates", "تواريخ مهمة", "Wichtige Daten"]) || "لا توجد تواريخ واضحة."
       };
     }
 
-    function saveCurrentToArchive() {
-      if (!state.currentDocument) {
-        toast(t('needsDoc'), 'error');
-        return;
+    function setRiskIndicator(risksText) {
+      const riskDot = document.getElementById('riskDot');
+      const riskLevel = document.getElementById('riskLevel');
+      const lowWords = ["لا توجد", "no major", "no significant", "منخفض"];
+      const highWords = ["خطر", "risk", "penalty", "termination", "critical", "urgent", "مهم", "مرتفع"];
+
+      const lower = risksText.toLowerCase();
+
+      if (highWords.some(w => lower.includes(w))) {
+        riskDot.style.background = "var(--red)";
+        riskLevel.innerText = "Risk Level: High";
+      } else if (lowWords.some(w => lower.includes(w))) {
+        riskDot.style.background = "var(--green)";
+        riskLevel.innerText = "Risk Level: Low";
+      } else {
+        riskDot.style.background = "var(--blue)";
+        riskLevel.innerText = "Risk Level: Medium";
       }
-      const snapshot = {
-        id: crypto.randomUUID(),
-        name: state.currentDocument.name || 'Internal Document',
-        type: state.currentDocument.type || 'general',
-        createdAt: new Date().toLocaleString(state.currentLang === 'ar' ? 'ar-EG' : 'en-GB'),
-        analysis: state.currentDocument.analysis || '',
-        encrypted: !!state.currentDocument.encryptedPayload
-      };
-      state.archive.unshift(snapshot);
+    }
+
+    function saveToArchive(fileName, parsed) {
+      const oldData = JSON.parse(localStorage.getItem("bismark_archive") || "[]");
+      oldData.unshift({
+        fileName,
+        date: new Date().toLocaleString("ar-EG"),
+        summary: parsed.summary
+      });
+      localStorage.setItem("bismark_archive", JSON.stringify(oldData.slice(0, 10)));
       renderArchive();
-      updateMetrics();
-      addAudit('archive_save', snapshot.name);
-      toast(t('savedArchive'));
-      persist();
     }
 
     function renderArchive() {
-      const container = document.getElementById('archiveList');
-      container.innerHTML = '';
-      if (!state.archive.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
+      const list = document.getElementById("archiveList");
+      const data = JSON.parse(localStorage.getItem("bismark_archive") || "[]");
+
+      if (!data.length) {
+        list.innerHTML = `<div class="archive-item">لا توجد تحليلات محفوظة بعد.</div>`;
         return;
       }
-      state.archive.forEach(item => {
-        container.innerHTML += `
-          <div class="item">
-            <h4>${item.name}</h4>
-            <p>${item.analysis.slice(0, 260)}${item.analysis.length > 260 ? '...' : ''}</p>
-            <small>${item.createdAt} • ${item.type} • ${item.encrypted ? 'Encrypted' : 'Plain Snapshot'}</small>
-          </div>`;
-      });
+
+      list.innerHTML = data.map(item => `
+        <div class="archive-item">
+          <strong>${item.fileName}</strong><br>
+          <span class="muted">${item.date}</span><br><br>
+          <span>${item.summary}</span>
+        </div>
+      `).join("");
     }
 
-    function clearArchive() {
-      state.archive = [];
-      renderArchive();
-      updateMetrics();
-      addAudit('archive_cleared');
-      toast(t('archiveCleared'), 'warn');
-      persist();
-    }
+    renderArchive();
 
-    function mockSyncMail() {
-      state.mails = [...demoMailData];
-      renderMail();
-      addAudit('mail_sync', 'Mock inbox sync');
-      toast(t('mailSynced'));
-      persist();
-    }
+    async function runAnalysis() {
+      const file = document.getElementById('fileInput').files[0];
+      const outputSummary = document.getElementById('summaryBox');
+      const outputRisks = document.getElementById('risksBox');
+      const outputRecs = document.getElementById('recommendationsBox');
+      const outputDates = document.getElementById('datesBox');
+      const btn = document.getElementById('mainBtn');
 
-    function renderMail() {
-      const list = document.getElementById('mailList');
-      list.innerHTML = '';
-      if (!state.mails.length) {
-        list.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
-      } else {
-        state.mails.forEach(mail => {
-          list.innerHTML += `
-            <div class="item">
-              <div class="severity ${formatSeverity(mail.priority === 'high' ? 'high' : 'medium')}">${mail.priority.toUpperCase()}</div>
-              <h4>${mail.subject}</h4>
-              <p>${mail.snippet}</p>
-              <small>From: ${mail.from}</small>
-            </div>`;
-        });
-      }
-      document.getElementById('metricMails').textContent = state.mails.length;
-    }
+      const lang = document.getElementById('langPref').value;
+      const mode = document.getElementById('aiMode').value;
+      const accuracy = document.getElementById('accuracyRange').value;
 
-    function generateMailSummary() {
-      const box = document.getElementById('mailSummaryBox');
-      if (!state.mails.length) {
-        box.textContent = t('noData');
-        return;
-      }
-      const summary = [
-        'Inbox Intelligence Summary',
-        '━━━━━━━━━━━━━━━━━━',
-        `Total emails reviewed: ${state.mails.length}`,
-        '',
-        ...state.mails.map((m, i) => `${i + 1}. ${m.subject} — ${m.snippet}`),
-        '',
-        'Top Priorities:',
-        '- Contract signature deadline',
-        '- Data deletion confirmation request',
-        '- Invoice validation discrepancy'
-      ].join('\n');
-      box.textContent = summary;
-      addAudit('mail_summary_generated');
-    }
+      if (!file) return alert("اختر ملفاً أولاً");
 
-    function extractMailTasks() {
-      state.actions = [
-        { title: 'Reply to legal team', desc: 'Confirm contract review and signature timeline.', level: 'high' },
-        { title: 'Verify deletion request', desc: 'Check whether GDPR deletion completion evidence exists.', level: 'high' },
-        { title: 'Validate invoice totals', desc: 'Review the finance discrepancy before payment release.', level: 'medium' }
-      ];
-      renderActions();
-      updateMetrics();
-      addAudit('mail_tasks_extracted');
-      toast(t('taskExtracted'));
-      persist();
-    }
+      btn.disabled = true;
+      btn.innerText = "جاري الاتصال بـ Bismark AI...";
+      outputSummary.innerText = "يتم الآن تحليل المستند...";
+      outputRisks.innerText = "يرجى الانتظار...";
+      outputRecs.innerText = "يرجى الانتظار...";
+      outputDates.innerText = "يرجى الانتظار...";
 
-    function performSmartAction(index) {
-      const action = state.actions[index];
-      if (!action) return;
-      toast(`Executed: ${action.title}`);
-      addAudit('smart_action_executed', action.title);
-    }
+      const reader = new FileReader();
 
-    function renderAssistant() {
-      const chatBox = document.getElementById('chatBox');
-      chatBox.innerHTML = '';
-      if (!state.chat.length) {
-        const welcome = state.currentLang === 'ar'
-          ? 'مرحبًا يا مالك. أنا BismarkVault AI Assistant. أستطيع مساعدتك في تحليل الوثائق، الامتثال، المخاطر، الأرشفة، والبريد الذكي داخل هذه النسخة التجريبية.'
-          : 'Welcome, Malek. I am the BismarkVault AI Assistant. I can help with documents, compliance, risks, archive, and smart mail workflows in this prototype.';
-        state.chat.push({ role: 'ai', text: welcome });
-      }
-      state.chat.forEach(msg => {
-        const bubble = document.createElement('div');
-        bubble.className = `bubble ${msg.role === 'user' ? 'user' : 'ai'}`;
-        bubble.innerHTML = `<span class="sender">${msg.role === 'user' ? 'You' : 'BismarkVault AI'}</span>${escapeHtml(msg.text)}`;
-        chatBox.appendChild(bubble);
-      });
-      chatBox.scrollTop = chatBox.scrollHeight;
+      reader.onload = async (e) => {
+        try {
+          const response = await fetch('/api/analyze', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              fileName: file.name,
+              fileContent: e.target.result.substring(0, 5000),
+              options: {
+                language: lang,
+                mode: mode,
+                accuracy: accuracy
+              }
+            })
+          });
 
-      const tools = document.getElementById('assistantToolsList');
-      tools.innerHTML = `
-        <div class="item"><h4>Analyze Document</h4><p>Uses current document text to generate local intelligence summary.</p></div>
-        <div class="item"><h4>Compliance Scan</h4><p>Flags personal data and deletion/GDPR indicators heuristically.</p></div>
-        <div class="item"><h4>Risk Radar</h4><p>Highlights urgency, financial issues, and operational complexity.</p></div>
-        <div class="item"><h4>Smart Actions</h4><p>Proposes next steps based on findings.</p></div>
-      `;
-    }
+          const data = await response.json();
 
-    function escapeHtml(text) {
-      return text
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;')
-        .replace(/\n/g, '<br>');
-    }
+          if (!response.ok) {
+            throw new Error(data.error || "فشل التحليل");
+          }
 
-    async function sendAssistantMessage() {
-      const input = document.getElementById('chatInput');
-      const text = input.value.trim();
-      if (!text) return;
-      state.chat.push({ role: 'user', text });
-      input.value = '';
-      renderAssistant();
+          const parsed = parseAnalysis(data.analysis || "لا توجد نتيجة.");
 
-      let answer = '';
-      const lower = text.toLowerCase();
-      if (lower.includes('analy') || lower.includes('حلل') || lower.includes('analysis')) {
-        answer = state.currentDocument?.analysis || (state.currentLang === 'ar' ? 'لا توجد وثيقة حالية محللة بعد.' : 'No current analyzed document yet.');
-      } else if (lower.includes('risk') || lower.includes('مخاطر')) {
-        answer = state.risks.length ? state.risks.map((r, i) => `${i + 1}. ${r.title}: ${r.desc}`).join('\n') : (state.currentLang === 'ar' ? 'لا توجد مخاطر مرصودة بعد.' : 'No risks detected yet.');
-      } else if (lower.includes('mail') || lower.includes('بريد')) {
-        answer = state.mails.length ? state.mails.map((m, i) => `${i + 1}. ${m.subject}`).join('\n') : (state.currentLang === 'ar' ? 'لم تتم مزامنة البريد بعد.' : 'Mail has not been synced yet.');
-      } else {
-        answer = state.currentLang === 'ar'
-          ? 'في هذه النسخة، أستطيع مساعدتك محليًا عبر التحليل، الامتثال، المخاطر، البريد التجريبي، والأرشيف. للذكاء الحقيقي المباشر اربط المشروع مع Backend آمن وواجهة API.'
-          : 'In this version, I can help locally with analysis, compliance, risks, mock mail, and archive. For live intelligence, connect the project to a secure backend AI API.';
-      }
+          outputSummary.innerText = parsed.summary;
+          outputRisks.innerText = parsed.risks;
+          outputRecs.innerText = parsed.recommendations;
+          outputDates.innerText = parsed.dates;
 
-      state.chat.push({ role: 'ai', text: answer });
-      addAudit('assistant_message', text.slice(0, 60));
-      renderAssistant();
-      persist();
-    }
+          setRiskIndicator(parsed.risks);
+          saveToArchive(file.name, parsed);
 
-    function renderAudit() {
-      const container = document.getElementById('auditList');
-      container.innerHTML = '';
-      if (!state.audit.length) {
-        container.innerHTML = `<div class="item"><p>${t('noData')}</p></div>`;
-        return;
-      }
-      state.audit.forEach(log => {
-        container.innerHTML += `
-          <div class="item">
-            <h4>${log.event}</h4>
-            <p>${log.details || '—'}</p>
-            <small>${log.time}</small>
-          </div>`;
-      });
-    }
-
-    function toggleSwitch(el, key) {
-      el.classList.toggle('active');
-      state.settings[key] = el.classList.contains('active');
-      updateStatus();
-      addAudit('setting_toggled', key + ': ' + state.settings[key]);
-      persist();
-    }
-
-    function saveSettings() {
-      state.settings.ownerName = document.getElementById('ownerNameInput').value.trim() || state.settings.ownerName;
-      state.settings.workspaceName = document.getElementById('workspaceNameInput').value.trim() || state.settings.workspaceName;
-      updateStatus();
-      addAudit('settings_saved', `${state.settings.ownerName} / ${state.settings.workspaceName}`);
-      toast(t('settingsSaved'));
-      persist();
-    }
-
-    function updateStatus() {
-      document.getElementById('profileName').textContent = state.settings.ownerName.split(' ')[0] || 'Founder';
-      document.getElementById('storageStateText').textContent = state.settings.encryptionEnabled ? 'Encrypted Local' : 'Local Plain';
-      document.getElementById('securityLevelText').textContent = state.settings.encryptionEnabled && state.settings.auditEnabled ? 'Maximum' : 'Standard';
-      document.getElementById('miniVaultStatus').textContent = state.settings.encryptionEnabled ? 'Encrypted Local Vault' : 'Local Vault';
-      document.getElementById('miniAiStatus').textContent = state.settings.streamingEnabled ? 'Streaming Ready' : 'Ready';
-      document.getElementById('miniSecurityMode').textContent = 'Local Demo';
-      document.getElementById('ownerNameInput').value = state.settings.ownerName;
-      document.getElementById('workspaceNameInput').value = state.settings.workspaceName;
-      document.getElementById('swEncryption').classList.toggle('active', state.settings.encryptionEnabled);
-      document.getElementById('swAudit').classList.toggle('active', state.settings.auditEnabled);
-      document.getElementById('swStreaming').classList.toggle('active', state.settings.streamingEnabled);
-    }
-
-    function updateMetrics() {
-      document.getElementById('metricDocs').textContent = state.currentDocument ? 1 + state.archive.length : state.archive.length;
-      document.getElementById('metricRisks').textContent = state.risks.length + state.compliance.filter(x => x.level === 'high').length;
-      document.getElementById('metricActions').textContent = state.actions.length;
-      document.getElementById('metricMails').textContent = state.mails.length;
-    }
-
-    function renderDashboard() {
-      renderSignals();
-      renderActions();
-      updateMetrics();
-    }
-
-    function renderAll() {
-      renderCompliance();
-      renderRisk();
-      renderActions();
-      renderArchive();
-      renderMail();
-      renderAssistant();
-      renderAudit();
-      renderDashboard();
-      updateStatus();
-      applyTranslations();
-    }
-
-    function persist() {
-      localStorage.setItem('bismarkvault_prototype_v1', JSON.stringify({
-        currentLang: state.currentLang,
-        settings: state.settings,
-        currentDocument: state.currentDocument,
-        archive: state.archive,
-        risks: state.risks,
-        compliance: state.compliance,
-        actions: state.actions,
-        audit: state.audit,
-        mails: state.mails,
-        chat: state.chat,
-        cinematic: state.cinematic
-      }));
-    }
-
-    function loadPersisted() {
-      const raw = localStorage.getItem('bismarkvault_prototype_v1');
-      if (!raw) return;
-      try {
-        const data = JSON.parse(raw);
-        state.currentLang = data.currentLang || state.currentLang;
-        state.settings = { ...state.settings, ...(data.settings || {}) };
-        state.currentDocument = data.currentDocument || null;
-        state.archive = data.archive || [];
-        state.risks = data.risks || [];
-        state.compliance = data.compliance || [];
-        state.actions = data.actions || [];
-        state.audit = data.audit || [];
-        state.mails = data.mails || [];
-        state.chat = data.chat || [];
-        state.cinematic = !!data.cinematic;
-      } catch {}
-    }
-
-    function exportVaultData() {
-      const payload = {
-        exportedAt: new Date().toISOString(),
-        currentDocument: state.currentDocument,
-        archive: state.archive,
-        risks: state.risks,
-        compliance: state.compliance,
-        actions: state.actions,
-        audit: state.audit,
-        mails: state.mails,
-        settings: state.settings
-      };
-      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'bismarkvault-export.json';
-      a.click();
-      URL.revokeObjectURL(url);
-      addAudit('data_exported');
-      toast(t('exportReady'));
-    }
-
-    function openQuickCreate() {
-      document.getElementById('modal').style.display = 'flex';
-    }
-
-    function closeModal() {
-      document.getElementById('modal').style.display = 'none';
-    }
-
-    function createQuickDocument() {
-      const title = document.getElementById('quickDocTitle').value.trim() || 'Internal Draft';
-      const category = document.getElementById('quickDocCategory').value;
-      const content = document.getElementById('quickDocContent').value.trim() || 'No content provided.';
-      state.currentDocument = {
-        id: crypto.randomUUID(),
-        name: title,
-        content,
-        type: category,
-        depth: 'balanced',
-        createdAt: new Date().toISOString(),
-        analysis: ''
-      };
-      document.getElementById('fileName').textContent = `${t('fileSelected')}: ${title}`;
-      closeModal();
-      addAudit('quick_document_created', title);
-      toast(t('quickDocCreated'));
-      persist();
-    }
-
-    function resetDemoData() {
-      localStorage.removeItem('bismarkvault_prototype_v1');
-      state.currentDocument = null;
-      state.archive = [];
-      state.risks = [];
-      state.compliance = [];
-      state.actions = [];
-      state.audit = [];
-      state.mails = [];
-      state.chat = [];
-      document.getElementById('resultDisplay').textContent = t('waiting');
-      document.getElementById('fileName').textContent = t('dropSub');
-      renderAll();
-      addAudit('demo_reset');
-      toast(t('demoReset'), 'warn');
-      persist();
-    }
-
-    function setupDropzone() {
-      const dropZone = document.getElementById('dropZone');
-      const fileInput = document.getElementById('docInput');
-
-      fileInput.addEventListener('change', () => {
-        const f = fileInput.files[0];
-        if (f) document.getElementById('fileName').textContent = `${t('fileSelected')}: ${f.name}`;
-      });
-
-      ['dragenter', 'dragover'].forEach(evt => {
-        dropZone.addEventListener(evt, e => {
-          e.preventDefault();
-          dropZone.classList.add('drag');
-        });
-      });
-
-      ['dragleave', 'drop'].forEach(evt => {
-        dropZone.addEventListener(evt, e => {
-          e.preventDefault();
-          dropZone.classList.remove('drag');
-        });
-      });
-
-      dropZone.addEventListener('drop', e => {
-        if (e.dataTransfer.files.length) {
-          fileInput.files = e.dataTransfer.files;
-          document.getElementById('fileName').textContent = `${t('fileSelected')}: ${e.dataTransfer.files[0].name}`;
+        } catch (err) {
+          outputSummary.innerText = "فشل في الاتصال بالخادم.";
+          outputRisks.innerText = err.message || "حدث خطأ.";
+          outputRecs.innerText = "تأكد من إعدادات API أو الخادم.";
+          outputDates.innerText = "—";
+        } finally {
+          btn.disabled = false;
+          btn.innerText = "بدء التحليل الذكي";
         }
-      });
+      };
+
+      reader.readAsText(file);
     }
-
-    document.getElementById('passCode').addEventListener('keydown', e => {
-      if (e.key === 'Enter') validateAccess();
-    });
-
-    document.getElementById('chatInput').addEventListener('keydown', e => {
-      if (e.key === 'Enter') sendAssistantMessage();
-    });
-
-    function init() {
-      loadPersisted();
-      setupDropzone();
-      updateClock();
-      setInterval(updateClock, 1000);
-      applyTranslations();
-      renderAll();
-      if (state.cinematic) document.body.style.filter = 'contrast(1.03) saturate(1.08)';
-      bootSequence();
-    }
-
-    init();
   </script>
 </body>
 </html>
