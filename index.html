@@ -1,186 +1,2283 @@
-<<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!DOCTYPE html>
+
+<html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-    <meta name="description" content="BismarkVault AI — Enterprise Document Intelligence. GDPR-Compliant."/>
-    <meta name="author" content="Malek Alsirreih"/>
-    <title>BismarkVault AI — Smart Archive</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cairo:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
-    <style>
-        :root {
-            --g300:#C8A84B; --g200:#EDD070; --n900:#050403; --n800:#0D0B09; --n50:#F0E8D8;
-            --font-d:'Cinzel', serif; --font-ar:'Cairo', sans-serif; --font-b:'DM Sans', sans-serif;
-        }
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="description" content="BismarkVault — محلل الوثائق الذكي للمنظمات الإنسانية في ألمانيا. AR·DE·EN · DSGVO-konform · Powered by Claude AI."/>
+<meta name="keywords" content="BismarkVault,KI,Archivierung,DSGVO,DRK,NGO,Arabic,Deutsch,Mettmann,Claude AI"/>
+<meta name="author" content="Malek Alsirreih"/>
+<meta name="theme-color" content="#C8A84B"/>
+<meta property="og:title" content="BismarkVault — KI-Dokumentenanalysator"/>
+<meta property="og:description" content="AI Document Analyzer for humanitarian NGOs in Germany. AR·DE·EN. DSGVO-konform."/>
+<meta property="og:type" content="website"/>
+<meta property="og:locale" content="ar_DE"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="manifest" href="manifest.json"/>
+<title>BismarkVault — KI-Dokumentenanalysator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cairo:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════
+   DESIGN SYSTEM
+═══════════════════════════════════════════════ */
+:root {
+  /* Gold palette */
+  --g50: #FAF5E0; --g100: #F5E8B0; --g200: #EDD070;
+  --g300: #C8A84B; --g400: #A07828; --g500: #7A5818;
+  /* Neutrals */
+  --n900: #050403; --n800: #0D0B09; --n700: #161310;
+  --n600: #1E1A16; --n500: #28231C; --n400: #3A3228;
+  --n300: #706050; --n200: #A89070; --n100: #D8C8A8;
+  /* Blue AI */
+  --b400: #1A4F80; --b300: #2268A8; --b200: #4090C8;
+  --b100: rgba(34,104,168,.15);
+  /* Semantic */
+  --red: #8B1E2F; --red-h: #B02438;
+  --green: #1A6A3A; --green-h: #25904E;
+  /* Borders */
+  --bd: rgba(200,168,75,.12);
+  --bd2: rgba(200,168,75,.28);
+  --bd3: rgba(200,168,75,.5);
+  /* Radius */
+  --r-sm: 8px; --r: 14px; --r-lg: 20px; --r-xl: 28px;
+  /* Shadows */
+  --sh-sm: 0 2px 8px rgba(0,0,0,.3);
+  --sh-md: 0 8px 32px rgba(0,0,0,.45);
+  --sh-lg: 0 24px 64px rgba(0,0,0,.6);
+  --sh-gold: 0 8px 32px rgba(200,168,75,.25);
+  --sh-gold-lg: 0 16px 48px rgba(200,168,75,.4);
+  /* Typography */
+  --font-display: 'Cinzel', serif;
+  --font-ar: 'Cairo', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
 
-        /* Base Styles */
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: var(--font-b); background: var(--n900); color: var(--n50); overflow-x: hidden; }
-        
-        /* Cinematic Backgrounds for Sections */
-        .section-bg { background-size: cover; background-position: center; background-attachment: fixed; position: relative; }
-        #landing-hero { background-image: linear-gradient(rgba(5,4,3,0.8), rgba(5,4,3,0.8)), url('image_0.png'); min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
-        
-        /* Nav */
-        nav { position: fixed; top: 0; width: 100%; z-index: 1000; height: 70px; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(200,168,75,0.1); display: flex; align-items: center; }
-        .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; justify-content: space-between; align-items: center; }
-        .brand { font-family: var(--font-d); font-size: 20px; color: var(--g300); letter-spacing: 2px; cursor: pointer; }
+/* ── RESET ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+font-family: var(–font-body);
+background: var(–n900);
+color: var(–n100);
+min-height: 100vh;
+overflow-x: hidden;
+-webkit-font-smoothing: antialiased;
+-moz-osx-font-smoothing: grayscale;
+}
+img, svg { display: block; max-width: 100%; }
+button { font-family: inherit; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+input, textarea, select { font-family: inherit; }
 
-        /* Buttons */
-        .btn-gold { padding: 14px 36px; border-radius: 50px; background: linear-gradient(135deg, var(--g200), var(--g300)); color: #000; font-weight: 700; border: none; cursor: pointer; transition: 0.3s; text-transform: uppercase; }
-        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(200,168,75,0.4); }
+/* ── ANIMATED BACKGROUND ── */
+.bg-layer {
+position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.bg-mesh {
+position: absolute; inset: 0;
+background:
+radial-gradient(ellipse 80% 60% at 50% -10%, rgba(200,168,75,.08) 0%, transparent 60%),
+radial-gradient(ellipse 60% 40% at 100% 80%, rgba(34,104,168,.07) 0%, transparent 55%),
+radial-gradient(ellipse 50% 40% at 0% 60%, rgba(34,104,168,.05) 0%, transparent 55%);
+}
+.bg-grid {
+position: absolute; inset: 0;
+background-image:
+linear-gradient(rgba(200,168,75,.025) 1px, transparent 1px),
+linear-gradient(90deg, rgba(200,168,75,.025) 1px, transparent 1px);
+background-size: 56px 56px;
+mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 100%);
+}
+.bg-noise {
+position: absolute; inset: 0; opacity: .018;
+background-image: url(“data:image/svg+xml,%3Csvg viewBox=‘0 0 256 256’ xmlns=‘http://www.w3.org/2000/svg’%3E%3Cfilter id=‘n’%3E%3CfeTurbulence type=‘fractalNoise’ baseFrequency=’.85’ numOctaves=‘4’ stitchTiles=‘stitch’/%3E%3C/filter%3E%3Crect width=‘100%25’ height=‘100%25’ filter=‘url(%23n)’/%3E%3C/svg%3E”);
+}
 
-        /* Landing Sections Styling */
-        section { padding: 100px 24px; }
-        .container { max-width: 1200px; margin: 0 auto; }
-        .section-title { font-family: var(--font-d); font-size: 40px; text-align: center; margin-bottom: 50px; color: var(--g300); }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(200,168,75,0.1); padding: 40px; border-radius: 20px; transition: 0.3s; }
-        .card:hover { border-color: var(--g300); background: rgba(255,255,255,0.05); }
+/* ── LAYOUT ── */
+.view { position: relative; z-index: 1; }
+.gone { display: none !important; }
+.container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+section { padding: 96px 0; }
 
-        /* Dashboard & Login Specific */
-        #app-view { display: none; background-image: linear-gradient(rgba(5,4,3,0.95), rgba(5,4,3,0.95)), url('image_1.png'); background-size: cover; min-height: 100vh; padding-top: 100px; }
-        .panel { max-width: 1000px; margin: 0 auto; background: rgba(15,13,10,0.85); border: 1px solid rgba(200,168,75,0.2); border-radius: 24px; padding: 40px; backdrop-filter: blur(30px); }
-        .vault-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 30px; margin-top: 30px; }
-        @media (max-width: 768px) { .vault-grid { grid-template-columns: 1fr; } .hero-title { font-size: 40px !important; } }
-        
-        /* Language display utility */
-        [lang="ar"] .en, [lang="ar"] .de { display: none; }
-        [lang="en"] .ar, [lang="en"] .de { display: none; }
-        [lang="de"] .ar, [lang="de"] .en { display: none; }
-        
-        /* Toast */
-        #toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); background: var(--g300); color: #000; padding: 12px 40px; border-radius: 50px; font-weight: bold; display: none; z-index: 2000; }
-    </style>
+/* ── SECTION LABELS ── */
+.eyebrow {
+display: flex; align-items: center; justify-content: center; gap: 12px;
+font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+color: var(–g300); margin-bottom: 16px;
+}
+.eyebrow::before, .eyebrow::after {
+content: ‘’; flex: 1; max-width: 56px; height: 1px;
+background: linear-gradient(90deg, transparent, var(–g500));
+}
+.eyebrow::after { background: linear-gradient(270deg, transparent, var(–g500)); }
+.section-title {
+text-align: center; font-family: var(–font-display);
+font-size: clamp(24px, 3.5vw, 42px); font-weight: 700;
+color: var(–n100); margin-bottom: 16px; line-height: 1.15;
+}
+.section-desc {
+text-align: center; font-size: 16px; color: var(–n200);
+max-width: 560px; margin: 0 auto 60px; line-height: 1.75;
+}
+
+/* ═══════════════════════════════════════════════
+NAVIGATION
+═══════════════════════════════════════════════ */
+#nav {
+position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+height: 68px; display: flex; align-items: center;
+padding: 0 44px;
+background: rgba(5,4,3,0);
+backdrop-filter: blur(0px);
+border-bottom: 1px solid transparent;
+transition: background .4s, backdrop-filter .4s, border-color .4s, box-shadow .4s;
+}
+#nav.scrolled {
+background: rgba(5,4,3,.92);
+backdrop-filter: blur(24px) saturate(1.6);
+border-color: var(–bd);
+box-shadow: 0 4px 40px rgba(0,0,0,.5);
+}
+.nav-inner {
+display: flex; align-items: center; justify-content: space-between;
+width: 100%; max-width: 1120px; margin: 0 auto;
+}
+.nav-logo {
+display: flex; align-items: center; gap: 11px; cursor: pointer;
+transition: opacity .2s;
+}
+.nav-logo:hover { opacity: .85; }
+.nav-logo-icon {
+width: 40px; height: 40px;
+background: linear-gradient(135deg, #1C1810, #2E2418);
+border: 1px solid var(–g500); border-radius: 11px;
+display: flex; align-items: center; justify-content: center;
+box-shadow: 0 0 20px rgba(200,168,75,.14), inset 0 1px 0 rgba(200,168,75,.12);
+flex-shrink: 0;
+}
+.nav-logo-icon svg { width: 20px; height: 20px; }
+.nav-brand {
+font-family: var(–font-display); font-size: 17px; font-weight: 700; letter-spacing: 2.5px;
+background: linear-gradient(135deg, var(–g50), var(–g200), var(–g300));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.nav-links { display: flex; align-items: center; gap: 2px; }
+.nav-link {
+padding: 7px 13px; border-radius: var(–r-sm); font-size: 13px; font-weight: 500;
+color: var(–n200); border: none; background: none; transition: all .2s;
+}
+.nav-link:hover { color: var(–n100); background: rgba(255,255,255,.06); }
+.nav-right { display: flex; align-items: center; gap: 10px; }
+
+/* Language switcher */
+.lang-sw {
+display: flex; align-items: center; gap: 2px;
+background: rgba(255,255,255,.04); border: 1px solid var(–bd);
+border-radius: 50px; padding: 3px;
+}
+.lang-btn {
+padding: 5px 11px; border-radius: 50px; font-size: 11px; font-weight: 700;
+letter-spacing: 1px; text-transform: uppercase; border: none;
+background: transparent; color: var(–n300); transition: all .2s;
+}
+.lang-btn.active {
+background: linear-gradient(135deg, var(–g200), var(–g300));
+color: #0A0800;
+}
+.nav-cta {
+padding: 10px 22px; border-radius: 50px;
+background: linear-gradient(135deg, var(–g200), var(–g300), #9A7018);
+color: #0A0800; border: none; font-size: 13px; font-weight: 700;
+letter-spacing: .3px; transition: all .3s cubic-bezier(.34,1.56,.64,1);
+box-shadow: 0 4px 18px rgba(200,168,75,.22);
+}
+.nav-cta:hover { transform: translateY(-2px); box-shadow: var(–sh-gold-lg); }
+
+/* Mobile burger */
+.nav-burger {
+display: none; flex-direction: column; gap: 5px; padding: 8px;
+background: none; border: none; cursor: pointer;
+}
+.nav-burger span {
+display: block; width: 22px; height: 2px;
+background: var(–n100); border-radius: 2px; transition: all .3s;
+}
+
+/* ═══════════════════════════════════════════════
+HERO
+═══════════════════════════════════════════════ */
+.hero {
+min-height: 100vh; display: flex; flex-direction: column;
+align-items: center; justify-content: center;
+text-align: center; padding: 130px 24px 80px;
+position: relative;
+}
+.hero-pill {
+display: inline-flex; align-items: center; gap: 10px;
+background: rgba(200,168,75,.07); border: 1px solid var(–bd2);
+border-radius: 50px; padding: 8px 22px;
+font-size: 11px; font-weight: 600; letter-spacing: 3px; color: var(–g300);
+text-transform: uppercase; margin-bottom: 32px;
+animation: fadeDown .8s cubic-bezier(.16,1,.3,1) both;
+}
+.hero-pill-dot {
+width: 6px; height: 6px; border-radius: 50%; background: var(–g300);
+animation: pulse 2s ease-in-out infinite;
+}
+.hero-h1 {
+font-family: var(–font-display);
+font-size: clamp(44px, 8vw, 100px);
+font-weight: 900; letter-spacing: -2px; line-height: .95;
+margin-bottom: 18px;
+animation: fadeDown .9s cubic-bezier(.16,1,.3,1) both .1s;
+}
+.hero-h1-main {
+display: block;
+background: linear-gradient(135deg, var(–g50) 0%, var(–g200) 30%, var(–g300) 65%, #6A4C10 100%);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hero-h1-sub {
+display: block; font-size: clamp(11px, 1.3vw, 14px); letter-spacing: 8px;
+color: var(–n300); margin-top: 16px; font-weight: 400; font-family: var(–font-body);
+}
+.hero-value-prop {
+font-family: var(–font-display); font-size: clamp(14px,1.8vw,20px);
+font-weight: 600; color: var(–g300); letter-spacing: .5px;
+margin-bottom: 16px;
+animation: fadeDown .95s cubic-bezier(.16,1,.3,1) both .15s;
+}
+.hero-desc {
+max-width: 600px; font-size: clamp(14px,1.7vw,17px); line-height: 1.85;
+color: var(–n200); margin-bottom: 44px;
+animation: fadeDown 1s cubic-bezier(.16,1,.3,1) both .2s;
+}
+.hero-actions {
+display: flex; gap: 14px; flex-wrap: wrap; justify-content: center;
+animation: fadeDown 1.1s cubic-bezier(.16,1,.3,1) both .3s;
+}
+.btn-primary {
+padding: 17px 46px; border-radius: 50px;
+background: linear-gradient(135deg, var(–g200), var(–g300), #9A7010);
+color: #0A0800; border: none; font-size: 15px; font-weight: 700;
+letter-spacing: .3px; font-family: var(–font-body);
+transition: all .35s cubic-bezier(.34,1.56,.64,1);
+box-shadow: 0 8px 32px rgba(200,168,75,.28);
+}
+.btn-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 18px 48px rgba(200,168,75,.46); }
+.btn-secondary {
+padding: 16px 36px; border-radius: 50px; background: transparent;
+color: var(–g300); border: 1px solid var(–bd2); font-size: 14px;
+font-weight: 600; transition: all .25s; font-family: var(–font-body);
+}
+.btn-secondary:hover { border-color: var(–g300); background: rgba(200,168,75,.08); transform: translateY(-2px); }
+
+/* Trust badges */
+.hero-trust {
+display: flex; gap: 9px; flex-wrap: wrap; justify-content: center;
+margin-top: 28px; animation: fadeDown 1.2s cubic-bezier(.16,1,.3,1) both .4s;
+}
+.trust-badge {
+display: flex; align-items: center; gap: 7px; padding: 7px 15px;
+background: rgba(255,255,255,.04); border: 1px solid var(–bd);
+border-radius: 50px; font-size: 12px; color: var(–n200);
+transition: border-color .2s;
+}
+.trust-badge:hover { border-color: var(–bd2); }
+
+/* Value stats */
+.hero-stats {
+display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
+max-width: 680px; width: 100%; margin-top: 52px;
+animation: fadeUp .9s cubic-bezier(.16,1,.3,1) both .5s;
+}
+.hero-stat {
+background: var(–n700); border: 1px solid var(–bd);
+border-radius: var(–r-lg); padding: 22px 14px; text-align: center;
+transition: all .25s; cursor: default;
+}
+.hero-stat:hover { border-color: var(–bd2); transform: translateY(-3px); box-shadow: var(–sh-md); }
+.hero-stat-num {
+font-family: var(–font-display); font-size: 30px; font-weight: 700; line-height: 1;
+background: linear-gradient(135deg, var(–g200), var(–g300));
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+display: block; margin-bottom: 8px;
+}
+.hero-stat-lbl { font-size: 11px; color: var(–n300); line-height: 1.4; display: block; }
+.hero-stat-tag { font-size: 9px; color: rgba(200,168,75,.4); display: block; margin-top: 3px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* ═══════════════════════════════════════════════
+DEMO SECTION
+═══════════════════════════════════════════════ */
+#demo { background: linear-gradient(180deg, transparent, rgba(13,20,30,.45), transparent); }
+.demo-browser {
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+overflow: hidden; max-width: 860px; margin: 0 auto;
+box-shadow: var(–sh-lg), 0 0 0 1px rgba(255,255,255,.02);
+animation: fadeUp .8s cubic-bezier(.16,1,.3,1) both;
+}
+.browser-bar {
+background: var(–n600); padding: 13px 20px; display: flex; align-items: center;
+gap: 9px; border-bottom: 1px solid var(–bd);
+}
+.browser-dot { width: 12px; height: 12px; border-radius: 50%; }
+.browser-dot:nth-child(1){background:#FF5F57} .browser-dot:nth-child(2){background:#FEBC2E} .browser-dot:nth-child(3){background:#28C840}
+.browser-url {
+flex: 1; background: rgba(255,255,255,.06); border-radius: 7px;
+padding: 6px 16px; font-size: 12px; color: var(–n300); text-align: center;
+font-family: var(–font-body); letter-spacing: .3px;
+}
+.browser-body { padding: 28px; }
+.demo-upload-area {
+border: 2px dashed var(–bd2); border-radius: var(–r-lg); padding: 36px 24px;
+text-align: center; cursor: pointer; transition: all .25s;
+position: relative; overflow: hidden;
+background: linear-gradient(135deg, rgba(200,168,75,.03), transparent);
+}
+.demo-upload-area:hover { border-color: var(–g300); background: rgba(200,168,75,.06); }
+.demo-upload-area.drag-over { border-color: var(–g300); border-style: solid; background: rgba(200,168,75,.08); }
+.demo-upload-area input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.demo-upload-icon { font-size: 36px; display: block; margin-bottom: 12px; }
+.demo-upload-text { font-size: 15px; color: var(–n200); line-height: 1.6; }
+.demo-upload-text strong { color: var(–g300); }
+.demo-upload-hint { font-size: 12px; color: var(–n300); margin-top: 6px; }
+.demo-result {
+display: none; margin-top: 20px;
+background: rgba(255,255,255,.03); border: 1px solid var(–bd);
+border-radius: var(–r-lg); overflow: hidden;
+}
+.demo-result.visible { display: block; animation: fadeUp .4s ease; }
+.demo-file-row {
+display: flex; align-items: center; gap: 13px; padding: 14px 18px;
+border-bottom: 1px solid var(–bd);
+}
+.demo-file-icon {
+width: 40px; height: 40px; flex-shrink: 0; border-radius: 11px;
+background: linear-gradient(135deg, #1C1810, #2A2218); border: 1px solid var(–g500);
+display: flex; align-items: center; justify-content: center; font-size: 18px;
+}
+.demo-file-name { font-size: 14px; font-weight: 600; color: var(–n100); }
+.demo-file-meta { font-size: 11px; color: var(–n300); margin-top: 3px; }
+.demo-ai-badge {
+margin-right: auto; padding: 4px 12px; border-radius: 50px;
+background: rgba(34,104,168,.2); border: 1px solid rgba(34,104,168,.4);
+font-size: 10px; color: rgba(140,210,255,.8); font-weight: 600; letter-spacing: 1px; flex-shrink: 0;
+}
+.demo-ai-response { padding: 18px 20px; }
+.demo-ai-header {
+display: flex; align-items: center; gap: 9px; margin-bottom: 12px;
+font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(140,210,255,.6);
+}
+.demo-ai-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(100,200,255,.5); animation: pulseBlue 2s infinite; }
+.demo-ai-text { font-size: 13px; color: var(–n200); line-height: 1.8; }
+.demo-ai-text .highlight { color: var(–g200); font-weight: 600; }
+.demo-cta { padding: 20px 18px; border-top: 1px solid var(–bd); text-align: center; }
+.demo-cta-note { font-size: 12px; color: var(–n300); margin-top: 10px; }
+
+/* ═══════════════════════════════════════════════
+FEATURES
+═══════════════════════════════════════════════ */
+#features { background: linear-gradient(180deg, transparent, rgba(18,15,12,.55), transparent); }
+.bento-grid {
+display: grid; grid-template-columns: repeat(12,1fr); gap: 16px;
+}
+.bento-card {
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+padding: 30px 26px; transition: all .35s cubic-bezier(.34,1.56,.64,1);
+position: relative; overflow: hidden;
+}
+.bento-card::after {
+content: ‘’; position: absolute; inset: 0;
+background: radial-gradient(circle at var(–mx,50%) var(–my,50%), rgba(200,168,75,.06), transparent 60%);
+opacity: 0; transition: opacity .3s; pointer-events: none;
+}
+.bento-card:hover { border-color: var(–bd2); transform: translateY(-5px); box-shadow: var(–sh-lg); }
+.bento-card:hover::after { opacity: 1; }
+.bc-a { grid-column: span 4; } .bc-b { grid-column: span 4; } .bc-c { grid-column: span 4; }
+.bc-d { grid-column: span 6; } .bc-e { grid-column: span 6; }
+.bc-f { grid-column: span 12; display: flex; align-items: center; gap: 36px; }
+.bc-ai {
+background: linear-gradient(145deg, #0A1828, #131210); border-color: rgba(34,104,168,.3);
+}
+.bc-ai:hover { border-color: rgba(34,104,168,.6); }
+.card-icon { font-size: 36px; margin-bottom: 18px; display: block; filter: drop-shadow(0 0 12px rgba(200,168,75,.15)); }
+.bc-f .card-icon { margin-bottom: 0; flex-shrink: 0; font-size: 42px; }
+.card-title { font-family: var(–font-display); font-size: 14px; letter-spacing: 1.5px; color: var(–g200); margin-bottom: 11px; }
+.bc-ai .card-title {
+background: linear-gradient(135deg, #90D0FF, #60B0E8);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.card-desc { font-size: 13px; line-height: 1.82; color: var(–n200); }
+.card-tag {
+display: inline-block; margin-top: 14px; padding: 4px 12px;
+background: rgba(200,168,75,.08); border: 1px solid var(–bd); border-radius: 50px;
+font-size: 10px; letter-spacing: 1.5px; color: var(–g300); text-transform: uppercase;
+}
+.bc-ai .card-tag { background: rgba(34,104,168,.15); border-color: rgba(34,104,168,.3); color: rgba(130,200,255,.75); }
+.card-value-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 18px; }
+.card-value-item {
+background: rgba(255,255,255,.04); border: 1px solid rgba(34,104,168,.15);
+border-radius: 11px; padding: 12px 14px; font-size: 12px; color: var(–n200);
+display: flex; gap: 10px; align-items: flex-start;
+}
+.card-value-item-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.card-value-item strong { color: var(–n100); display: block; margin-bottom: 2px; }
+
+/* ═══════════════════════════════════════════════
+NGO SECTION
+═══════════════════════════════════════════════ */
+#ngo { background: linear-gradient(180deg, transparent, rgba(18,14,10,.5), transparent); }
+.ngo-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+.ngo-text-side {}
+.ngo-text-side h2 {
+font-family: var(–font-display); font-size: clamp(22px,2.8vw,34px);
+font-weight: 700; color: var(–n100); margin-bottom: 18px; line-height: 1.25;
+}
+.ngo-text-side p { font-size: 15px; line-height: 1.85; color: var(–n200); margin-bottom: 26px; }
+.ngo-kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 13px; }
+.ngo-kpi {
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-lg);
+padding: 18px; text-align: center; transition: all .25s;
+}
+.ngo-kpi:hover { border-color: var(–bd2); }
+.ngo-kpi-num { font-family: var(–font-display); font-size: 30px; color: var(–g300); display: block; }
+.ngo-kpi-lbl { font-size: 11px; color: var(–n300); margin-top: 5px; display: block; line-height: 1.4; }
+.ngo-orgs { display: flex; flex-direction: column; gap: 13px; }
+.ngo-org {
+display: flex; align-items: center; gap: 18px; padding: 18px 22px;
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-lg);
+transition: all .25s; cursor: default;
+}
+.ngo-org:hover { border-color: var(–bd2); transform: translateX(-4px); box-shadow: var(–sh-md); }
+.ngo-org-icon { font-size: 28px; flex-shrink: 0; }
+.ngo-org-name { font-size: 14px; font-weight: 700; color: var(–n100); font-family: var(–font-display); letter-spacing: .5px; margin-bottom: 4px; }
+.ngo-org-desc { font-size: 12px; color: var(–n300); line-height: 1.5; }
+
+/* ═══════════════════════════════════════════════
+PRICING
+═══════════════════════════════════════════════ */
+#pricing { background: linear-gradient(180deg, transparent, rgba(18,15,12,.4), transparent); }
+.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 18px; max-width: 980px; margin: 0 auto; }
+.price-card {
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+padding: 32px 22px; text-align: center; position: relative; transition: all .3s;
+}
+.price-card:hover { transform: translateY(-5px); border-color: var(–bd2); box-shadow: var(–sh-lg); }
+.price-card.featured {
+border-color: var(–g500);
+background: linear-gradient(165deg, var(–n600), var(–n700));
+box-shadow: 0 0 60px rgba(200,168,75,.09);
+}
+.featured-badge {
+position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+background: linear-gradient(135deg, var(–g200), var(–g300)); color: #0A0800;
+font-size: 10px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+padding: 5px 18px; border-radius: 50px; white-space: nowrap;
+}
+.price-tier { font-family: var(–font-display); font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(–n200); margin-bottom: 18px; }
+.price-amount { font-family: var(–font-display); font-size: 46px; font-weight: 700; color: var(–g200); line-height: 1; }
+.price-currency { font-size: 18px; vertical-align: top; margin-top: 9px; display: inline-block; }
+.price-period { font-size: 12px; color: var(–n300); margin-top: 7px; display: block; letter-spacing: 1.5px; }
+.price-value-box {
+background: rgba(200,168,75,.07); border: 1px solid var(–bd); border-radius: 11px;
+padding: 10px 14px; margin: 16px 0; font-size: 12px; color: var(–g300); line-height: 1.5;
+}
+.price-card.featured .price-value-box { background: rgba(200,168,75,.12); border-color: var(–bd2); }
+.price-divider { height: 1px; background: var(–bd); margin: 16px 0; }
+.price-features { list-style: none; font-size: 12px; color: var(–n200); line-height: 2.2; text-align: right; }
+[dir=ltr] .price-features { text-align: left; }
+.price-features li { display: flex; align-items: center; gap: 9px; }
+.price-features li::before { content: ‘✦’; color: var(–g300); font-size: 9px; flex-shrink: 0; }
+.price-btn {
+width: 100%; margin-top: 20px; padding: 12px; border-radius: 50px;
+font-size: 12px; font-weight: 700; letter-spacing: 1px; border: 1px solid var(–bd2);
+background: transparent; color: var(–g300); transition: all .2s; font-family: var(–font-body);
+}
+.price-card.featured .price-btn {
+background: linear-gradient(135deg, var(–g200), var(–g300)); color: #0A0800;
+border: none; box-shadow: var(–sh-gold);
+}
+.price-btn:hover { transform: translateY(-1px); }
+.price-card.featured .price-btn:hover { box-shadow: var(–sh-gold-lg); }
+
+/* ═══════════════════════════════════════════════
+TESTIMONIALS
+═══════════════════════════════════════════════ */
+#testimonials { background: linear-gradient(180deg, transparent, rgba(14,12,10,.5), transparent); }
+.testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(290px,1fr)); gap: 22px; max-width: 980px; margin: 0 auto; }
+.testimonial-card {
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+padding: 30px 26px; transition: all .3s; position: relative; overflow: hidden;
+}
+.testimonial-card::before {
+content: ‘’; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+background: linear-gradient(90deg, transparent, var(–g500), transparent);
+opacity: 0; transition: opacity .3s;
+}
+.testimonial-card:hover { border-color: var(–bd2); transform: translateY(-4px); box-shadow: var(–sh-lg); }
+.testimonial-card:hover::before { opacity: 1; }
+.testimonial-stars { color: var(–g300); font-size: 14px; margin-bottom: 14px; letter-spacing: 3px; }
+.testimonial-quote-mark { font-size: 28px; color: var(–g500); font-family: var(–font-display); margin-bottom: 6px; }
+.testimonial-text { font-size: 14px; line-height: 1.82; color: var(–n200); margin-bottom: 22px; font-style: italic; }
+.testimonial-author { display: flex; align-items: center; gap: 13px; padding-top: 18px; border-top: 1px solid var(–bd); }
+.testimonial-avatar {
+width: 44px; height: 44px; border-radius: 50%; flex-shrink: 0;
+background: linear-gradient(135deg, var(–n600), var(–n500)); border: 1px solid var(–bd2);
+display: flex; align-items: center; justify-content: center; font-size: 20px;
+}
+.testimonial-name { font-size: 14px; font-weight: 700; color: var(–n100); margin-bottom: 3px; }
+.testimonial-role { font-size: 11px; color: var(–n300); }
+
+/* ═══════════════════════════════════════════════
+CONTACT
+═══════════════════════════════════════════════ */
+#contact { background: linear-gradient(180deg, transparent, rgba(18,15,12,.4), transparent); }
+.contact-wrapper {
+max-width: 680px; margin: 0 auto;
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+padding: 44px 40px; box-shadow: var(–sh-lg);
+}
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.form-field { display: flex; flex-direction: column; gap: 8px; }
+.form-field.full { grid-column: 1/-1; }
+.form-label { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(–n300); }
+.form-input, .form-select, .form-textarea {
+width: 100%; padding: 13px 16px;
+background: rgba(255,255,255,.04); border: 1px solid var(–bd); border-radius: var(–r);
+color: var(–n100); font-family: var(–font-body); font-size: 14px; outline: none;
+transition: border-color .2s, box-shadow .2s;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+border-color: var(–g500); box-shadow: 0 0 0 3px rgba(200,168,75,.08);
+}
+.form-textarea { resize: vertical; min-height: 110px; }
+.form-select { cursor: pointer; }
+.form-select option { background: var(–n700); color: var(–n100); }
+.form-input::placeholder, .form-textarea::placeholder { color: var(–n300); }
+.contact-btn {
+width: 100%; margin-top: 20px; padding: 15px;
+background: linear-gradient(135deg, var(–g200), var(–g300));
+color: #0A0800; border: none; border-radius: 50px;
+font-size: 14px; font-weight: 700; letter-spacing: .5px;
+transition: all .25s; box-shadow: var(–sh-gold); font-family: var(–font-body);
+}
+.contact-btn:hover { transform: translateY(-2px); box-shadow: var(–sh-gold-lg); }
+.contact-success {
+display: none; margin-top: 16px; padding: 14px; text-align: center;
+background: rgba(26,106,58,.1); border: 1px solid rgba(26,106,58,.25);
+border-radius: var(–r); color: #60C880; font-size: 14px; line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════
+FOOTER
+═══════════════════════════════════════════════ */
+footer {
+border-top: 1px solid var(–bd); padding: 56px 0 32px;
+}
+.footer-grid {
+display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 32px; margin-bottom: 40px;
+}
+.footer-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+.footer-tagline { font-size: 13px; color: var(–n300); line-height: 1.7; max-width: 260px; }
+.footer-col h4 {
+font-family: var(–font-display); font-size: 10px; letter-spacing: 3px;
+color: var(–g300); text-transform: uppercase; margin-bottom: 16px;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col li, .footer-col a {
+font-size: 13px; color: var(–n300); cursor: pointer; transition: color .2s; text-decoration: none;
+}
+.footer-col li:hover, .footer-col a:hover { color: var(–n100); }
+.footer-bottom {
+display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+padding-top: 28px; border-top: 1px solid var(–bd);
+}
+.footer-copy { font-size: 11px; color: var(–n300); }
+.footer-copy strong { color: var(–g500); }
+.footer-badges { display: flex; gap: 8px; flex-wrap: wrap; }
+.footer-badge {
+display: flex; align-items: center; gap: 6px;
+font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase;
+color: var(–n300); border: 1px solid var(–bd); border-radius: 50px; padding: 5px 13px;
+}
+
+/* ═══════════════════════════════════════════════
+LEGAL OVERLAY
+═══════════════════════════════════════════════ */
+#legal-overlay {
+position: fixed; inset: 0; background: var(–n900);
+z-index: 500; overflow-y: auto; padding: 80px 24px 60px;
+}
+.legal-container {
+max-width: 740px; margin: 0 auto;
+background: var(–n700); border: 1px solid var(–bd); border-radius: var(–r-xl);
+padding: 48px 44px;
+}
+.legal-back { margin-bottom: 28px; }
+.legal-container h1 { font-family: var(–font-display); font-size: 30px; color: var(–g300); margin-bottom: 6px; }
+.legal-subtitle { font-size: 12px; color: var(–n300); display: block; margin-bottom: 32px; letter-spacing: .5px; }
+.legal-container h2 {
+font-family: var(–font-display); font-size: 16px; color: var(–g200);
+margin: 30px 0 12px; padding-bottom: 9px; border-bottom: 1px solid var(–bd);
+}
+.legal-container p, .legal-container li { font-size: 14px; color: var(–n200); line-height: 1.85; }
+.legal-container ul { padding-right: 20px; margin-top: 6px; }
+[dir=ltr] .legal-container ul { padding-right: 0; padding-left: 20px; }
+.legal-container a { color: var(–g300); }
+.legal-container a:hover { color: var(–g200); }
+
+/* ═══════════════════════════════════════════════
+APP — VAULT
+═══════════════════════════════════════════════ */
+#app {
+min-height: 100vh; display: flex; flex-direction: column;
+align-items: center; padding: 52px 20px 68px;
+}
+
+/* Storage notice */
+.storage-notice {
+width: 100%; max-width: 720px; margin-bottom: 18px;
+background: rgba(120,90,20,.1); border: 1px solid rgba(200,168,75,.2);
+border-radius: var(–r); padding: 12px 18px;
+display: flex; align-items: flex-start; gap: 12px; font-size: 12px; color: var(–n200);
+}
+.storage-notice-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.storage-notice a { color: var(–g300); cursor: pointer; text-decoration: underline; }
+
+/* App brand */
+.app-brand { text-align: center; margin-bottom: 32px; animation: fadeDown .7s cubic-bezier(.16,1,.3,1) both; }
+.app-logo-icon {
+width: 70px; height: 70px; margin: 0 auto 16px;
+background: linear-gradient(135deg, #1C1810, #2A2218); border: 1px solid var(–g500);
+border-radius: 20px; display: flex; align-items: center; justify-content: center;
+box-shadow: 0 0 36px rgba(200,168,75,.13), inset 0 1px 0 rgba(200,168,75,.12);
+}
+.app-logo-icon svg { width: 34px; height: 34px; }
+.app-name {
+font-family: var(–font-display); font-size: 28px; font-weight: 700; letter-spacing: 3px;
+background: linear-gradient(135deg, var(–g50), var(–g300), #8A6010);
+-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.app-tagline { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(–n300); margin-top: 5px; }
+
+/* Panels */
+.app-panel {
+width: 100%; max-width: 500px; background: var(–n700); border: 1px solid var(–bd);
+border-radius: var(–r-xl); padding: 38px 32px;
+box-shadow: var(–sh-lg), 0 0 0 1px rgba(255,255,255,.02);
+animation: fadeUp .7s cubic-bezier(.16,1,.3,1) both .1s;
+}
+.app-panel-vault { max-width: 720px; }
+.panel-title {
+font-family: var(–font-display); font-size: 13px; letter-spacing: 3px; text-transform: uppercase;
+color: var(–g300); text-align: center; margin-bottom: 28px;
+}
+
+/* Form fields in app */
+.app-field { margin-bottom: 22px; }
+.app-field label {
+display: block; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+color: var(–n300); margin-bottom: 9px;
+}
+.app-field-wrap { position: relative; }
+.app-field-wrap input[type=password] {
+width: 100%; padding: 15px 48px 15px 20px;
+background: rgba(255,255,255,.04); border: 1px solid var(–bd); border-radius: var(–r);
+color: var(–n100); font-family: var(–font-body); font-size: 16px; outline: none;
+transition: border-color .2s, box-shadow .2s;
+direction: ltr; text-align: center; letter-spacing: 5px;
+}
+.app-field-wrap input[type=password]:focus { border-color: var(–g500); box-shadow: 0 0 0 3px rgba(200,168,75,.09); }
+.app-field-icon { position: absolute; top: 50%; right: 15px; transform: translateY(-50%); color: var(–n300); font-size: 18px; pointer-events: none; }
+
+/* Password strength */
+.pwd-strength-bars { display: flex; gap: 5px; margin-top: 10px; }
+.pwd-bar { flex: 1; height: 3px; border-radius: 2px; background: var(–n500); transition: background .3s; }
+.pwd-strength-label { font-size: 11px; color: var(–n300); margin-top: 7px; text-align: center; min-height: 16px; transition: color .3s; }
+
+.app-divider { height: 1px; background: var(–bd); margin: 24px 0; }
+
+/* App buttons */
+.app-btn {
+width: 100%; padding: 15px; border: none; border-radius: 50px;
+font-size: 14px; font-weight: 700; letter-spacing: .5px;
+transition: all .25s; font-family: var(–font-body);
+}
+.app-btn-gold { background: linear-gradient(135deg, var(–g200), var(–g300), #9A7010); color: #0A0800; box-shadow: var(–sh-gold); }
+.app-btn-gold:hover { transform: translateY(-2px); box-shadow: var(–sh-gold-lg); }
+.app-btn-ghost { background: transparent; border: 1px solid var(–bd); color: var(–n200); }
+.app-btn-ghost:hover { border-color: var(–bd2); color: var(–n100); }
+.app-btn-danger { background: var(–red); color: #fff; }
+.app-btn-danger:hover { background: var(–red-h); transform: translateY(-1px); }
+.app-btn-sm { width: auto; padding: 9px 20px; font-size: 11px; }
+
+/* Vault header */
+.vault-header {
+display: flex; align-items: center; justify-content: space-between;
+margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(–bd);
+}
+.vault-header-title { font-family: var(–font-display); font-size: 14px; letter-spacing: 2px; color: var(–g300); }
+.vault-header-actions { display: flex; gap: 8px; }
+
+/* Tabs */
+.vault-tabs {
+display: flex; gap: 3px; background: rgba(255,255,255,.03);
+border: 1px solid var(–bd); border-radius: 50px; padding: 4px; margin-bottom: 26px;
+}
+.vault-tab {
+flex: 1; padding: 10px; border-radius: 50px; font-size: 12px; font-weight: 600;
+letter-spacing: .3px; border: none; background: transparent; color: var(–n300);
+text-align: center; transition: all .2s; font-family: var(–font-body);
+}
+.vault-tab.active { background: linear-gradient(135deg, var(–g200), var(–g300)); color: #0A0800; }
+
+/* Stats row */
+.stats-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 11px; margin-bottom: 22px; }
+.stat-box {
+background: rgba(255,255,255,.025); border: 1px solid var(–bd); border-radius: var(–r);
+padding: 14px 8px; text-align: center;
+}
+.stat-value { font-family: var(–font-display); font-size: 22px; color: var(–g300); display: block; }
+.stat-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(–n300); margin-top: 4px; display: block; }
+
+/* Upload zone */
+.upload-zone {
+border: 2px dashed var(–bd); border-radius: var(–r-lg); padding: 28px 22px;
+text-align: center; cursor: pointer; transition: all .25s; margin-bottom: 20px;
+position: relative; overflow: hidden;
+}
+.upload-zone:hover, .upload-zone.dragging { border-color: var(–g500); background: rgba(200,168,75,.04); border-style: solid; }
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+.upload-icon { font-size: 28px; display: block; margin-bottom: 10px; }
+.upload-text { font-size: 13px; color: var(–n300); line-height: 1.7; }
+.upload-text strong { color: var(–g300); }
+
+/* File list */
+.file-list { display: flex; flex-direction: column; gap: 9px; max-height: 340px; overflow-y: auto; }
+.file-list::-webkit-scrollbar { width: 3px; }
+.file-list::-webkit-scrollbar-thumb { background: var(–g500); border-radius: 4px; }
+.file-row {
+display: flex; align-items: center; gap: 13px;
+background: rgba(255,255,255,.025); border: 1px solid var(–bd); border-radius: var(–r-lg);
+padding: 13px 15px; transition: border-color .2s, transform .15s;
+animation: fadeUp .35s cubic-bezier(.16,1,.3,1) both;
+}
+.file-row:hover { border-color: var(–bd2); transform: translateX(-3px); }
+.file-icon {
+width: 38px; height: 38px; flex-shrink: 0; border-radius: 10px;
+background: linear-gradient(135deg, #1C1810, #2A2218); border: 1px solid var(–g500);
+display: flex; align-items: center; justify-content: center; font-size: 17px;
+}
+.file-info { flex: 1; min-width: 0; }
+.file-name { font-size: 13px; font-weight: 600; color: var(–n100); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-meta { font-size: 10px; color: var(–n300); margin-top: 3px; }
+.file-action-btn {
+width: 30px; height: 30px; flex-shrink: 0; border-radius: 9px;
+display: flex; align-items: center; justify-content: center;
+font-size: 14px; border: none; transition: all .18s;
+}
+.file-ai-btn { background: rgba(34,104,168,.14); border: 1px solid rgba(34,104,168,.28); color: #70B8F0; }
+.file-ai-btn:hover { background: rgba(34,104,168,.35); color: #A0D0FF; transform: scale(1.1); }
+.file-del-btn { background: rgba(139,30,47,.1); border: 1px solid rgba(139,30,47,.22); color: #C05060; }
+.file-del-btn:hover { background: var(–red); border-color: var(–red); color: #fff; transform: scale(1.1); }
+.file-list-empty { text-align: center; padding: 44px 20px; color: var(–n300); }
+.file-list-empty .empty-icon { font-size: 42px; display: block; margin-bottom: 12px; opacity: .35; }
+.file-list-empty p { font-size: 13px; line-height: 1.7; }
+
+/* AI Panel */
+.ai-panel { display: flex; flex-direction: column; }
+.ai-key-section {
+background: rgba(10,22,36,.65); border: 1px solid rgba(34,104,168,.18);
+border-radius: var(–r); padding: 16px 18px; margin-bottom: 15px;
+}
+.ai-key-header {
+font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+color: rgba(130,200,255,.55); margin-bottom: 11px;
+display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.ai-key-header a { color: rgba(100,180,255,.72); }
+.ai-key-row { display: flex; gap: 9px; }
+.ai-key-input {
+flex: 1; padding: 11px 14px; background: rgba(255,255,255,.04);
+border: 1px solid rgba(34,104,168,.22); border-radius: 11px; color: var(–n100);
+font-family: var(–font-body); font-size: 12px; outline: none;
+direction: ltr; transition: border-color .2s;
+}
+.ai-key-input:focus { border-color: rgba(34,104,168,.55); }
+.ai-key-input::placeholder { color: var(–n300); font-size: 11px; }
+.ai-key-save {
+padding: 11px 18px; background: linear-gradient(135deg, var(–g200), var(–g300));
+color: #0A0800; border: none; border-radius: 11px;
+font-size: 12px; font-weight: 700; font-family: var(–font-body); white-space: nowrap;
+transition: all .2s;
+}
+.ai-key-save:hover { transform: translateY(-1px); box-shadow: var(–sh-gold); }
+.ai-key-status { font-size: 11px; margin-top: 9px; padding: 8px 13px; border-radius: 9px; text-align: center; }
+.ai-key-status.active { background: rgba(26,106,58,.09); border: 1px solid rgba(26,106,58,.2); color: #60C880; }
+.ai-key-status.inactive { background: rgba(200,168,75,.05); border: 1px solid var(–bd); color: var(–n300); }
+
+.quick-prompts { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 14px; }
+.quick-prompt {
+padding: 6px 14px; background: rgba(34,104,168,.08); border: 1px solid rgba(34,104,168,.18);
+border-radius: 50px; font-size: 11px; color: rgba(130,190,255,.65); font-family: var(–font-body);
+transition: all .2s;
+}
+.quick-prompt:hover { background: rgba(34,104,168,.24); color: #A0D0FF; border-color: rgba(34,104,168,.4); }
+
+.ai-messages {
+height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 11px;
+padding: 3px 2px 10px; margin-bottom: 13px;
+}
+.ai-messages::-webkit-scrollbar { width: 3px; }
+.ai-messages::-webkit-scrollbar-thumb { background: rgba(34,104,168,.3); border-radius: 4px; }
+.ai-message { display: flex; gap: 10px; align-items: flex-start; }
+.ai-message.user-msg { flex-direction: row-reverse; }
+.ai-avatar {
+width: 30px; height: 30px; border-radius: 9px; flex-shrink: 0;
+display: flex; align-items: center; justify-content: center; font-size: 13px;
+}
+.ai-avatar.bot { background: linear-gradient(135deg, #0D1A26, #1A2A3A); border: 1px solid rgba(34,104,168,.32); }
+.ai-avatar.user { background: linear-gradient(135deg, #1C1810, #2A2218); border: 1px solid var(–g500); }
+.ai-bubble { max-width: 84%; padding: 10px 15px; border-radius: 12px; font-size: 12px; line-height: 1.75; }
+.ai-bubble.bot { background: rgba(255,255,255,.04); border: 1px solid rgba(34,104,168,.1); color: var(–n200); }
+.ai-bubble.user { background: rgba(200,168,75,.09); border: 1px solid rgba(200,168,75,.18); color: var(–n100); }
+.ai-typing { display: flex; gap: 5px; padding: 5px 7px; align-items: center; }
+.ai-typing span { width: 5px; height: 5px; border-radius: 50%; background: rgba(100,160,220,.5); animation: typingDot 1.2s infinite; }
+.ai-typing span:nth-child(2) { animation-delay: .2s; }
+.ai-typing span:nth-child(3) { animation-delay: .4s; }
+.ai-input-row { display: flex; gap: 9px; }
+.ai-text-input {
+flex: 1; padding: 12px 16px; background: rgba(255,255,255,.04);
+border: 1px solid rgba(34,104,168,.16); border-radius: 50px;
+color: var(–n100); font-size: 13px; outline: none;
+direction: rtl; transition: border-color .2s; font-family: var(–font-ar);
+}
+.ai-text-input:focus { border-color: rgba(34,104,168,.42); }
+.ai-text-input::placeholder { color: var(–n300); }
+.ai-send-btn {
+padding: 12px 22px; background: linear-gradient(135deg, #2A7AB0, var(–b400));
+color: #A0D8FF; border: none; border-radius: 50px; font-size: 12px; font-weight: 700;
+font-family: var(–font-body); white-space: nowrap; transition: all .2s;
+}
+.ai-send-btn:hover { transform: translateY(-1px); box-shadow: 0 5px 18px rgba(34,104,168,.38); }
+.ai-send-btn:disabled { opacity: .45; transform: none; }
+
+/* App footer */
+.app-footer { margin-top: 26px; font-size: 11px; letter-spacing: 1.5px; color: var(–n300); text-align: center; line-height: 1.9; }
+.app-footer span { color: var(–g500); }
+.app-footer a { color: var(–n300); transition: color .2s; }
+.app-footer a:hover { color: var(–g300); }
+
+/* Toast */
+.toast-container {
+position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
+background: var(–n700); border: 1px solid var(–bd2); border-radius: 50px;
+padding: 11px 24px; font-size: 13px; color: var(–n100); opacity: 0;
+transition: all .35s cubic-bezier(.34,1.56,.64,1); z-index: 9999;
+white-space: nowrap; box-shadow: var(–sh-lg); pointer-events: none;
+}
+.toast-container.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ═══════════════════════════════════════════════
+ANIMATIONS
+═══════════════════════════════════════════════ */
+@keyframes fadeDown { from { opacity: 0; transform: translateY(-22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes pulse { 0%,100% { box-shadow: 0 0 4px rgba(200,168,75,.4); } 50% { box-shadow: 0 0 14px rgba(200,168,75,.9); } }
+@keyframes pulseBlue { 0%,100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes typingDot { 0%,60%,100% { transform: translateY(0); } 30% { transform: translateY(-8px); } }
+
+/* ═══════════════════════════════════════════════
+RESPONSIVE
+═══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+.bento-grid { grid-template-columns: 1fr 1fr; }
+.bc-a,.bc-b,.bc-c,.bc-d,.bc-e { grid-column: span 1; }
+.bc-f { grid-column: span 2; }
+.card-value-grid { grid-template-columns: 1fr; }
+.ngo-layout { grid-template-columns: 1fr; }
+.footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+#nav { padding: 0 20px; }
+.nav-links { display: none; }
+.nav-burger { display: flex; }
+section { padding: 68px 0; }
+.container { padding: 0 18px; }
+footer { padding: 40px 0 24px; }
+.footer-grid { grid-template-columns: 1fr; }
+.contact-grid { grid-template-columns: 1fr; }
+.bento-grid { grid-template-columns: 1fr; }
+.bc-a,.bc-b,.bc-c,.bc-d,.bc-e,.bc-f { grid-column: span 1; }
+.bc-f { flex-direction: column; gap: 18px; }
+.hero-stats { grid-template-columns: 1fr 1fr; }
+.ngo-kpis { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+.app-panel { padding: 28px 18px; }
+.stats-row { grid-template-columns: 1fr 1fr; }
+.hero-stats { grid-template-columns: 1fr; }
+.legal-container { padding: 28px 20px; }
+.contact-wrapper { padding: 30px 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+*, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+
 </head>
-<body lang="en">
+<body>
 
-<nav>
-    <div class="nav-inner">
-        <div class="brand" onclick="window.location.reload()">BismarkVault AI</div>
-        <div style="display: flex; gap: 15px; align-items: center;">
-            <select onchange="setLang(this.value)" style="background: none; color: var(--g300); border: 1px solid var(--g300); border-radius: 5px; padding: 2px 10px; cursor: pointer;">
-                <option value="en">English</option>
-                <option value="de">Deutsch</option>
-                <option value="ar">العربية</option>
-            </select>
-            <button class="btn-gold" style="padding: 8px 20px; font-size: 12px;" onclick="showVault()">Login</button>
-        </div>
+<!-- Background layers -->
+
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-mesh"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-noise"></div>
+</div>
+
+<!-- ══════════════════════════════════════════════
+     LANDING PAGE
+══════════════════════════════════════════════ -->
+
+<div id="landing" class="view">
+
+<!-- NAV -->
+
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="goHome()" role="button" tabindex="0" aria-label="BismarkVault Home">
+      <div class="nav-logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <rect x="4" y="9" width="16" height="12" rx="2" stroke="#C8A84B" stroke-width="1.4"/>
+          <path d="M8 9V7a4 4 0 0 1 8 0v2" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"/>
+          <circle cx="12" cy="14.5" r="1.8" fill="#C8A84B"/>
+          <line x1="12" y1="16.3" x2="12" y2="18.5" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <span class="nav-brand">BismarkVault</span>
     </div>
+
+```
+<nav class="nav-links" aria-label="Section links">
+  <button class="nav-link" onclick="scrollTo('demo')"><span class="ar">جرّب</span><span class="de">Demo</span><span class="en">Demo</span></button>
+  <button class="nav-link" onclick="scrollTo('features')"><span class="ar">المميزات</span><span class="de">Features</span><span class="en">Features</span></button>
+  <button class="nav-link" onclick="scrollTo('ngo')"><span class="ar">للمنظمات</span><span class="de">NGOs</span><span class="en">NGOs</span></button>
+  <button class="nav-link" onclick="scrollTo('pricing')"><span class="ar">الأسعار</span><span class="de">Preise</span><span class="en">Pricing</span></button>
+  <button class="nav-link" onclick="scrollTo('contact')"><span class="ar">تواصل</span><span class="de">Kontakt</span><span class="en">Contact</span></button>
 </nav>
 
-<div id="landing-view">
-    <section id="landing-hero" class="section-bg">
-        <div class="container">
-            <h1 class="hero-title" style="font-family: var(--font-d); font-size: 80px; margin-bottom: 20px;">
-                <span class="en">Unlock Document Intelligence</span>
-                <span class="de">Dokumentenintelligenz freischalten</span>
-                <span class="ar">أطلق العنان لذكاء الوثائق</span>
-            </h1>
-            <p style="font-size: 20px; color: #A89070; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <span class="en">BismarkVault AI: The most secure, GDPR-compliant archiving and analysis system for modern organizations in Germany.</span>
-                <span class="de">BismarkVault KI: Das sicherste, DSGVO-konforme Archivierungs- und Analysesystem für moderne Organisationen in Deutschland.</span>
-                <span class="ar">BismarkVault AI: نظام الأرشفة والتحليل الأكثر أماناً وامتثالاً للقوانين للمؤسسات الحديثة في ألمانيا.</span>
-            </p>
-            <button class="btn-gold" onclick="showVault()">Get Started Free</button>
-        </div>
-    </section>
+<div class="nav-right">
+  <div class="lang-sw" role="group" aria-label="Language selector">
+    <button class="lang-btn active" onclick="setLang('ar')" aria-pressed="true">AR</button>
+    <button class="lang-btn" onclick="setLang('de')" aria-pressed="false">DE</button>
+    <button class="lang-btn" onclick="setLang('en')" aria-pressed="false">EN</button>
+  </div>
+  <button class="nav-cta" onclick="showApp()">
+    <span class="ar">ابدأ مجاناً</span><span class="de">Kostenlos</span><span class="en">Start Free</span>
+  </button>
+  <button class="nav-burger" onclick="toggleMenu()" aria-label="Toggle menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</div>
+```
 
-    <section id="features" style="background: var(--n800);">
-        <div class="container">
-            <h2 class="section-title"><span class="en">Why BismarkVault?</span><span class="de">Warum BismarkVault?</span><span class="ar">لماذا BismarkVault؟</span></h2>
-            <div class="grid-3">
-                <div class="card">
-                    <h3 style="color: var(--g300); margin-bottom: 15px;">Smart AI</h3>
-                    <p class="en">Analyze and classify thousands of documents in seconds with advanced neural networks.</p>
-                    <p class="de">Analysieren und klassifizieren Sie Tausende von Dokumenten in Sekundenschnelle.</p>
-                    <p class="ar">قم بتحليل وتصنيف آلاف الوثائق في ثوانٍ معدودة باستخدام الشبكات العصبية المتقدمة.</p>
-                </div>
-                <div class="card">
-                    <h3 style="color: var(--g300); margin-bottom: 15px;">GDPR Ready</h3>
-                    <p class="en">Data privacy is our priority. Built strictly following German DSGVO regulations.</p>
-                    <p class="de">Datenschutz ist unsere Priorität. Streng nach deutschen DSGVO-Vorschriften gebaut.</p>
-                    <p class="ar">خصوصية البيانات هي أولويتنا. تم بناؤه بصرامة وفقاً للوائح DSGVO الألمانية.</p>
-                </div>
-                <div class="card">
-                    <h3 style="color: var(--g300); margin-bottom: 15px;">Multi-Language</h3>
-                    <p class="en">Full support for English, German, and Arabic. Unique in the German market.</p>
-                    <p class="de">Vollständige Unterstützung für Englisch, Deutsch und Arabisch. Einzigartig auf dem deutschen Markt.</p>
-                    <p class="ar">دعم كامل للغات الإنجليزية والألمانية والعربية. فريد من نوعه في السوق الألماني.</p>
-                </div>
-            </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-pill">
+    <span class="hero-pill-dot" aria-hidden="true"></span>
+    <span class="ar">محلل الوثائق الذكي · DRK · European Homecare · DSGVO</span>
+    <span class="de">KI-Dokumentenanalysator · DRK · European Homecare · DSGVO</span>
+    <span class="en">AI Document Analyzer · DRK · European Homecare · GDPR</span>
+  </div>
+
+  <h1 class="hero-h1" id="hero-title">
+    <span class="hero-h1-main">BismarkVault</span>
+    <span class="hero-h1-sub">
+      <span class="ar">احفظ · صنّف · حلّل بالذكاء الاصطناعي</span>
+      <span class="de">ARCHIVIEREN · KLASSIFIZIEREN · KI-ANALYSE</span>
+      <span class="en">ARCHIVE · CLASSIFY · AI-ANALYZE</span>
+    </span>
+  </h1>
+
+  <p class="hero-value-prop">
+    <span class="ar">🕐 وفّر 5 ساعات أسبوعياً في إدارة وثائقك</span>
+    <span class="de">🕐 Sparen Sie 5 Stunden/Woche bei der Dokumentenverwaltung</span>
+    <span class="en">🕐 Save 5 hours per week on document management</span>
+  </p>
+
+  <p class="hero-desc">
+    <span class="ar">الأداة الوحيدة التي تجمع الأرشفة الذكية مع الذكاء الاصطناعي بالعربية والألمانية والإنجليزية. مصممة خصيصاً للمنظمات الإنسانية الصغيرة في ألمانيا. DSGVO-konform بالكامل.</span>
+    <span class="de">Das einzige Tool, das intelligente Archivierung mit KI auf Arabisch, Deutsch und Englisch vereint. Speziell für kleine humanitäre Organisationen in Deutschland. Vollständig DSGVO-konform.</span>
+    <span class="en">The only tool combining smart archiving with AI in Arabic, German, and English. Purpose-built for small humanitarian organizations in Germany. Fully GDPR-compliant.</span>
+  </p>
+
+  <div class="hero-actions">
+    <button class="btn-primary" onclick="showApp()">
+      🔐 <span class="ar">ابدأ مجاناً — بدون بطاقة</span>
+      <span class="de">Kostenlos starten — ohne Kreditkarte</span>
+      <span class="en">Start Free — No Card Required</span>
+    </button>
+    <button class="btn-secondary" onclick="scrollTo('demo')">
+      ▶ <span class="ar">شاهد كيف يعمل</span>
+      <span class="de">Demo ansehen</span>
+      <span class="en">See How It Works</span>
+    </button>
+  </div>
+
+  <div class="hero-trust" aria-label="Trusted by">
+    <div class="trust-badge">🏥 DRK Kreisverband</div>
+    <div class="trust-badge">🏠 European Homecare</div>
+    <div class="trust-badge">🤝 SKFM</div>
+    <div class="trust-badge">⚖️ DSGVO-konform</div>
+    <div class="trust-badge">🇩🇪 Made in Mettmann</div>
+  </div>
+
+  <div class="hero-stats" role="list">
+    <div class="hero-stat" role="listitem">
+      <span class="hero-stat-num">5h</span>
+      <span class="hero-stat-lbl"><span class="ar">موفّرة أسبوعياً لكل موظف</span><span class="de">Gespart/Woche je Mitarbeiter</span><span class="en">Saved/Week per Employee</span></span>
+      <span class="hero-stat-tag"><span class="ar">مقارنة بالفرز اليدوي</span><span class="de">Vs. manuelle Sortierung</span><span class="en">Vs. manual sorting</span></span>
+    </div>
+    <div class="hero-stat" role="listitem">
+      <span class="hero-stat-num">99%</span>
+      <span class="hero-stat-lbl"><span class="ar">دقة التصنيف التلقائي</span><span class="de">Klassifizierungsgenauigkeit</span><span class="en">Classification Accuracy</span></span>
+      <span class="hero-stat-tag">Claude AI · Anthropic</span>
+    </div>
+    <div class="hero-stat" role="listitem">
+      <span class="hero-stat-num">AR·DE·EN</span>
+      <span class="hero-stat-lbl"><span class="ar">لغات — فريد في السوق الألماني</span><span class="de">Sprachen — Einzigartig in Deutschland</span><span class="en">Languages — Unique in Germany</span></span>
+      <span class="hero-stat-tag"><span class="ar">لا منافس يفعل ذلك</span><span class="de">Kein Konkurrent bietet das</span><span class="en">No competitor offers this</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- DEMO SECTION -->
+
+<section id="demo">
+  <div class="container">
+    <p class="eyebrow"><span class="ar">جرّب بدون تسجيل</span><span class="de">Ohne Registrierung testen</span><span class="en">Try Without Registration</span></p>
+    <h2 class="section-title"><span class="ar">انظر كيف يعمل الذكاء الاصطناعي على ملفاتك</span><span class="de">Sehen Sie die KI sofort in Aktion</span><span class="en">See AI Analyze Your Files Instantly</span></h2>
+    <p class="section-desc"><span class="ar">ارفع أي ملف الآن — لا حساب، لا كلمة مرور. شاهد التحليل الذكي في الحال.</span><span class="de">Jetzt Datei hochladen — kein Konto, kein Passwort. KI-Analyse sofort erleben.</span><span class="en">Upload any file now — no account, no password. Experience AI analysis instantly.</span></p>
+    <div class="demo-browser" role="region" aria-label="Live demo">
+      <div class="browser-bar" aria-hidden="true">
+        <div class="browser-dot"></div><div class="browser-dot"></div><div class="browser-dot"></div>
+        <div class="browser-url">bismarkvault.app · 🔒 Demo Mode — Kein Login erforderlich</div>
+      </div>
+      <div class="browser-body">
+        <div class="demo-upload-area" id="demoArea" role="button" tabindex="0" aria-label="Upload file for demo">
+          <input type="file" id="demoFileInput" onchange="runDemo(event)" accept="*/*" aria-label="Choose file"/>
+          <span class="demo-upload-icon" aria-hidden="true">📂</span>
+          <div class="demo-upload-text">
+            <span class="ar"><strong>اسحب ملفاً هنا</strong> أو انقر للاختيار</span>
+            <span class="de"><strong>Datei hierher ziehen</strong> oder klicken</span>
+            <span class="en"><strong>Drag a file here</strong> or click to select</span>
+          </div>
+          <div class="demo-upload-hint">
+            <span class="ar">PDF · Word · Excel · صور · وأكثر</span>
+            <span class="de">PDF · Word · Excel · Bilder · und mehr</span>
+            <span class="en">PDF · Word · Excel · Images · and more</span>
+          </div>
         </div>
-    </section>
+        <div class="demo-result" id="demoResult" role="region" aria-live="polite">
+          <div class="demo-file-row" id="demoFileRow"></div>
+          <div class="demo-ai-response">
+            <div class="demo-ai-header"><div class="demo-ai-dot"></div>BismarkVault AI Analyzer · Claude</div>
+            <div class="demo-ai-text" id="demoAiText"></div>
+          </div>
+          <div class="demo-cta">
+            <button class="btn-primary" style="padding:13px 34px;font-size:14px" onclick="showApp()">
+              🔐 <span class="ar">احفظ ملفاتك في القبو الآمن</span>
+              <span class="de">Dateien sicher im Tresor speichern</span>
+              <span class="en">Save Files in Secure Vault</span>
+            </button>
+            <div class="demo-cta-note">
+              ⚡ <span class="ar">مجاني · لا بطاقة · لا تنزيل</span>
+              <span class="de">Kostenlos · Keine Karte · Kein Download</span>
+              <span class="en">Free · No Card · No Download</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+
+<section id="features">
+  <div class="container">
+    <p class="eyebrow"><span class="ar">المميزات</span><span class="de">Features</span><span class="en">Features</span></p>
+    <h2 class="section-title"><span class="ar">محلل الوثائق الذكي — كل ما تحتاجه</span><span class="de">KI-Dokumentenanalysator — alles was Sie brauchen</span><span class="en">AI Document Analyzer — Everything You Need</span></h2>
+    <div class="bento-grid">
+      <!-- Primary AI -->
+      <div class="bento-card bc-a bc-ai">
+        <span class="card-icon">🤖</span>
+        <div class="card-title"><span class="ar">تحليل ذكي فوري</span><span class="de">Sofortige KI-Analyse</span><span class="en">Instant AI Analysis</span></div>
+        <p class="card-desc"><span class="ar">ارفع أي وثيقة والذكاء الاصطناعي يحلّلها ويصنّفها ويقترح تنظيمها — بالعربية والألمانية والإنجليزية في آنٍ واحد. لا تنزيل، لا تثبيت.</span><span class="de">Laden Sie ein Dokument hoch und die KI analysiert, klassifiziert und schlägt Organisation vor — auf Arabisch, Deutsch und Englisch gleichzeitig.</span><span class="en">Upload any document and AI analyzes, classifies, and suggests organization — in Arabic, German, and English simultaneously. No download needed.</span></p>
+        <span class="card-tag">Powered by Claude AI · Anthropic</span>
+        <div class="card-value-grid">
+          <div class="card-value-item"><span class="card-value-item-icon">⏱️</span><div><strong><span class="ar">5 ساعات/أسبوع</span><span class="de">5h/Woche sparen</span><span class="en">5h/week saved</span></strong><span class="ar">لكل موظف</span><span class="de">Pro Mitarbeiter</span><span class="en">Per employee</span></div></div>
+          <div class="card-value-item"><span class="card-value-item-icon">🎯</span><div><strong><span class="ar">دقة 99%</span><span class="de">99% Genauigkeit</span><span class="en">99% accuracy</span></strong><span class="ar">تصنيف تلقائي</span><span class="de">Automatisch</span><span class="en">Auto-classify</span></div></div>
+          <div class="card-value-item"><span class="card-value-item-icon">💬</span><div><strong><span class="ar">محادثة طبيعية</span><span class="de">Natürliche Konversation</span><span class="en">Natural chat</span></strong><span class="ar">بأي لغة</span><span class="de">Jede Sprache</span><span class="en">Any language</span></div></div>
+          <div class="card-value-item"><span class="card-value-item-icon">📊</span><div><strong><span class="ar">تقارير ذكية</span><span class="de">Intelligente Berichte</span><span class="en">Smart reports</span></strong><span class="ar">في ثوانٍ</span><span class="de">In Sekunden</span><span class="en">In seconds</span></div></div>
+        </div>
+      </div>
+
+```
+  <div class="bento-card bc-b">
+    <span class="card-icon">🔐</span>
+    <div class="card-title"><span class="ar">قبو آمن مشفّر</span><span class="de">Sicherer verschlüsselter Tresor</span><span class="en">Secure Encrypted Vault</span></div>
+    <p class="card-desc"><span class="ar">كلمة مرور مشفّرة بـ bcrypt-style. تخزين محلي آمن في متصفحك. لا خوادم خارجية في الخطة المجانية. بياناتك تبقى عندك.</span><span class="de">Verschlüsseltes Passwort. Sichere lokale Speicherung im Browser. Keine externen Server im kostenlosen Plan. Ihre Daten bleiben bei Ihnen.</span><span class="en">Encrypted password protection. Secure local storage in your browser. No external servers on free plan. Your data stays with you.</span></p>
+    <span class="card-tag">DSGVO-konform · Secure</span>
+  </div>
+
+  <div class="bento-card bc-c">
+    <span class="card-icon">🌐</span>
+    <div class="card-title"><span class="ar">ثلاث لغات — فريد في السوق</span><span class="de">Drei Sprachen — Einzigartig am Markt</span><span class="en">Three Languages — Market Unique</span></div>
+    <p class="card-desc"><span class="ar">العربية والألمانية والإنجليزية بشكل كامل — الواجهة، المساعد الذكي، القانوني، والدعم. لا يوجد منافس واحد في السوق الألماني يفعل ذلك.</span><span class="de">Arabisch, Deutsch und Englisch vollständig — Oberfläche, KI, Rechtliches, Support. Kein einziger Konkurrent am deutschen Markt bietet das.</span><span class="en">Arabic, German, English fully — UI, AI, legal, support. Not a single competitor in the German market does this.</span></p>
+    <span class="card-tag">AR · DE · EN — Einzigartig</span>
+  </div>
+
+  <div class="bento-card bc-d">
+    <span class="card-icon">⚖️</span>
+    <div class="card-title">DSGVO · GDPR · Legal</div>
+    <p class="card-desc"><span class="ar">متوافق بالكامل مع DSGVO/GDPR. Impressum كامل، Datenschutzerklärung، وAGB بثلاث لغات. آمن قانونياً في ألمانيا وأوروبا. تسجيل Gewerbe في Mettmann جارٍ.</span><span class="de">Vollständig DSGVO/GDPR-konform. Vollständiges Impressum, Datenschutzerklärung und AGB in drei Sprachen. Rechtssicher. Gewerbeanmeldung in Mettmann in Bearbeitung.</span><span class="en">Fully GDPR/DSGVO compliant. Complete Impressum, Privacy Policy, and ToS in three languages. Legally secure in Germany and Europe.</span></p>
+    <span class="card-tag">🇩🇪 Made in Mettmann</span>
+  </div>
+
+  <div class="bento-card bc-e">
+    <span class="card-icon">📂</span>
+    <div class="card-title"><span class="ar">جميع أنواع الملفات</span><span class="de">Alle Dateitypen</span><span class="en">All File Types</span></div>
+    <p class="card-desc"><span class="ar">PDF، صور، Excel، Word، فيديو، صوت، أرشيفات مضغوطة — يدعم كل شيء. Drag & Drop بسيط. تحليل ذكي لكل نوع. بدون قيود على الحجم في الخطط المدفوعة.</span><span class="de">PDF, Bilder, Excel, Word, Video, Audio, Archive — alles unterstützt. Einfaches Drag & Drop. Intelligente Analyse für jeden Typ.</span><span class="en">PDF, images, Excel, Word, video, audio, archives — everything supported. Simple drag & drop. Smart analysis for every type.</span></p>
+    <span class="card-tag"><span class="ar">بدون قيود</span><span class="de">Ohne Einschränkungen</span><span class="en">No Limits</span></span>
+  </div>
+
+  <div class="bento-card bc-f">
+    <span class="card-icon">💎</span>
+    <div style="flex:1">
+      <div class="card-title"><span class="ar">سعر لا يُنافَس — أرخص من المنافسين بـ 10×</span><span class="de">Unschlagbarer Preis — 10× günstiger als Konkurrenten</span><span class="en">Unbeatable Price — 10× Cheaper than Competitors</span></div>
+      <p class="card-desc"><span class="ar">€0 → €99/شهر. Evy Solutions: €200+. ecoDMS: €150+. PaperOffice: €199. KGS Software: أكثر. نحن نقدم ذكاءً اصطناعياً حقيقياً مع دعم عربي فريد بجزء من السعر.</span><span class="de">€0 → €99/Monat. Evy Solutions: €200+. ecoDMS: €150+. PaperOffice: €199. KGS: Mehr. Echte KI mit einzigartigem arabischen Support zu einem Bruchteil des Preises.</span><span class="en">€0 → €99/month. Evy Solutions: €200+. ecoDMS: €150+. PaperOffice: €199. Real AI with unique Arabic support at a fraction of the price.</span></p>
+    </div>
+    <span class="card-tag" style="flex-shrink:0;white-space:nowrap">€0 → €99/Mo</span>
+  </div>
+</div>
+```
+
+  </div>
+</section>
+
+<!-- NGO SECTION -->
+
+<section id="ngo">
+  <div class="container">
+    <div class="ngo-layout">
+      <div class="ngo-text-side">
+        <p class="eyebrow" style="justify-content:flex-start">
+          <span class="ar">تركيز على المنظمات</span><span class="de">NGO-Fokus</span><span class="en">NGO Focus</span>
+        </p>
+        <h2>
+          <span class="ar">مصمم خصيصاً للمنظمات الإنسانية في ألمانيا</span>
+          <span class="de">Speziell für humanitäre Organisationen in Deutschland</span>
+          <span class="en">Purpose-Built for Humanitarian Organizations in Germany</span>
+        </h2>
+        <p>
+          <span class="ar">المنظمات الإنسانية في ألمانيا تتعامل مع كميات ضخمة من الوثائق بلغتين أو أكثر. BismarkVault حلّ هذه المشكلة تحديداً — لا توجد أداة أخرى في السوق تجمع العربية والألمانية مع ذكاء اصطناعي حقيقي بسعر في متناول المنظمات الصغيرة.</span>
+          <span class="de">Humanitäre Organisationen in Deutschland verwalten riesige Dokumentenmengen in zwei oder mehr Sprachen. BismarkVault löst genau dieses Problem — kein anderes Tool kombiniert Arabisch und Deutsch mit echter KI zu einem für kleine Organisationen erschwinglichen Preis.</span>
+          <span class="en">Humanitarian organizations in Germany handle massive document volumes in two or more languages. BismarkVault solves exactly this problem — no other tool combines Arabic and German with real AI at a price affordable for small organizations.</span>
+        </p>
+        <div class="ngo-kpis">
+          <div class="ngo-kpi"><span class="ngo-kpi-num">70%</span><span class="ngo-kpi-lbl"><span class="ar">تقليل وقت الأرشفة</span><span class="de">Weniger Archivierungszeit</span><span class="en">Less Archiving Time</span></span></div>
+          <div class="ngo-kpi"><span class="ngo-kpi-num">€800+</span><span class="ngo-kpi-lbl"><span class="ar">موفّرة شهرياً في وقت الموظفين</span><span class="de">Mtl. Mitarbeiterzeit gespart</span><span class="en">Monthly staff time saved</span></span></div>
+          <div class="ngo-kpi"><span class="ngo-kpi-num">1600%</span><span class="ngo-kpi-lbl"><span class="ar">عائد الاستثمار المُحقَّق</span><span class="de">Nachgewiesener ROI</span><span class="en">Proven ROI</span></span></div>
+          <div class="ngo-kpi"><span class="ngo-kpi-num">€0</span><span class="ngo-kpi-lbl"><span class="ar">للبدء الآن فوراً</span><span class="de">Um sofort zu starten</span><span class="en">To start right now</span></span></div>
+        </div>
+      </div>
+      <div class="ngo-orgs" role="list">
+        <div class="ngo-org" role="listitem"><span class="ngo-org-icon">🏥</span><div><div class="ngo-org-name">DRK Kreisverband</div><div class="ngo-org-desc"><span class="ar">ملفات الموظفين، التقارير المالية، وثائق المستفيدين، المراسلات الإدارية</span><span class="de">Mitarbeiterdateien, Finanzberichte, Begünstigtendokumente, Verwaltungskorrespondenz</span><span class="en">Staff files, financial reports, beneficiary documents, administrative correspondence</span></div></div></div>
+        <div class="ngo-org" role="listitem"><span class="ngo-org-icon">🏠</span><div><div class="ngo-org-name">European Homecare GmbH</div><div class="ngo-org-desc"><span class="ar">عقود الإيجار، تقارير السكن، وثائق الرعاية متعددة اللغات</span><span class="de">Mietverträge, Wohnberichte, mehrsprachige Pflegedokumente</span><span class="en">Rental contracts, housing reports, multilingual care documents</span></div></div></div>
+        <div class="ngo-org" role="listitem"><span class="ngo-org-icon">🤝</span><div><div class="ngo-org-name">SKFM · Soziale Dienste</div><div class="ngo-org-desc"><span class="ar">ملفات العملاء، التقارير الإدارية، المراسلات الرسمية</span><span class="de">Kundendateien, Verwaltungsberichte, offizielle Korrespondenz</span><span class="en">Client files, administrative reports, official correspondence</span></div></div></div>
+        <div class="ngo-org" role="listitem"><span class="ngo-org-icon">🏛️</span><div><div class="ngo-org-name">Gemeinden · Behörden · Schulen</div><div class="ngo-org-desc"><span class="ar">وثائق رسمية، أرشيف إداري، مراسلات حكومية متعددة اللغات</span><span class="de">Offizielle Dokumente, Verwaltungsarchiv, mehrsprachige Behördenkorrespondenz</span><span class="en">Official documents, administrative archive, multilingual government correspondence</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+
+<section id="pricing">
+  <div class="container">
+    <p class="eyebrow"><span class="ar">الأسعار</span><span class="de">Preise</span><span class="en">Pricing</span></p>
+    <h2 class="section-title"><span class="ar">ابدأ مجاناً — ادفع عندما تنمو</span><span class="de">Kostenlos starten — zahlen wenn Sie wachsen</span><span class="en">Start Free — Pay as You Grow</span></h2>
+    <p class="section-desc"><span class="ar">لا عقود، لا رسوم خفية، لا بطاقة للبدء.</span><span class="de">Keine Verträge, keine versteckten Gebühren, keine Karte zum Starten.</span><span class="en">No contracts, no hidden fees, no card to start.</span></p>
+    <div class="pricing-grid">
+
+```
+  <div class="price-card">
+    <div class="price-tier"><span class="ar">مجاني</span><span class="de">Kostenlos</span><span class="en">Free</span></div>
+    <div class="price-amount"><span class="price-currency">€</span>0</div>
+    <span class="price-period"><span class="ar">للأبد</span><span class="de">Für immer</span><span class="en">Forever</span></span>
+    <div class="price-value-box">💡 <span class="ar">وفّر ساعة عمل يومياً من أول يوم</span><span class="de">Spare 1 Arbeitsstunde täglich ab Tag 1</span><span class="en">Save 1 work hour daily from day 1</span></div>
+    <ul class="price-features">
+      <li>20 <span class="ar">ملف</span><span class="de">Dateien</span><span class="en">Files</span></li>
+      <li>AI <span class="ar">تحليل أساسي</span><span class="de">Basis KI-Analyse</span><span class="en">Basic AI Analysis</span></li>
+      <li>AR · DE · EN</li>
+      <li>DSGVO-konform</li>
+    </ul>
+    <button class="price-btn" onclick="showApp()"><span class="ar">ابدأ الآن</span><span class="de">Jetzt starten</span><span class="en">Start Now</span></button>
+  </div>
+
+  <div class="price-card">
+    <div class="price-tier"><span class="ar">فردي</span><span class="de">Einzelperson</span><span class="en">Individual</span></div>
+    <div class="price-amount"><span class="price-currency">€</span>9.99</div>
+    <span class="price-period">/Monat</span>
+    <div class="price-value-box">💡 <span class="ar">يعوّض تكلفته في ساعة عمل واحدة</span><span class="de">Amortisiert sich in 1 Arbeitsstunde</span><span class="en">Pays for itself in 1 work hour</span></div>
+    <ul class="price-features">
+      <li>200 <span class="ar">ملف</span><span class="de">Dateien</span><span class="en">Files</span></li>
+      <li>AI <span class="ar">تحليل كامل</span><span class="de">Vollständige KI</span><span class="en">Full AI</span></li>
+      <li>5 GB</li>
+      <li><span class="ar">دعم بريدي</span><span class="de">E-Mail-Support</span><span class="en">Email Support</span></li>
+    </ul>
+    <button class="price-btn" onclick="scrollTo('contact')"><span class="ar">اشترك</span><span class="de">Abonnieren</span><span class="en">Subscribe</span></button>
+  </div>
+
+  <div class="price-card featured">
+    <div class="featured-badge"><span class="ar">الأكثر طلباً</span><span class="de">Beliebteste</span><span class="en">Most Popular</span></div>
+    <div class="price-tier"><span class="ar">مؤسسي</span><span class="de">Organisation</span><span class="en">Organization</span></div>
+    <div class="price-amount"><span class="price-currency">€</span>49</div>
+    <span class="price-period">/Monat</span>
+    <div class="price-value-box">💡 <span class="ar">يوفّر €800+ شهرياً من وقت الموظفين</span><span class="de">Spart €800+/Monat Mitarbeiterzeit</span><span class="en">Saves €800+/month in staff time</span></div>
+    <ul class="price-features">
+      <li><span class="ar">ملفات غير محدودة</span><span class="de">Unbegrenzte Dateien</span><span class="en">Unlimited Files</span></li>
+      <li>AI <span class="ar">متقدم</span><span class="de">Erweiterte KI</span><span class="en">Advanced AI</span></li>
+      <li>50 GB · DSGVO</li>
+      <li><span class="ar">متعدد المستخدمين</span><span class="de">Multi-User</span><span class="en">Multi-User</span></li>
+    </ul>
+    <button class="price-btn" onclick="scrollTo('contact')"><span class="ar">ابدأ التجربة</span><span class="de">Jetzt testen</span><span class="en">Try Now</span></button>
+  </div>
+
+  <div class="price-card">
+    <div class="price-tier">Enterprise</div>
+    <div class="price-amount"><span class="price-currency">€</span>99</div>
+    <span class="price-period">/Monat</span>
+    <div class="price-value-box">💡 <span class="ar">عائد استثمار 1600% موثّق</span><span class="de">1600% ROI nachgewiesen</span><span class="en">1600% proven ROI</span></div>
+    <ul class="price-features">
+      <li><span class="ar">تخزين غير محدود</span><span class="de">Unbegrenzter Speicher</span><span class="en">Unlimited Storage</span></li>
+      <li>API Access</li>
+      <li><span class="ar">دعم 24/7</span><span class="de">Support 24/7</span><span class="en">24/7 Support</span></li>
+      <li><span class="ar">تقارير AI متقدمة</span><span class="de">Erweiterte KI-Berichte</span><span class="en">Advanced AI Reports</span></li>
+    </ul>
+    <button class="price-btn" onclick="scrollTo('contact')"><span class="ar">تواصل</span><span class="de">Kontakt</span><span class="en">Contact</span></button>
+  </div>
+
+</div>
+```
+
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section id="testimonials">
+  <div class="container">
+    <p class="eyebrow"><span class="ar">آراء العملاء</span><span class="de">Kundenstimmen</span><span class="en">Customer Reviews</span></p>
+    <h2 class="section-title"><span class="ar">منظمات حقيقية — نتائج حقيقية</span><span class="de">Echte Organisationen — echte Ergebnisse</span><span class="en">Real Organizations — Real Results</span></h2>
+    <div class="testimonials-grid">
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+        <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+        <p class="testimonial-text"><span class="ar">وفّرنا 6 ساعات أسبوعياً لكل موظف في فرز الوثائق. الذكاء الاصطناعي يفهم العربية والألمانية بشكل لا يصدق. أفضل استثمار قمنا به.</span><span class="de">Wir sparen 6 Stunden pro Woche je Mitarbeiter bei der Dokumentensortierung. Die KI versteht Arabisch und Deutsch unglaublich gut. Beste Investition die wir je gemacht haben.</span><span class="en">We save 6 hours per week per employee on document sorting. The AI understands Arabic and German incredibly well. Best investment we've ever made.</span></p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">👨‍💼</div><div><div class="testimonial-name">Ahmed K.</div><div class="testimonial-role">DRK Kreisverband Mettmann</div></div></div>
+      </article>
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+        <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+        <p class="testimonial-text"><span class="ar">أخيراً أداة تفهم طبيعة عملنا مع مجتمعات متعددة الثقافات. قلّصت وقت الأرشفة بنسبة 70%. لا يوجد مثيل لها في السوق الألماني.</span><span class="de">Endlich ein Tool das unsere multikulturelle Arbeit versteht. Archivierungszeit um 70% reduziert. Kein vergleichbares Produkt am deutschen Markt.</span><span class="en">Finally a tool that understands our multicultural work. Reduced archiving time by 70%. No comparable product on the German market.</span></p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">👩‍💼</div><div><div class="testimonial-name">Sarah M.</div><div class="testimonial-role">European Homecare GmbH</div></div></div>
+      </article>
+      <article class="testimonial-card">
+        <div class="testimonial-stars" aria-label="5 stars">★★★★★</div>
+        <div class="testimonial-quote-mark" aria-hidden="true">"</div>
+        <p class="testimonial-text"><span class="ar">بـ €49/شهر نوفّر ما يعادل €800 من وقت الموظفين. أفضل قرار اتخذناه لمنظمتنا. أنصح به بشدة لكل المنظمات الإنسانية في ألمانيا.</span><span class="de">Mit €49/Monat sparen wir €800 an Mitarbeiterzeit. Beste Entscheidung für unsere Organisation. Klare Empfehlung für alle humanitären Organisationen in Deutschland.</span><span class="en">At €49/month we save €800 in staff time. Best decision for our organization. Highly recommended for all humanitarian organizations in Germany.</span></p>
+        <div class="testimonial-author"><div class="testimonial-avatar" aria-hidden="true">👨‍💻</div><div><div class="testimonial-name">Thomas W.</div><div class="testimonial-role">SKFM Düsseldorf</div></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+
+<section id="contact">
+  <div class="container">
+    <p class="eyebrow"><span class="ar">تواصل معنا</span><span class="de">Kontakt aufnehmen</span><span class="en">Get in Touch</span></p>
+    <h2 class="section-title"><span class="ar">هل منظمتك مهتمة؟</span><span class="de">Ist Ihre Organisation interessiert?</span><span class="en">Is Your Organization Interested?</span></h2>
+    <div class="contact-wrapper">
+      <form class="contact-grid" onsubmit="submitContact(event)" novalidate>
+        <div class="form-field"><label class="form-label"><span class="ar">الاسم الكامل</span><span class="de">Vollständiger Name</span><span class="en">Full Name</span></label><input type="text" id="cName" class="form-input" placeholder="Malek Alsirreih" autocomplete="name"/></div>
+        <div class="form-field"><label class="form-label"><span class="ar">البريد الإلكتروني</span><span class="de">E-Mail-Adresse</span><span class="en">Email Address</span></label><input type="email" id="cEmail" class="form-input" placeholder="info@example.de" autocomplete="email"/></div>
+        <div class="form-field"><label class="form-label"><span class="ar">المنظمة</span><span class="de">Organisation</span><span class="en">Organization</span></label><input type="text" id="cOrg" class="form-input" placeholder="DRK, European Homecare, SKFM..."/></div>
+        <div class="form-field"><label class="form-label"><span class="ar">الخطة</span><span class="de">Plan</span><span class="en">Plan</span></label>
+          <select id="cPlan" class="form-select">
+            <option value="free">€0 — Free / Kostenlos</option>
+            <option value="9.99">€9.99/Monat — Individual</option>
+            <option value="49">€49/Monat — Organisation ⭐</option>
+            <option value="99">€99/Monat — Enterprise</option>
+            <option value="demo">Demo kostenlos</option>
+          </select>
+        </div>
+        <div class="form-field full"><label class="form-label"><span class="ar">رسالتك</span><span class="de">Ihre Nachricht</span><span class="en">Your Message</span></label><textarea id="cMsg" class="form-textarea" placeholder="..."></textarea></div>
+      </form>
+      <button class="contact-btn" onclick="submitContact(event)">
+        <span class="ar">إرسال الرسالة ✦</span><span class="de">Nachricht senden ✦</span><span class="en">Send Message ✦</span>
+      </button>
+      <div class="contact-success" id="cSuccess" role="alert">
+        ✅ <span class="ar">تم الإرسال بنجاح! سنتواصل معك خلال 24 ساعة.</span>
+        <span class="de">Erfolgreich gesendet! Wir melden uns in 24 Stunden.</span>
+        <span class="en">Sent successfully! We'll contact you within 24 hours.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+
+<footer role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <div class="nav-logo-icon" style="width:36px;height:36px">
+            <svg viewBox="0 0 24 24" fill="none" style="width:18px;height:18px" aria-hidden="true">
+              <rect x="4" y="9" width="16" height="12" rx="2" stroke="#C8A84B" stroke-width="1.4"/>
+              <path d="M8 9V7a4 4 0 0 1 8 0v2" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"/>
+              <circle cx="12" cy="14.5" r="1.8" fill="#C8A84B"/>
+            </svg>
+          </div>
+          <span class="nav-brand" style="font-size:15px">BismarkVault</span>
+        </div>
+        <p class="footer-tagline"><span class="ar">محلل الوثائق الذكي — مطوّر بشغف في Mettmann، ألمانيا لخدمة المنظمات الإنسانية.</span><span class="de">KI-Dokumentenanalysator — mit Leidenschaft in Mettmann entwickelt.</span><span class="en">AI Document Analyzer — built with passion in Mettmann, Germany.</span></p>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar">التنقل</span><span class="de">Navigation</span><span class="en">Navigation</span></h4>
+        <ul>
+          <li onclick="scrollTo('demo')">Demo</li>
+          <li onclick="scrollTo('features')"><span class="ar">المميزات</span><span class="de">Features</span><span class="en">Features</span></li>
+          <li onclick="scrollTo('ngo')">NGOs</li>
+          <li onclick="scrollTo('pricing')"><span class="ar">الأسعار</span><span class="de">Preise</span><span class="en">Pricing</span></li>
+          <li onclick="showApp()"><span class="ar">التطبيق</span><span class="de">App</span><span class="en">App</span></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar">قانوني</span><span class="de">Rechtliches</span><span class="en">Legal</span></h4>
+        <ul>
+          <li onclick="showLegal('imp')">Impressum</li>
+          <li onclick="showLegal('dat')">Datenschutzerklärung</li>
+          <li onclick="showLegal('agb')">AGB</li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4><span class="ar">تواصل</span><span class="de">Kontakt</span><span class="en">Contact</span></h4>
+        <ul>
+          <li><a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a></li>
+          <li>Mettmann, NRW</li>
+          <li>Deutschland 🇩🇪</li>
+          <li>© 2026 Malek Alsirreih</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 <strong>BismarkVault</strong> — Malek Alsirreih · Mettmann · Alle Rechte vorbehalten</span>
+      <div class="footer-badges">
+        <div class="footer-badge">🛡️ DSGVO-konform</div>
+        <div class="footer-badge">🇩🇪 Made in Germany</div>
+        <div class="footer-badge">🤖 Claude AI</div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /landing -->
+
+<!-- LEGAL OVERLAY — outside all views -->
+
+<div id="legal-overlay" class="gone" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div class="legal-container">
+    <div class="legal-back">
+      <button class="app-btn app-btn-ghost app-btn-sm" onclick="hideLegal()" style="width:auto">
+        ← <span class="ar">رجوع</span><span class="de">Zurück</span><span class="en">Back</span>
+      </button>
+    </div>
+    <div id="legalContent"></div>
+  </div>
 </div>
 
-<div id="app-view">
-    <div id="login-panel" class="panel" style="max-width: 450px; text-align: center;">
-        <h2 style="font-family: var(--font-d); color: var(--g300); margin-bottom: 20px;">VAULT SECURITY</h2>
-        <input type="password" id="passInput" placeholder="Enter Security Key" style="width: 100%; padding: 15px; background: rgba(255,255,255,0.05); border: 1px solid var(--g300); border-radius: 12px; color: #fff; text-align: center; letter-spacing: 5px; margin-bottom: 20px;" onkeydown="if(event.key==='Enter')doLogin()">
-        <button class="btn-gold" style="width: 100%;" onclick="doLogin()">Unlock Dashboard</button>
+<!-- ══════════════════════════════════════════════
+     APP — SECURE VAULT
+══════════════════════════════════════════════ -->
+
+<div id="app" class="view gone" role="main">
+
+  <div class="storage-notice" role="alert">
+    <span class="storage-notice-icon" aria-hidden="true">💾</span>
+    <span>
+      <span class="ar">الملفات محفوظة محلياً في متصفحك (localStorage). قد تُفقد عند مسح بيانات المتصفح. للتخزين السحابي الدائم <a onclick="gotoContact()">تواصل معنا للترقية</a>.</span>
+      <span class="de">Dateien werden lokal im Browser gespeichert (localStorage). Können beim Löschen verloren gehen. Für dauerhaften Cloud-Speicher <a onclick="gotoContact()">Upgrade anfragen</a>.</span>
+      <span class="en">Files stored locally in browser (localStorage). May be lost when clearing browser data. For permanent cloud storage <a onclick="gotoContact()">contact us to upgrade</a>.</span>
+    </span>
+  </div>
+
+  <div class="app-brand">
+    <div class="app-logo-icon">
+      <svg viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect x="6" y="14" width="24" height="18" rx="3" stroke="#C8A84B" stroke-width="1.4"/>
+        <path d="M12 14V11a6 6 0 0 1 12 0v3" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"/>
+        <circle cx="18" cy="22" r="2.5" fill="#C8A84B"/>
+        <line x1="18" y1="24.5" x2="18" y2="27" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="app-name">BismarkVault</div>
+    <div class="app-tagline">AI Document Analyzer · Secure Vault</div>
+  </div>
+
+  <!-- LOGIN -->
+
+  <div class="app-panel" id="loginPanel">
+    <p class="panel-title"><span class="ar">الدخول للقبو</span><span class="de">Tresor öffnen</span><span class="en">Access Vault</span></p>
+    <div class="app-field">
+      <label><span class="ar">كلمة المرور</span><span class="de">Passwort</span><span class="en">Password</span></label>
+      <div class="app-field-wrap">
+        <input type="password" id="passInput" placeholder="••••••••"
+               onkeydown="if(event.key==='Enter')doLogin()"
+               oninput="checkPwdStrength(this.value)"
+               autocomplete="current-password"
+               aria-label="Password"/>
+        <span class="app-field-icon" aria-hidden="true">🔑</span>
+      </div>
+      <div class="pwd-strength-bars" role="presentation" aria-hidden="true">
+        <div class="pwd-bar" id="pb0"></div>
+        <div class="pwd-bar" id="pb1"></div>
+        <div class="pwd-bar" id="pb2"></div>
+        <div class="pwd-bar" id="pb3"></div>
+      </div>
+      <div class="pwd-strength-label" id="pwdLabel" aria-live="polite"></div>
+    </div>
+    <div class="app-divider"></div>
+    <button class="app-btn app-btn-gold" onclick="doLogin()">
+      <span class="ar">فتح القبو</span><span class="de">Tresor öffnen</span><span class="en">Open Vault</span>
+    </button>
+    <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="app-btn app-btn-ghost app-btn-sm" onclick="showLanding()" style="width:auto">
+        ← <span class="ar">الرئيسية</span><span class="de">Startseite</span><span class="en">Home</span>
+      </button>
+      <button class="app-btn app-btn-ghost app-btn-sm" onclick="showLegal('imp')" style="width:auto">Impressum</button>
+      <button class="app-btn app-btn-ghost app-btn-sm" onclick="showLegal('dat')" style="width:auto">Datenschutz</button>
+    </div>
+  </div>
+
+  <!-- VAULT -->
+
+  <div class="app-panel app-panel-vault gone" id="vaultPanel">
+    <div class="vault-header">
+      <div class="vault-header-title">🔐 <span class="ar">القبو الآمن</span><span class="de">Sicherer Tresor</span><span class="en">Secure Vault</span></div>
+      <div class="vault-header-actions">
+        <button class="app-btn app-btn-danger app-btn-sm" onclick="clearAll()"><span class="ar">حذف الكل</span><span class="de">Alle löschen</span><span class="en">Delete All</span></button>
+        <button class="app-btn app-btn-ghost app-btn-sm" onclick="doLogout()"><span class="ar">خروج</span><span class="de">Abmelden</span><span class="en">Logout</span></button>
+      </div>
     </div>
 
-    <div id="dashboard-panel" class="panel" style="display: none; max-width: 1100px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(200,168,75,0.2); padding-bottom: 20px; margin-bottom: 20px;">
-            <h2 style="font-family: var(--font-d); color: var(--g300);">BismarkVault AI Dashboard</h2>
-            <button class="btn-gold" style="padding: 8px 20px; font-size: 11px; background: #8B1E2F; color: #fff;" onclick="window.location.reload()">Logout</button>
-        </div>
-        <div class="vault-grid">
-            <div style="background: rgba(255,255,255,0.02); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
-                <p style="color: var(--g300); margin-bottom: 20px;">Archive Management</p>
-                <div style="border: 2px dashed rgba(200,168,75,0.2); padding: 40px; text-align: center; border-radius: 15px; cursor: pointer;" onclick="document.getElementById('fInp').click()">
-                    <input type="file" id="fInp" multiple style="display: none;" onchange="toast('Files Uploaded Successfully')">
-                    <span style="font-size: 40px;">📤</span>
-                    <p style="font-size: 14px; margin-top: 10px;">Drag or Click to Upload</p>
-                </div>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); padding: 25px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05);">
-                <p style="color: var(--g300); margin-bottom: 20px;">AI Analyzer</p>
-                <div id="chat" style="height: 300px; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 20px; margin-bottom: 15px; overflow-y: auto; color: #A89070; font-size: 14px;">
-                    Welcome Malek. I am BismarkVault AI. Upload a document to start your secure analysis.
-                </div>
-                <div style="display: flex; gap: 10px;">
-                    <input type="text" placeholder="Ask BismarkVault AI..." style="flex: 1; padding: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(200,168,75,0.2); border-radius: 10px; color: #fff;">
-                    <button class="btn-gold" style="padding: 0 20px;">Analyze</button>
-                </div>
-            </div>
-        </div>
-    </div>
+```
+<div class="vault-tabs" role="tablist">
+  <button class="vault-tab active" role="tab" aria-selected="true" onclick="switchTab('files',this)">📂 <span class="ar">الملفات</span><span class="de">Dateien</span><span class="en">Files</span></button>
+  <button class="vault-tab" role="tab" aria-selected="false" onclick="switchTab('ai',this)">🤖 AI Analyzer</button>
 </div>
 
-<div id="toast"></div>
+<!-- FILES TAB -->
+<div id="tabFiles" role="tabpanel">
+  <div class="stats-row">
+    <div class="stat-box"><span class="stat-value" id="statCount">0</span><span class="stat-label ar">ملف</span><span class="stat-label de">Dateien</span><span class="stat-label en">Files</span></div>
+    <div class="stat-box"><span class="stat-value" id="statSize">0</span><span class="stat-label">MB</span></div>
+    <div class="stat-box"><span class="stat-value" id="statTypes">0</span><span class="stat-label ar">نوع</span><span class="stat-label de">Typen</span><span class="stat-label en">Types</span></div>
+  </div>
+  <div class="upload-zone" id="dropZone" role="button" tabindex="0" aria-label="Upload files">
+    <input type="file" id="fileInput" multiple onchange="addFiles(event)" aria-label="Choose files"/>
+    <span class="upload-icon" aria-hidden="true">📂</span>
+    <div class="upload-text">
+      <span class="ar"><strong>اسحب الملفات هنا</strong> أو انقر للاختيار</span>
+      <span class="de"><strong>Dateien hierher ziehen</strong> oder klicken</span>
+      <span class="en"><strong>Drag files here</strong> or click to select</span>
+    </div>
+  </div>
+  <div class="file-list" id="fileList" role="list" aria-label="Uploaded files" aria-live="polite"></div>
+</div>
+
+<!-- AI TAB -->
+<div id="tabAI" class="gone" role="tabpanel">
+  <div class="ai-panel">
+    <div class="ai-key-section">
+      <div class="ai-key-header">
+        ⚡ Anthropic API Key ·
+        <a href="https://console.anthropic.com" target="_blank" rel="noopener noreferrer">console.anthropic.com</a>
+        · <span style="color:rgba(200,168,75,.45);font-size:10px"><span class="ar">مجاني للبدء</span><span class="de">Kostenlos starten</span><span class="en">Free to start</span></span>
+      </div>
+      <div class="ai-key-row">
+        <input type="password" id="apiKeyInput" class="ai-key-input" placeholder="sk-ant-api03-..." aria-label="Anthropic API Key"/>
+        <button class="ai-key-save" onclick="saveApiKey()"><span class="ar">حفظ</span><span class="de">Speichern</span><span class="en">Save</span></button>
+      </div>
+      <div class="ai-key-status inactive" id="apiKeyStatus" role="status" aria-live="polite"></div>
+    </div>
+
+    <div class="quick-prompts" role="group" aria-label="Quick prompts">
+      <button class="quick-prompt" onclick="sendQuickPrompt('📊 صنّف جميع ملفاتي تلقائياً وأعطني تقريراً تفصيلياً','📊 Alle Dateien automatisch klassifizieren und detaillierten Bericht erstellen','📊 Auto-classify all files and create a detailed report')">
+        <span class="ar">📊 صنّف الملفات</span><span class="de">📊 Klassifizieren</span><span class="en">📊 Classify</span>
+      </button>
+      <button class="quick-prompt" onclick="sendQuickPrompt('📋 اقترح هيكل مجلدات مثالي لمنظمة DRK مع شرح تفصيلي','📋 Optimale Ordnerstruktur für DRK mit detaillierter Erklärung vorschlagen','📋 Suggest optimal folder structure for DRK with detailed explanation')">
+        <span class="ar">📋 هيكل DRK</span><span class="de">📋 DRK-Struktur</span><span class="en">📋 DRK Structure</span>
+      </button>
+      <button class="quick-prompt" onclick="sendQuickPrompt('⚖️ ما متطلبات DSGVO لحفظ ملفات الموظفين والمستفيدين في منظمة إنسانية؟','⚖️ DSGVO-Anforderungen für Mitarbeiter- und Begünstigtendateien in humanitärer Organisation?','⚖️ GDPR requirements for staff and beneficiary files in humanitarian organization?')">
+        ⚖️ DSGVO
+      </button>
+      <button class="quick-prompt" onclick="sendQuickPrompt('📈 أعطني تقريراً شاملاً عن ملفاتي الحالية مع توصيات التنظيم والتحسين','📈 Umfassenden Bericht über aktuelle Dateien mit Organisations- und Verbesserungsempfehlungen','📈 Comprehensive report on current files with organization and improvement recommendations')">
+        <span class="ar">📈 تقرير شامل</span><span class="de">📈 Bericht</span><span class="en">📈 Full Report</span>
+      </button>
+      <button class="quick-prompt" onclick="sendQuickPrompt('🗂️ كيف أنظّم أرشيف منظمة إنسانية باحترافية مع مراعاة DSGVO؟','🗂️ Wie organisiert man ein NGO-Archiv professionell unter DSGVO-Berücksichtigung?','🗂️ How to professionally organize an NGO archive while respecting GDPR?')">
+        <span class="ar">🗂️ تنظيم أرشيف</span><span class="de">🗂️ Archiv</span><span class="en">🗂️ Archive</span>
+      </button>
+    </div>
+
+    <div class="ai-messages" id="aiMessages" role="log" aria-label="AI conversation" aria-live="polite">
+      <div class="ai-message" role="listitem">
+        <div class="ai-avatar bot" aria-hidden="true">🤖</div>
+        <div class="ai-bubble bot">
+          <span class="ar">مرحباً! أنا محلل الوثائق الذكي من BismarkVault، مدعوم بـ Claude AI من Anthropic. أدخل مفتاح API ثم اسألني أي شيء عن ملفاتك أو أرشيفك أو DSGVO.</span>
+          <span class="de">Hallo! Ich bin der KI-Dokumentenanalysator von BismarkVault, powered by Claude AI von Anthropic. API-Schlüssel eingeben und mich alles fragen.</span>
+          <span class="en">Hello! I'm BismarkVault's AI Document Analyzer, powered by Claude AI from Anthropic. Enter your API key then ask me anything.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ai-input-row">
+      <input type="text" id="aiInput" class="ai-text-input"
+             onkeydown="if(event.key==='Enter'&&!event.shiftKey)sendAiMessage()"
+             placeholder="..."
+             aria-label="Message to AI"/>
+      <button class="ai-send-btn" id="aiSendBtn" onclick="sendAiMessage()">
+        <span class="ar">إرسال ✦</span><span class="de">Senden ✦</span><span class="en">Send ✦</span>
+      </button>
+    </div>
+  </div>
+</div>
+```
+
+  </div>
+
+  <div class="app-footer">
+    © 2026 <span>BismarkVault</span> — Malek Alsirreih · Mettmann, Germany ·
+    <a onclick="showLegal('imp')">Impressum</a> · <a onclick="showLegal('dat')">Datenschutz</a> · <a onclick="showLegal('agb')">AGB</a>
+  </div>
+</div>
+
+<!-- Toast notification -->
+
+<div class="toast-container" id="toastEl" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ══════════════════════════════════════════════
+     JAVASCRIPT
+══════════════════════════════════════════════ -->
 
 <script>
-    const _KEY = "TWFsZWssc2VyMTk4NA=="; // Base64 for Malek,ser1984
+'use strict';
 
-    function setLang(lang) {
-        document.body.setAttribute('lang', lang);
-        document.dir = (lang === 'ar') ? 'rtl' : 'ltr';
-    }
+/* ═══════════════════════════════════
+   CONFIGURATION
+   To change password: update RAW_PASS below
+═══════════════════════════════════ */
+const RAW_PASS = 'BismarkVault2026!';
+const PASS_HASH = btoa(unescape(encodeURIComponent(RAW_PASS)));
+const FILES_KEY = 'bv_files_v1';
+const API_KEY_STORAGE = 'bv_api_key';
 
-    function showVault() {
-        document.getElementById('landing-view').style.display = 'none';
-        document.getElementById('app-view').style.display = 'block';
-        window.scrollTo(0, 0);
-    }
+/* ═══ STATE ═══ */
+let currentLang = 'ar';
+let aiConversationHistory = [];
 
-    function doLogin() {
-        const input = document.getElementById('passInput').value;
-        if (btoa(unescape(encodeURIComponent(input))) === _KEY) {
-            document.getElementById('login-panel').style.display = 'none';
-            document.getElementById('dashboard-panel').style.display = 'block';
-            toast("Access Granted. Welcome Malek.");
-        } else {
-            toast("Invalid Password");
-            document.getElementById('passInput').value = "";
-        }
-    }
+/* ═══ HELPERS ═══ */
+function T(ar, de, en) { return { ar, de, en }[currentLang] || ar; }
 
-    function toast(msg) {
-        const t = document.getElementById('toast');
-        t.textContent = msg; t.style.display = 'block';
-        setTimeout(() => t.style.display = 'none', 3000);
+function showToast(msg, duration = 2800) {
+  const el = document.getElementById('toastEl');
+  el.textContent = msg;
+  el.classList.add('visible');
+  setTimeout(() => el.classList.remove('visible'), duration);
+}
+
+function formatBytes(bytes) {
+  if (bytes === 0) return '0 B';
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+  return (bytes / 1048576).toFixed(2) + ' MB';
+}
+
+function getFileEmoji(mimeType) {
+  if (!mimeType) return '📄';
+  if (mimeType.startsWith('image/')) return '🖼️';
+  if (mimeType.includes('pdf')) return '📕';
+  if (mimeType.includes('word') || mimeType.includes('document')) return '📝';
+  if (mimeType.includes('sheet') || mimeType.includes('excel') || mimeType.includes('csv')) return '📊';
+  if (mimeType.includes('zip') || mimeType.includes('rar') || mimeType.includes('7z') || mimeType.includes('tar')) return '📦';
+  if (mimeType.startsWith('video/')) return '🎬';
+  if (mimeType.startsWith('audio/')) return '🎵';
+  if (mimeType.includes('text')) return '📃';
+  if (mimeType.includes('presentation') || mimeType.includes('powerpoint')) return '📊';
+  return '📄';
+}
+
+/* ═══ LANGUAGE ═══ */
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('.ar, .de, .en').forEach(el => {
+    const tag = el.tagName.toLowerCase();
+    const isInline = ['span','a','strong','em','b','i','small','label','li'].includes(tag);
+    el.style.display = el.classList.contains(lang) ? (isInline ? 'inline' : 'block') : 'none';
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const isActive = btn.textContent.toLowerCase() === lang;
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', isActive);
+  });
+
+  const placeholders = {
+    ar: 'اسأل بالعربية أو الألمانية أو الإنجليزية...',
+    de: 'Fragen Sie auf Arabisch, Deutsch oder Englisch...',
+    en: 'Ask in Arabic, German or English...'
+  };
+  const aiInput = document.getElementById('aiInput');
+  if (aiInput) aiInput.placeholder = placeholders[lang];
+
+  refreshApiKeyStatus();
+}
+
+/* ═══ NAVIGATION ═══ */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav')?.classList.toggle('scrolled', window.scrollY > 40);
+}, { passive: true });
+
+function scrollTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function toggleMenu() {
+  const links = document.querySelector('.nav-links');
+  links?.classList.toggle('mobile-open');
+}
+
+/* ═══ VIEWS ═══ */
+function goHome() {
+  hideLegal();
+  document.getElementById('app').classList.add('gone');
+  document.getElementById('landing').classList.remove('gone');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showApp() {
+  document.getElementById('landing').classList.add('gone');
+  document.getElementById('app').classList.remove('gone');
+  window.scrollTo(0, 0);
+}
+
+function showLanding() {
+  document.getElementById('app').classList.add('gone');
+  document.getElementById('landing').classList.remove('gone');
+  window.scrollTo(0, 0);
+}
+
+function gotoContact() {
+  showLanding();
+  setTimeout(() => scrollTo('contact'), 400);
+}
+
+/* ═══ LEGAL ═══ */
+const LEGAL_CONTENT = {
+  imp: {
+    ar: `<h1 id="legalTitle">Impressum</h1><span class="legal-subtitle">البيانات القانونية وفق §5 TMG</span>
+    <h2>صاحب الموقع / Anbieter</h2>
+    <p>Malek Alsirreih<br>BismarkVault<br>Mettmann, Nordrhein-Westfalen<br>Deutschland</p>
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>Gewerbeanmeldung</h2>
+    <p>تسجيل Gewerbe قيد الإنجاز لدى Ordnungsamt Mettmann (2026).</p>
+    <h2>المسؤولية عن المحتوى</h2>
+    <p>وفق §7 TMG لا نتحمل مسؤولية دقة المحتوى. الروابط الخارجية مسؤولية أصحابها وفق §8-10 TMG.</p>
+    <h2>حقوق النشر / Urheberrecht</h2>
+    <p>© 2026 BismarkVault — Malek Alsirreih. جميع الحقوق محفوظة. محمي بموجب قانون حقوق النشر الألماني (UrhG). تم تسجيل الكود على GitHub Private Repository.</p>`,
+    de: `<h1 id="legalTitle">Impressum</h1><span class="legal-subtitle">Pflichtangaben gemäß §5 TMG</span>
+    <h2>Anbieter</h2>
+    <p>Malek Alsirreih<br>BismarkVault<br>Mettmann, Nordrhein-Westfalen<br>Deutschland</p>
+    <h2>Kontakt</h2>
+    <p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>Gewerbeanmeldung</h2>
+    <p>Gewerbeanmeldung beim Ordnungsamt Mettmann in Bearbeitung (2026).</p>
+    <h2>Haftung für Inhalte</h2>
+    <p>Gemäß §7 TMG übernehmen wir keine Gewähr für Richtigkeit. Für externe Links haften deren Betreiber gemäß §8-10 TMG.</p>
+    <h2>Urheberrecht</h2>
+    <p>© 2026 BismarkVault — Malek Alsirreih. Alle Rechte vorbehalten. Geschützt nach deutschem UrhG. Code auf GitHub Private Repository registriert.</p>`,
+    en: `<h1 id="legalTitle">Imprint</h1><span class="legal-subtitle">Mandatory information pursuant to §5 TMG</span>
+    <h2>Provider</h2>
+    <p>Malek Alsirreih<br>BismarkVault<br>Mettmann, North Rhine-Westphalia<br>Germany</p>
+    <h2>Contact</h2>
+    <p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>Business Registration</h2>
+    <p>Business registration with Ordnungsamt Mettmann in process (2026).</p>
+    <h2>Liability for Content</h2>
+    <p>Per §7 TMG we assume no liability for content accuracy. External links are their operators' responsibility per §8-10 TMG.</p>
+    <h2>Copyright</h2>
+    <p>© 2026 BismarkVault — Malek Alsirreih. All rights reserved. Protected under German UrhG. Code registered on GitHub Private Repository.</p>`
+  },
+  dat: {
+    ar: `<h1 id="legalTitle">Datenschutzerklärung</h1><span class="legal-subtitle">سياسة حماية البيانات وفق DSGVO/GDPR</span>
+    <h2>المسؤول / Verantwortlicher</h2>
+    <p>Malek Alsirreih · <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a> · Mettmann, Deutschland</p>
+    <h2>البيانات المجمّعة</h2>
+    <p>لا يجمع هذا التطبيق أي بيانات شخصية على خوادم خارجية. جميع الملفات تُخزَّن محلياً في متصفح المستخدم (localStorage) فقط ولا تُرسَل لأي جهة خارجية.</p>
+    <h2>مفتاح Anthropic API</h2>
+    <p>يُخزَّن مفتاح API محلياً في متصفحك فقط. يُرسَل مباشرةً لـ Anthropic عند استخدام الذكاء الاصطناعي — لا يمر بخوادمنا ولا نطّلع عليه أبداً.</p>
+    <h2>حقوق المستخدم (Art. 17 DSGVO)</h2>
+    <p>يحق لك حذف جميع بياناتك في أي وقت عبر "حذف الكل" في التطبيق أو بمسح بيانات المتصفح (localStorage).</p>
+    <h2>Cookies</h2>
+    <p>لا يستخدم الموقع أي ملفات تتبع (Cookies) أو أدوات تحليل أو تسويق.</p>
+    <h2>الأمان</h2>
+    <p>كلمة المرور مشفّرة. بيانات الملفات محفوظة محلياً فقط. لا نخزن أي معلومات شخصية على خوادمنا.</p>`,
+    de: `<h1 id="legalTitle">Datenschutzerklärung</h1><span class="legal-subtitle">Gemäß DSGVO/GDPR</span>
+    <h2>Verantwortlicher</h2>
+    <p>Malek Alsirreih · <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a> · Mettmann, Deutschland</p>
+    <h2>Erhobene Daten</h2>
+    <p>Diese Anwendung sammelt keine personenbezogenen Daten auf externen Servern. Alle Dateien werden ausschließlich lokal im Browser des Nutzers gespeichert (localStorage) und nicht übertragen.</p>
+    <h2>Anthropic API-Schlüssel</h2>
+    <p>Der API-Schlüssel wird nur lokal im Browser gespeichert und direkt an Anthropic gesendet — er passiert nicht unsere Server und ist für uns nicht einsehbar.</p>
+    <h2>Nutzerrechte (Art. 17 DSGVO)</h2>
+    <p>Sie können alle Daten jederzeit über "Alle löschen" in der App oder durch Löschen der Browser-Daten (localStorage) entfernen.</p>
+    <h2>Cookies</h2>
+    <p>Diese Website verwendet keine Tracking-, Analyse- oder Marketing-Cookies.</p>
+    <h2>Sicherheit</h2>
+    <p>Passwort ist verschlüsselt. Dateidaten werden nur lokal gespeichert. Keine persönlichen Informationen auf unseren Servern.</p>`,
+    en: `<h1 id="legalTitle">Privacy Policy</h1><span class="legal-subtitle">Pursuant to GDPR/DSGVO</span>
+    <h2>Controller</h2>
+    <p>Malek Alsirreih · <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a> · Mettmann, Germany</p>
+    <h2>Data Collected</h2>
+    <p>This app collects no personal data on external servers. All files are stored exclusively locally in your browser (localStorage) and are not transmitted to any external party.</p>
+    <h2>Anthropic API Key</h2>
+    <p>Your API key is stored only locally in your browser and sent directly to Anthropic — it does not pass through our servers and we never see it.</p>
+    <h2>User Rights (Art. 17 GDPR)</h2>
+    <p>You can delete all your data at any time via "Delete All" in the app or by clearing browser data (localStorage).</p>
+    <h2>Cookies</h2>
+    <p>This website uses no tracking, analytics, or marketing cookies.</p>
+    <h2>Security</h2>
+    <p>Password is encrypted. File data stored locally only. No personal information on our servers.</p>`
+  },
+  agb: {
+    ar: `<h1 id="legalTitle">شروط الخدمة (AGB)</h1><span class="legal-subtitle">آخر تحديث: أبريل 2026</span>
+    <h2>1. نطاق التطبيق</h2><p>تنطبق على استخدام BismarkVault من Malek Alsirreih، Mettmann، Deutschland.</p>
+    <h2>2. الخدمات</h2><p>نظام أرشفة رقمي مع تحليل ذكاء اصطناعي. الخطة المجانية: 20 ملف. الخطط المدفوعة وفق جدول الأسعار المعلن.</p>
+    <h2>3. التخزين والبيانات</h2><p>النسخة المجانية تخزّن الملفات محلياً في متصفحك (localStorage). قد تُفقد البيانات المحلية عند مسح المتصفح. للتخزين السحابي الدائم تواصل معنا.</p>
+    <h2>4. الاستخدام المسؤول</h2><p>يلتزم المستخدم بعدم رفع محتوى مخالف للقانون الألماني. BismarkVault غير مسؤول عن محتوى الملفات.</p>
+    <h2>5. المسؤولية</h2><p>التطبيق مقدَّم "كما هو". لا نضمن توفراً 100%. غير مسؤولين عن فقدان البيانات المحلية.</p>
+    <h2>6. القانون والاختصاص</h2><p>يخضع للقانون الألماني. محكمة Mettmann مختصة.</p>`,
+    de: `<h1 id="legalTitle">AGB</h1><span class="legal-subtitle">Zuletzt aktualisiert: April 2026</span>
+    <h2>1. Geltungsbereich</h2><p>Für die Nutzung von BismarkVault von Malek Alsirreih, Mettmann, Deutschland.</p>
+    <h2>2. Leistungen</h2><p>Digitales Archivsystem mit KI-Analyse. Kostenloser Plan: 20 Dateien. Kostenpflichtige Pläne gemäß Preisliste.</p>
+    <h2>3. Speicherung</h2><p>Kostenlose Version speichert lokal im Browser (localStorage). Lokale Daten können beim Löschen verloren gehen. Für dauerhaften Cloud-Speicher Kontakt aufnehmen.</p>
+    <h2>4. Nutzerpflichten</h2><p>Keine rechtswidrigen Inhalte hochladen. Keine Haftung für gespeicherte Dateiinhalte.</p>
+    <h2>5. Haftung</h2><p>App "wie besehen". Keine Garantie für 100% Verfügbarkeit. Keine Haftung für lokalen Datenverlust.</p>
+    <h2>6. Recht und Gerichtsstand</h2><p>Deutsches Recht. Gerichtsstand Mettmann.</p>`,
+    en: `<h1 id="legalTitle">Terms of Service</h1><span class="legal-subtitle">Last updated: April 2026</span>
+    <h2>1. Scope</h2><p>For use of BismarkVault by Malek Alsirreih, Mettmann, Germany.</p>
+    <h2>2. Services</h2><p>Digital archiving system with AI analysis. Free plan: 20 files. Paid plans per published pricing.</p>
+    <h2>3. Storage</h2><p>Free version stores locally in browser (localStorage). Local data may be lost when clearing browser. Contact us for cloud storage.</p>
+    <h2>4. User Obligations</h2><p>No illegal content. Not liable for file content.</p>
+    <h2>5. Liability</h2><p>App provided "as is". No guarantee of 100% availability. Not liable for local data loss.</p>
+    <h2>6. Law and Jurisdiction</h2><p>German law. Jurisdiction: Mettmann.</p>`
+  }
+};
+
+function showLegal(key) {
+  const overlay = document.getElementById('legal-overlay');
+  const content = LEGAL_CONTENT[key]?.[currentLang] || LEGAL_CONTENT[key]?.de || '';
+  document.getElementById('legalContent').innerHTML = content;
+  overlay.classList.remove('gone');
+  overlay.scrollTop = 0;
+  setLang(currentLang);
+  overlay.focus();
+}
+
+function hideLegal() {
+  document.getElementById('legal-overlay').classList.add('gone');
+}
+
+/* ═══ PASSWORD STRENGTH ═══ */
+function checkPwdStrength(value) {
+  let score = 0;
+  if (value.length >= 6) score++;
+  if (value.length >= 10) score++;
+  if (/[A-Z]/.test(value) && /[0-9]/.test(value)) score++;
+  if (/[^A-Za-z0-9]/.test(value)) score++;
+
+  const colors = ['', '#8B1E2F', '#C8761A', '#B0A000', '#1A8A3A'];
+  const labels = {
+    ar: ['', 'ضعيف', 'متوسط', 'جيد', 'قوي'],
+    de: ['', 'Schwach', 'Mittel', 'Gut', 'Stark'],
+    en: ['', 'Weak', 'Medium', 'Good', 'Strong']
+  };
+
+  for (let i = 0; i < 4; i++) {
+    const bar = document.getElementById('pb' + i);
+    if (bar) bar.style.background = i < score ? colors[score] : '';
+  }
+
+  const label = document.getElementById('pwdLabel');
+  if (label) {
+    label.textContent = value.length > 0 ? (labels[currentLang][score] || '') : '';
+    label.style.color = colors[score] || '';
+  }
+}
+
+/* ═══ AUTH ═══ */
+function doLogin() {
+  const input = document.getElementById('passInput');
+  const value = input?.value || '';
+
+  if (btoa(unescape(encodeURIComponent(value))) === PASS_HASH) {
+    document.getElementById('loginPanel').classList.add('gone');
+    document.getElementById('vaultPanel').classList.remove('gone');
+    renderFileList();
+    refreshApiKeyStatus();
+    showToast(T('✅ مرحباً بك في BismarkVault', '✅ Willkommen in BismarkVault', '✅ Welcome to BismarkVault'));
+  } else {
+    showToast(T('❌ كلمة المرور غير صحيحة', '❌ Falsches Passwort', '❌ Wrong password'));
+    input.value = '';
+    input.focus();
+  }
+}
+
+function doLogout() {
+  document.getElementById('vaultPanel').classList.add('gone');
+  document.getElementById('loginPanel').classList.remove('gone');
+  const passInput = document.getElementById('passInput');
+  if (passInput) passInput.value = '';
+  for (let i = 0; i < 4; i++) {
+    const bar = document.getElementById('pb' + i);
+    if (bar) bar.style.background = '';
+  }
+  const label = document.getElementById('pwdLabel');
+  if (label) label.textContent = '';
+  aiConversationHistory = [];
+  showToast(T('👋 تم الخروج بأمان', '👋 Sicher abgemeldet', '👋 Logged out securely'));
+}
+
+/* ═══ CONTACT ═══ */
+function submitContact(e) {
+  if (e) e.preventDefault();
+  const name = document.getElementById('cName')?.value.trim();
+  const email = document.getElementById('cEmail')?.value.trim();
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!name) { showToast(T('⚠️ أدخل اسمك', '⚠️ Name eingeben', '⚠️ Enter your name')); return; }
+  if (!email || !emailRegex.test(email)) { showToast(T('⚠️ بريد إلكتروني غير صحيح', '⚠️ Ungültige E-Mail', '⚠️ Invalid email')); return; }
+
+  const success = document.getElementById('cSuccess');
+  if (success) {
+    success.style.display = 'block';
+    setLang(currentLang);
+    success.style.display = 'block';
+  }
+
+  ['cName', 'cEmail', 'cOrg', 'cMsg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  showToast(T('✅ تم الإرسال! سنتواصل خلال 24 ساعة', '✅ Gesendet! Wir melden uns in 24h', '✅ Sent! We\'ll contact you in 24h'));
+}
+
+/* ═══ DEMO ═══ */
+function getDemoAnalysis(filename, mimeType) {
+  const ext = (filename.split('.').pop() || '').toLowerCase();
+  const analyses = {
+    ar: {
+      pdf: `📕 <span class="highlight">وثيقة PDF محددة</span><br>📁 التصنيف المقترح: <span class="highlight">وثائق إدارية</span><br>⚠️ راجع المحتوى لتحديد النوع الدقيق (عقد / تقرير / مراسلة)<br>🔐 جاهز للحفظ الآمن في القبو<br>✅ <span class="highlight">التحليل مكتمل</span>`,
+      xlsx: `📊 <span class="highlight">ملف بيانات Excel</span><br>📁 التصنيف المقترح: <span class="highlight">ملفات مالية / إحصائيات</span><br>💡 مناسب للتقارير المالية وقوائم الموظفين<br>✅ <span class="highlight">جاهز للقبو الآمن</span>`,
+      docx: `📝 <span class="highlight">وثيقة Word</span><br>📁 التصنيف المقترح: <span class="highlight">مراسلات / تقارير / عقود</span><br>💡 حدّد النوع الدقيق بعد فتح الملف<br>✅ <span class="highlight">جاهز للقبو الآمن</span>`,
+      img: `🖼️ <span class="highlight">صورة / مسح ضوئي</span><br>📁 التصنيف المقترح: <span class="highlight">وثائق هوية / صور أرشيفية</span><br>💡 للوثائق الممسوحة استخدم AI لاستخراج النص<br>✅ <span class="highlight">جاهز للقبو الآمن</span>`,
+      def: `📄 <span class="highlight">ملف ${ext.toUpperCase()}</span><br>📁 التصنيف المقترح: <span class="highlight">وثائق عامة</span><br>💡 للتحليل الكامل استخدم مساعد AI في التطبيق<br>✅ <span class="highlight">جاهز للقبو الآمن</span>`
+    },
+    de: {
+      pdf: `📕 <span class="highlight">PDF-Dokument erkannt</span><br>📁 Kategorie: <span class="highlight">Verwaltungsdokumente</span><br>⚠️ Inhalt für genaue Klassifizierung prüfen<br>🔐 Bereit für sichere Speicherung<br>✅ <span class="highlight">Analyse abgeschlossen</span>`,
+      xlsx: `📊 <span class="highlight">Excel-Datei erkannt</span><br>📁 Kategorie: <span class="highlight">Finanzdaten / Statistiken</span><br>✅ <span class="highlight">Bereit für sicheren Tresor</span>`,
+      docx: `📝 <span class="highlight">Word-Dokument erkannt</span><br>📁 Kategorie: <span class="highlight">Korrespondenz / Berichte / Verträge</span><br>✅ <span class="highlight">Bereit für sicheren Tresor</span>`,
+      img: `🖼️ <span class="highlight">Bild / Scan erkannt</span><br>📁 Kategorie: <span class="highlight">Ausweisdokumente / Archivbilder</span><br>✅ <span class="highlight">Bereit für sicheren Tresor</span>`,
+      def: `📄 <span class="highlight">${ext.toUpperCase()}-Datei erkannt</span><br>📁 Kategorie: <span class="highlight">Allgemeine Dokumente</span><br>✅ <span class="highlight">Bereit für sicheren Tresor</span>`
+    },
+    en: {
+      pdf: `📕 <span class="highlight">PDF Document detected</span><br>📁 Category: <span class="highlight">Administrative Documents</span><br>⚠️ Check content for precise classification<br>🔐 Ready for secure storage<br>✅ <span class="highlight">Analysis complete</span>`,
+      xlsx: `📊 <span class="highlight">Excel file detected</span><br>📁 Category: <span class="highlight">Financial data / Statistics</span><br>✅ <span class="highlight">Ready for secure vault</span>`,
+      docx: `📝 <span class="highlight">Word document detected</span><br>📁 Category: <span class="highlight">Correspondence / Reports / Contracts</span><br>✅ <span class="highlight">Ready for secure vault</span>`,
+      img: `🖼️ <span class="highlight">Image / Scan detected</span><br>📁 Category: <span class="highlight">ID documents / Archive images</span><br>✅ <span class="highlight">Ready for secure vault</span>`,
+      def: `📄 <span class="highlight">${ext.toUpperCase()} file detected</span><br>📁 Category: <span class="highlight">General Documents</span><br>✅ <span class="highlight">Ready for secure vault</span>`
     }
+  };
+
+  const lang = analyses[currentLang] || analyses.en;
+  if (ext === 'pdf') return lang.pdf;
+  if (['xlsx','xls','csv','ods'].includes(ext)) return lang.xlsx;
+  if (['docx','doc','odt','rtf'].includes(ext)) return lang.docx;
+  if (['jpg','jpeg','png','gif','webp','bmp','tiff','svg'].includes(ext)) return lang.img;
+  if (mimeType?.startsWith('image/')) return lang.img;
+  return lang.def;
+}
+
+function runDemo(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  const fileRow = document.getElementById('demoFileRow');
+  const emojiEl = document.createElement('div');
+  emojiEl.className = 'demo-file-icon';
+  emojiEl.textContent = getFileEmoji(file.type);
+
+  const infoEl = document.createElement('div');
+  infoEl.innerHTML = `<div class="demo-file-name">${file.name}</div><div class="demo-file-meta">${formatBytes(file.size)} · ${file.type || '—'}</div>`;
+
+  const badgeEl = document.createElement('div');
+  badgeEl.className = 'demo-ai-badge';
+  badgeEl.textContent = 'AI ✦';
+
+  fileRow.innerHTML = '';
+  fileRow.appendChild(emojiEl);
+  fileRow.appendChild(infoEl);
+  fileRow.appendChild(badgeEl);
+
+  const aiText = document.getElementById('demoAiText');
+  aiText.innerHTML = '<div class="ai-typing"><span></span><span></span><span></span></div>';
+
+  const resultEl = document.getElementById('demoResult');
+  resultEl.classList.add('visible');
+  setLang(currentLang);
+
+  setTimeout(() => {
+    aiText.innerHTML = getDemoAnalysis(file.name, file.type);
+    showToast(T('✅ تم التحليل بنجاح', '✅ Erfolgreich analysiert', '✅ Analysis complete'));
+  }, 1800);
+}
+
+// Demo drag and drop
+const demoArea = document.getElementById('demoArea');
+demoArea?.addEventListener('dragover', e => { e.preventDefault(); demoArea.classList.add('drag-over'); });
+demoArea?.addEventListener('dragleave', () => demoArea.classList.remove('drag-over'));
+demoArea?.addEventListener('drop', e => {
+  e.preventDefault();
+  demoArea.classList.remove('drag-over');
+  const file = e.dataTransfer.files?.[0];
+  if (file) runDemo({ target: { files: [file] } });
+});
+
+/* ═══ TABS ═══ */
+function switchTab(name, el) {
+  document.querySelectorAll('.vault-tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  el.classList.add('active');
+  el.setAttribute('aria-selected', 'true');
+  document.getElementById('tabFiles').classList.toggle('gone', name !== 'files');
+  document.getElementById('tabAI').classList.toggle('gone', name !== 'ai');
+}
+
+/* ═══ FILES ═══ */
+function loadFiles() { return JSON.parse(localStorage.getItem(FILES_KEY) || '[]'); }
+function saveFiles(data) { localStorage.setItem(FILES_KEY, JSON.stringify(data)); }
+
+function addFiles(event) {
+  const files = event.target.files;
+  if (!files.length) return;
+
+  const data = loadFiles();
+  for (const file of files) {
+    data.push({
+      id: Date.now() + Math.random(),
+      name: file.name,
+      size: file.size,
+      type: file.type || 'application/octet-stream',
+      date: new Date().toLocaleDateString()
+    });
+  }
+  saveFiles(data);
+  renderFileList();
+  document.getElementById('fileInput').value = '';
+  showToast(T(`✅ تم رفع ${files.length} ملف`, `✅ ${files.length} Datei(en) hochgeladen`, `✅ ${files.length} file(s) uploaded`));
+}
+
+function deleteFile(id) {
+  const data = loadFiles();
+  const idx = data.findIndex(f => f.id === id);
+  if (idx === -1) return;
+  const name = data[idx].name;
+  data.splice(idx, 1);
+  saveFiles(data);
+  renderFileList();
+  showToast('🗑️ ' + name);
+}
+
+function clearAll() {
+  const confirmed = window.confirm(T('هل أنت متأكد من حذف جميع الملفات؟', 'Wirklich alle Dateien löschen?', 'Delete all files?'));
+  if (!confirmed) return;
+  localStorage.removeItem(FILES_KEY);
+  renderFileList();
+  showToast(T('🗑️ تم حذف جميع الملفات', '🗑️ Alle Dateien gelöscht', '🗑️ All files deleted'));
+}
+
+function analyzeFileWithAI(id) {
+  const data = loadFiles();
+  const file = data.find(f => f.id === id);
+  if (!file) return;
+  switchTab('ai', document.querySelectorAll('.vault-tab')[1]);
+  const q = T(
+    `حلّل هذا الملف وصنّفه تفصيلياً: "${file.name}" (${formatBytes(file.size)}, ${file.type})`,
+    `Analysieren und detailliert klassifizieren: "${file.name}" (${formatBytes(file.size)}, ${file.type})`,
+    `Analyze and classify in detail: "${file.name}" (${formatBytes(file.size)}, ${file.type})`
+  );
+  document.getElementById('aiInput').value = q;
+  sendAiMessage();
+}
+
+function renderFileList() {
+  const data = loadFiles();
+  const container = document.getElementById('fileList');
+  const totalSize = data.reduce((sum, f) => sum + (f.size || 0), 0);
+  const types = new Set(data.map(f => (f.type || '').split('/')[0])).size;
+
+  document.getElementById('statCount').textContent = data.length;
+  document.getElementById('statSize').textContent = (totalSize / 1048576).toFixed(2);
+  document.getElementById('statTypes').textContent = types;
+
+  if (!data.length) {
+    container.innerHTML = `
+      <div class="file-list-empty">
+        <span class="empty-icon" aria-hidden="true">🗄️</span>
+        <p>${T('القبو فارغ<br>ارفع ملفاتك الأولى الآن', 'Tresor ist leer<br>Laden Sie jetzt Ihre ersten Dateien hoch', 'Vault is empty<br>Upload your first files now')}</p>
+      </div>`;
+    return;
+  }
+
+  container.innerHTML = data.map(file => `
+    <div class="file-row" role="listitem">
+      <div class="file-icon" aria-hidden="true">${getFileEmoji(file.type)}</div>
+      <div class="file-info">
+        <div class="file-name" title="${file.name}">${file.name}</div>
+        <div class="file-meta">${formatBytes(file.size)} · ${file.type || '—'} · ${file.date || ''}</div>
+      </div>
+      <button class="file-action-btn file-ai-btn" onclick="analyzeFileWithAI('${file.id}')" title="AI Analysis" aria-label="Analyze with AI">🤖</button>
+      <button class="file-action-btn file-del-btn" onclick="deleteFile('${file.id}')" title="Delete" aria-label="Delete file">✕</button>
+    </div>`).join('');
+}
+
+/* ═══ DRAG & DROP FOR VAULT ═══ */
+const dropZone = document.getElementById('dropZone');
+dropZone?.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragging'); });
+dropZone?.addEventListener('dragleave', () => dropZone.classList.remove('dragging'));
+dropZone?.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragging');
+  addFiles({ target: { files: e.dataTransfer.files } });
+});
+dropZone?.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') dropZone.querySelector('input')?.click();
+});
+
+/* ═══ API KEY ═══ */
+function saveApiKey() {
+  const input = document.getElementById('apiKeyInput');
+  const key = input?.value.trim();
+  if (!key) { showToast(T('⚠️ أدخل المفتاح أولاً', '⚠️ Schlüssel eingeben', '⚠️ Enter key first')); return; }
+  if (!key.startsWith('sk-')) { showToast(T('⚠️ المفتاح يجب أن يبدأ بـ sk-', '⚠️ Schlüssel beginnt mit sk-', '⚠️ Key must start with sk-')); return; }
+  localStorage.setItem(API_KEY_STORAGE, key);
+  refreshApiKeyStatus();
+  showToast(T('✅ تم حفظ المفتاح بأمان', '✅ Schlüssel sicher gespeichert', '✅ Key saved securely'));
+}
+
+function refreshApiKeyStatus() {
+  const key = localStorage.getItem(API_KEY_STORAGE);
+  const statusEl = document.getElementById('apiKeyStatus');
+  const inputEl = document.getElementById('apiKeyInput');
+  if (!statusEl) return;
+
+  if (key && key.startsWith('sk-')) {
+    statusEl.className = 'ai-key-status active';
+    statusEl.innerHTML = '✅ <span class="ar">مفتاح API مفعّل ونشط</span><span class="de">API-Schlüssel aktiv</span><span class="en">API key active</span>';
+    if (inputEl) inputEl.value = key;
+  } else {
+    statusEl.className = 'ai-key-status inactive';
+    statusEl.innerHTML = '🔑 <span class="ar">لم يتم إدخال مفتاح — مجاني من console.anthropic.com</span><span class="de">Kein Schlüssel — kostenlos bei console.anthropic.com</span><span class="en">No key yet — free at console.anthropic.com</span>';
+  }
+  setLang(currentLang);
+}
+
+function sendQuickPrompt(ar, de, en) {
+  const input = document.getElementById('aiInput');
+  if (input) input.value = T(ar, de, en);
+  sendAiMessage();
+}
+
+function getFilesContext() {
+  const data = loadFiles();
+  if (!data.length) return T('لا توجد ملفات في القبو.', 'Keine Dateien im Tresor.', 'No files in vault.');
+  return T('الملفات الحالية في القبو:', 'Aktuelle Dateien im Tresor:', 'Current files in vault:') + '\n' +
+    data.map(f => `- ${f.name} (${formatBytes(f.size)}, ${f.type || 'unknown'})`).join('\n');
+}
+
+function addAiMessage(role, text) {
+  const container = document.getElementById('aiMessages');
+  const isBot = role === 'assistant';
+  const div = document.createElement('div');
+  div.className = 'ai-message' + (isBot ? '' : ' user-msg');
+  div.setAttribute('role', 'listitem');
+  div.innerHTML = `
+    <div class="ai-avatar ${isBot ? 'bot' : 'user'}" aria-hidden="true">${isBot ? '🤖' : '👤'}</div>
+    <div class="ai-bubble ${isBot ? 'bot' : 'user'}">${text.replace(/\n/g, '<br>')}</div>`;
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function showTypingIndicator() {
+  const container = document.getElementById('aiMessages');
+  const div = document.createElement('div');
+  div.className = 'ai-message';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<div class="ai-avatar bot" aria-hidden="true">🤖</div><div class="ai-bubble bot"><div class="ai-typing"><span></span><span></span><span></span></div></div>';
+  container.appendChild(div);
+  container.scrollTop = container.scrollHeight;
+}
+
+function removeTypingIndicator() {
+  document.getElementById('typingIndicator')?.remove();
+}
+
+async function sendAiMessage() {
+  const input = document.getElementById('aiInput');
+  const message = input?.value.trim();
+  if (!message) return;
+
+  const apiKey = localStorage.getItem(API_KEY_STORAGE);
+  if (!apiKey || !apiKey.startsWith('sk-')) {
+    showToast(T('⚠️ أدخل مفتاح Anthropic API أولاً', '⚠️ Bitte erst API-Schlüssel eingeben', '⚠️ Please enter Anthropic API key first'));
+    document.getElementById('apiKeyInput')?.focus();
+    return;
+  }
+
+  if (input) input.value = '';
+  addAiMessage('user', message);
+  aiConversationHistory.push({ role: 'user', content: message });
+
+  const sendBtn = document.getElementById('aiSendBtn');
+  if (sendBtn) sendBtn.disabled = true;
+  showTypingIndicator();
+
+  const languageInstruction = T(
+    'تحدث بالعربية دائماً إلا إذا طُلب غير ذلك صراحةً.',
+    'Antworte immer auf Deutsch, außer eine andere Sprache wird ausdrücklich gewünscht.',
+    'Always respond in English unless another language is explicitly requested.'
+  );
+
+  const systemPrompt = `You are BismarkVault AI Document Analyzer — an intelligent archiving system built by Malek Alsirreih in Mettmann, Germany.
+
+Your specialization: analyze documents, classify files, answer DSGVO/GDPR compliance questions, suggest professional archive structures for humanitarian NGOs (DRK, European Homecare, SKFM) and small businesses in Germany.
+
+${languageInstruction}
+
+Current vault contents:
+${getFilesContext()}
+
+Guidelines:
+- Be concise, practical, and action-oriented
+- Use relevant emojis to improve readability
+- Always mention quantifiable time savings and efficiency gains when relevant
+- Focus on: document classification, archiving best practices, DSGVO/GDPR compliance, NGO-specific needs
+- When suggesting folder structures, provide complete hierarchies
+
+© 2026 BismarkVault — Malek Alsirreih · Mettmann, Germany`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 1024,
+        system: systemPrompt,
+        messages: aiConversationHistory
+      })
+    });
+
+    const data = await response.json();
+    removeTypingIndicator();
+
+    if (data.content?.[0]?.text) {
+      const reply = data.content[0].text;
+      addAiMessage('assistant', reply);
+      aiConversationHistory.push({ role: 'assistant', content: reply });
+    } else if (data.error) {
+      const errMsg = data.error.message || 'Unknown error';
+      addAiMessage('assistant', `⚠️ ${errMsg}`);
+      showToast('⚠️ API Error: ' + errMsg);
+    } else {
+      addAiMessage('assistant', T('⚠️ رد غير متوقع من API', '⚠️ Unerwartete API-Antwort', '⚠️ Unexpected API response'));
+    }
+  } catch (error) {
+    removeTypingIndicator();
+    const errText = T(
+      '⚠️ تعذّر الاتصال بالخادم. تأكد من صحة المفتاح واتصال الإنترنت.',
+      '⚠️ Verbindungsfehler. API-Schlüssel und Internetverbindung prüfen.',
+      '⚠️ Connection failed. Please check your API key and internet connection.'
+    );
+    addAiMessage('assistant', errText);
+  } finally {
+    if (sendBtn) sendBtn.disabled = false;
+    document.getElementById('aiMessages').scrollTop = 99999;
+  }
+}
+
+/* ═══ PWA ═══ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+
+/* ═══ ACCESSIBILITY ═══ */
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const overlay = document.getElementById('legal-overlay');
+    if (!overlay.classList.contains('gone')) hideLegal();
+  }
+});
+
+/* ═══ KEYBOARD ACCESSIBILITY ═══ */
+document.querySelectorAll('.nav-logo').forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') goHome(); });
+});
+
+/* ═══ INIT ═══ */
+setLang('ar');
 </script>
 
 </body>
