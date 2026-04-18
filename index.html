@@ -1,55 +1,161 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>BismarkVault | الخزنة الآمنة</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>BismarkVault Ultimate | Secure AI Vault</title>
+    
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#050403">
+    
     <style>
-        :root { --gold: #C8A84B; --bg: #0d0d0d; }
-        body { background: var(--bg); color: white; font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
-        .login-card { background: rgba(255,255,255,0.03); padding: 40px; border-radius: 20px; border: 1px solid var(--gold); text-align: center; width: 360px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
-        h1 { color: var(--gold); margin-bottom: 5px; font-size: 24px; }
-        p { opacity: 0.6; font-size: 14px; margin-bottom: 25px; }
-        .input-box { position: relative; width: 100%; }
-        input { width: 100%; padding: 14px; border-radius: 10px; border: 1px solid #333; background: #000; color: white; font-size: 16px; box-sizing: border-box; }
-        input:focus { border-color: var(--gold); outline: none; }
-        .toggle { position: absolute; left: 10px; top: 12px; cursor: pointer; filter: grayscale(1); opacity: 0.5; }
-        button { width: 100%; padding: 14px; background: var(--gold); border: none; border-radius: 10px; color: black; font-weight: bold; font-size: 16px; cursor: pointer; margin-top: 20px; transition: 0.3s; }
-        button:hover { background: #e0bc54; transform: translateY(-2px); }
+        :root {
+            --gold: #C8A84B;
+            --bg: #050403;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(200, 168, 75, 0.2);
+        }
+
+        body, html {
+            margin: 0; padding: 0;
+            background-color: var(--bg);
+            color: #fff;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            height: 100vh; overflow: hidden;
+        }
+
+        /* شاشة القفل الاحترافية */
+        #lock-screen {
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, #1a1a1a 0%, #050403 100%);
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            z-index: 9999; transition: transform 0.8s cubic-bezier(0.87, 0, 0.13, 1);
+        }
+
+        .vault-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 50px; border-radius: 30px;
+            border: 1px solid var(--border);
+            text-align: center; width: 90%; max-width: 400px;
+            box-shadow: 0 50px 100px rgba(0,0,0,0.9);
+        }
+
+        .logo-gold {
+            color: var(--gold); font-size: 2.5rem; font-weight: 800;
+            margin-bottom: 10px; text-transform: uppercase; letter-spacing: 2px;
+        }
+
+        .input-group { position: relative; margin-top: 30px; }
+
+        input {
+            width: 100%; padding: 18px;
+            background: rgba(0,0,0,0.6);
+            border: 1px solid #333; border-radius: 15px;
+            color: #fff; font-size: 1.1rem; text-align: center;
+            box-sizing: border-box; transition: 0.3s;
+        }
+
+        input:focus { border-color: var(--gold); outline: none; box-shadow: 0 0 20px rgba(200, 168, 75, 0.2); }
+
+        .btn-unlock {
+            width: 100%; padding: 18px; margin-top: 25px;
+            background: var(--gold); color: #000;
+            border: none; border-radius: 15px;
+            font-weight: 900; cursor: pointer; transition: 0.3s;
+        }
+
+        .btn-unlock:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(200, 168, 75, 0.3); }
+
+        /* الشاشة الرئيسية للبرنامج (مخفية قبل الدخول) */
+        #main-app {
+            display: none; padding: 20px;
+            height: 100vh; flex-direction: column;
+        }
+
+        .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #222; padding-bottom: 15px; }
+
+        .app-container {
+            flex: 1; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            text-align: center;
+        }
+
+        .status-msg { color: var(--gold); background: rgba(200, 168, 75, 0.1); padding: 10px 20px; border-radius: 50px; font-size: 0.9rem; }
+
+        .gone { transform: translateY(-100%); }
     </style>
 </head>
 <body>
 
-<div class="login-card">
-    <h1>BismarkVault</h1>
-    <p>مرحباً مالك، أدخل مفتاحك الخاص</p>
-    
-    <div class="input-box">
-        <input type="password" id="passInput" placeholder="كلمة السر">
-        <span class="toggle" onclick="togglePass()">👁️</span>
+    <div id="lock-screen">
+        <div class="vault-card">
+            <div class="logo-gold">BismarkVault</div>
+            <p id="lang-msg" style="opacity: 0.6;">أدخل مفتاح العبور الخاص بمالك</p>
+            
+            <div class="input-group">
+                <input type="password" id="pass-input" placeholder="كلمة السر">
+            </div>
+
+            <button class="btn-unlock" onclick="handleAuth()">فتح الخزنة الآمنة</button>
+            <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.4;">Mettmann, Germany | 2026</div>
+        </div>
     </div>
 
-    <button onclick="checkAuth()">دخول آمن</button>
-</div>
+    <div id="main-app">
+        <div class="header">
+            <div style="color: var(--gold); font-weight: bold;">BISMARKVAULT ULTIMATE</div>
+            <div class="status-msg">● النظام نشط ومؤمن</div>
+        </div>
+        
+        <div class="app-container">
+            <h2 style="font-size: 2rem;">مرحباً بك يا مالك</h2>
+            <p style="opacity: 0.7; max-width: 500px;">تم التحقق من هويتك بنجاح. يمكنك الآن البدء بتحليل المستندات أو استخدام ميزات الذكاء الاصطناعي المتقدمة.</p>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; width: 100%; max-width: 500px; margin-top: 30px;">
+                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222;">تحليل الوثائق</div>
+                <div style="background: #111; padding: 20px; border-radius: 15px; border: 1px solid #222;">الخزنة السحابية</div>
+            </div>
+        </div>
+    </div>
 
-<script>
-    // كلمة السر التي اخترتها
-    const MY_SECRET = "Malek,ser1984";
+    <script>
+        // كلمة السر المطلوبة
+        const KEY = "Malek,ser1984";
 
-    function checkAuth() {
-        const val = document.getElementById('passInput').value;
-        if (val === MY_SECRET) {
-            alert("✅ أهلاً بك يا مالك! جاري فتح الخزنة...");
-            // هنا تضع رابط صفحتك التالية: window.location.href = "vault.html";
-        } else {
-            alert("❌ كلمة السر غير صحيحة، حاول مجدداً.");
+        // التحقق من الجلسة السابقة
+        window.onload = () => {
+            if (localStorage.getItem('bv_auth') === 'true') {
+                showApp();
+            }
+        };
+
+        function handleAuth() {
+            const input = document.getElementById('pass-input').value;
+            if (input === KEY) {
+                localStorage.setItem('bv_auth', 'true');
+                showApp();
+            } else {
+                alert("❌ خطأ: مفتاح العبور غير صحيح.");
+            }
         }
-    }
 
-    function togglePass() {
-        const p = document.getElementById('passInput');
-        p.type = p.type === 'password' ? 'text' : 'password';
-    }
-</script>
+        function showApp() {
+            const lock = document.getElementById('lock-screen');
+            const main = document.getElementById('main-app');
+            
+            lock.classList.add('gone');
+            setTimeout(() => {
+                lock.style.display = 'none';
+                main.style.display = 'flex';
+            }, 800);
+        }
 
+        // تسجيل الـ Service Worker لضمان عمل البرنامج كـ PWA
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js').catch(err => console.log("SW error", err));
+        }
+    </script>
 </body>
 </html>
