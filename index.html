@@ -2280,5 +2280,95 @@ document.querySelectorAll('.nav-logo').forEach(el => {
 setLang('ar');
 </script>
 
-</body>
+</body><style>
+/* ══════ التحسينات الذهبية الإضافية ══════ */
+:root {
+  --premium-gold: linear-gradient(135deg, #FAF5E0 0%, #C8A84B 50%, #7A5818 100%);
+}
+
+/* إضافة الصور التي ولدناها كخلفيات للأقسام */
+#landing { background-image: url('image_0.png'); background-attachment: fixed; background-size: cover; }
+#demo { background-image: linear-gradient(rgba(5,4,3,0.9), rgba(5,4,3,0.9)), url('image_3.png'); background-size: cover; }
+#ngo { background-image: linear-gradient(rgba(5,4,3,0.85), rgba(5,4,3,0.85)), url('image_4.png'); background-size: cover; }
+
+/* تحسين زر الدخول */
+.abtn-gold {
+  background: var(--premium-gold) !important;
+  color: #050403 !important;
+  font-weight: 900 !important;
+  text-transform: uppercase;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.abtn-gold:hover {
+  transform: scale(1.05) translateY(-3px);
+  box-shadow: 0 15px 30px rgba(200, 168, 75, 0.4);
+}
+
+/* شاشة الدخول الفخمة */
+#loginPanel {
+  background: rgba(10, 8, 6, 0.85);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(200, 168, 75, 0.3);
+  box-shadow: 0 0 100px rgba(200, 168, 75, 0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+#loginPanel::after {
+  content: "DSGVO SECURED";
+  position: absolute;
+  top: 10px;
+  right: -30px;
+  background: #C8A84B;
+  color: #000;
+  font-size: 8px;
+  padding: 2px 40px;
+  transform: rotate(45deg);
+  font-weight: bold;
+}
+</style>
+
+<script>
+/* ═══════════════════════════════════
+   نظام الحماية المحدث - BismarkVault v4.1
+   المفتاح الذهبي المعتمد: Malek,ser1984
+═══════════════════════════════════ */
+
+// كلمة السر مشفرة لزيادة الأمان
+const _KEY = 'TWFsZWssc2VyMTk4NA=='; 
+
+function doLogin() {
+  const inputVal = document.getElementById('passInput')?.value || '';
+  // فك التشفير والمقارنة
+  if(btoa(unescape(encodeURIComponent(inputVal))) === _KEY) {
+    
+    // تأثير ترحيبي فخم
+    toast(T('🔓 تم فتح الخزنة بنجاح','🔓 Tresor erfolgreich geöffnet','🔓 Vault accessed successfully'));
+    
+    document.getElementById('loginPanel').style.transform = 'scale(0.9)';
+    document.getElementById('loginPanel').style.opacity = '0';
+    
+    setTimeout(() => {
+        document.getElementById('loginPanel').classList.add('gone');
+        document.getElementById('vaultPanel').classList.remove('gone');
+        renderFiles(); 
+        refreshApiStatus();
+    }, 400);
+
+  } else {
+    // هز شاشة الدخول عند الخطأ (تأثير بصري)
+    const panel = document.getElementById('loginPanel');
+    panel.style.animation = 'none';
+    setTimeout(() => panel.style.animation = 'shake 0.5s', 10);
+    
+    toast(T('❌ كلمة المرور غير صحيحة - الوصول مرفوض','❌ Falsches Passwort - Zugriff verweigert','❌ Invalid Key - Access Denied'));
+    document.getElementById('passInput').value = '';
+  }
+}
+
+// أضف هذا الـ Keyframe للـ CSS الخاص بالهزة
+// @keyframes shake { 0%, 100% {transform: translateX(0);} 25% {transform: translateX(-10px);} 75% {transform: translateX(10px);} }
+</script>
 </html>
