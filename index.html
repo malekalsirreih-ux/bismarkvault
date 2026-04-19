@@ -4,114 +4,238 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
 <meta name="description" content="BismarkVault AI — Enterprise Document Intelligence. EN·DE·AR · GDPR-compliant."/>
+<meta name="author" content="Malek Alsirreih"/>
+<meta name="theme-color" content="#C8A84B"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cairo:wght@300;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
 <title>BismarkVault AI — Smart Archive</title>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Cairo:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 :root {
-  --g300:#C8A84B; --g200:#EDD070; --n900:#050403; --n800:#0D0B09; --n50:#F0E8D8;
-  --font-d:'Cinzel', serif; --font-ar:'Cairo', sans-serif; --font-b:'DM Sans', sans-serif;
+  --g50:#FAF5E0;--g100:#F5E8B0;--g200:#EDD070;--g300:#C8A84B;--g400:#A07828;--g500:#7A5818;--g600:#5A3E10;
+  --n950:#030302;--n900:#050403;--n850:#0A0806;--n800:#0D0B09;--n750:#111009;--n700:#161310;--n50:#F0E8D8;
+  --font-d:'Cinzel',serif; --font-ar:'Cairo',sans-serif; --font-b:'DM Sans',sans-serif;
   --tx-spring:350ms cubic-bezier(.34,1.56,.64,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:var(--font-b);background:var(--n900);color:var(--n50);overflow-x:hidden;}
-#topbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:38px;background:linear-gradient(90deg,#5A3E10,#C8A84B,#5A3E10);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;}
-nav{position:fixed;top:38px;width:100%;z-index:900;height:70px;backdrop-filter:blur(20px);border-bottom:1px solid rgba(200,168,75,0.1);display:flex;align-items:center;}
-.nav-inner{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;}
-.brand{font-family:var(--font-d);font-size:22px;color:var(--g300);letter-spacing:2px;cursor:pointer;}
-#landing-hero{background-image:linear-gradient(rgba(5,4,3,0.7),rgba(5,4,3,0.8)),url('image_0.png');background-size:cover;background-position:center;background-attachment:fixed;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding-top:100px;}
-.hero-h1{font-family:var(--font-d);font-size:clamp(45px,8vw,100px);line-height:0.9;margin-bottom:20px;}
-.hero-h1 span{background:linear-gradient(135deg,#FFF,var(--g300));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.btn-gold{padding:16px 45px;border-radius:50px;background:linear-gradient(135deg,var(--g200),var(--g300));color:#000;font-weight:800;text-transform:uppercase;transition:var(--tx-spring);cursor:pointer;border:none;box-shadow:0 10px 30px rgba(200,168,75,0.3);}
-.btn-gold:hover{transform:translateY(-5px);box-shadow:0 20px 50px rgba(200,168,75,0.5)}
+html{scroll-behavior:smooth;font-size:16px;}
+body{font-family:var(--font-b);background:var(--n900);color:var(--n50);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0.5}
+#landing { background-image: linear-gradient(rgba(5,4,3,0.8), rgba(5,4,3,0.8)), url('image_0.png'); background-size: cover; background-position: center; background-attachment: fixed; }
+#topbar{position:fixed;top:0;left:0;right:0;z-index:1000;height:38px;background:linear-gradient(90deg,var(--g600),var(--g300),var(--g600));display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#000;border-bottom:1px solid rgba(200,168,75,0.5);}
+#nav{position:fixed;top:38px;left:0;right:0;z-index:900;height:70px;display:flex;align-items:center;backdrop-filter:blur(25px);border-bottom:1px solid rgba(200,168,75,0.15);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1200px;margin:0 auto;padding:0 24px}
+.nav-brand{font-family:var(--font-d);font-size:22px;font-weight:900;letter-spacing:2px;color:var(--g300)}
+.lang-sw{display:flex;background:rgba(255,255,255,0.05);border-radius:50px;padding:4px;gap:5px;border:1px solid rgba(200,168,75,0.1);}
+.lang-btn{padding:6px 16px;border-radius:50px;font-size:11px;font-weight:800;color:#A89070;transition:0.3s;cursor:pointer;border:none;background:none;}
+.lang-btn.active{background:linear-gradient(135deg, var(--g200), var(--g300));color:#000;}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:150px 24px 100px;}
+.hero-h1{font-family:var(--font-d);font-size:clamp(50px, 9vw, 110px);margin-bottom:20px;line-height:0.85;}
+.hero-h1 span{background:linear-gradient(135deg, #FFF, var(--g300));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.btn-gold{padding:18px 50px;border-radius:50px;background:linear-gradient(135deg, var(--g200), var(--g300));color:#000;font-weight:800;text-transform:uppercase;transition:var(--tx-spring);cursor:pointer;border:none;box-shadow:0 10px 40px rgba(200,168,75,0.25);}
 .bcard{background:rgba(15,13,10,0.7);border:1px solid rgba(200,168,75,0.1);border-radius:24px;padding:40px;backdrop-filter:blur(10px);transition:0.4s;}
-[lang="ar"] .en,[lang="ar"] .de,[lang="en"] .ar,[lang="en"] .de,[lang="de"] .ar,[lang="de"] .en{display:none;}
+[lang="ar"] .en, [lang="ar"] .de, [lang="en"] .ar, [lang="en"] .de, [lang="de"] .en, [lang="de"] .ar { display: none; }
 </style>
-</head>
-<body lang="en">
-<div id="topbar">
-  <span class="en">BismarkVault AI — Smart Document Archiving · Start Free</span>
-  <span class="de">BismarkVault AI — Intelligente Archivierung · Kostenlos</span>
-  <span class="ar">BismarkVault AI — الأرشفة الذكية · ابدأ مجاناً</span>
+</head><body lang="en">
+<div class="bg-canvas" aria-hidden="true">
+  <div class="bg-gradient"></div><div class="bg-grid"></div><div class="bg-noise"></div>
+  <div class="bg-orb bg-orb-1"></div><div class="bg-orb bg-orb-2"></div><div class="bg-orb bg-orb-3"></div>
 </div>
-<div id="landing-view">
-  <nav>
+
+<div id="topbar">
+  <span class="en">❖ BismarkVault AI — Enterprise Archiving & Analysis · Start Free</span>
+  <span class="de" style="display:none">❖ BismarkVault AI — Intelligente Archivierung & Analyse · Kostenlos</span>
+  <span class="ar" style="display:none">❖ BismarkVault AI — الأرشفة الذكية وتحليل البيانات · ابدأ مجاناً</span>
+  <button class="btn-gold" style="padding:4px 12px; font-size:10px; margin-left:15px;" onclick="showApp()">GO</button>
+</div>
+
+<div id="landing">
+  <nav id="nav">
     <div class="nav-inner">
-      <div class="brand">BismarkVault AI</div>
-      <div style="display:flex;gap:15px;align-items:center;">
-        <select onchange="setLang(this.value)" style="background:none;color:var(--g300);border:1px solid var(--g300);border-radius:5px;padding:2px 10px;cursor:pointer;">
-          <option value="en">English</option><option value="de">Deutsch</option><option value="ar">العربية</option>
-        </select>
-        <button class="btn-gold" style="padding:8px 20px;font-size:12px;" onclick="showVault()">Login</button>
+      <div class="nav-logo" onclick="goHome()">
+        <span class="nav-brand">BismarkVault AI</span>
       </div>
+      <div class="lang-sw">
+        <button class="lang-btn active" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" onclick="setLang('de')">DE</button>
+        <button class="lang-btn" onclick="setLang('ar')">AR</button>
+      </div>
+      <button class="btn-gold" style="padding:10px 25px; font-size:11px" onclick="showApp()">Login</button>
     </div>
   </nav>
-  <section id="landing-hero">
-    <div class="container">
-      <h1 class="hero-h1"><span>BismarkVault AI</span></h1>
-      <p style="max-width:800px;color:#A89070;font-size:20px;margin:0 auto 40px;line-height:1.6;">
-        <span class="en">Next-generation document intelligence. Secure, classify, and analyze your files with German engineering.</span>
-        <span class="de">Dokumentenintelligenz der nächsten Generation. Sicher, klassifizieren und analysieren.</span>
-        <span class="ar">الجيل القادم من ذكاء الوثائق. قم بتأمين وتصنيف وتحليل ملفاتك بالهندسة الألمانية.</span>
-      </p>
-      <button class="btn-gold" onclick="showVault()">Unlock Vault</button>
+
+  <section class="hero">
+    <div class="hero-pill">
+      <span class="hero-pill-dot"></span>
+      <span class="en">AI Document Intelligence · DSGVO-konform</span>
+      <span class="de" style="display:none">KI-Dokumentenanalyse · DSGVO-konform</span>
+      <span class="ar" style="display:none">ذكاء الوثائق الاصطناعي · متوافق مع DSGVO</span>
     </div>
-  </section><section style="padding:100px 24px;background:var(--n800);">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:30px;">
-      <div class="bcard">
-        <h3 style="color:var(--g300);margin-bottom:15px;font-family:var(--font-d);">Smart AI</h3>
-        <p class="en">Classify thousands of documents instantly with our neural analyzer.</p>
-        <p class="de">Klassifizieren Sie Tausende von Dokumenten sofort.</p>
-        <p class="ar">صنف آلاف الوثائق فوراً باستخدام المحلل الذكي.</p>
-      </div>
-      <div class="bcard">
-        <h3 style="color:var(--g300);margin-bottom:15px;font-family:var(--font-d);">GDPR / DSGVO</h3>
-        <p class="en">Fully compliant with German data protection laws. Made in Mettmann.</p>
-        <p class="de">Vollständig DSGVO-konform. Hergestellt in Mettmann.</p>
-        <p class="ar">متوافق تماماً مع قوانين حماية البيانات الألمانية. صنع في متمان.</p>
+    <h1 class="hero-h1"><span>BismarkVault AI</span></h1>
+    <p style="max-width:800px; color:#A89070; font-size:19px; margin-bottom:40px; line-height:1.7;">
+      <span class="en">The most advanced AI document analysis system for German organizations. English, German, and Arabic supported natively. Secure, Scalable, Sovereign.</span>
+      <span class="de" style="display:none">Das fortschrittlichste KI-Dokumentenanalysesystem für deutsche Organisationen. Englisch, Deutsch und Arabisch nativ unterstützt.</span>
+      <span class="ar" style="display:none">نظام تحليل الوثائق الأكثر تقدماً للمؤسسات الألمانية. دعم كامل للغات الإنجليزية والألمانية والعربية بشكل أصلي.</span>
+    </p>
+    <div style="display:flex; gap:15px; flex-wrap:wrap; justify-content:center;">
+      <button class="btn-gold" onclick="showApp()">Get Started Free</button>
+      <button class="btn-gold" style="background:rgba(255,255,255,0.05); color:var(--g300); border:1px solid var(--g300);" onclick="goTo('demo')">Watch Demo</button>
+    </div>
+  </section>
+
+  <section id="demo" style="background:rgba(0,0,0,0.2); padding:100px 24px;">
+    <div class="container" style="max-width:1000px; margin:0 auto; text-align:center;">
+      <h2 style="font-family:var(--font-d); font-size:36px; color:var(--g300); margin-bottom:20px;">Live AI Demo</h2>
+      <div class="bcard" style="padding:50px;">
+        <div id="demoArea" style="border:2px dashed var(--g300); padding:60px; border-radius:20px; cursor:pointer;" onclick="document.getElementById('demoInp').click()">
+          <input type="file" id="demoInp" style="display:none" onchange="runDemo(event)">
+          <span style="font-size:50px;">📂</span>
+          <p class="en">Drop any PDF or Image to see the AI magic</p>
+          <p class="de" style="display:none">PDF oder Bild hierher ziehen für die KI-Analyse</p>
+          <p class="ar" style="display:none">اسحب أي ملف PDF أو صورة لترى سحر الذكاء الاصطناعي</p>
+        </div>
       </div>
     </div>
   </section>
-</div><div id="app-view" style="display:none;min-height:100vh;padding-top:120px;background-image:linear-gradient(rgba(5,4,3,0.95),rgba(5,4,3,0.95)),url('image_1.png');background-size:cover;background-attachment:fixed;">
-  <div id="login-panel" class="bcard" style="max-width:450px;margin:0 auto;text-align:center;">
-    <h2 style="font-family:var(--font-d);color:var(--g300);margin-bottom:20px;">VAULT KEY</h2>
-    <input type="password" id="passInput" placeholder="••••••••" style="width:100%;padding:15px;background:rgba(255,255,255,0.05);border:1px solid var(--g300);border-radius:12px;color:#fff;text-align:center;letter-spacing:5px;margin-bottom:20px;outline:none;" onkeydown="if(event.key==='Enter')doLogin()">
-    <button class="btn-gold" style="width:100%" onclick="doLogin()">Unlock</button>
-  </div>
-  <div id="dashboard-panel" class="bcard" style="display:none;max-width:1100px;margin:0 auto;">
-    <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(200,168,75,0.2);padding-bottom:20px;margin-bottom:20px;">
-      <h2 style="font-family:var(--font-d);color:var(--g300);">BismarkVault AI Dashboard</h2>
-      <button class="btn-gold" style="padding:8px 20px;font-size:11px;background:#8B1E2F;color:#fff;" onclick="window.location.reload()">Logout</button>
+
+  <section id="features" style="padding:100px 24px;">
+    <div class="bento">
+      <div class="bcard" style="grid-column: span 8;">
+        <h3 style="color:var(--g300); font-family:var(--font-d); margin-bottom:15px;">Automated Classification</h3>
+        <p class="en">Save 5+ hours per week per employee. Our AI reads, understands, and files your documents automatically according to your organizational structure.</p>
+        <p class="de" style="display:none">Sparen Sie 5+ Stunden pro Woche. Unsere KI liest, versteht und archiviert Ihre Dokumente automatisch.</p>
+        <p class="ar" style="display:none">وفر أكثر من 5 ساعات أسبوعياً لكل موظف. يقوم ذكاؤنا الاصطناعي بقراءة وفهم وأرشفة مستنداتك تلقائياً.</p>
+      </div>
+      <div class="bcard" style="grid-column: span 4;">
+        <h3 style="color:var(--g300); font-family:var(--font-d); margin-bottom:15px;">DSGVO / GDPR</h3>
+        <p class="en">Data stays in Germany. Fully compliant with all legal requirements for lawyers, doctors, and NGOs.</p>
+        <p class="de" style="display:none">Daten bleiben in Deutschland. Vollständig konform mit allen rechtlichen Anforderungen.</p>
+        <p class="ar" style="display:none">البيانات تبقى في ألمانيا. متوافق تماماً مع جميع المتطلبات القانونية للمحامين والأطباء والمنظمات.</p>
+      </div>
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1.5fr;gap:30px;">
-      <div style="background:rgba(255,255,255,0.02);padding:25px;border-radius:20px;border:1px solid rgba(255,255,255,0.05);">
-        <p style="color:var(--g300);margin-bottom:20px;">Secure Archive</p>
-        <div style="border:2px dashed rgba(200,168,75,0.2);padding:40px;text-align:center;border-radius:15px;cursor:pointer;" onclick="document.getElementById('fInp').click()">
-          <input type="file" id="fInp" multiple style="display:none" onchange="toast('Secured Successfully')">
-          <p style="font-size:14px;color:#A89070;">Drag & Drop Documents</p>
+  </section>
+
+  <section id="pricing" style="background:rgba(10,8,6,0.5); padding:100px 24px;">
+    <div class="container" style="max-width:1100px; margin:0 auto; text-align:center;">
+      <h2 style="font-family:var(--font-d); font-size:40px; color:var(--g300); margin-bottom:60px;">Pricing Plans</h2>
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap:30px;">
+        <div class="bcard">
+          <h4 style="letter-spacing:2px;">FREE</h4>
+          <div style="font-size:50px; font-weight:900; margin:25px 0;">€0</div>
+          <p class="en">20 Files Analysis/mo<br>Basic AI Support<br>Local Vault</p>
+          <button class="btn-gold" style="width:100%; margin-top:25px;" onclick="showApp()">Start Free</button>
+        </div>
+        <div class="bcard" style="border:2px solid var(--g300);">
+          <h4 style="color:var(--g300); letter-spacing:2px;">ORGANIZATION</h4>
+          <div style="font-size:50px; font-weight:900; margin:25px 0;">€49<small style="font-size:14px;">/mo</small></div>
+          <p class="en">Unlimited Files<br>Advanced AI Engine<br>Cloud Sync</p>
+          <button class="btn-gold" style="width:100%; margin-top:25px;" onclick="gotoContact()">Go Pro</button>
         </div>
       </div>
-      <div style="background:rgba(255,255,255,0.02);padding:25px;border-radius:20px;border:1px solid rgba(255,255,255,0.05);">
-        <p style="color:var(--g300);margin-bottom:20px;">AI Analyzer</p>
-        <div id="chat" style="height:250px;background:rgba(0,0,0,0.3);border-radius:12px;padding:20px;overflow-y:auto;color:#A89070;font-size:14px;">Welcome Malek. BismarkVault AI is ready.</div>
-      </div>
+    </div>
+  </section>
+</div><div id="app" class="view gone" style="min-height:100vh; padding:100px 20px;">
+  <style>
+    #app { background-image: linear-gradient(rgba(5,4,3,0.97), rgba(5,4,3,0.97)), url('image_1.png'); background-size: cover; background-attachment: fixed; }
+    .panel-app { max-width: 1100px; margin: 0 auto; background: rgba(15,13,10,0.85); border: 1px solid rgba(200,168,75,0.2); border-radius: 28px; padding: 40px; backdrop-filter: blur(30px); }
+    .vault-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 30px; margin-top: 30px; }
+    .chat-area { height: 380px; overflow-y: auto; background: rgba(0,0,0,0.4); border-radius: 18px; padding: 20px; border: 1px solid rgba(200,168,75,0.1); margin-bottom: 20px; }
+    .file-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; margin-bottom: 10px; font-size: 13px; }
+    @media(max-width:768px){ .vault-grid { grid-template-columns: 1fr; } .panel-app { padding: 25px; } }
+  </style>
+
+  <div class="panel-app" id="loginPanel" style="max-width:480px; text-align:center; margin-top:50px;">
+    <div style="margin-bottom:30px;">
+        <h2 style="font-family:var(--font-d); color:var(--g300); letter-spacing:3px;">VAULT SECURED</h2>
+        <p style="color:#A89070; font-size:10px; margin-top:5px; letter-spacing:2px;">BISMARKVAULT AI • MALEK EDITION</p>
+    </div>
+    <input type="password" id="passInput" placeholder="ENTER SECURITY KEY" 
+           style="width:100%; padding:18px; background:rgba(255,255,255,0.05); border:1px solid var(--g300); border-radius:15px; color:#fff; text-align:center; letter-spacing:6px; font-size:18px; margin-bottom:25px; outline:none;"
+           onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn-gold" style="width:100%;" onclick="doLogin()">Unlock BismarkVault</button>
+    <button onclick="goHome()" style="margin-top:25px; background:none; border:none; color:#A89070; text-decoration:underline; cursor:pointer;">← Return to Main Page</button>
+  </div>
+
+  <div class="panel-app" id="vaultPanel" style="display:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid rgba(200,168,75,0.2); padding-bottom:20px; margin-bottom:30px;">
+        <div>
+            <h3 style="font-family:var(--font-d); color:var(--g300); font-size:24px;">BismarkVault AI Dashboard</h3>
+            <span style="font-size:10px; color:#60C880;">● SYSTEM ENCRYPTED | MALEK ACCESS</span>
+        </div>
+        <button class="btn-gold" style="padding:10px 25px; font-size:11px; background:rgba(139,30,47,0.85);" onclick="location.reload()">Lock Vault</button>
+    </div>
+
+    <div class="vault-grid">
+        <div style="background:rgba(255,255,255,0.02); padding:25px; border-radius:20px;">
+            <p style="font-family:var(--font-d); color:var(--g300); margin-bottom:20px;">Archive Manager</p>
+            <div style="border:2px dashed rgba(200,168,75,0.2); border-radius:15px; padding:45px 20px; text-align:center; cursor:pointer;" onclick="document.getElementById('fileInp').click()">
+                <input type="file" id="fileInp" multiple style="display:none" onchange="handleFiles(this.files)">
+                <span style="font-size:40px;">📂</span>
+                <p style="font-size:14px; color:#A89070; margin-top:10px;">Drag & Drop Secure Documents</p>
+            </div>
+            <div id="vaultList" style="margin-top:25px;"></div>
+        </div>
+
+        <div style="background:rgba(255,255,255,0.02); padding:25px; border-radius:20px;">
+            <p style="font-family:var(--font-d); color:var(--g300); margin-bottom:20px;">BismarkVault AI Analyzer</p>
+            <div class="chat-area" id="vaultChat">
+                <div style="color:#A89070; font-size:14px; line-height:1.7;">Hello Malek. Your <b>BismarkVault AI</b> is active. I can analyze documents, check DSGVO compliance, and organize your archive. How can I help?</div>
+            </div>
+            <div style="display:flex; gap:12px;">
+                <input type="text" id="aiMsg" placeholder="Ask AI about documents..." 
+                       style="flex:1; padding:15px; background:rgba(255,255,255,0.05); border:1px solid rgba(200,168,75,0.2); border-radius:12px; color:#fff; outline:none;">
+                <button class="btn-gold" style="padding:0 25px;" onclick="talkToAI()">Analyze</button>
+            </div>
+        </div>
     </div>
   </div>
 </div>
-<div id="toast" style="position:fixed;bottom:30px;left:50%;transform:translateX(-50%);background:var(--g300);color:#000;padding:12px 40px;border-radius:50px;font-weight:bold;display:none;z-index:2000;"></div>
+
+<div id="toast" style="position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--g300); color:#000; padding:12px 40px; border-radius:50px; font-weight:900; display:none; z-index:9999; box-shadow:0 10px 30px rgba(0,0,0,0.5);"></div>
+
 <script>
-const _K = "TWFsZWssc2VyMTk4NA==";
-function setLang(l){ document.body.setAttribute('lang',l); document.dir=(l==='ar')?'rtl':'ltr'; }
-function showVault(){ document.getElementById('landing-view').style.display='none'; document.getElementById('app-view').style.display='block'; }
-function doLogin(){
-  const i=document.getElementById('passInput').value;
-  if(btoa(unescape(encodeURIComponent(i)))===_K){
-    document.getElementById('login-panel').style.display='none';
-    document.getElementById('dashboard-panel').style.display='block';
-    toast("Welcome Malek.");
-  } else { toast("Invalid Key"); document.getElementById('passInput').value=""; }
+'use strict';
+const _H = 'TWFsZWssc2VyMTk4NA=='; // Base64 key for Malek,ser1984
+let currentL = 'en';
+
+function setLang(lang) {
+    currentL = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+    const sections = ['en', 'de', 'ar'];
+    sections.forEach(l => {
+        document.querySelectorAll(l === lang ? '.'+l : '.'+l).forEach(el => {
+            if (el.tagName === 'SPAN' || el.tagName === 'P' || el.tagName === 'DIV') {
+                el.style.display = (l === lang) ? 'inline-block' : 'none';
+            }
+        });
+    });
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+    });
 }
-function toast(m){ const t=document.getElementById('toast'); t.textContent=m; t.style.display='block'; setTimeout(()=>t.style.display='none',3000); }
-setLang('en');
-</script>
-</body>
-</html>
+
+function showApp() { 
+    document.getElementById('landing').style.display='none'; 
+    document.getElementById('app').classList.remove('gone'); 
+    window.scrollTo(0,0); 
+}
+
+function goHome() { 
+    document.getElementById('app').classList.add('gone'); 
+    document.getElementById('landing').style.display='block'; 
+}
+
+function doLogin() {
+    const val = document.getElementById('passInput').value;
+    if(btoa(unescape(encodeURIComponent(val))) === _H) {
+        document.getElementById('loginPanel').style.display='none';
+        document.getElementById('vaultPanel').style.display='block';
+        toast('VAULT UNLOCKED. WELCOME MALEK.');
+    } else {
+        toast('INVALID SECURITY KEY');
+        document.getElementById('passInput').value = '';
+    }
+}
+
+function handleFiles(
