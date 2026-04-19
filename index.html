@@ -1,640 +1,151 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<<!DOCTYPE html>
+<html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
-<meta name="description" content="BismarkVault — AI Document Analyzer for humanitarian NGOs in Germany. EN·DE·AR · GDPR-compliant · BismarkVault AI."/>
-<meta name="keywords" content="BismarkVault,KI,Archivierung,DSGVO,Unternehmen,Kanzleien,Schulen,Mettmann,BismarkVaultAI"/>
-<meta name="author" content="Malek Alsirreih"/>
-<meta name="theme-color" content="#C8A84B" media="(prefers-color-scheme: dark)"/>
-<meta name="theme-color" content="#C8A84B"/>
-<meta name="color-scheme" content="dark"/>
-<meta property="og:title" content="BismarkVault — AI Document Analyzer"/>
-<meta property="og:description" content="AI Document Analyzer for organizations in Germany. EN·DE·AR. GDPR-compliant."/>
-<meta property="og:type" content="website"/>
-<meta property="og:locale" content="en_US"/>
-<link rel="manifest" href="manifest.json"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cairo:wght@300;400;700&family=DM+Sans:wght@300;400;500;700&display=swap" rel="stylesheet"/>
-<title>BismarkVault — AI Document Analyzer</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BismarkVault</title>
+
+<meta name="description" content="BismarkVault AI Document Analyzer">
+<meta name="theme-color" content="#C8A84B">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+
 <style>
-/* ═══════════════════════════════════════════════════════
-   DESIGN SYSTEM — BISMARKVAULT v4 ULTIMATE (MALEK EDITION)
-═══════════════════════════════════════════════════════ */
-:root {
-  --g50:#FAF5E0;--g100:#F5E8B0;--g200:#EDD070;--g300:#C8A84B;
-  --g400:#A07828;--g500:#7A5818;--g600:#5A3E10;
-  --n950:#030302;--n900:#050403;--n850:#0A0806;--n800:#0D0B09;
-  --n750:#111009;--n700:#161310;--n650:#1A1714;--n600:#1E1A16;
-  --n200:#A89070;--n100:#D8C8A8;--n50:#F0E8D8;
-  --b600:#0F2E48;--b500:#1A4F80;--b400:#2268A8;--b300:#3A88C8;
-  --success:#1A6A3A;--danger:#8B1E2F;
-  --font-d:'Cinzel',serif; --font-ar:'Cairo',sans-serif; --font-b:'DM Sans',sans-serif;
-  --tx-spring:350ms cubic-bezier(.34,1.56,.64,1);
-  --tx-mid:250ms cubic-bezier(.16,1,.3,1);
-  --r10:28px; --r-pill:999px;
-  --sh4:0 20px 60px rgba(0,0,0,.65);
+body {
+  margin: 0;
+  font-family: 'Cairo', sans-serif;
+  background: #0b0b0b;
+  color: #fff;
 }
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px;-webkit-text-size-adjust:100%}
-body{font-family:var(--font-b);background:var(--n900);color:var(--n50);min-height:100vh;overflow-x:hidden;}
-</style>/* ═══ BACKGROUND SYSTEM ═══ */
-.bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;contain:strict}
-.bg-gradient{
-position:absolute;inset:0;
-background:
-radial-gradient(ellipse 90% 60% at 50% -5%,rgba(200,168,75,.07) 0%,transparent 55%),
-radial-gradient(ellipse 70% 50% at 100% 85%,rgba(26,79,128,.08) 0%,transparent 50%),
-radial-gradient(ellipse 60% 45% at 0% 70%,rgba(26,79,128,.05) 0%,transparent 50%),
-radial-gradient(ellipse 80% 80% at 50% 50%,rgba(10,8,6,.3) 0%,transparent 70%);
-}
-.bg-grid{
-position:absolute;inset:0;
-background-image:linear-gradient(rgba(200,168,75,.022) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.022) 1px,transparent 1px);
-background-size:52px 52px;
-mask-image:radial-gradient(ellipse 85% 85% at 50% 50%,rgba(0,0,0,.8) 30%,transparent 100%);
-}
-.bg-noise{
-position:absolute;inset:0;opacity:.018;
-background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-/* Animated orbs */
-.bg-orb{position:absolute;border-radius:50%;filter:blur(60px);animation:orbFloat 20s ease-in-out infinite;will-change:transform}
-.bg-orb-1{width:500px;height:500px;top:-150px;left:50%;transform:translateX(-50%);background:radial-gradient(circle,rgba(200,168,75,.05),transparent 70%);animation-delay:0s}
-.bg-orb-2{width:350px;height:350px;bottom:-100px;right:-50px;background:radial-gradient(circle,rgba(34,104,168,.06),transparent 70%);animation-delay:-7s}
-.bg-orb-3{width:280px;height:280px;top:40%;left:-60px;background:radial-gradient(circle,rgba(34,104,168,.04),transparent 70%);animation-delay:-14s}
 
-/* ═══ LAYOUT UTILS ═══ */
-.view{position:relative;z-index:1}
-.gone{display:none!important}
-.container{max-width:1120px;margin:0 auto;padding:0 24px}
-section{padding:100px 0}
-.eyebrow{
-display:flex;align-items:center;justify-content:center;gap:12px;
-font-size:10px;letter-spacing:5px;text-transform:uppercase;color:var(--g300);margin-bottom:14px;
+header {
+  padding: 20px;
+  text-align: center;
+  background: #111;
+  border-bottom: 1px solid #C8A84B;
 }
-.eyebrow::before,.eyebrow::after{content:'';flex:1;max-width:52px;height:1px}
-.eyebrow::before{background:linear-gradient(90deg,transparent,var(--g500))}
-.eyebrow::after{background:linear-gradient(270deg,transparent,var(--g500))}
 
-/* ═══ TOP BAR ═══ */
-#topbar{
-position:fixed;top:0;left:0;right:0;z-index:600;
-height:38px;display:flex;align-items:center;justify-content:center;gap:12px;
-background:linear-gradient(90deg,var(--g600) 0%,var(--g500) 15%,var(--g300) 35%,var(--g200) 50%,var(--g300) 65%,var(--g500) 85%,var(--g600) 100%);
-background-size:200% 100%;
-animation:topbarShimmer 5s linear infinite;
-font-size:12px;font-weight:600;letter-spacing:.8px;
-color:#0A0800;border-bottom:1px solid rgba(200,168,75,.5);
-padding:0 50px;white-space:nowrap;overflow:hidden;
-}/* ═══ NAVIGATION STYLES ═══ */
-.nav-inner{display:flex;align-items:center;justify-content:space-between;width:100%;max-width:1120px;margin:0 auto;padding:0 24px}
-.nav-logo{display:flex;align-items:center;gap:11px;cursor:pointer;transition:opacity var(--tx-fast)}
-.nav-logo:hover{opacity:.85}
-.nav-logo-mark{
-width:40px;height:40px;flex-shrink:0;
-background:linear-gradient(135deg,#1C1810,#2E2418);
-border:1px solid var(--g500);border-radius:11px;
-display:flex;align-items:center;justify-content:center;
-box-shadow:0 0 20px rgba(200,168,75,.14),inset 0 1px 0 rgba(200,168,75,.12);
-transition:box-shadow var(--tx-mid);
+h1 {
+  color: #C8A84B;
 }
-.nav-logo-mark:hover{box-shadow:0 0 30px rgba(200,168,75,.2),inset 0 1px 0 rgba(200,168,75,.15)}
-.nav-logo-mark svg{width:20px;height:20px}
-.nav-brand{
-font-family:var(--font-d);font-size:17px;font-weight:700;letter-spacing:2.5px;
-background:linear-gradient(135deg,var(--g50),var(--g200),var(--g300));
--webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-}
-.nav-links{display:flex;align-items:center;gap:2px}
-.nav-link{
-padding:7px 13px;border-radius:var(--r4);font-size:13px;font-weight:500;
-color:var(--n200);transition:all var(--tx-fast);position:relative;
-}
-.nav-link::after{content:'';position:absolute;bottom:-1px;left:50%;right:50%;height:1px;background:var(--g300);transition:all var(--tx-mid)}
-.nav-link:hover{color:var(--n50);background:rgba(255,255,255,.06)}
-.nav-link:hover::after{left:13px;right:13px}
-.nav-right{display:flex;align-items:center;gap:10px}
-.lang-sw{display:flex;background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:var(--r-pill);padding:3px;gap:2px}
-.lang-btn{padding:5px 12px;border-radius:var(--r-pill);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--n300);transition:all var(--tx-mid); cursor: pointer;}
-.lang-btn.active{background:linear-gradient(135deg,var(--g200),var(--g300));color:#0A0800;box-shadow:0 6px 24px rgba(200,168,75,.22)}
-.nav-cta{
-padding:10px 22px;border-radius:var(--r-pill);
-background:linear-gradient(135deg,var(--g200),var(--g300),#9A7018);
-color:#0A0800;font-size:13px;font-weight:700;letter-spacing:.2px;
-transition:all var(--tx-spring);box-shadow:0 6px 24px rgba(200,168,75,.22);
-}
-.nav-cta:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(200,168,75,.38)}/* ═══ HERO SECTION ═══ */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  text-align: center; padding: 130px 24px 90px;
-  position: relative; isolation: isolate;
-  /* إضافة صورة خلفية خفيفة للواجهة */
-  background-image: radial-gradient(circle at center, rgba(5,4,3,0) 0%, var(--n900) 100%), url('image_1.png');
-  background-size: cover; background-position: center; background-attachment: fixed;
-}
-.hero-pill {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: rgba(200, 168, 75, .07); border: 1px solid var(--bd2);
-  border-radius: var(--r-pill); padding: 8px 22px;
-  font-size: 11px; font-weight: 600; letter-spacing: 3px;
-  color: var(--g300); text-transform: uppercase; margin-bottom: 32px;
-  backdrop-filter: blur(10px);
-}
-.hero-pill-dot { width: 6px; height: 6px; background: var(--g300); border-radius: 50%; box-shadow: 0 0 10px var(--g300); animation: pulse 2s infinite; }
 
-.hero-h1 {
-  font-family: var(--font-d); font-size: clamp(46px, 8.5vw, 108px);
-  font-weight: 900; letter-spacing: -3px; line-height: .92;
-  margin-bottom: 18px; perspective: 1000px;
+nav a {
+  color: #ccc;
+  margin: 0 10px;
+  text-decoration: none;
 }
-.hero-h1 span {
-  display: block;
-  background: linear-gradient(140deg, var(--g50) 0%, var(--g300) 50%, var(--g500) 100%);
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 40px rgba(200, 168, 75, .15));
-}
-.hero-desc {
-  max-width: 680px; margin: 0 auto 48px;
-  font-size: clamp(16px, 2vw, 19px); line-height: 1.6;
-  color: var(--n200); font-weight: 400;
-}
-.hero-actions { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; }
 
-.btn-hero-primary {
-  padding: 17px 48px; border-radius: var(--r-pill);
-  background: linear-gradient(135deg, var(--g200), var(--g300), #9A7010);
-  color: #0A0800; font-size: 15px; font-weight: 700; letter-spacing: .2px;
-  transition: all var(--tx-spring); box-shadow: 0 8px 32px rgba(200, 168, 75, .28);
+nav a:hover {
+  color: #C8A84B;
 }
-.btn-hero-primary:hover { transform: translateY(-3px) scale(1.02); box-shadow: 0 20px 50px rgba(200, 168, 75, .45); }
 
-.btn-hero-sec {
-  padding: 17px 42px; border-radius: var(--r-pill);
-  background: rgba(255,255,255,.03); border: 1px solid var(--bd2);
-  color: var(--n50); font-size: 15px; font-weight: 600;
-  transition: all var(--tx-mid); backdrop-filter: blur(10px);
+.container {
+  padding: 40px;
+  text-align: center;
 }
-.btn-hero-sec:hover { background: rgba(255,255,255,.08); border-color: var(--g300); }</style>
+
+.btn {
+  background: #C8A84B;
+  color: #000;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.upload-box {
+  margin-top: 30px;
+  border: 2px dashed #C8A84B;
+  padding: 30px;
+}
+
+.result {
+  margin-top: 20px;
+  background: #111;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #333;
+  margin-top: 50px;
+}
+</style>
 </head>
-<body lang="en">
-
-<div class="bg-canvas" aria-hidden="true">
-  <div class="bg-gradient"></div>
-  <div class="bg-grid"></div>
-  <div class="bg-noise"></div>
-  <div class="bg-orb bg-orb-1" style="background-image: url('image_2.png'); background-size: cover; opacity: 0.1;"></div>
-  <div class="bg-orb bg-orb-2"></div>
-  <div class="bg-orb bg-orb-3"></div>
-</div>
-
-<div id="topbar" role="banner">
-  <span class="tb-icon" aria-hidden="true">❖</span>
-  <span class="en">BismarkVault AI — Enterprise Archiving for Companies & Lawyers · GDPR-compliant · Start Free</span>
-  <span class="de" style="display:none">BismarkVault AI — Intelligente Archivierung für Unternehmen & Kanzleien · DSGVO-konform</span>
-  <span class="ar" style="display:none">BismarkVault AI — الأرشفة الذكية للشركات والمحامين والأطباء · متوافق مع DSGVO</span>
-  <span class="tb-sep">|</span>
-  <button class="tb-cta" onclick="showApp()">
-    <span class="en">Start Free →</span>
-    <span class="de" style="display:none">Kostenlos →</span>
-    <span class="ar" style="display:none">ابدأ مجاناً ←</span>
-  </button>
-</div>
-
-<div id="landing" class="view">
-
-<nav id="nav" role="navigation">
-  <div class="nav-inner">
-    <div class="nav-logo" onclick="goHome()" tabindex="0" role="button">
-      <div class="nav-logo-mark">
-        <svg viewBox="0 0 24 24" fill="none">
-          <rect x="4" y="9" width="16" height="12" rx="2" stroke="#C8A84B" stroke-width="1.4"/>
-          <path d="M8 9V7a4 4 0 0 1 8 0v2" stroke="#C8A84B" stroke-width="1.4"/>
-        </svg>
-      </div>
-      <span class="nav-brand">BismarkVault AI</span>
-    </div>
-    
-    <nav class="nav-links" aria-label="Main Navigation">
-      <button class="nav-link" onclick="goTo('features')"><span class="en">Features</span><span class="de" style="display:none">Features</span><span class="ar" style="display:none">المميزات</span></button>
-      <button class="nav-link" onclick="goTo('ngo')"><span class="en">NGOs</span><span class="de" style="display:none">NGOs</span><span class="ar" style="display:none">المنظمات</span></button>
-      <button class="nav-link" onclick="goTo('pricing')"><span class="en">Pricing</span><span class="de" style="display:none">Preise</span><span class="ar" style="display:none">الأسعار</span></button>
-    </nav>
-
-    <div class="nav-right">
-      <div class="lang-sw" role="group">
-        <button class="lang-btn active" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" onclick="setLang('de')">DE</button>
-        <button class="lang-btn" onclick="setLang('ar')">AR</button>
-      </div>
-      <button class="nav-cta" onclick="showApp()">
-        <span class="en">Login</span><span class="de" style="display:none">Anmelden</span><span class="ar" style="display:none">دخول</span>
-      </button>
-    </div>
-  </div>
+<body><header>
+<h1>BismarkVault</h1>
+<nav>
+<a href="#">الرئيسية</a>
+<a href="#">Vault</a>
+<a href="#">AI</a>
 </nav>
+</header>
 
-<section class="hero" style="background-image: linear-gradient(rgba(5,4,3,0.8), rgba(5,4,3,0.8)), url('image_1.png');">
-  <div class="hero-pill">
-    <span class="hero-pill-dot" aria-hidden="true"></span>
-    <span class="en">AI Document Intelligence for German Enterprises</span>
-    <span class="de" style="display:none">KI-Dokumentenanalyse für deutsche Unternehmen</span>
-    <span class="ar" style="display:none">ذكاء الوثائق الاصطناعي للمؤسسات الألمانية</span>
-  </div>
-  <h1 class="hero-h1">
-    <span class="hero-h1-main">BismarkVault AI</span>
-  </h1>
-  <p class="hero-desc">
-    <span class="en">The next generation of smart archiving. English, German, and Arabic supported. Fully GDPR-compliant (DSGVO). Made in Mettmann.</span>
-    <span class="de" style="display:none">Die nächste Generation der intelligenten Archivierung. Vollständig DSGVO-konform.</span>
-    <span class="ar" style="display:none">الجيل القادم من الأرشفة الذكية. دعم كامل للغات الإنجليزية والألمانية والعربية. متوافق مع DSGVO.</span>
-  </p>
-  <div class="hero-actions">
-    <button class="btn-hero-primary" onclick="showApp()">
-      <span class="en">Unlock Your Vault</span>
-      <span class="de" style="display:none">Tresor öffnen</span>
-      <span class="ar" style="display:none">افتح قبوك الخاص</span>
-    </button>
-  </div>
-</section><section id="demo" style="background-image: linear-gradient(rgba(10,8,6,0.9), rgba(10,8,6,0.9)), url('image_3.png'); background-size: cover; background-attachment: fixed;">
-  <div class="container">
-    <p class="eyebrow">
-      <span class="en">Live AI Experience</span>
-      <span class="de" style="display:none">Live KI-Erfahrung</span>
-      <span class="ar" style="display:none">تجربة حية للذكاء الاصطناعي</span>
-    </p>
-    <h2 class="section-title">
-      <span class="en">Try BismarkVault AI Instantly</span>
-      <span class="de" style="display:none">BismarkVault KI sofort testen</span>
-      <span class="ar" style="display:none">جرّب ذكاء BismarkVault فوراً</span>
-    </h2>
-    <p class="section-desc">
-      <span class="en">Upload any document. No registration required for this demo. See how AI extracts data in seconds.</span>
-      <span class="de" style="display:none">Datei hochladen. Keine Registrierung nötig. KI-Analyse in Sekunden.</span>
-      <span class="ar" style="display:none">ارفع أي مستند. لا حاجة للتسجيل في هذا العرض. انظر كيف يستخرج الذكاء الاصطناعي البيانات في ثوانٍ.</span>
-    </p>
+<section class="container">
+<h2>محلل الوثائق الذكي</h2>
+<p>رفع ملفاتك وتحليلها باستخدام الذكاء الاصطناعي</p>
 
-    <div class="demo-window" role="region" aria-label="Interactive AI Demo">
-      <div class="window-bar" aria-hidden="true">
-        <div class="win-dot"></div><div class="win-dot"></div><div class="win-dot"></div>
-        <div class="win-url">bismarkvault.app · 🔒 Demo Mode</div>
-      </div>
-      <div class="window-body">
-        <div class="demo-drop" id="demoArea" tabindex="0" role="button">
-          <input type="file" id="demoInput" onchange="runDemo(event)" aria-label="Upload file for demo analysis"/>
-          <span class="demo-drop-icon" aria-hidden="true">📂</span>
-          <div class="demo-drop-text">
-            <span class="en"><strong>Drag a file here</strong> or click to select</span>
-            <span class="de" style="display:none"><strong>Datei hierher ziehen</strong> oder klicken</span>
-            <span class="ar" style="display:none"><strong>اسحب ملفاً هنا</strong> أو انقر للاختيار</span>
-          </div>
-          <div class="demo-drop-hint">
-            <span class="en">PDF · Word · Excel · Images</span>
-            <span class="de" style="display:none">PDF · Word · Excel · Bilder</span>
-            <span class="ar" style="display:none">PDF · Word · Excel · صور</span>
-          </div>
-        </div>
-
-        <div class="demo-result" id="demoResult">
-          <div class="demo-file-strip" id="demoFileStrip"></div>
-          <div class="demo-ai-section">
-            <div class="demo-ai-hd">
-              <div class="demo-ai-pulse"></div>
-              BismarkVault AI Analyzer
-            </div>
-            <div class="demo-ai-body" id="demoAiBody"></div>
-          </div>
-          <div class="demo-footer">
-            <button class="btn-hero-primary" style="padding:13px 36px; font-size:14px" onclick="showApp()">
-              <span class="en">Secure This File in Vault</span>
-              <span class="de" style="display:none">Datei im Tresor sichern</span>
-              <span class="ar" style="display:none">احفظ هذا الملف في القبو الآمن</span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section><section id="features" style="background-image: linear-gradient(rgba(5,4,3,0.92), rgba(5,4,3,0.92)), url('image_4.png'); background-size: cover;">
-  <div class="container">
-    <p class="eyebrow">
-      <span class="en">Advanced Capabilities</span>
-      <span class="de" style="display:none">Fortgeschrittene Funktionen</span>
-      <span class="ar" style="display:none">قدرات متقدمة</span>
-    </p>
-    <h2 class="section-title">
-      <span class="en">Engineered for Precision</span>
-      <span class="de" style="display:none">Entwickelt für Präzision</span>
-      <span class="ar" style="display:none">هندسة فائقة الدقة</span>
-    </h2>
-
-    <div class="bento-grid">
-      <div class="bcard bc-ai" onmousemove="trackMouse(event, this)">
-        <div class="bcard-glow"></div>
-        <div class="bc-icon">🤖</div>
-        <h3 class="bc-title">
-          <span class="en">Multilingual AI Intelligence</span>
-          <span class="de" style="display:none">Mehrsprachige KI-Intelligenz</span>
-          <span class="ar" style="display:none">ذكاء اصطناعي متعدد اللغات</span>
-        </h3>
-        <p class="bc-desc">
-          <span class="en">Native support for AR, DE, and EN. Our AI understands legal and medical terminology in all three languages perfectly.</span>
-          <span class="de" style="display:none">Native Unterstützung für AR, DE und EN. Unsere KI versteht Fachterminologie perfekt.</span>
-          <span class="ar" style="display:none">دعم أصلي للعربية والألمانية والإنجليزية. ذكاؤنا الاصطناعي يفهم المصطلحات القانونية والطبية بدقة.</span>
-        </p>
-        <div class="bc-badge">BismarkVault AI Core</div>
-      </div>
-
-      <div class="bcard" onmousemove="trackMouse(event, this)">
-        <div class="bcard-glow"></div>
-        <div class="bc-icon">🔐</div>
-        <h3 class="bc-title">
-          <span class="en">Military-Grade Security</span>
-          <span class="de" style="display:none">Militärische Sicherheit</span>
-          <span class="ar" style="display:none">أمن بمستوى عسكري</span>
-        </h3>
-        <p class="bc-desc">
-          <span class="en">End-to-end encryption. Your documents are stored in a secure vault that only you can access with your master key.</span>
-          <span class="de" style="display:none">Ende-zu-Ende-Verschlüsselung. Nur Sie haben Zugriff auf Ihren Tresor.</span>
-          <span class="ar" style="display:none">تشفير من الطرف إلى الطرف. مستنداتك محفوظة في قبو آمن لا يمكن لأحد غيرك دخوله.</span>
-        </p>
-      </div>
-
-      <div class="bcard" onmousemove="trackMouse(event, this)">
-        <div class="bcard-glow"></div>
-        <div class="bc-icon">🛡️</div>
-        <h3 class="bc-title">
-          <span class="en">100% DSGVO Compliant</span>
-          <span class="de" style="display:none">100% DSGVO-konform</span>
-          <span class="ar" style="display:none">متوافق تماماً مع DSGVO</span>
-        </h3>
-        <p class="bc-desc">
-          <span class="en">Built in Mettmann, Germany. We strictly follow European data protection laws to ensure your organization's safety.</span>
-          <span class="de" style="display:none">Entwickelt in Mettmann. Wir befolgen strikt die europäischen Datenschutzgesetze.</span>
-          <span class="ar" style="display:none">صُنع في متمان، ألمانيا. نتبع بدقة قوانين حماية البيانات الأوروبية لضمان سلامة مؤسستك.</span>
-        </p>
-      </div>
-    </div>
-  </div>
-</section><section id="ngo" style="background-image: linear-gradient(rgba(18,14,10,0.85), rgba(18,14,10,0.85)), url('image_5.png'); background-size: cover; background-attachment: fixed;">
-  <div class="container">
-    <div class="ngo-layout">
-      <div class="ngo-text">
-        <p class="eyebrow" style="justify-content:flex-start">
-          <span class="en">Sector Specific Solutions</span>
-          <span class="de" style="display:none">Branchenspezifische Lösungen</span>
-          <span class="ar" style="display:none">حلول مخصصة للقطاعات</span>
-        </p>
-        <h2 style="font-family:var(--font-d); font-size:clamp(22px,2.8vw,34px); font-weight:700; color:var(--n50); margin-bottom:18px; line-height:1.22;">
-          <span class="en">Empowering Germany's Professional Sectors</span>
-          <span class="de" style="display:none">Stärkung der deutschen Fachbereiche</span>
-          <span class="ar" style="display:none">تمكين القطاعات المهنية في ألمانيا</span>
-        </h2>
-        <p style="font-size:15px; line-height:1.85; color:var(--n200); margin-bottom:26px;">
-          <span class="en">From legal firms in Düsseldorf to medical practices in Mettmann, BismarkVault AI provides the sovereignty and intelligence needed for high-stakes document management.</span>
-          <span class="de" style="display:none">Von Kanzleien in Düsseldorf bis zu Praxen in Mettmann – BismarkVault KI bietet die Souveränität, die Sie brauchen.</span>
-          <span class="ar" style="display:none">من مكاتب المحاماة في دوسلدورف إلى العيادات الطبية في متمان، يوفر BismarkVault AI السيادة والذكاء المطلوبين لإدارة المستندات الحساسة.</span>
-        </p>
-        <div class="ngo-kpis">
-          <div class="ngo-kpi"><span class="ngo-kpi-n">70%</span><span class="ngo-kpi-l"><span class="en">Efficiency Gain</span><span class="de" style="display:none">Effizienzsteigerung</span><span class="ar" style="display:none">زيادة الكفاءة</span></span></div>
-          <div class="ngo-kpi"><span class="ngo-kpi-n">€0</span><span class="ngo-kpi-l"><span class="en">Initial Investment</span><span class="de" style="display:none">Anfangsinvestition</span><span class="ar" style="display:none">استثمار أولي</span></span></div>
-        </div>
-      </div>
-      
-      <div class="ngo-orgs" role="list">
-        <div class="ngo-org" role="listitem">
-          <span class="ngo-org-ico">⚖️</span>
-          <div>
-            <div class="ngo-org-n"><span class="en">Lawyers & Notaries</span><span class="de" style="display:none">Anwälte & Notare</span><span class="ar" style="display:none">المحامون والموثقون</span></div>
-            <div class="ngo-org-d"><span class="en">Automated case filing and contract risk analysis.</span><span class="de" style="display:none">Automatisierte Aktenführung.</span><span class="ar" style="display:none">أرشفة القضايا تلقائياً وتحليل مخاطر العقود.</span></div>
-          </div>
-        </div>
-        <div class="ngo-org" role="listitem">
-          <span class="ngo-org-ico">🏥</span>
-          <div>
-            <div class="ngo-org-n"><span class="en">Medical Sector</span><span class="de" style="display:none">Medizinischer Sektor</span><span class="ar" style="display:none">القطاع الطبي</span></div>
-            <div class="ngo-org-d"><span class="en">DSGVO-safe patient record management.</span><span class="de" style="display:none">DSGVO-sichere Patientenakten.</span><span class="ar" style="display:none">إدارة سجلات المرضى بأمان وفق DSGVO.</span></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pricing" style="padding:100px 0;">
-  <div class="container">
-    <p class="eyebrow"><span class="en">Investment Plans</span><span class="de" style="display:none">Investitionspläne</span><span class="ar" style="display:none">خطط الاستثمار</span></p>
-    <h2 class="section-title"><span class="en">Transparent Pricing</span><span class="de" style="display:none">Transparente Preise</span><span class="ar" style="display:none">أسعار شفافة</span></h2>
-    <div class="price-grid">
-      <div class="price-card">
-        <div class="price-tier">COMMUNITY</div>
-        <div class="price-amt"><span class="price-cur">€</span>0</div>
-        <span class="price-per">FOREVER FREE</span>
-        <div class="price-val">💡 <span class="en">Ideal for small offices</span><span class="ar" style="display:none">مثالي للمكاتب الصغيرة</span></div>
-        <ul class="price-feats" style="list-style:none; padding:0; margin-top:20px;">
-          <li>20 Files Analysis</li>
-          <li>Basic AI Engine</li>
-          <li>Local Storage Only</li>
-        </ul>
-        <button class="price-btn" onclick="showApp()">GET STARTED</button>
-      </div>
-      <div class="price-card pop">
-        <div class="pop-lbl">RECOMMENDED</div>
-        <div class="price-tier">ENTERPRISE</div>
-        <div class="price-amt"><span class="price-cur">€</span>49</div>
-        <span class="price-per">PER MONTH</span>
-        <div class="price-val">🚀 <span class="en">Saves 20+ hours/month</span><span class="ar" style="display:none">يوفر 20+ ساعة شهرياً</span></div>
-        <ul class="price-feats" style="list-style:none; padding:0; margin-top:20px;">
-          <li>Unlimited Files</li>
-          <li>Advanced AI Analyzer</li>
-          <li>Cloud Sync & Backup</li>
-        </ul>
-        <button class="price-btn" onclick="goTo('contact')">CHOOSE PLAN</button>
-      </div>
-    </div>
-  </div>
-</section><div id="legal" class="gone" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
-  <div class="legal-box" style="background-image: linear-gradient(rgba(15,13,10,0.95), rgba(15,13,10,0.95)), url('image_2.png');">
-    <div class="legal-back">
-      <button class="abtn abtn-ghost abtn-sm" onclick="hideLegal()" style="width:auto">
-        ← <span class="en">Back</span><span class="de" style="display:none">Zurück</span><span class="ar" style="display:none">رجوع</span>
-      </button>
-    </div>
-    <div id="legalContent">
-      </div>
-  </div>
+<div class="upload-box">
+<input type="file" id="fileInput">
+<br><br>
+<button class="btn" onclick="analyzeFile()">Analyze with AI</button>
 </div>
 
-<section id="contact" style="background: linear-gradient(180deg, transparent, rgba(18,14,10,0.45), transparent);">
-  <div class="container">
-    <p class="eyebrow"><span class="en">Get in Touch</span><span class="de" style="display:none">Kontakt</span><span class="ar" style="display:none">تواصل معنا</span></p>
-    <div class="contact-box">
-      <div class="cform">
-        <div class="cfield"><label class="cfield-lbl"><span class="en">Email</span><span class="ar" style="display:none">البريد الإلكتروني</span></label><input type="email" id="cEmail" placeholder="info@bismarkvault.de"/></div>
-        <div class="cfield"><label class="cfield-lbl"><span class="en">Subject</span><span class="ar" style="display:none">الموضوع</span></label><input type="text" id="cSubject" placeholder="Enterprise Inquiry"/></div>
-        <div class="cfield full"><label class="cfield-lbl"><span class="en">Message</span><span class="ar" style="display:none">الرسالة</span></label><textarea id="cMsg" placeholder="How can BismarkVault AI help your organization?"></textarea></div>
-      </div>
-      <button class="contact-btn" onclick="submitContact()">
-        <span class="en">Send Message ✦</span><span class="de" style="display:none">Nachricht senden</span><span class="ar" style="display:none">إرسال الرسالة</span>
-      </button>
-      <div class="contact-ok" id="cOK" style="display:none; color:var(--success); text-align:center; margin-top:15px;">✅ Sent! We will reply within 24h.</div>
-    </div>
-  </div>
-</section>
+<div id="output" class="result" style="display:none;"></div>
+</section><script>
+function analyzeFile() {
+  const file = document.getElementById("fileInput").files[0];
 
-<footer role="contentinfo" style="background-image: linear-gradient(to top, var(--n950), transparent);">
-  <div class="container">
-    <div class="foot-grid">
-      <div>
-        <div class="foot-brand">
-          <div class="nav-logo-mark" style="width:36px;height:36px">
-            <svg viewBox="0 0 24 24" fill="none" style="width:18px;"><rect x="4" y="9" width="16" height="12" rx="2" stroke="#C8A84B" stroke-width="1.4"/></svg>
-          </div>
-          <span class="nav-brand" style="font-size:15px">BismarkVault AI</span>
-        </div>
-        <p class="foot-tagline" style="font-size:13px; color:var(--n300);"><span class="en">AI-Driven Document Sovereignity. Developed in Mettmann, Germany.</span><span class="ar" style="display:none">سيادة الوثائق المدعومة بالذكاء الاصطناعي. طُور في متمان، ألمانيا.</span></p>
-      </div>
-      <div class="foot-col">
-        <h4><span class="en">Legal</span><span class="ar" style="display:none">قانوني</span></h4>
-        <ul>
-          <li onclick="showLegal('imp')">Impressum</li>
-          <li onclick="showLegal('dat')">Privacy Policy</li>
-          <li onclick="showLegal('agb')">ToS</li>
-        </ul>
-      </div>
-    </div>
-    <div class="foot-bottom">
-      <span class="foot-copy">© 2026 <strong>BismarkVault AI</strong> — Malek Alsirreih · Mettmann · All rights reserved</span>
-      <div class="foot-badges">
-        <div class="foot-badge">🛡️ DSGVO-konform</div>
-        <div class="foot-badge">🇩🇪 Made in Germany</div>
-      </div>
-    </div>
-  </div>
-</footer>/* ════════════════════════════════════
-     JAVASCRIPT — THE ULTIMATE ENGINE
-════════════════════════════════════ */
-'use strict';
+  if (!file) {
+    alert("يرجى اختيار ملف أولاً");
+    return;
+  }
 
-// 🔑 SECURITY CONFIG
-const AUTH_KEY = 'Malek,ser1984';
-const HASH_KEY = btoa(unescape(encodeURIComponent(AUTH_KEY)));
-let currentLang = 'en';
+  const output = document.getElementById("output");
+  output.style.display = "block";
+  output.innerHTML = "⏳ جاري التحليل...";
 
-// ═══ INITIALIZATION ═══
-window.addEventListener('DOMContentLoaded', () => {
-    setLang('en'); // تبدأ اللغة بالإنجليزية افتراضياً كما طلبت
-    initApp();
-    console.log("BismarkVault Ultimate Engine — Optimized for Malek");
-});
-
-// ═══ CORE NAVIGATION ═══
-function showApp() {
-    document.getElementById('landing').classList.add('gone');
-    document.getElementById('app').style.display = 'block';
-    window.scrollTo({top: 0, behavior: 'smooth'});
+  setTimeout(() => {
+    simulateAI(file.name);
+  }, 1500);
 }
 
-function goHome() {
-    document.getElementById('app').style.display = 'none';
-    document.getElementById('landing').classList.remove('gone');
-    window.scrollTo({top: 0, behavior: 'smooth'});
+function simulateAI(filename) {
+  const text = `
+📄 اسم الملف: ${filename}
+
+🔍 التحليل:
+- تم اكتشاف محتوى قانوني
+- لا توجد مخاطر DSGVO
+- اللغة: ألمانية
+
+💡 توصيات:
+- لا حاجة لاتخاذ إجراء
+- الملف آمن للاستخدام
+  `;
+
+  typeEffect(text);
 }
 
-function goTo(id) {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-}
+function typeEffect(text) {
+  const output = document.getElementById("output");
+  output.innerHTML = "";
+  let i = 0;
 
-// ═══ LANGUAGE SYSTEM ═══
-function setLang(l) {
-    currentLang = l;
-    document.documentElement.lang = l;
-    document.documentElement.dir = (l === 'ar') ? 'rtl' : 'ltr';
-
-    // التبديل بين النصوص
-    ['en', 'de', 'ar'].forEach(lang => {
-        document.querySelectorAll('.' + lang).forEach(el => {
-            const isMatch = (lang === l);
-            el.style.display = isMatch ? (el.tagName === 'SPAN' ? 'inline' : 'block') : 'none';
-        });
-    });
-
-    // تحديث الأزرار
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-        btn.classList.toggle('active', btn.textContent.toLowerCase() === l);
-    });
-}
-
-// ═══ AUTHENTICATION ═══
-function doLogin() {
-    const input = document.getElementById('passInput').value;
-    const currentHash = btoa(unescape(encodeURIComponent(input)));
-    
-    if (currentHash === HASH_KEY) {
-        document.getElementById('loginPanel').style.display = 'none';
-        document.getElementById('vaultPanel').style.display = 'block';
-        // دمج صورة خلفية سادسة للقبو عند الدخول
-        document.getElementById('app').style.backgroundImage = "linear-gradient(rgba(5,4,3,0.95), rgba(5,4,3,0.95)), url('image_6.png')";
-        showToast("Welcome Malek. Vault Decrypted.");
-    } else {
-        showToast("Invalid Security Key.");
-        document.getElementById('passInput').value = '';
+  function typing() {
+    if (i < text.length) {
+      output.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typing, 20);
     }
+  }
+
+  typing();
 }
+</script><footer>
+<p>© 2026 BismarkVault — AI Powered</p>
+</footer>
 
-// ═══ AI ANALYZER ENGINE ═══
-async function runDemo(event) {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const resDiv = document.getElementById('demoResult');
-    const body = document.getElementById('demoAiBody');
-    
-    resDiv.style.display = 'block';
-    body.innerHTML = '<div class="demo-ai-pulse"></div> Thinking...';
-
-    // محاكاة تحليل الذكاء الاصطناعي
-    setTimeout(() => {
-        body.innerHTML = `
-            <div style="color:var(--g200); margin-bottom:10px;">Analysis Complete: ${file.name}</div>
-            <p><strong>Status:</strong> Valid Document Identified</p>
-            <p><strong>BismarkVault AI:</strong> This file contains data related to professional archiving. Ready to be moved to the secure vault.</p>
-        `;
-    }, 2000);
-}
-
-// ═══ UI UTILS ═══
-function showToast(msg) {
-    const toast = document.createElement('div');
-    toast.className = 'toast-msg';
-    toast.style = "position:fixed; bottom:30px; left:50%; transform:translateX(-50%); background:var(--g300); color:#000; padding:12px 24px; border-radius:50px; font-weight:700; z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.5);";
-    toast.textContent = msg;
-    document.body.appendChild(toast);
-    setTimeout(() => toast.remove(), 3000);
-}
-
-// Mouse Tracking for Bento Cards
-function trackMouse(e, el) {
-    const rect = el.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    el.style.setProperty('--mx', `${x}px`);
-    el.style.setProperty('--my', `${y}px`);
-}
-
-// Intersection Observer for Animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if(entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-        }
-    });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('section').forEach(s => observer.observe(s));
-
-</script>
 </body>
 </html>
