@@ -1,151 +1,2798 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta
+    name="description"
+    content="BismarkVault — KI-Dokumentenanalysator für Unternehmen, Kanzleien, Praxen und Institutionen in Deutschland. AR · DE · EN · DSGVO-konform · BismarkVault AI."
+  />
+  <meta
+    name="keywords"
+    content="BismarkVault, KI, Archivierung, DSGVO, Unternehmen, Kanzleien, Schulen, Mettmann, BismarkVaultAI"
+  />
+  <meta name="author" content="Malek Alsirreih" />
+  <meta name="theme-color" content="#C8A84B" />
+  <meta name="color-scheme" content="dark" />
 
-<meta name="description" content="BismarkVault AI Document Analyzer">
-<meta name="theme-color" content="#C8A84B">
+  <meta property="og:title" content="BismarkVault — KI-Dokumentenanalysator" />
+  <meta
+    property="og:description"
+    content="AI Document Analyzer for companies, practices, schools and institutions in Germany. AR · DE · EN · DSGVO-konform."
+  />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ar_DE" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;600&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;900&family=Cairo:wght@300;400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap"
+    rel="stylesheet"
+  />
 
-<style>
-body {
-  margin: 0;
-  font-family: 'Cairo', sans-serif;
-  background: #0b0b0b;
-  color: #fff;
-}
+  <title>BismarkVault — KI-Dokumentenanalysator</title>
 
-header {
-  padding: 20px;
-  text-align: center;
-  background: #111;
-  border-bottom: 1px solid #C8A84B;
-}
+  <style>
+    :root {
+      --g50: #faf5e0;
+      --g100: #f5e8b0;
+      --g200: #edd070;
+      --g300: #c8a84b;
+      --g400: #a07828;
+      --g500: #7a5818;
+      --g600: #5a3e10;
 
-h1 {
-  color: #C8A84B;
-}
+      --n950: #030302;
+      --n900: #050403;
+      --n850: #0a0806;
+      --n800: #0d0b09;
+      --n750: #111009;
+      --n700: #161310;
+      --n650: #1a1714;
+      --n600: #1e1a16;
+      --n550: #232018;
+      --n500: #2a251e;
+      --n400: #3a3228;
+      --n300: #706050;
+      --n200: #a89070;
+      --n100: #d8c8a8;
+      --n50: #f0e8d8;
 
-nav a {
-  color: #ccc;
-  margin: 0 10px;
-  text-decoration: none;
-}
+      --b600: #0f2e48;
+      --b500: #1a4f80;
+      --b400: #2268a8;
+      --b300: #3a88c8;
+      --b200: #6aaee0;
 
-nav a:hover {
-  color: #C8A84B;
-}
+      --success: #1a6a3a;
+      --success-bg: rgba(26, 106, 58, 0.1);
+      --danger: #8b1e2f;
+      --danger-bg: rgba(139, 30, 47, 0.1);
 
-.container {
-  padding: 40px;
-  text-align: center;
-}
+      --bd: rgba(200, 168, 75, 0.1);
+      --bd2: rgba(200, 168, 75, 0.22);
+      --bd3: rgba(200, 168, 75, 0.4);
 
-.btn {
-  background: #C8A84B;
-  color: #000;
-  padding: 12px 20px;
-  border: none;
-  cursor: pointer;
-}
+      --r2: 6px;
+      --r4: 10px;
+      --r6: 14px;
+      --r8: 20px;
+      --r10: 28px;
+      --r-pill: 999px;
 
-.upload-box {
-  margin-top: 30px;
-  border: 2px dashed #C8A84B;
-  padding: 30px;
-}
+      --sh1: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+      --sh2: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --sh3: 0 10px 32px rgba(0, 0, 0, 0.5);
+      --sh4: 0 20px 60px rgba(0, 0, 0, 0.65);
+      --sh5: 0 40px 100px rgba(0, 0, 0, 0.75);
+      --sh-g: 0 6px 24px rgba(200, 168, 75, 0.22);
+      --sh-g2: 0 12px 40px rgba(200, 168, 75, 0.38);
+      --sh-b: 0 4px 16px rgba(34, 104, 168, 0.25);
 
-.result {
-  margin-top: 20px;
-  background: #111;
-  padding: 20px;
-  border-radius: 10px;
-}
+      --font-d: "Cinzel", serif;
+      --font-ar: "Cairo", sans-serif;
+      --font-b: "DM Sans", sans-serif;
 
-footer {
-  text-align: center;
-  padding: 20px;
-  border-top: 1px solid #333;
-  margin-top: 50px;
-}
-</style>
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+      --tx-fast: 150ms var(--ease-in-out);
+      --tx-mid: 250ms var(--ease-out);
+      --tx-slow: 400ms var(--ease-out);
+      --tx-spring: 350ms var(--ease-spring);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+      tab-size: 4;
+    }
+
+    body {
+      font-family: var(--font-b);
+      background: var(--n900);
+      color: var(--n50);
+      min-height: 100vh;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      font-feature-settings: "kern" 1, "liga" 1;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    input,
+    textarea,
+    select {
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    :focus-visible {
+      outline: 2px solid var(--g300);
+      outline-offset: 3px;
+      border-radius: var(--r2);
+    }
+
+    ::selection {
+      background: rgba(200, 168, 75, 0.25);
+      color: var(--g100);
+    }
+
+    .gone {
+      display: none !important;
+    }
+
+    .view {
+      position: relative;
+      z-index: 1;
+    }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .bg-gradient {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 90% 60% at 50% -5%, rgba(200, 168, 75, 0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 50% at 100% 85%, rgba(26, 79, 128, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse 60% 45% at 0% 70%, rgba(26, 79, 128, 0.05) 0%, transparent 50%),
+        radial-gradient(ellipse 80% 80% at 50% 50%, rgba(10, 8, 6, 0.3) 0%, transparent 70%);
+    }
+
+    .bg-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(200, 168, 75, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 168, 75, 0.022) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: radial-gradient(ellipse 85% 85% at 50% 50%, rgba(0, 0, 0, 0.8) 30%, transparent 100%);
+    }
+
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      animation: orbFloat 20s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    .bg-orb-1 {
+      width: 500px;
+      height: 500px;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(200, 168, 75, 0.05), transparent 70%);
+      animation-delay: 0s;
+    }
+
+    .bg-orb-2 {
+      width: 350px;
+      height: 350px;
+      bottom: -100px;
+      right: -50px;
+      background: radial-gradient(circle, rgba(34, 104, 168, 0.06), transparent 70%);
+      animation-delay: -7s;
+    }
+
+    .bg-orb-3 {
+      width: 280px;
+      height: 280px;
+      top: 40%;
+      left: -60px;
+      background: radial-gradient(circle, rgba(34, 104, 168, 0.04), transparent 70%);
+      animation-delay: -14s;
+    }
+
+    #topbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 600;
+      height: 38px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: linear-gradient(
+        90deg,
+        var(--g600) 0%,
+        var(--g500) 15%,
+        var(--g300) 35%,
+        var(--g200) 50%,
+        var(--g300) 65%,
+        var(--g500) 85%,
+        var(--g600) 100%
+      );
+      background-size: 200% 100%;
+      animation: topbarShimmer 5s linear infinite;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+      color: #0a0800;
+      border-bottom: 1px solid rgba(200, 168, 75, 0.5);
+      padding: 0 50px;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+
+    .tb-icon {
+      font-size: 13px;
+      flex-shrink: 0;
+      animation: tbBounce 2s ease-in-out infinite;
+    }
+
+    .tb-sep {
+      opacity: 0.4;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .tb-cta {
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(0, 0, 0, 0.3);
+      border-radius: 50px;
+      padding: 3px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0a0800;
+      white-space: nowrap;
+      flex-shrink: 0;
+      transition: background var(--tx-fast);
+    }
+
+    .tb-cta:hover {
+      background: rgba(0, 0, 0, 0.28);
+    }
+
+    .tb-close {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.18);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      color: #0a0800;
+      font-weight: 800;
+      transition: background var(--tx-fast);
+    }
+
+    [dir="ltr"] .tb-close {
+      left: auto;
+      right: 14px;
+    }
+
+    .tb-close:hover {
+      background: rgba(0, 0, 0, 0.32);
+    }
+
+    #nav {
+      position: fixed;
+      top: 38px;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      background: rgba(5, 4, 3, 0);
+      backdrop-filter: blur(0) saturate(1.6);
+      border-bottom: 1px solid transparent;
+      transition:
+        background var(--tx-slow),
+        border-color var(--tx-slow),
+        backdrop-filter var(--tx-slow),
+        box-shadow var(--tx-slow),
+        top var(--tx-mid);
+    }
+
+    #nav.is-scrolled {
+      background: rgba(5, 4, 3, 0.94);
+      border-color: rgba(200, 168, 75, 0.1);
+      backdrop-filter: blur(24px) saturate(1.6);
+      box-shadow: 0 4px 40px rgba(0, 0, 0, 0.55);
+    }
+
+    #nav.bar-gone {
+      top: 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      cursor: pointer;
+      transition: opacity var(--tx-fast);
+    }
+
+    .nav-logo:hover {
+      opacity: 0.85;
+    }
+
+    .nav-logo-mark {
+      width: 40px;
+      height: 40px;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, #1c1810, #2e2418);
+      border: 1px solid var(--g500);
+      border-radius: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 20px rgba(200, 168, 75, 0.14),
+        inset 0 1px 0 rgba(200, 168, 75, 0.12);
+    }
+
+    .nav-brand {
+      font-family: var(--font-d);
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      background: linear-gradient(135deg, var(--g50), var(--g200), var(--g300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .nav-link {
+      padding: 7px 13px;
+      border-radius: var(--r4);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--n200);
+      transition: all var(--tx-fast);
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      right: 50%;
+      height: 1px;
+      background: var(--g300);
+      transition: all var(--tx-mid);
+    }
+
+    .nav-link:hover {
+      color: var(--n50);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .nav-link:hover::after {
+      left: 13px;
+      right: 13px;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .lang-sw {
+      display: flex;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bd);
+      border-radius: var(--r-pill);
+      padding: 3px;
+      gap: 2px;
+    }
+
+    .lang-btn {
+      padding: 5px 12px;
+      border-radius: var(--r-pill);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--n300);
+      transition: all var(--tx-mid);
+    }
+
+    .lang-btn.active {
+      background: linear-gradient(135deg, var(--g200), var(--g300));
+      color: #0a0800;
+      box-shadow: var(--sh-g);
+    }
+
+    .nav-cta {
+      padding: 10px 22px;
+      border-radius: var(--r-pill);
+      background: linear-gradient(135deg, var(--g200), var(--g300), #9a7018);
+      color: #0a0800;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      transition: all var(--tx-spring);
+      box-shadow: var(--sh-g);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sh-g2);
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 170px 24px 90px;
+      position: relative;
+      isolation: isolate;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(200, 168, 75, 0.07);
+      border: 1px solid var(--bd2);
+      border-radius: var(--r-pill);
+      padding: 8px 22px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      color: var(--g300);
+      text-transform: uppercase;
+      margin-bottom: 32px;
+      animation: fadeDown 0.8s var(--ease-out) both;
+    }
+
+    .hero-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--g300);
+      flex-shrink: 0;
+      animation: pillPulse 2.5s ease-in-out infinite;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-d);
+      font-size: clamp(46px, 8.5vw, 108px);
+      font-weight: 900;
+      letter-spacing: -3px;
+      line-height: 0.92;
+      margin-bottom: 18px;
+      animation: fadeDown 0.9s var(--ease-out) both 0.08s;
+    }
+
+    .hero-h1-main {
+      display: block;
+      background: linear-gradient(
+        140deg,
+        var(--g50) 0%,
+        var(--g200) 25%,
+        var(--g300) 55%,
+        var(--g500) 85%,
+        #4a3010 100%
+      );
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(200, 168, 75, 0.15));
+    }
+
+    .hero-h1-sub {
+      display: block;
+      font-size: clamp(10px, 1.2vw, 13px);
+      letter-spacing: 9px;
+      color: var(--n300);
+      margin-top: 18px;
+      font-weight: 400;
+      font-family: var(--font-b);
+      text-transform: uppercase;
+    }
+
+    .hero-value {
+      font-family: var(--font-d);
+      font-size: clamp(15px, 1.8vw, 20px);
+      font-weight: 600;
+      color: var(--g300);
+      letter-spacing: 0.3px;
+      margin-bottom: 14px;
+      animation: fadeDown 0.95s var(--ease-out) both 0.14s;
+    }
+
+    .hero-desc {
+      max-width: 620px;
+      font-size: clamp(14px, 1.6vw, 17px);
+      line-height: 1.85;
+      color: var(--n200);
+      margin-bottom: 48px;
+      animation: fadeDown 1s var(--ease-out) both 0.18s;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeDown 1.05s var(--ease-out) both 0.24s;
+    }
+
+    .btn-hero-primary {
+      padding: 17px 48px;
+      border-radius: var(--r-pill);
+      background: linear-gradient(135deg, var(--g200), var(--g300), #9a7010);
+      color: #0a0800;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      transition: all var(--tx-spring);
+      box-shadow: 0 8px 32px rgba(200, 168, 75, 0.28);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-hero-primary:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 20px 50px rgba(200, 168, 75, 0.45);
+    }
+
+    .btn-hero-ghost {
+      padding: 16px 38px;
+      border-radius: var(--r-pill);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--g300);
+      border: 1px solid var(--bd2);
+      font-size: 14px;
+      font-weight: 600;
+      transition: all var(--tx-mid);
+      backdrop-filter: blur(8px);
+    }
+
+    .btn-hero-ghost:hover {
+      border-color: var(--g300);
+      background: rgba(200, 168, 75, 0.09);
+      transform: translateY(-2px);
+    }
+
+    .hero-trust {
+      display: flex;
+      gap: 9px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 30px;
+      animation: fadeDown 1.1s var(--ease-out) both 0.3s;
+    }
+
+    .trust-chip {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 15px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--bd);
+      border-radius: var(--r-pill);
+      font-size: 12px;
+      color: var(--n200);
+      backdrop-filter: blur(8px);
+      transition: border-color var(--tx-fast);
+    }
+
+    .trust-chip:hover {
+      border-color: var(--bd2);
+    }
+
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 700px;
+      width: 100%;
+      margin-top: 56px;
+      animation: fadeUp 1s var(--ease-out) both 0.4s;
+    }
+
+    .metric-card {
+      background: var(--n700);
+      border: 1px solid var(--bd);
+      border-radius: var(--r8);
+      padding: 22px 14px;
+      text-align: center;
+      transition: all var(--tx-spring);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .metric-card:hover {
+      border-color: var(--bd2);
+      transform: translateY(-4px);
+      box-shadow: var(--sh3);
+    }
+
+    .metric-num {
+      font-family: var(--font-d);
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, var(--g200), var(--g300));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      display: block;
+      margin-bottom: 9px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      color: var(--n300);
+      line-height: 1.45;
+      display: block;
+    }
+
+    .metric-tag {
+      font-size: 9px;
+      color: rgba(200, 168, 75, 0.4);
+      display: block;
+      margin-top: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      font-size: 10px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--g300);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      flex: 1;
+      max-width: 52px;
+      height: 1px;
+    }
+
+    .eyebrow::before {
+      background: linear-gradient(90deg, transparent, var(--g500));
+    }
+
+    .eyebrow::after {
+      background: linear-gradient(270deg, transparent, var(--g500));
+    }
+
+    .section-title {
+      text-align: center;
+      font-family: var(--font-d);
+      font-size: clamp(22px, 3.5vw, 42px);
+      font-weight: 700;
+      color: var(--n50);
+      margin-bottom: 14px;
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+    }
+
+    .section-desc {
+      text-align: center;
+      font-size: 16px;
+      color: var(--n200);
+      max-width: 560px;
+      margin: 0 auto 64px;
+      line-height: 1.75;
+    }
+
+    @keyframes fadeDown {
+      from {
+        opacity: 0;
+        transform: translateY(-22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes orbFloat {
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+      33% {
+        transform: translate(20px, -15px) scale(1.05);
+      }
+      66% {
+        transform: translate(-10px, 10px) scale(0.97);
+      }
+    }
+
+    @keyframes pillPulse {
+      0%,
+      100% {
+        box-shadow: 0 0 4px rgba(200, 168, 75, 0.4);
+      }
+      50% {
+        box-shadow: 0 0 14px rgba(200, 168, 75, 0.9);
+      }
+    }
+
+    @keyframes topbarShimmer {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 200% 50%;
+      }
+    }
+
+    @keyframes tbBounce {
+      0%,
+      100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-2px);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .hero-metrics {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      #topbar {
+        font-size: 11px;
+        height: 34px;
+        gap: 8px;
+        padding: 0 44px;
+      }
+
+      #nav {
+        top: 34px;
+      }
+
+      #nav.bar-gone {
+        top: 0;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .container {
+        padding: 0 18px;
+      }
+
+      section {
+        padding: 68px 0;
+      }
+
+      .hero {
+        padding: 140px 18px 64px;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr 1fr;
+        margin-top: 40px;
+        gap: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      #topbar {
+        font-size: 10px;
+        height: 32px;
+        gap: 6px;
+        padding: 0 40px;
+      }
+
+      #nav {
+        top: 32px;
+      }
+
+      .hero {
+        padding: 130px 18px 64px;
+      }
+
+      .hero-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
-<body><header>
-<h1>BismarkVault</h1>
-<nav>
-<a href="#">الرئيسية</a>
-<a href="#">Vault</a>
-<a href="#">AI</a>
-</nav>
+<body>
+
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="bg-gradient"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+  </div>
+
+  <div id="topbar" role="banner">
+    <span class="tb-icon" aria-hidden="true">❖</span>
+    <span class="ar">BismarkVault AI — الأرشفة الذكية للشركات والمحامين والأطباء · DSGVO-konform · ابدأ مجاناً</span>
+    <span class="de">BismarkVault AI — Intelligente Archivierung für Unternehmen, Kanzleien &amp; Praxen · Kostenlos starten</span>
+    <span class="en">BismarkVault AI — Smart Archiving for Companies, Lawyers &amp; Doctors · Start Free Today</span>
+    <span class="tb-sep">|</span>
+    <button class="tb-cta" onclick="showApp()">
+      <span class="ar">ابدأ مجاناً ←</span>
+      <span class="de">Kostenlos →</span>
+      <span class="en">Start Free →</span>
+    </button>
+    <button class="tb-close" onclick="closeTopBar()" aria-label="Close">×</button>
+  </div>
+
+  <div id="landing" class="view">
+    <nav id="nav" role="navigation" aria-label="Main navigation">
+      <div class="nav-inner">
+        <div class="nav-logo" onclick="goHome()" tabindex="0" role="button" aria-label="BismarkVault — Go to homepage">
+          <div class="nav-logo-mark">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="4" y="9" width="16" height="12" rx="2" stroke="#C8A84B" stroke-width="1.4"></rect>
+              <path d="M8 9V7a4 4 0 0 1 8 0v2" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"></path>
+              <circle cx="12" cy="14.5" r="1.8" fill="#C8A84B"></circle>
+              <line x1="12" y1="16.3" x2="12" y2="18.5" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"></line>
+            </svg>
+          </div>
+          <span class="nav-brand">BismarkVault</span>
+        </div>
+
+        <div class="nav-links" aria-label="Page sections">
+          <button class="nav-link" onclick="goTo('demo')"><span class="ar">جرّب</span><span class="de">Demo</span><span class="en">Demo</span></button>
+          <button class="nav-link" onclick="goTo('features')"><span class="ar">المميزات</span><span class="de">Features</span><span class="en">Features</span></button>
+          <button class="nav-link" onclick="goTo('ngo')"><span class="ar">للمنظمات</span><span class="de">NGOs</span><span class="en">NGOs</span></button>
+          <button class="nav-link" onclick="goTo('pricing')"><span class="ar">الأسعار</span><span class="de">Preise</span><span class="en">Pricing</span></button>
+          <button class="nav-link" onclick="goTo('contact')"><span class="ar">تواصل</span><span class="de">Kontakt</span><span class="en">Contact</span></button>
+        </div>
+
+        <div class="nav-right">
+          <div class="lang-sw" role="group" aria-label="Language selector">
+            <button class="lang-btn active" onclick="setLang('ar')" aria-pressed="true">AR</button>
+            <button class="lang-btn" onclick="setLang('de')" aria-pressed="false">DE</button>
+            <button class="lang-btn" onclick="setLang('en')" aria-pressed="false">EN</button>
+          </div>
+
+          <button class="nav-cta" onclick="showApp()">
+            <span class="ar">ابدأ مجاناً</span>
+            <span class="de">Kostenlos</span>
+            <span class="en">Start Free</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <section class="hero" aria-labelledby="heroTitle">
+      <div class="hero-pill">
+        <span class="hero-pill-dot" aria-hidden="true"></span>
+        <span class="ar">محلل الوثائق الذكي للشركات والمكاتب والمؤسسات · DSGVO-konform</span>
+        <span class="de">KI-Dokumentenanalysator für Unternehmen, Kanzleien &amp; Behörden · DSGVO-konform</span>
+        <span class="en">AI Document Analyzer for Companies, Lawyers &amp; Institutions · GDPR-Compliant</span>
+      </div>
+
+      <h1 class="hero-h1" id="heroTitle">
+        <span class="hero-h1-main">BismarkVault</span>
+        <span class="hero-h1-sub">
+          <span class="ar">احفظ · صنّف · حلّل بالذكاء الاصطناعي</span>
+          <span class="de">ARCHIVIEREN · KLASSIFIZIEREN · KI-ANALYSE</span>
+          <span class="en">ARCHIVE · CLASSIFY · AI-ANALYZE</span>
+        </span>
+      </h1>
+
+      <p class="hero-value">
+        <span class="ar">🕐 وفّر 5 ساعات أسبوعياً في إدارة وثائقك</span>
+        <span class="de">🕐 Sparen Sie 5 Stunden pro Woche bei der Dokumentenverwaltung</span>
+        <span class="en">🕐 Save 5 hours per week on document management</span>
+      </p>
+
+      <p class="hero-desc">
+        <span class="ar">الأداة الذكية التي تجمع الأرشفة الاحترافية مع الذكاء الاصطناعي بالعربية والألمانية والإنجليزية. مصممة للشركات والمحامين والأطباء والمدارس والدوائر الحكومية. DSGVO-konform بالكامل.</span>
+        <span class="de">Das intelligente Archivsystem für Unternehmen, Kanzleien, Arztpraxen, Schulen und Behörden. KI auf Arabisch, Deutsch und Englisch. Vollständig DSGVO-konform.</span>
+        <span class="en">The smart archiving system for companies, law firms, medical practices, schools, and government offices. AI in Arabic, German, and English. Fully GDPR-compliant.</span>
+      </p>
+
+      <div class="hero-actions">
+        <button class="btn-hero-primary" onclick="showApp()">
+          🔐
+          <span class="ar">ابدأ مجاناً — بدون بطاقة</span>
+          <span class="de">Kostenlos starten — ohne Kreditkarte</span>
+          <span class="en">Start Free — No Card Required</span>
+        </button>
+
+        <button class="btn-hero-ghost" onclick="goTo('demo')">
+          ▶
+          <span class="ar">شاهد كيف يعمل</span>
+          <span class="de">Demo ansehen</span>
+          <span class="en">See How It Works</span>
+        </button>
+      </div>
+
+      <div class="hero-trust">
+        <div class="trust-chip">⚖️ Rechtsanwälte</div>
+        <div class="trust-chip">🏢 Unternehmen</div>
+        <div class="trust-chip">🏥 Arztpraxen</div>
+        <div class="trust-chip">⚖️ DSGVO-konform</div>
+        <div class="trust-chip">🇩🇪 Made in Mettmann</div>
+      </div>
+
+      <div class="hero-metrics" role="list">
+        <div class="metric-card" role="listitem">
+          <span class="metric-num">5h</span>
+          <span class="metric-label">
+            <span class="ar">موفّرة أسبوعياً لكل موظف</span>
+            <span class="de">Gespart/Woche pro Mitarbeiter</span>
+            <span class="en">Saved/Week per Employee</span>
+          </span>
+          <span class="metric-tag">
+            <span class="ar">vs. يدوي</span>
+            <span class="de">vs. manuell</span>
+            <span class="en">vs. manual</span>
+          </span>
+        </div>
+
+        <div class="metric-card" role="listitem">
+          <span class="metric-num">99%</span>
+          <span class="metric-label">
+            <span class="ar">دقة التصنيف التلقائي</span>
+            <span class="de">Klassifizierungsgenauigkeit</span>
+            <span class="en">Classification Accuracy</span>
+          </span>
+          <span class="metric-tag">BismarkVault AI</span>
+        </div>
+
+        <div class="metric-card" role="listitem">
+          <span class="metric-num">AR·DE·EN</span>
+          <span class="metric-label">
+            <span class="ar">لغات — فريد في السوق</span>
+            <span class="de">Sprachen — Einzigartig</span>
+            <span class="en">Languages — Unique</span>
+          </span>
+          <span class="metric-tag">
+            <span class="ar">فريد في السوق</span>
+            <span class="de">Einzigartig am Markt</span>
+            <span class="en">Unique in market</span>
+          </span>
+        </div>
+      </div>
+    </section><!-- =========================
+VAULT INTERFACE
+========================= -->
+<section id="app" class="hidden">
+
+<header class="app-header">
+    <h2>📂 BismarkVault</h2>
+    <button onclick="logout()">Logout</button>
 </header>
 
-<section class="container">
-<h2>محلل الوثائق الذكي</h2>
-<p>رفع ملفاتك وتحليلها باستخدام الذكاء الاصطناعي</p>
+<div class="vault-container">
 
-<div class="upload-box">
-<input type="file" id="fileInput">
-<br><br>
-<button class="btn" onclick="analyzeFile()">Analyze with AI</button>
+    <!-- Upload Area -->
+    <div class="upload-box">
+        <h3>Upload Document</h3>
+        <input type="file" id="fileInput"/>
+        <button onclick="uploadFile()">Upload</button>
+    </div>
+
+    <!-- File List -->
+    <div class="file-list">
+        <h3>Your Files</h3>
+        <ul id="files"></ul>
+    </div>
+
 </div>
 
-<div id="output" class="result" style="display:none;"></div>
-</section><script>
-function analyzeFile() {
-  const file = document.getElementById("fileInput").files[0];
+<!-- AI PANEL -->
+<div class="ai-panel">
+    <h3>🤖 BismarkVault AI</h3>
+    <textarea id="aiInput" placeholder="Ask about your document..."></textarea>
+    <button onclick="askAI()">Analyze</button>
 
-  if (!file) {
-    alert("يرجى اختيار ملف أولاً");
+    <div id="aiResponse"></div>
+</div>
+
+</section>
+
+<!-- =========================
+STYLES
+========================= -->
+<style>
+
+.hidden {
+    display: none;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px;
+    background: black;
+    color: gold;
+}
+
+.vault-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+}
+
+.upload-box, .file-list {
+    background: #111;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+}
+
+.ai-panel {
+    background: #000;
+    color: gold;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+button {
+    background: gold;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+</style>
+
+<!-- =========================
+SCRIPT
+========================= -->
+<script>
+
+let files = [];
+
+function login() {
+    document.getElementById("login").classList.add("hidden");
+    document.getElementById("app").classList.remove("hidden");
+}
+
+function logout() {
+    location.reload();
+}
+
+function uploadFile() {
+    const input = document.getElementById("fileInput");
+    const file = input.files[0];
+
+    if (!file) return alert("Select file");
+
+    files.push(file.name);
+    renderFiles();
+}
+
+function renderFiles() {
+    const list = document.getElementById("files");
+    list.innerHTML = "";
+
+    files.forEach(f => {
+        const li = document.createElement("li");
+        li.textContent = f;
+        list.appendChild(li);
+    });
+}
+
+async function askAI() {
+    const input = document.getElementById("aiInput").value;
+    const output = document.getElementById("aiResponse");
+
+    output.innerHTML = "Analyzing...";
+
+    try {
+        const res = await fetch("/api/ai", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ message: input })
+        });
+
+        const data = await res.json();
+        output.innerHTML = data.reply;
+
+    } catch (err) {
+        output.innerHTML = "Error connecting to AI";
+    }
+}
+
+</script><!-- =========================
+LEGAL OVERLAY
+========================= -->
+<div id="legal" class="gone" role="dialog" aria-modal="true" aria-labelledby="legalTitle">
+  <div class="legal-box">
+    <div class="legal-back">
+      <button class="abtn abtn-ghost abtn-sm" onclick="hideLegal()" style="width:auto">
+        ← <span class="ar">رجوع</span><span class="de">Zurück</span><span class="en">Back</span>
+      </button>
+    </div>
+    <div id="legalContent"></div>
+  </div>
+</div>
+
+<style>
+  #legal {
+    position: fixed;
+    inset: 0;
+    background: rgba(5, 4, 3, 0.96);
+    backdrop-filter: blur(20px);
+    z-index: 900;
+    overflow-y: auto;
+    padding: 80px 24px 60px;
+  }
+
+  .legal-box {
+    max-width: 740px;
+    margin: 0 auto;
+    background: var(--n750);
+    border: 1px solid var(--bd);
+    border-radius: var(--r10);
+    padding: 48px 44px;
+  }
+
+  .legal-back {
+    margin-bottom: 28px;
+  }
+
+  .legal-box h1 {
+    font-family: var(--font-d);
+    font-size: 30px;
+    color: var(--g300);
+    margin-bottom: 6px;
+  }
+
+  .legal-sub {
+    font-size: 12px;
+    color: var(--n300);
+    display: block;
+    margin-bottom: 32px;
+    letter-spacing: 0.5px;
+  }
+
+  .legal-box h2 {
+    font-family: var(--font-d);
+    font-size: 16px;
+    color: var(--g200);
+    margin: 30px 0 12px;
+    padding-bottom: 9px;
+    border-bottom: 1px solid var(--bd);
+  }
+
+  .legal-box p,
+  .legal-box li {
+    font-size: 14px;
+    color: var(--n200);
+    line-height: 1.85;
+  }
+
+  .legal-box ul {
+    padding-right: 20px;
+    margin-top: 8px;
+  }
+
+  [dir="ltr"] .legal-box ul {
+    padding-right: 0;
+    padding-left: 20px;
+  }
+
+  .legal-box a {
+    color: var(--g300);
+  }
+</style>
+
+<!-- =========================
+APP / VAULT
+========================= -->
+<div id="app" class="view gone" role="main">
+  <div class="stor-note" role="alert">
+    <span class="stor-note-ico" aria-hidden="true">💾</span>
+    <span>
+      <span class="ar">الملفات محفوظة محلياً في متصفحك (localStorage). قد تُفقد عند مسح بيانات المتصفح. للتخزين السحابي <a onclick="gotoContact()">تواصل معنا</a>.</span>
+      <span class="de">Dateien lokal im Browser gespeichert (localStorage). Können beim Löschen verloren gehen. Für Cloud-Speicher <a onclick="gotoContact()">Kontakt aufnehmen</a>.</span>
+      <span class="en">Files stored locally in browser (localStorage). May be lost when clearing browser. For cloud storage <a onclick="gotoContact()">contact us</a>.</span>
+    </span>
+  </div>
+
+  <div class="app-brand">
+    <div class="app-logo-wrap">
+      <svg viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect x="6" y="14" width="24" height="18" rx="3" stroke="#C8A84B" stroke-width="1.4"></rect>
+        <path d="M12 14V11a6 6 0 0 1 12 0v3" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"></path>
+        <circle cx="18" cy="22" r="2.5" fill="#C8A84B"></circle>
+        <line x1="18" y1="24.5" x2="18" y2="27" stroke="#C8A84B" stroke-width="1.4" stroke-linecap="round"></line>
+      </svg>
+    </div>
+    <div class="app-name">BismarkVault</div>
+    <div class="app-sub">AI Document Analyzer · Secure Vault</div>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="panel" id="loginPanel">
+    <p class="panel-title"><span class="ar">الدخول للقبو</span><span class="de">Tresor öffnen</span><span class="en">Access Vault</span></p>
+
+    <div class="afield">
+      <label><span class="ar">كلمة المرور</span><span class="de">Passwort</span><span class="en">Password</span></label>
+      <div class="afield-wrap">
+        <input
+          type="password"
+          id="passInput"
+          placeholder="••••••••"
+          onkeydown="if(event.key==='Enter')doLogin()"
+          oninput="checkStrength(this.value)"
+          autocomplete="current-password"
+          aria-label="Password"
+        />
+        <span class="afield-ico" aria-hidden="true">🔑</span>
+      </div>
+
+      <div class="pwd-bars" aria-hidden="true">
+        <div class="pwd-bar" id="pb0"></div>
+        <div class="pwd-bar" id="pb1"></div>
+        <div class="pwd-bar" id="pb2"></div>
+        <div class="pwd-bar" id="pb3"></div>
+      </div>
+
+      <div class="pwd-lbl" id="pwdLbl" aria-live="polite"></div>
+    </div>
+
+    <div class="adivider"></div>
+
+    <button class="abtn abtn-gold" onclick="doLogin()">
+      <span class="ar">فتح القبو</span><span class="de">Tresor öffnen</span><span class="en">Open Vault</span>
+    </button>
+
+    <div style="margin-top:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+      <button class="abtn abtn-ghost abtn-sm" onclick="showLanding()" style="width:auto">
+        ← <span class="ar">الرئيسية</span><span class="de">Startseite</span><span class="en">Home</span>
+      </button>
+      <button class="abtn abtn-ghost abtn-sm" onclick="showLegal('imp')" style="width:auto">Impressum</button>
+      <button class="abtn abtn-ghost abtn-sm" onclick="showLegal('dat')" style="width:auto">Datenschutz</button>
+    </div>
+  </div>
+
+  <!-- VAULT -->
+  <div class="panel panel-vault gone" id="vaultPanel">
+    <div class="vault-head">
+      <div class="vault-head-title">🔐 <span class="ar">القبو الآمن</span><span class="de">Sicherer Tresor</span><span class="en">Secure Vault</span></div>
+      <div class="vault-head-acts">
+        <button class="abtn abtn-danger abtn-sm" onclick="clearAll()"><span class="ar">حذف الكل</span><span class="de">Alle löschen</span><span class="en">Delete All</span></button>
+        <button class="abtn abtn-ghost abtn-sm" onclick="doLogout()"><span class="ar">خروج</span><span class="de">Abmelden</span><span class="en">Logout</span></button>
+      </div>
+    </div>
+
+    <div class="vtabs" role="tablist">
+      <button class="vtab active" role="tab" aria-selected="true" onclick="switchTab('files',this)">📂 <span class="ar">الملفات</span><span class="de">Dateien</span><span class="en">Files</span></button>
+      <button class="vtab" role="tab" aria-selected="false" onclick="switchTab('ai',this)">🤖 AI Analyzer</button>
+    </div>
+
+    <!-- FILES TAB -->
+    <div id="tabFiles" role="tabpanel">
+      <div class="stats-grid">
+        <div class="stat-box"><span class="stat-v" id="statFiles">0</span><span class="stat-l ar">ملف</span><span class="stat-l de">Dateien</span><span class="stat-l en">Files</span></div>
+        <div class="stat-box"><span class="stat-v" id="statMB">0</span><span class="stat-l">MB</span></div>
+        <div class="stat-box"><span class="stat-v" id="statTypes">0</span><span class="stat-l ar">نوع</span><span class="stat-l de">Typen</span><span class="stat-l en">Types</span></div>
+      </div>
+
+      <div class="upzone" id="dropZone" tabindex="0" role="button" aria-label="Upload files">
+        <input type="file" id="fileInput" multiple onchange="addFiles(event)" aria-label="Choose files" />
+        <span class="up-ico" aria-hidden="true">📂</span>
+        <div class="up-txt">
+          <span class="ar"><strong>اسحب الملفات هنا</strong> أو انقر للاختيار</span>
+          <span class="de"><strong>Dateien hierher ziehen</strong> oder klicken</span>
+          <span class="en"><strong>Drag files here</strong> or click to select</span>
+        </div>
+      </div>
+
+      <div class="flist" id="fileList" role="list" aria-live="polite" aria-label="File vault"></div>
+    </div>
+
+    <!-- AI TAB -->
+    <div id="tabAI" class="gone" role="tabpanel">
+      <div class="aipanel">
+        <div class="aikey">
+          <div class="aikey-hd">
+            ⚡ BismarkVault AI · API Key ·
+            <a href="https://console.anthropic.com" target="_blank" rel="noopener noreferrer">console.anthropic.com</a>
+            ·
+            <span style="color:rgba(200,168,75,.4);font-size:10px">
+              <span class="ar">مجاني للبدء</span>
+              <span class="de">Kostenlos</span>
+              <span class="en">Free to start</span>
+            </span>
+          </div>
+
+          <div class="aikey-row">
+            <input type="password" id="apiKeyInput" class="aikey-inp" placeholder="sk-ant-api03-..." aria-label="Anthropic API Key" />
+            <button class="aikey-save" onclick="saveApiKey()"><span class="ar">حفظ</span><span class="de">Speichern</span><span class="en">Save</span></button>
+          </div>
+
+          <div class="aikey-st no" id="apiStatus" role="status" aria-live="polite"></div>
+        </div>
+
+        <div class="qps" role="group" aria-label="Quick prompts">
+          <button class="qp" onclick="sendQuick('📊 صنّف جميع ملفاتي تلقائياً وأعطني تقريراً','📊 Alle Dateien klassifizieren und Bericht erstellen','📊 Auto-classify all files and create report')"><span class="ar">📊 صنّف</span><span class="de">📊 Klassifizieren</span><span class="en">📊 Classify</span></button>
+          <button class="qp" onclick="sendQuick('📋 اقترح هيكل مجلدات لشركة أو مكتب محاماة','📋 Ordnerstruktur für Unternehmen oder Kanzlei vorschlagen','📋 Suggest folder structure for company or law firm')"><span class="ar">📋 هيكل مجلدات</span><span class="de">📋 Ordnerstruktur</span><span class="en">📋 Folder Structure</span></button>
+          <button class="qp" onclick="sendQuick('⚖️ متطلبات DSGVO لحفظ ملفات الموظفين؟','⚖️ DSGVO-Anforderungen für Mitarbeiterdateien?','⚖️ GDPR requirements for staff files?')">⚖️ DSGVO</button>
+          <button class="qp" onclick="sendQuick('📈 تقرير شامل عن ملفاتي مع توصيات','📈 Umfassenden Bericht mit Empfehlungen erstellen','📈 Comprehensive report with recommendations')"><span class="ar">📈 تقرير</span><span class="de">📈 Bericht</span><span class="en">📈 Report</span></button>
+          <button class="qp" onclick="sendQuick('🗂️ كيف أنظّم أرشيف منظمة إنسانية مع DSGVO؟','🗂️ NGO-Archiv professionell unter DSGVO organisieren?','🗂️ How to organize NGO archive respecting GDPR?')"><span class="ar">🗂️ أرشيف</span><span class="de">🗂️ Archiv</span><span class="en">🗂️ Archive</span></button>
+        </div>
+
+        <div class="chat" id="chatMsgs" role="log" aria-label="AI conversation" aria-live="polite">
+          <div class="cmsg">
+            <div class="cav bot" aria-hidden="true">🤖</div>
+            <div class="cbbl bot">
+              <span class="ar">مرحباً! أنا مساعد BismarkVault الذكي. أدخل مفتاح API ثم اسألني عن ملفاتك أو أرشيفك أو متطلبات DSGVO.</span>
+              <span class="de">Hallo! Ich bin der BismarkVault KI-Assistent. API-Schlüssel eingeben und alles über Dokumente, Archiv oder DSGVO fragen.</span>
+              <span class="en">Hello! I'm the BismarkVault AI assistant. Enter API key and ask me anything about your files, archive, or GDPR.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chat-input-row">
+          <input type="text" id="chatInput" class="chat-input" onkeydown="if(event.key==='Enter'&&!event.shiftKey)sendMsg()" placeholder="..." aria-label="Message" />
+          <button class="chat-send" id="chatSend" onclick="sendMsg()">
+            <span class="ar">إرسال ✦</span><span class="de">Senden ✦</span><span class="en">Send ✦</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-footer">
+    © 2026 <span>BismarkVault</span> — Malek Alsirreih · Mettmann, Germany ·
+    <a onclick="showLegal('imp')">Impressum</a> ·
+    <a onclick="showLegal('dat')">Datenschutz</a> ·
+    <a onclick="showLegal('agb')">AGB</a>
+  </div>
+</div>
+
+<div class="toast" id="toastEl" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<style>
+  #app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 54px 20px 72px;
+  }
+
+  .stor-note {
+    width: 100%;
+    max-width: 730px;
+    margin-bottom: 18px;
+    background: rgba(120, 90, 20, 0.1);
+    border: 1px solid rgba(200, 168, 75, 0.18);
+    border-radius: var(--r6);
+    padding: 12px 18px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 12px;
+    color: var(--n200);
+  }
+
+  .stor-note-ico {
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .stor-note a {
+    color: var(--g300);
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  .app-brand {
+    text-align: center;
+    margin-bottom: 32px;
+    animation: fadeDown 0.7s var(--ease-out) both;
+  }
+
+  .app-logo-wrap {
+    width: 70px;
+    height: 70px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #1c1810, #2a2218);
+    border: 1px solid var(--g500);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow:
+      0 0 36px rgba(200, 168, 75, 0.14),
+      inset 0 1px 0 rgba(200, 168, 75, 0.12);
+  }
+
+  .app-logo-wrap svg {
+    width: 34px;
+    height: 34px;
+  }
+
+  .app-name {
+    font-family: var(--font-d);
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    background: linear-gradient(135deg, var(--g50), var(--g300), #8a6010);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .app-sub {
+    font-size: 10px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--n300);
+    margin-top: 5px;
+  }
+
+  .panel {
+    width: 100%;
+    max-width: 500px;
+    background: var(--n750);
+    border: 1px solid var(--bd);
+    border-radius: var(--r10);
+    padding: 38px 32px;
+    box-shadow: var(--sh4), 0 0 0 1px rgba(255,255,255,.02);
+    animation: fadeUp 0.7s var(--ease-out) both 0.1s;
+  }
+
+  .panel-vault {
+    max-width: 730px;
+  }
+
+  .panel-title {
+    font-family: var(--font-d);
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--g300);
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  .afield {
+    margin-bottom: 22px;
+  }
+
+  .afield label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--n300);
+    margin-bottom: 9px;
+  }
+
+  .afield-wrap {
+    position: relative;
+  }
+
+  .afield-wrap input[type="password"] {
+    width: 100%;
+    padding: 15px 48px 15px 20px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--bd);
+    border-radius: var(--r6);
+    color: var(--n50);
+    font-size: 16px;
+    outline: none;
+    transition: border-color var(--tx-fast), box-shadow var(--tx-fast);
+    direction: ltr;
+    text-align: center;
+    letter-spacing: 5px;
+  }
+
+  .afield-wrap input[type="password"]:focus {
+    border-color: var(--g500);
+    box-shadow: 0 0 0 3px rgba(200,168,75,.09);
+  }
+
+  .afield-ico {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    color: var(--n300);
+    font-size: 18px;
+    pointer-events: none;
+  }
+
+  .pwd-bars {
+    display: flex;
+    gap: 5px;
+    margin-top: 10px;
+  }
+
+  .pwd-bar {
+    flex: 1;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--n500);
+    transition: background var(--tx-mid);
+  }
+
+  .pwd-lbl {
+    font-size: 11px;
+    color: var(--n300);
+    margin-top: 7px;
+    text-align: center;
+    min-height: 16px;
+  }
+
+  .adivider {
+    height: 1px;
+    background: var(--bd);
+    margin: 24px 0;
+  }
+
+  .abtn {
+    width: 100%;
+    padding: 15px;
+    border-radius: var(--r-pill);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: .3px;
+    transition: all var(--tx-spring);
+  }
+
+  .abtn-gold {
+    background: linear-gradient(135deg, var(--g200), var(--g300), #9a7010);
+    color: #0a0800;
+    box-shadow: var(--sh-g);
+  }
+
+  .abtn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sh-g2);
+  }
+
+  .abtn-ghost {
+    background: rgba(255,255,255,.04);
+    border: 1px solid var(--bd);
+    color: var(--n200);
+  }
+
+  .abtn-ghost:hover {
+    border-color: var(--bd2);
+    color: var(--n50);
+    background: rgba(255,255,255,.07);
+  }
+
+  .abtn-danger {
+    background: var(--danger);
+    color: #fff;
+  }
+
+  .abtn-danger:hover {
+    transform: translateY(-1px);
+  }
+
+  .abtn-sm {
+    width: auto;
+    padding: 9px 20px;
+    font-size: 11px;
+  }
+
+  .vault-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--bd);
+  }
+
+  .vault-head-title {
+    font-family: var(--font-d);
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: var(--g300);
+  }
+
+  .vault-head-acts {
+    display: flex;
+    gap: 8px;
+  }
+
+  .vtabs {
+    display: flex;
+    gap: 3px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid var(--bd);
+    border-radius: var(--r-pill);
+    padding: 4px;
+    margin-bottom: 26px;
+  }
+
+  .vtab {
+    flex: 1;
+    padding: 10px;
+    border-radius: var(--r-pill);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .2px;
+    background: transparent;
+    color: var(--n300);
+    text-align: center;
+    transition: all var(--tx-mid);
+  }
+
+  .vtab.active {
+    background: linear-gradient(135deg, var(--g200), var(--g300));
+    color: #0a0800;
+    box-shadow: var(--sh-g);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 11px;
+    margin-bottom: 22px;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,.025);
+    border: 1px solid var(--bd);
+    border-radius: var(--r6);
+    padding: 13px 8px;
+    text-align: center;
+  }
+
+  .stat-v {
+    font-family: var(--font-d);
+    font-size: 22px;
+    color: var(--g300);
+    display: block;
+    line-height: 1;
+  }
+
+  .stat-l {
+    font-size: 9px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--n300);
+    margin-top: 4px;
+    display: block;
+  }
+
+  .upzone {
+    border: 2px dashed var(--bd);
+    border-radius: var(--r8);
+    padding: 28px 22px;
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--tx-mid);
+    margin-bottom: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upzone:hover,
+  .upzone.drag {
+    border-color: var(--g500);
+    border-style: solid;
+  }
+
+  .upzone input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .up-ico {
+    font-size: 28px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  .up-txt {
+    font-size: 13px;
+    color: var(--n300);
+    line-height: 1.72;
+  }
+
+  .up-txt strong {
+    color: var(--g300);
+  }
+
+  .flist {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    max-height: 350px;
+    overflow-y: auto;
+  }
+
+  .frow {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: rgba(255,255,255,.025);
+    border: 1px solid var(--bd);
+    border-radius: var(--r8);
+    padding: 13px 15px;
+    transition: all var(--tx-spring);
+  }
+
+  .frow:hover {
+    border-color: var(--bd2);
+    transform: translateX(-3px);
+    box-shadow: var(--sh2);
+  }
+
+  .frow-ico {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #1c1810, #2a2218);
+    border: 1px solid var(--g500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+  }
+
+  .frow-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .frow-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--n50);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .frow-meta {
+    font-size: 10px;
+    color: var(--n300);
+    margin-top: 3px;
+  }
+
+  .frow-btn {
+    width: 30px;
+    height: 30px;
+    flex-shrink: 0;
+    border-radius: 9px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: all var(--tx-spring);
+  }
+
+  .frow-ai {
+    background: rgba(34,104,168,.14);
+    border: 1px solid rgba(34,104,168,.28);
+    color: #70b8f0;
+  }
+
+  .frow-del {
+    background: rgba(139,30,47,.1);
+    border: 1px solid rgba(139,30,47,.22);
+    color: #c05060;
+  }
+
+  .flist-empty {
+    text-align: center;
+    padding: 48px 20px;
+    color: var(--n300);
+  }
+
+  .flist-empty-ico {
+    font-size: 44px;
+    display: block;
+    margin-bottom: 13px;
+    opacity: .3;
+  }
+
+  .aipanel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .aikey {
+    background: rgba(8,18,32,.7);
+    border: 1px solid rgba(34,104,168,.18);
+    border-radius: var(--r6);
+    padding: 16px 18px;
+    margin-bottom: 15px;
+    backdrop-filter: blur(8px);
+  }
+
+  .aikey-hd {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(130,200,255,.55);
+    margin-bottom: 11px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .aikey-hd a {
+    color: rgba(100,180,255,.72);
+  }
+
+  .aikey-row {
+    display: flex;
+    gap: 9px;
+  }
+
+  .aikey-inp {
+    flex: 1;
+    padding: 11px 14px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(34,104,168,.22);
+    border-radius: var(--r4);
+    color: var(--n50);
+    font-size: 12px;
+    outline: none;
+    direction: ltr;
+  }
+
+  .aikey-save {
+    padding: 11px 18px;
+    background: linear-gradient(135deg, var(--g200), var(--g300));
+    color: #0a0800;
+    border-radius: var(--r4);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .aikey-st {
+    font-size: 11px;
+    margin-top: 9px;
+    padding: 8px 12px;
+    border-radius: var(--r4);
+    text-align: center;
+  }
+
+  .aikey-st.ok {
+    background: var(--success-bg);
+    border: 1px solid rgba(26,106,58,.2);
+    color: #60c880;
+  }
+
+  .aikey-st.no {
+    background: rgba(200,168,75,.05);
+    border: 1px solid var(--bd);
+    color: var(--n300);
+  }
+
+  .qps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-bottom: 13px;
+  }
+
+  .qp {
+    padding: 6px 14px;
+    background: rgba(34,104,168,.08);
+    border: 1px solid rgba(34,104,168,.18);
+    border-radius: var(--r-pill);
+    font-size: 11px;
+    color: rgba(130,190,255,.65);
+    transition: all var(--tx-mid);
+  }
+
+  .chat {
+    height: 285px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+    padding: 3px 2px 10px;
+    margin-bottom: 13px;
+  }
+
+  .cmsg {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  .cmsg.u {
+    flex-direction: row-reverse;
+  }
+
+  .cav {
+    width: 30px;
+    height: 30px;
+    border-radius: 9px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+  }
+
+  .cav.bot {
+    background: linear-gradient(135deg, #0d1a26, #1a2a3a);
+    border: 1px solid rgba(34,104,168,.32);
+  }
+
+  .cav.usr {
+    background: linear-gradient(135deg, #1c1810, #2a2218);
+    border: 1px solid var(--g500);
+  }
+
+  .cbbl {
+    max-width: 84%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 12px;
+    line-height: 1.75;
+  }
+
+  .cbbl.bot {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(34,104,168,.1);
+    color: var(--n200);
+  }
+
+  .cbbl.usr {
+    background: rgba(200,168,75,.09);
+    border: 1px solid rgba(200,168,75,.18);
+    color: var(--n50);
+  }
+
+  .typing-dots {
+    display: flex;
+    gap: 5px;
+    padding: 5px 7px;
+    align-items: center;
+  }
+
+  .typing-dots span {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(100,160,220,.5);
+    animation: typDot 1.2s infinite;
+  }
+
+  .typing-dots span:nth-child(2) { animation-delay: .2s; }
+  .typing-dots span:nth-child(3) { animation-delay: .4s; }
+
+  .chat-input-row {
+    display: flex;
+    gap: 9px;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(34,104,168,.16);
+    border-radius: var(--r-pill);
+    color: var(--n50);
+    font-size: 13px;
+    outline: none;
+    direction: rtl;
+    font-family: var(--font-ar);
+  }
+
+  .chat-send {
+    padding: 12px 22px;
+    background: linear-gradient(135deg, var(--b300), var(--b500));
+    color: #a0d8ff;
+    border-radius: var(--r-pill);
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+    transition: all var(--tx-spring);
+  }
+
+  .chat-send:disabled {
+    opacity: .45;
+  }
+
+  .app-footer {
+    margin-top: 28px;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--n300);
+    text-align: center;
+    line-height: 2;
+  }
+
+  .app-footer span {
+    color: var(--g500);
+  }
+
+  .app-footer a {
+    color: var(--n300);
+  }
+
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(22px);
+    background: var(--n700);
+    border: 1px solid var(--bd2);
+    border-radius: var(--r-pill);
+    padding: 11px 24px;
+    font-size: 13px;
+    color: var(--n50);
+    opacity: 0;
+    transition: all .38s var(--ease-spring);
+    z-index: 9999;
+    white-space: nowrap;
+    box-shadow: var(--sh4);
+    pointer-events: none;
+    backdrop-filter: blur(12px);
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  @keyframes typDot {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-8px); }
+  }
+
+  @media (max-width: 768px) {
+    #app {
+      padding: 40px 14px 56px;
+    }
+
+    .panel {
+      padding: 26px 16px;
+      border-radius: 16px;
+    }
+
+    .vault-head {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .vault-head-acts {
+      width: 100%;
+      justify-content: flex-end;
+    }
+
+    .stats-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .chat {
+      height: 240px;
+    }
+
+    .chat-send {
+      padding: 11px 16px;
+      font-size: 11px;
+    }
+  }
+</style>
+
+<script>
+'use strict';
+
+function closeTopBar() {
+  const bar = document.getElementById('topbar');
+  const nav = document.getElementById('nav');
+  if (!bar || !nav) return;
+  bar.style.transition = 'height .3s ease, opacity .3s ease, padding .3s ease';
+  bar.style.height = '0';
+  bar.style.opacity = '0';
+  bar.style.overflow = 'hidden';
+  nav.classList.add('bar-gone');
+}
+
+const RAW = 'Malek,ser1984';
+const HASH = btoa(unescape(encodeURIComponent(RAW)));
+const FK = 'bv_v4_files';
+const AK = 'bv_v4_apikey';
+let L = 'ar';
+let history = [];
+
+const T = (ar, de, en) => ({ ar, de, en }[L] || ar);
+
+let toastTimer;
+function toast(msg, ms = 2800) {
+  const el = document.getElementById('toastEl');
+  if (!el) return;
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), ms);
+}
+
+function fmt(b) {
+  if (!b) return '0 B';
+  if (b < 1024) return b + ' B';
+  if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+  return (b / 1048576).toFixed(2) + ' MB';
+}
+
+function emo(t = '') {
+  if (t.startsWith('image/')) return '🖼️';
+  if (t.includes('pdf')) return '📕';
+  if (t.includes('word') || t.includes('document')) return '📝';
+  if (t.includes('sheet') || t.includes('excel') || t.includes('csv') || t.includes('spreadsheet')) return '📊';
+  if (t.includes('zip') || t.includes('rar') || t.includes('7z') || t.includes('tar')) return '📦';
+  if (t.startsWith('video/')) return '🎬';
+  if (t.startsWith('audio/')) return '🎵';
+  if (t.includes('presentation') || t.includes('powerpoint')) return '📊';
+  if (t.includes('text')) return '📃';
+  return '📄';
+}
+
+function setLang(lang) {
+  L = lang;
+  document.documentElement.lang = lang;
+  document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+
+  document.querySelectorAll('.ar,.de,.en').forEach(el => {
+    const tag = el.tagName.toLowerCase();
+    const inline = ['span','a','strong','em','b','i','small','label'].includes(tag);
+    el.style.display = el.classList.contains(lang) ? (inline ? 'inline' : 'block') : 'none';
+  });
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    const active = btn.textContent.toLowerCase() === lang;
+    btn.classList.toggle('active', active);
+    btn.setAttribute('aria-pressed', active);
+  });
+
+  const inp = document.getElementById('chatInput');
+  if (inp) {
+    inp.placeholder = {
+      ar: 'اسأل بالعربية أو الألمانية أو الإنجليزية...',
+      de: 'Fragen auf Arabisch, Deutsch oder Englisch...',
+      en: 'Ask in Arabic, German or English...'
+    }[lang];
+  }
+
+  refreshApiStatus();
+}
+
+const nav = document.getElementById('nav');
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      nav?.classList.toggle('is-scrolled', window.scrollY > 40);
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+document.querySelectorAll('.bcard').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    card.style.setProperty('--mx', ((e.clientX - r.left) / r.width * 100) + '%');
+    card.style.setProperty('--my', ((e.clientY - r.top) / r.height * 100) + '%');
+  });
+});
+
+function goTo(id) {
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function goHome() {
+  hideLegal();
+  document.getElementById('app')?.classList.add('gone');
+  document.getElementById('landing')?.classList.remove('gone');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showApp() {
+  document.getElementById('landing')?.classList.add('gone');
+  document.getElementById('app')?.classList.remove('gone');
+  window.scrollTo(0, 0);
+}
+
+function showLanding() {
+  document.getElementById('app')?.classList.add('gone');
+  document.getElementById('landing')?.classList.remove('gone');
+  window.scrollTo(0, 0);
+}
+
+function gotoContact() {
+  showLanding();
+  setTimeout(() => goTo('contact'), 400);
+}
+
+const LEGAL_DB = {
+  imp: {
+    ar: `<h1 id="legalTitle">Impressum</h1><span class="legal-sub">البيانات القانونية وفق §5 TMG</span>
+    <h2>صاحب الموقع</h2><p>Malek Alsirreih<br>BismarkVault<br>Mettmann, Nordrhein-Westfalen, Deutschland</p>
+    <h2>Kontakt</h2><p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>المسؤولية</h2><p>وفق §7 TMG لا نتحمل مسؤولية دقة المحتوى. الروابط الخارجية مسؤولية أصحابها.</p>`,
+    de: `<h1 id="legalTitle">Impressum</h1><span class="legal-sub">Pflichtangaben gemäß §5 TMG</span>
+    <h2>Anbieter</h2><p>Malek Alsirreih<br>BismarkVault<br>Mettmann, Nordrhein-Westfalen, Deutschland</p>
+    <h2>Kontakt</h2><p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>Haftung</h2><p>Gemäß §7 TMG keine Gewähr für Inhalte. Externe Links haften deren Betreiber.</p>`,
+    en: `<h1 id="legalTitle">Imprint</h1><span class="legal-sub">Mandatory information pursuant to §5 TMG</span>
+    <h2>Provider</h2><p>Malek Alsirreih<br>BismarkVault<br>Mettmann, North Rhine-Westphalia, Germany</p>
+    <h2>Contact</h2><p>E-Mail: <a href="mailto:info@bismarkvault.de">info@bismarkvault.de</a><br>Website: bismarkvault.app</p>
+    <h2>Liability</h2><p>No liability for content accuracy. External links are their operators' responsibility.</p>`
+  },
+  dat: {
+    ar: `<h1 id="legalTitle">Datenschutzerklärung</h1><span class="legal-sub">وفق DSGVO/GDPR</span>
+    <h2>البيانات</h2><p>جميع الملفات محفوظة محلياً داخل المتصفح في هذه النسخة.</p>`,
+    de: `<h1 id="legalTitle">Datenschutzerklärung</h1><span class="legal-sub">Gemäß DSGVO/GDPR</span>
+    <h2>Daten</h2><p>Alle Dateien werden in dieser Version lokal im Browser gespeichert.</p>`,
+    en: `<h1 id="legalTitle">Privacy Policy</h1><span class="legal-sub">Pursuant to GDPR</span>
+    <h2>Data</h2><p>All files are stored locally in the browser in this version.</p>`
+  },
+  agb: {
+    ar: `<h1 id="legalTitle">شروط الخدمة</h1><span class="legal-sub">آخر تحديث: 2026</span>
+    <h2>الخدمة</h2><p>BismarkVault منصة أرشفة وتحليل ذكي للوثائق.</p>`,
+    de: `<h1 id="legalTitle">AGB</h1><span class="legal-sub">Zuletzt aktualisiert: 2026</span>
+    <h2>Leistung</h2><p>BismarkVault ist eine Plattform für intelligente Dokumentenarchivierung.</p>`,
+    en: `<h1 id="legalTitle">Terms of Service</h1><span class="legal-sub">Last updated: 2026</span>
+    <h2>Service</h2><p>BismarkVault is a smart document archiving and analysis platform.</p>`
+  }
+};
+
+function showLegal(key) {
+  const overlay = document.getElementById('legal');
+  const content = document.getElementById('legalContent');
+  if (!overlay || !content) return;
+  content.innerHTML = LEGAL_DB[key]?.[L] || LEGAL_DB[key]?.de || '';
+  overlay.classList.remove('gone');
+  overlay.scrollTop = 0;
+  setLang(L);
+}
+
+function hideLegal() {
+  document.getElementById('legal')?.classList.add('gone');
+}
+
+function checkStrength(v) {
+  let s = 0;
+  if (v.length >= 6) s++;
+  if (v.length >= 10) s++;
+  if (/[A-Z]/.test(v) && /[0-9]/.test(v)) s++;
+  if (/[^A-Za-z0-9]/.test(v)) s++;
+
+  const c = ['', '#8B1E2F', '#C8761A', '#B0A000', '#1A8A3A'];
+  const lbl = {
+    ar: ['', 'ضعيف', 'متوسط', 'جيد', 'قوي'],
+    de: ['', 'Schwach', 'Mittel', 'Gut', 'Stark'],
+    en: ['', 'Weak', 'Medium', 'Good', 'Strong']
+  };
+
+  for (let i = 0; i < 4; i++) {
+    const b = document.getElementById('pb' + i);
+    if (b) b.style.background = i < s ? c[s] : '';
+  }
+
+  const el = document.getElementById('pwdLbl');
+  if (el) {
+    el.textContent = v.length ? (lbl[L][s] || '') : '';
+    el.style.color = c[s] || '';
+  }
+}
+
+function doLogin() {
+  const val = document.getElementById('passInput')?.value || '';
+  if (btoa(unescape(encodeURIComponent(val))) === HASH) {
+    document.getElementById('loginPanel')?.classList.add('gone');
+    document.getElementById('vaultPanel')?.classList.remove('gone');
+    renderFiles();
+    refreshApiStatus();
+    toast(T('✅ مرحباً بك في BismarkVault','✅ Willkommen in BismarkVault','✅ Welcome to BismarkVault'));
+  } else {
+    toast(T('❌ كلمة المرور غير صحيحة','❌ Falsches Passwort','❌ Wrong password'));
+    const inp = document.getElementById('passInput');
+    if (inp) {
+      inp.value = '';
+      inp.focus();
+    }
+  }
+}
+
+function doLogout() {
+  document.getElementById('vaultPanel')?.classList.add('gone');
+  document.getElementById('loginPanel')?.classList.remove('gone');
+  const inp = document.getElementById('passInput');
+  if (inp) inp.value = '';
+  for (let i = 0; i < 4; i++) {
+    const b = document.getElementById('pb' + i);
+    if (b) b.style.background = '';
+  }
+  const el = document.getElementById('pwdLbl');
+  if (el) el.textContent = '';
+  history = [];
+  toast(T('👋 تم الخروج بأمان','👋 Sicher abgemeldet','👋 Logged out securely'));
+}
+
+function submitContact() {
+  const n = document.getElementById('cName')?.value.trim();
+  const e = document.getElementById('cEmail')?.value.trim();
+
+  if (!n) {
+    toast(T('⚠️ أدخل اسمك','⚠️ Name eingeben','⚠️ Enter your name'));
     return;
   }
 
-  const output = document.getElementById("output");
-  output.style.display = "block";
-  output.innerHTML = "⏳ جاري التحليل...";
-
-  setTimeout(() => {
-    simulateAI(file.name);
-  }, 1500);
-}
-
-function simulateAI(filename) {
-  const text = `
-📄 اسم الملف: ${filename}
-
-🔍 التحليل:
-- تم اكتشاف محتوى قانوني
-- لا توجد مخاطر DSGVO
-- اللغة: ألمانية
-
-💡 توصيات:
-- لا حاجة لاتخاذ إجراء
-- الملف آمن للاستخدام
-  `;
-
-  typeEffect(text);
-}
-
-function typeEffect(text) {
-  const output = document.getElementById("output");
-  output.innerHTML = "";
-  let i = 0;
-
-  function typing() {
-    if (i < text.length) {
-      output.innerHTML += text.charAt(i);
-      i++;
-      setTimeout(typing, 20);
-    }
+  if (!e || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+    toast(T('⚠️ بريد إلكتروني غير صحيح','⚠️ Ungültige E-Mail','⚠️ Invalid email'));
+    return;
   }
 
-  typing();
+  const ok = document.getElementById('cOK');
+  if (ok) {
+    ok.style.display = 'block';
+    setLang(L);
+  }
+
+  ['cName','cEmail','cOrg','cMsg'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.value = '';
+  });
+
+  toast(T('✅ تم الإرسال! سنتواصل خلال 24 ساعة','✅ Gesendet! In 24h zurück','✅ Sent! We\\'ll reply in 24h'));
 }
-</script><footer>
-<p>© 2026 BismarkVault — AI Powered</p>
-</footer>
+
+function getDemoAnalysis(name, type) {
+  const ext = (name.split('.').pop() || '').toLowerCase();
+  const d = {
+    ar: {
+      pdf: `📕 <span class="hl">وثيقة PDF</span><br>📁 <span class="hl">التصنيف: وثائق إدارية / عقود / تقارير</span><br>✅ <span class="hl">جاهز للقبو الآمن</span>`,
+      xls: `📊 <span class="hl">بيانات Excel</span><br>📁 <span class="hl">التصنيف: مالية / إحصائيات / قوائم</span><br>✅ <span class="hl">جاهز للقبو الآمن</span>`,
+      doc: `📝 <span class="hl">وثيقة Word</span><br>📁 <span class="hl">التصنيف: مراسلات / تقارير / عقود</span><br>✅ <span class="hl">جاهز للقبو الآمن</span>`,
+      img: `🖼️ <span class="hl">صورة / مسح ضوئي</span><br>📁 <span class="hl">التصنيف: وثائق هوية / أرشيف صور</span><br>✅ <span class="hl">جاهز للقبو الآمن</span>`,
+      def: `📄 <span class="hl">ملف ${ext.toUpperCase()}</span><br>📁 <span class="hl">التصنيف: وثائق عامة</span><br>✅ <span class="hl">جاهز للقبو الآمن</span>`
+    },
+    de: {
+      pdf: `📕 <span class="hl">PDF-Dokument erkannt</span><br>📁 <span class="hl">Kategorie: Verwaltung / Verträge / Berichte</span><br>✅ <span class="hl">Bereit für sicheren Tresor</span>`,
+      xls: `📊 <span class="hl">Excel-Datei erkannt</span><br>📁 <span class="hl">Kategorie: Finanzen / Statistiken</span><br>✅ <span class="hl">Bereit für sicheren Tresor</span>`,
+      doc: `📝 <span class="hl">Word-Dokument erkannt</span><br>📁 <span class="hl">Kategorie: Korrespondenz / Berichte</span><br>✅ <span class="hl">Bereit für sicheren Tresor</span>`,
+      img: `🖼️ <span class="hl">Bild / Scan erkannt</span><br>📁 <span class="hl">Kategorie: Ausweise / Archivbilder</span><br>✅ <span class="hl">Bereit für sicheren Tresor</span>`,
+      def: `📄 <span class="hl">${ext.toUpperCase()}-Datei erkannt</span><br>📁 <span class="hl">Kategorie: Allgemeine Dokumente</span><br>✅ <span class="hl">Bereit für sicheren Tresor</span>`
+    },
+    en: {
+      pdf: `📕 <span class="hl">PDF Document detected</span><br>📁 <span class="hl">Category: Admin / Contracts / Reports</span><br>✅ <span class="hl">Ready for secure vault</span>`,
+      xls: `📊 <span class="hl">Excel file detected</span><br>📁 <span class="hl">Category: Financial / Statistics</span><br>✅ <span class="hl">Ready for secure vault</span>`,
+      doc: `📝 <span class="hl">Word document detected</span><br>📁 <span class="hl">Category: Correspondence / Reports</span><br>✅ <span class="hl">Ready for secure vault</span>`,
+      img: `🖼️ <span class="hl">Image / Scan detected</span><br>📁 <span class="hl">Category: ID documents / Archive</span><br>✅ <span class="hl">Ready for secure vault</span>`,
+      def: `📄 <span class="hl">${ext.toUpperCase()} file detected</span><br>📁 <span class="hl">Category: General Documents</span><br>✅ <span class="hl">Ready for secure vault</span>`
+    }
+  };
+
+  const lang = d[L] || d.en;
+  if (ext === 'pdf') return lang.pdf;
+  if (['xlsx','xls','csv','ods'].includes(ext)) return lang.xls;
+  if (['docx','doc','odt','rtf'].includes(ext)) return lang.doc;
+  if (['jpg','jpeg','png','gif','webp','bmp','tiff','svg'].includes(ext) || type?.startsWith('image/')) return lang.img;
+  return lang.def;
+}
+
+function runDemo(e) {
+  const file = e.target.files?.[0];
+  if (!file) return;
+
+  const strip = document.getElementById('demoFileStrip');
+  const body = document.getElementById('demoAiBody');
+  const res = document.getElementById('demoResult');
+
+  if (!strip || !body || !res) return;
+
+  strip.innerHTML = `<div class="demo-file-ico">${emo(file.type)}</div><div><div class="demo-file-name">${file.name}</div><div class="demo-file-meta">${fmt(file.size)} · ${file.type || '—'}</div></div><div class="demo-ai-badge">AI ✦</div>`;
+  body.innerHTML = '<div class="typing-dots"><span></span><span></span><span></span></div>';
+  res.classList.add('is-visible');
+  setLang(L);
+
+  setTimeout(() => {
+    body.innerHTML = getDemoAnalysis(file.name, file.type);
+    toast(T('✅ تم التحليل','✅ Analysiert','✅ Analysis complete'));
+  }, 1800);
+}
+
+const demoArea = document.getElementById('demoArea');
+demoArea?.addEventListener('dragover', e => {
+  e.preventDefault();
+  demoArea.classList.add('is-over');
+});
+demoArea?.addEventListener('dragleave', () => demoArea.classList.remove('is-over'));
+demoArea?.addEventListener('drop', e => {
+  e.preventDefault();
+  demoArea.classList.remove('is-over');
+  const f = e.dataTransfer.files?.[0];
+  if (f) runDemo({ target: { files: [f] } });
+});
+demoArea?.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') demoArea.querySelector('input')?.click();
+});
+
+function switchTab(name, el) {
+  document.querySelectorAll('.vtab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  el.classList.add('active');
+  el.setAttribute('aria-selected', 'true');
+  document.getElementById('tabFiles')?.classList.toggle('gone', name !== 'files');
+  document.getElementById('tabAI')?.classList.toggle('gone', name !== 'ai');
+}
+
+const loadFiles = () => JSON.parse(localStorage.getItem(FK) || '[]');
+const saveFiles = d => localStorage.setItem(FK, JSON.stringify(d));
+
+function addFiles(e) {
+  const files = e.target.files;
+  if (!files.length) return;
+
+  const data = loadFiles();
+  Array.from(files).forEach(f => {
+    data.push({
+      id: `${Date.now()}${Math.random()}`,
+      name: f.name,
+      size: f.size,
+      type: f.type || 'application/octet-stream',
+      date: new Date().toLocaleDateString()
+    });
+  });
+
+  saveFiles(data);
+  renderFiles();
+  document.getElementById('fileInput').value = '';
+  toast(T(`✅ تم رفع ${files.length} ملف`,`✅ ${files.length} Datei(en) hochgeladen`,`✅ ${files.length} file(s) uploaded`));
+}
+
+function deleteFile(id) {
+  const data = loadFiles();
+  const idx = data.findIndex(f => f.id === id);
+  if (idx < 0) return;
+  const name = data[idx].name;
+  data.splice(idx, 1);
+  saveFiles(data);
+  renderFiles();
+  toast('🗑️ ' + name);
+}
+
+function clearAll() {
+  if (!confirm(T('هل أنت متأكد؟','Sicher?','Are you sure?'))) return;
+  localStorage.removeItem(FK);
+  renderFiles();
+  toast(T('🗑️ تم الحذف','🗑️ Gelöscht','🗑️ Deleted'));
+}
+
+function analyzeWithAI(id) {
+  const f = loadFiles().find(f => f.id === id);
+  if (!f) return;
+  switchTab('ai', document.querySelectorAll('.vtab')[1]);
+  document.getElementById('chatInput').value = T(
+    `حلّل هذا الملف وصنّفه: "${f.name}" (${fmt(f.size)}, ${f.type})`,
+    `Analysieren und klassifizieren: "${f.name}" (${fmt(f.size)}, ${f.type})`,
+    `Analyze and classify: "${f.name}" (${fmt(f.size)}, ${f.type})`
+  );
+  sendMsg();
+}
+
+function renderFiles() {
+  const data = loadFiles();
+  const totalSize = data.reduce((s, f) => s + (f.size || 0), 0);
+  const types = new Set(data.map(f => (f.type || '').split('/')[0])).size;
+
+  document.getElementById('statFiles').textContent = data.length;
+  document.getElementById('statMB').textContent = (totalSize / 1048576).toFixed(2);
+  document.getElementById('statTypes').textContent = types;
+
+  const list = document.getElementById('fileList');
+  if (!list) return;
+
+  if (!data.length) {
+    list.innerHTML = `<div class="flist-empty"><span class="flist-empty-ico">🗄️</span><p>${T('القبو فارغ<br>ارفع ملفاتك الآن','Tresor leer<br>Dateien hochladen','Vault empty<br>Upload your files')}</p></div>`;
+    return;
+  }
+
+  list.innerHTML = data.map(f => `
+    <div class="frow" role="listitem">
+      <div class="frow-ico">${emo(f.type)}</div>
+      <div class="frow-info">
+        <div class="frow-name" title="${f.name}">${f.name}</div>
+        <div class="frow-meta">${fmt(f.size)} · ${f.type || '—'} · ${f.date || ''}</div>
+      </div>
+      <button class="frow-btn frow-ai" onclick="analyzeWithAI('${f.id}')" aria-label="Analyze with AI" title="AI">🤖</button>
+      <button class="frow-btn frow-del" onclick="deleteFile('${f.id}')" aria-label="Delete" title="Delete">✕</button>
+    </div>
+  `).join('');
+}
+
+const dz = document.getElementById('dropZone');
+dz?.addEventListener('dragover', e => {
+  e.preventDefault();
+  dz.classList.add('drag');
+});
+dz?.addEventListener('dragleave', () => dz.classList.remove('drag'));
+dz?.addEventListener('drop', e => {
+  e.preventDefault();
+  dz.classList.remove('drag');
+  addFiles({ target: { files: e.dataTransfer.files } });
+});
+dz?.addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') dz.querySelector('input')?.click();
+});
+
+function saveApiKey() {
+  const k = document.getElementById('apiKeyInput')?.value.trim();
+  if (!k) {
+    toast(T('⚠️ أدخل المفتاح','⚠️ Schlüssel eingeben','⚠️ Enter key'));
+    return;
+  }
+  if (!k.startsWith('sk-')) {
+    toast(T('⚠️ يبدأ بـ sk-','⚠️ Beginnt mit sk-','⚠️ Must start with sk-'));
+    return;
+  }
+  localStorage.setItem(AK, k);
+  refreshApiStatus();
+  toast(T('✅ تم الحفظ بأمان','✅ Sicher gespeichert','✅ Saved securely'));
+}
+
+function refreshApiStatus() {
+  const k = localStorage.getItem(AK);
+  const el = document.getElementById('apiStatus');
+  if (!el) return;
+
+  if (k && k.startsWith('sk-')) {
+    el.className = 'aikey-st ok';
+    el.innerHTML = '✅ <span class="ar">مفتاح API مفعّل</span><span class="de">API-Schlüssel aktiv</span><span class="en">API key active</span>';
+    const inp = document.getElementById('apiKeyInput');
+    if (inp) inp.value = k;
+  } else {
+    el.className = 'aikey-st no';
+    el.innerHTML = '🔑 <span class="ar">لم يتم إدخال مفتاح بعد</span><span class="de">Kein Schlüssel eingegeben</span><span class="en">No key entered yet</span>';
+  }
+
+  setLang(L);
+}
+
+function sendQuick(ar, de, en) {
+  const inp = document.getElementById('chatInput');
+  if (inp) inp.value = T(ar, de, en);
+  sendMsg();
+}
+
+function filesCtx() {
+  const d = loadFiles();
+  if (!d.length) return T('لا توجد ملفات.','Keine Dateien.','No files.');
+  return T('الملفات:','Dateien:','Files:') + '\\n' + d.map(f => `- ${f.name} (${fmt(f.size)}, ${f.type})`).join('\\n');
+}
+
+function addChatMsg(role, text) {
+  const box = document.getElementById('chatMsgs');
+  const isBot = role === 'assistant';
+  if (!box) return;
+
+  const div = document.createElement('div');
+  div.className = 'cmsg' + (isBot ? '' : ' u');
+  div.setAttribute('role', 'listitem');
+  div.innerHTML = `<div class="cav ${isBot ? 'bot' : 'usr'}" aria-hidden="true">${isBot ? '🤖' : '👤'}</div><div class="cbbl ${isBot ? 'bot' : 'usr'}">${text.replace(/\\n/g, '<br>')}</div>`;
+  box.appendChild(div);
+  box.scrollTop = box.scrollHeight;
+}
+
+function showTyping() {
+  const box = document.getElementById('chatMsgs');
+  if (!box) return;
+
+  const d = document.createElement('div');
+  d.className = 'cmsg';
+  d.id = 'typing';
+  d.innerHTML = '<div class="cav bot" aria-hidden="true">🤖</div><div class="cbbl bot"><div class="typing-dots"><span></span><span></span><span></span></div></div>';
+  box.appendChild(d);
+  box.scrollTop = box.scrollHeight;
+}
+
+function rmTyping() {
+  document.getElementById('typing')?.remove();
+}
+
+async function sendMsg() {
+  const inp = document.getElementById('chatInput');
+  const msg = inp?.value.trim();
+  if (!msg) return;
+
+  const k = localStorage.getItem(AK);
+  if (!k || !k.startsWith('sk-')) {
+    toast(T('⚠️ أدخل مفتاح API أولاً','⚠️ API-Schlüssel eingeben','⚠️ Enter API key first'));
+    document.getElementById('apiKeyInput')?.focus();
+    return;
+  }
+
+  inp.value = '';
+  addChatMsg('user', msg);
+  history.push({ role: 'user', content: msg });
+
+  const btn = document.getElementById('chatSend');
+  if (btn) btn.disabled = true;
+  showTyping();
+
+  const sys = `You are BismarkVault AI — an intelligent document archiving assistant for companies, law firms, medical practices, schools, and government offices in Germany.
+Specialization: document classification, archive structures, DSGVO/GDPR compliance, best practices for companies, law firms, medical practices, schools, and government offices.
+${T('تحدث بالعربية دائماً إلا إذا طُلب غير ذلك.','Antworte immer auf Deutsch.','Always respond in English.')}
+Vault: ${filesCtx()}
+Guidelines: concise, practical, use emojis, mention time/cost savings. © 2026 BismarkVault.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': k,
+        'anthropic-version': '2023-06-01'
+      },
+      body: JSON.stringify({
+        model: 'claude-opus-4-5',
+        max_tokens: 1024,
+        system: sys,
+        messages: history
+      })
+    });
+
+    const data = await res.json();
+    rmTyping();
+
+    if (data.content?.[0]?.text) {
+      const r = data.content[0].text;
+      addChatMsg('assistant', r);
+      history.push({ role: 'assistant', content: r });
+    } else if (data.error) {
+      addChatMsg('assistant', `⚠️ ${data.error.message}`);
+    } else {
+      addChatMsg('assistant', T('⚠️ رد غير متوقع','⚠️ Unerwartete Antwort','⚠️ Unexpected response'));
+    }
+  } catch {
+    rmTyping();
+    addChatMsg('assistant', T('⚠️ تعذّر الاتصال. تأكد من المفتاح والإنترنت.','⚠️ Verbindungsfehler.','⚠️ Connection failed. Check key and internet.'));
+  }
+
+  if (btn) btn.disabled = false;
+  document.getElementById('chatMsgs').scrollTop = 99999;
+}
+
+document.addEventListener('keydown', e => {
+  const lg = document.getElementById('legal');
+  if (e.key === 'Escape' && lg && !lg.classList.contains('gone')) hideLegal();
+});
+
+document.querySelector('.nav-logo')?.addEventListener('keydown', e => {
+  if (e.key === 'Enter') goHome();
+});
+
+setLang('ar');
+</script>
 
 </body>
 </html>
