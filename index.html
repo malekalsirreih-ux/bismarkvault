@@ -1,1549 +1,487 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BismarkVault</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
-
-<style>
-
-/* ===== RESET ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* ===== BODY ===== */
-body {
-  font-family: "Cairo", "Inter", sans-serif;
-  background: #0b0b0b;
-  color: #fff;
-}
-
-/* ===== GOLD THEME ===== */
-:root {
-  --gold: #C8A84B;
-  --dark: #0b0b0b;
-  --soft: #1a1a1a;
-}
-
-/* ===== LANGUAGE SYSTEM ===== */
-.ar, .de, .en {
-  display: none;
-}
-
-html[lang="ar"] .ar { display: inline; }
-html[lang="de"] .de { display: inline; }
-html[lang="en"] .en { display: inline; }
-
-html[lang="ar"] .block,
-html[lang="de"] .block,
-html[lang="en"] .block {
-  display: block;
-}
-
-/* ===== NAVBAR ===== */
-.navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 40px;
-  background: rgba(0,0,0,0.8);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(200,168,75,0.2);
-}
-
-.logo {
-  font-size: 22px;
-  font-weight: 800;
-  color: var(--gold);
-}
-
-.logo span {
-  font-size: 12px;
-  display: block;
-  color: #aaa;
-}
-
-/* ===== NAV LINKS ===== */
-.nav-links {
-  display: flex;
-  gap: 15px;
-}
-
-.nav-links button {
-  background: transparent;
-  border: 1px solid var(--gold);
-  color: var(--gold);
-  padding: 6px 12px;
-  cursor: pointer;
-}
-
-/* ===== HERO ===== */
-.hero {
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.hero h1 {
-  font-size: 50px;
-  color: var(--gold);
-}
-
-.hero p {
-  margin-top: 20px;
-  color: #ccc;
-}
-
-/* ===== BUTTON ===== */
-.cta {
-  margin-top: 30px;
-  padding: 15px 25px;
-  background: var(--gold);
-  color: black;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-</style>
-</head>
-
-<body>
-
-<!-- ===== NAVBAR ===== -->
-<div class="navbar">
-  <div class="logo">
-    BismarkVault
-    <span>by Malek Alsirreih · Made in Germany</span>
-  </div>
-
-  <div class="nav-links">
-    <button onclick="setLang('ar')">AR</button>
-    <button onclick="setLang('de')">DE</button>
-    <button onclick="setLang('en')">EN</button>
-  </div>
-</div>
-
-<!-- ===== HERO ===== -->
-<section class="hero">
-
-<h1>
-  <span class="ar block">الأرشفة الذكية بالذكاء الاصطناعي</span>
-  <span class="de block">Intelligente Dokumentenarchivierung</span>
-  <span class="en block">AI Smart Document Archiving</span>
-</h1>
-
-<p>
-  <span class="ar block">حل متكامل للشركات والمحامين والأطباء</span>
-  <span class="de block">Lösung für Unternehmen, Anwälte und Ärzte</span>
-  <span class="en block">Solution for companies, lawyers & doctors</span>
-</p>
-
-<button class="cta">
-  <span class="ar">ابدأ مجاناً</span>
-  <span class="de">Kostenlos starten</span>
-  <span class="en">Start Free</span>
-</button>
-
-</section>
-
-<!-- ===== SCRIPT ===== -->
-<script>
-function setLang(lang) {
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-}
-
-setLang("ar");
-</script>
-
-</body>
-</html><!-- ===== FEATURES ===== -->
-<section class="features" style="padding:60px 20px; max-width:1200px; margin:auto;">
-  <div style="text-align:center; margin-bottom:40px;">
-    <h2 style="font-size:36px; color:var(--gold); margin-bottom:12px;">
-      <span class="ar block">لماذا BismarkVault؟</span>
-      <span class="de block">Warum BismarkVault?</span>
-      <span class="en block">Why BismarkVault?</span>
-    </h2>
-    <p style="color:#bbb; max-width:700px; margin:auto; line-height:1.8;">
-      <span class="ar block">منصة أرشفة ذكية فاخرة تجمع بين السرعة، الأمان، والذكاء الاصطناعي في واجهة احترافية.</span>
-      <span class="de block">Eine elegante Archivplattform, die Geschwindigkeit, Sicherheit und KI in einer professionellen Oberfläche vereint.</span>
-      <span class="en block">A premium archive platform combining speed, security, and AI in a professional interface.</span>
-    </p>
-  </div>
-
-  <div class="feature-grid">
-    <div class="feature-card">
-      <div class="feature-icon">🤖</div>
-      <h3>
-        <span class="ar block">تحليل ذكي فوري</span>
-        <span class="de block">Sofortige KI-Analyse</span>
-        <span class="en block">Instant AI Analysis</span>
-      </h3>
-      <p>
-        <span class="ar block">حلّل المستندات خلال ثوانٍ واقترح تنظيمًا احترافيًا تلقائيًا.</span>
-        <span class="de block">Dokumente in Sekunden analysieren und automatisch professionell organisieren.</span>
-        <span class="en block">Analyze documents in seconds and get smart organization suggestions instantly.</span>
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🔐</div>
-      <h3>
-        <span class="ar block">قبو آمن</span>
-        <span class="de block">Sicherer Tresor</span>
-        <span class="en block">Secure Vault</span>
-      </h3>
-      <p>
-        <span class="ar block">مساحة آمنة لحفظ الملفات الحساسة مع تجربة استخدام بسيطة وفاخرة.</span>
-        <span class="de block">Ein sicherer Bereich für sensible Dateien mit einfacher und edler Benutzererfahrung.</span>
-        <span class="en block">A secure space for sensitive files with a simple and premium user experience.</span>
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">🌍</div>
-      <h3>
-        <span class="ar block">متعدد اللغات</span>
-        <span class="de block">Mehrsprachig</span>
-        <span class="en block">Multilingual</span>
-      </h3>
-      <p>
-        <span class="ar block">العربية، الألمانية، والإنجليزية ضمن واجهة موحدة بدون فوضى.</span>
-        <span class="de block">Arabisch, Deutsch und Englisch in einer einheitlichen und sauberen Oberfläche.</span>
-        <span class="en block">Arabic, German, and English in one unified clean interface.</span>
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">⚖️</div>
-      <h3>
-        <span class="ar block">جاهز لأوروبا</span>
-        <span class="de block">Europa-tauglich</span>
-        <span class="en block">Built for Europe</span>
-      </h3>
-      <p>
-        <span class="ar block">واجهة مناسبة للشركات والمكاتب القانونية والعيادات داخل السوق الألماني والأوروبي.</span>
-        <span class="de block">Geeignet für Unternehmen, Kanzleien und Praxen im deutschen und europäischen Markt.</span>
-        <span class="en block">Designed for companies, law firms, and clinics in the German and European market.</span>
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">📂</div>
-      <h3>
-        <span class="ar block">تنظيم ملفات احترافي</span>
-        <span class="de block">Professionelle Dateistruktur</span>
-        <span class="en block">Professional File Structure</span>
-      </h3>
-      <p>
-        <span class="ar block">أنشئ بنية ملفات واضحة ومنطقية بدلاً من الفوضى القديمة.</span>
-        <span class="de block">Erstellen Sie klare und logische Dateiordner statt alter Unordnung.</span>
-        <span class="en block">Create clear and logical file structures instead of old chaos.</span>
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon">💎</div>
-      <h3>
-        <span class="ar block">إحساس فاخر</span>
-        <span class="de block">Luxuriöses Erlebnis</span>
-        <span class="en block">Luxury Experience</span>
-      </h3>
-      <p>
-        <span class="ar block">تصميم أسود وذهبي يمنح منتجك حضورًا قويًا واحترافيًا.</span>
-        <span class="de block">Ein schwarzes und goldenes Design für eine starke und professionelle Präsenz.</span>
-        <span class="en block">A black-and-gold design that gives your product a strong premium identity.</span>
-      </p>
-    </div>
-  </div>
-</section>
-
-<style>
-.feature-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.feature-card {
-  background: linear-gradient(180deg, #111, #171717);
-  border: 1px solid rgba(200,168,75,0.18);
-  border-radius: 18px;
-  padding: 24px;
-  transition: 0.3s ease;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-}
-
-.feature-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(200,168,75,0.42);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.35);
-}
-
-.feature-icon {
-  font-size: 30px;
-  margin-bottom: 14px;
-}
-
-.feature-card h3 {
-  color: var(--gold);
-  margin-bottom: 12px;
-  font-size: 20px;
-}
-
-.feature-card p {
-  color: #cfcfcf;
-  line-height: 1.8;
-  font-size: 14px;
-}
-
-@media (max-width: 980px) {
-  .feature-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 680px) {
-  .feature-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
-
-<!-- ===== DEMO PREVIEW ===== -->
-<section class="demo-preview" style="padding:70px 20px;">
-  <div style="max-width:1100px; margin:auto;">
-    <div style="text-align:center; margin-bottom:34px;">
-      <h2 style="font-size:34px; color:var(--gold); margin-bottom:12px;">
-        <span class="ar block">تجربة مرئية أنيقة</span>
-        <span class="de block">Elegante visuelle Erfahrung</span>
-        <span class="en block">Elegant Visual Experience</span>
-      </h2>
-      <p style="color:#bbb; max-width:760px; margin:auto; line-height:1.9;">
-        <span class="ar block">واجهة التطبيق مصممة لتشعر وكأنك داخل منصة احترافية حقيقية، وليس مجرد صفحة عادية.</span>
-        <span class="de block">Die Oberfläche fühlt sich wie eine echte professionelle Plattform an — nicht wie eine einfache Webseite.</span>
-        <span class="en block">The interface is designed to feel like a real professional platform, not just a simple webpage.</span>
-      </p>
-    </div>
-
-    <div class="browser-mockup">
-      <div class="browser-top">
-        <div class="dots">
-          <span></span><span></span><span></span>
-        </div>
-        <div class="browser-url">bismarkvault.app</div>
-      </div>
-
-      <div class="browser-body">
-        <div class="mock-sidebar">
-          <div class="mock-logo">BV</div>
-          <div class="mock-item active">
-            <span class="ar">الرئيسية</span>
-            <span class="de">Start</span>
-            <span class="en">Home</span>
-          </div>
-          <div class="mock-item">
-            <span class="ar">الملفات</span>
-            <span class="de">Dateien</span>
-            <span class="en">Files</span>
-          </div>
-          <div class="mock-item">
-            <span class="ar">التحليل</span>
-            <span class="de">Analyse</span>
-            <span class="en">Analysis</span>
-          </div>
-          <div class="mock-item">
-            <span class="ar">الإعدادات</span>
-            <span class="de">Einstellungen</span>
-            <span class="en">Settings</span>
-          </div>
-        </div>
-
-        <div class="mock-main">
-          <div class="mock-card large">
-            <h3>
-              <span class="ar block">BismarkVault AI Dashboard</span>
-              <span class="de block">BismarkVault AI Dashboard</span>
-              <span class="en block">BismarkVault AI Dashboard</span>
-            </h3>
-            <p>
-              <span class="ar block">لوحة تحكم احترافية لتحليل المستندات وإدارة الأرشيف.</span>
-              <span class="de block">Professionelles Dashboard für Dokumentenanalyse und Archivverwaltung.</span>
-              <span class="en block">Professional dashboard for document analysis and archive management.</span>
-            </p>
-          </div>
-
-          <div class="mock-row">
-            <div class="mock-card">
-              <strong>24</strong>
-              <span class="ar block">ملف</span>
-              <span class="de block">Dateien</span>
-              <span class="en block">Files</span>
-            </div>
-            <div class="mock-card">
-              <strong>99%</strong>
-              <span class="ar block">دقة</span>
-              <span class="de block">Genauigkeit</span>
-              <span class="en block">Accuracy</span>
-            </div>
-            <div class="mock-card">
-              <strong>AR · DE · EN</strong>
-              <span class="ar block">لغات</span>
-              <span class="de block">Sprachen</span>
-              <span class="en block">Languages</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-.browser-mockup {
-  background: linear-gradient(180deg, #121212, #0d0d0d);
-  border: 1px solid rgba(200,168,75,0.2);
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.35);
-}
-
-.browser-top {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 14px 18px;
-  border-bottom: 1px solid rgba(200,168,75,0.12);
-  background: rgba(255,255,255,0.02);
-}
-
-.dots {
-  display: flex;
-  gap: 8px;
-}
-
-.dots span {
-  width: 11px;
-  height: 11px;
-  border-radius: 50%;
-  display: block;
-}
-
-.dots span:nth-child(1) { background: #ff5f57; }
-.dots span:nth-child(2) { background: #febc2e; }
-.dots span:nth-child(3) { background: #28c840; }
-
-.browser-url {
-  background: rgba(255,255,255,0.05);
-  color: #aaa;
-  border-radius: 999px;
-  padding: 8px 14px;
-  font-size: 13px;
-  flex: 1;
-  text-align: center;
-}
-
-.browser-body {
-  display: grid;
-  grid-template-columns: 240px 1fr;
-  min-height: 420px;
-}
-
-.mock-sidebar {
-  border-left: 1px solid rgba(200,168,75,0.1);
-  padding: 20px;
-  background: rgba(255,255,255,0.02);
-}
-
-html[dir="ltr"] .mock-sidebar {
-  border-left: none;
-  border-right: 1px solid rgba(200,168,75,0.1);
-}
-
-.mock-logo {
-  width: 54px;
-  height: 54px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #1d1708, #2f2410);
-  border: 1px solid rgba(200,168,75,0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--gold);
-  font-weight: 800;
-  margin-bottom: 24px;
-}
-
-.mock-item {
-  padding: 12px 14px;
-  border-radius: 12px;
-  color: #c9c9c9;
-  margin-bottom: 10px;
-  background: rgba(255,255,255,0.02);
-}
-
-.mock-item.active {
-  background: rgba(200,168,75,0.12);
-  color: var(--gold);
-  border: 1px solid rgba(200,168,75,0.22);
-}
-
-.mock-main {
-  padding: 22px;
-}
-
-.mock-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-  margin-top: 18px;
-}
-
-.mock-card {
-  background: linear-gradient(180deg, #151515, #101010);
-  border: 1px solid rgba(200,168,75,0.14);
-  border-radius: 18px;
-  padding: 22px;
-}
-
-.mock-card.large {
-  min-height: 180px;
-}
-
-.mock-card h3 {
-  color: var(--gold);
-  margin-bottom: 10px;
-}
-
-.mock-card p {
-  color: #cfcfcf;
-  line-height: 1.8;
-}
-
-.mock-card strong {
-  color: var(--gold);
-  font-size: 28px;
-  display: block;
-  margin-bottom: 8px;
-}
-
-@media (max-width: 860px) {
-  .browser-body {
-    grid-template-columns: 1fr;
-  }
-
-  .mock-sidebar {
-    border-left: none;
-    border-bottom: 1px solid rgba(200,168,75,0.1);
-  }
-
-  .mock-row {
-    grid-template-columns: 1fr;
-  }
-}
-</style><!-- ===== PRICING ===== -->
-<section class="pricing" style="padding:70px 20px; max-width:1200px; margin:auto;">
-  <div style="text-align:center; margin-bottom:38px;">
-    <h2 style="font-size:36px; color:var(--gold); margin-bottom:12px;">
-      <span class="ar block">الأسعار</span>
-      <span class="de block">Preise</span>
-      <span class="en block">Pricing</span>
-    </h2>
-    <p style="color:#bbb; max-width:760px; margin:auto; line-height:1.9;">
-      <span class="ar block">خطط واضحة وبسيطة من البداية وحتى المؤسسات.</span>
-      <span class="de block">Klare und einfache Pläne vom Einstieg bis zur Organisation.</span>
-      <span class="en block">Clear and simple plans from entry level to organizations.</span>
-    </p>
-  </div>
-
-  <div class="pricing-grid">
-    <div class="price-box">
-      <div class="price-label">
-        <span class="ar block">مجاني</span>
-        <span class="de block">Kostenlos</span>
-        <span class="en block">Free</span>
-      </div>
-      <div class="price-number">€0</div>
-      <div class="price-sub">
-        <span class="ar block">للتجربة والانطلاق</span>
-        <span class="de block">Zum Einstieg</span>
-        <span class="en block">For getting started</span>
-      </div>
-      <ul>
-        <li><span class="ar">20 ملف</span><span class="de">20 Dateien</span><span class="en">20 files</span></li>
-        <li><span class="ar">AI أساسي</span><span class="de">Basis AI</span><span class="en">Basic AI</span></li>
-        <li>AR · DE · EN</li>
-      </ul>
-      <button class="plan-btn"><span class="ar">ابدأ الآن</span><span class="de">Jetzt starten</span><span class="en">Start now</span></button>
-    </div>
-
-    <div class="price-box featured">
-      <div class="badge">
-        <span class="ar">الأكثر طلباً</span>
-        <span class="de">Beliebt</span>
-        <span class="en">Popular</span>
-      </div>
-      <div class="price-label">
-        <span class="ar block">احترافي</span>
-        <span class="de block">Professional</span>
-        <span class="en block">Professional</span>
-      </div>
-      <div class="price-number">€49</div>
-      <div class="price-sub">
-        <span class="ar block">للشركات والمكاتب</span>
-        <span class="de block">Für Unternehmen & Kanzleien</span>
-        <span class="en block">For companies & firms</span>
-      </div>
-      <ul>
-        <li><span class="ar">ملفات غير محدودة</span><span class="de">Unbegrenzte Dateien</span><span class="en">Unlimited files</span></li>
-        <li><span class="ar">تحليل متقدم</span><span class="de">Erweiterte Analyse</span><span class="en">Advanced analysis</span></li>
-        <li><span class="ar">مستخدمون متعددون</span><span class="de">Mehrere Nutzer</span><span class="en">Multi-user</span></li>
-      </ul>
-      <button class="plan-btn filled"><span class="ar">ابدأ التجربة</span><span class="de">Testen</span><span class="en">Start trial</span></button>
-    </div>
-
-    <div class="price-box">
-      <div class="price-label">Enterprise</div>
-      <div class="price-number">€99</div>
-      <div class="price-sub">
-        <span class="ar block">حلول متقدمة</span>
-        <span class="de block">Erweiterte Lösung</span>
-        <span class="en block">Advanced solution</span>
-      </div>
-      <ul>
-        <li><span class="ar">تقارير AI</span><span class="de">AI Berichte</span><span class="en">AI reports</span></li>
-        <li>API Access</li>
-        <li><span class="ar">دعم متقدم</span><span class="de">Premium Support</span><span class="en">Premium support</span></li>
-      </ul>
-      <button class="plan-btn"><span class="ar">تواصل</span><span class="de">Kontakt</span><span class="en">Contact</span></button>
-    </div>
-  </div>
-</section>
-
-<style>
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.price-box {
-  background: linear-gradient(180deg, #121212, #0f0f0f);
-  border: 1px solid rgba(200,168,75,0.16);
-  border-radius: 22px;
-  padding: 28px;
-  position: relative;
-  box-shadow: 0 16px 35px rgba(0,0,0,0.28);
-}
-
-.price-box.featured {
-  border-color: rgba(200,168,75,0.45);
-  transform: translateY(-6px);
-  box-shadow: 0 22px 48px rgba(0,0,0,0.34);
-}
-
-.badge {
-  position: absolute;
-  top: -12px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, var(--gold), #e8c96a);
-  color: #000;
-  font-size: 11px;
-  font-weight: 800;
-  padding: 6px 14px;
-  border-radius: 999px;
-}
-
-.price-label {
-  color: var(--gold);
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.price-number {
-  font-size: 52px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 10px;
-}
-
-.price-sub {
-  color: #bfbfbf;
-  line-height: 1.8;
-  margin-bottom: 18px;
-}
-
-.price-box ul {
-  list-style: none;
-  color: #d6d6d6;
-  line-height: 2;
-  margin-bottom: 18px;
-}
-
-.price-box li::before {
-  content: "✦ ";
-  color: var(--gold);
-}
-
-.plan-btn {
-  width: 100%;
-  padding: 13px;
-  border-radius: 999px;
-  border: 1px solid rgba(200,168,75,0.35);
-  background: transparent;
-  color: var(--gold);
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.plan-btn.filled {
-  background: linear-gradient(135deg, var(--gold), #e6c66a);
-  color: #000;
-  border: none;
-}
-
-@media (max-width: 980px) {
-  .pricing-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .price-box.featured {
-    transform: none;
-  }
-}
-</style>
-
-<!-- ===== TESTIMONIALS ===== -->
-<section class="testimonials" style="padding:70px 20px; max-width:1200px; margin:auto;">
-  <div style="text-align:center; margin-bottom:38px;">
-    <h2 style="font-size:36px; color:var(--gold); margin-bottom:12px;">
-      <span class="ar block">آراء العملاء</span>
-      <span class="de block">Kundenstimmen</span>
-      <span class="en block">Testimonials</span>
-    </h2>
-    <p style="color:#bbb; max-width:760px; margin:auto; line-height:1.9;">
-      <span class="ar block">نتائج حقيقية وانطباع احترافي قوي.</span>
-      <span class="de block">Echte Ergebnisse und ein starker professioneller Eindruck.</span>
-      <span class="en block">Real results and a strong professional impression.</span>
-    </p>
-  </div>
-
-  <div class="testi-grid">
-    <div class="testi-box">
-      <div class="stars">★★★★★</div>
-      <p>
-        <span class="ar block">وفّرنا ساعات كل أسبوع وأصبح الأرشيف أوضح بكثير.</span>
-        <span class="de block">Wir sparen jede Woche Stunden und das Archiv ist deutlich klarer geworden.</span>
-        <span class="en block">We save hours every week and the archive is much clearer now.</span>
-      </p>
-      <strong>Ahmed K.</strong>
-    </div>
-
-    <div class="testi-box">
-      <div class="stars">★★★★★</div>
-      <p>
-        <span class="ar block">واجهة فخمة وسهلة، والمنتج يبدو احترافياً جداً أمام العملاء.</span>
-        <span class="de block">Elegante und einfache Oberfläche, das Produkt wirkt sehr professionell vor Kunden.</span>
-        <span class="en block">Elegant and easy interface, and the product looks very professional to clients.</span>
-      </p>
-      <strong>Sarah M.</strong>
-    </div>
-
-    <div class="testi-box">
-      <div class="stars">★★★★★</div>
-      <p>
-        <span class="ar block">أفضل ما في المنصة هو الدمج بين الفخامة والوظيفة الحقيقية.</span>
-        <span class="de block">Das Beste an der Plattform ist die Verbindung von Eleganz und echter Funktion.</span>
-        <span class="en block">The best part is the balance between elegance and real functionality.</span>
-      </p>
-      <strong>Thomas W.</strong>
-    </div>
-  </div>
-</section>
-
-<style>
-.testi-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-
-.testi-box {
-  background: linear-gradient(180deg, #111, #161616);
-  border: 1px solid rgba(200,168,75,0.14);
-  border-radius: 20px;
-  padding: 24px;
-}
-
-.stars {
-  color: var(--gold);
-  margin-bottom: 12px;
-  letter-spacing: 3px;
-}
-
-.testi-box p {
-  color: #d2d2d2;
-  line-height: 1.9;
-  margin-bottom: 14px;
-}
-
-.testi-box strong {
-  color: var(--gold);
-}
-
-@media (max-width: 980px) {
-  .testi-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
-
-<!-- ===== CONTACT ===== -->
-<section class="contact" style="padding:70px 20px; max-width:900px; margin:auto;">
-  <div style="text-align:center; margin-bottom:30px;">
-    <h2 style="font-size:36px; color:var(--gold); margin-bottom:12px;">
-      <span class="ar block">تواصل معنا</span>
-      <span class="de block">Kontakt</span>
-      <span class="en block">Contact</span>
-    </h2>
-    <p style="color:#bbb; line-height:1.9;">
-      <span class="ar block">إذا أردت نسخة مؤسسية أو شراكة، راسلنا مباشرة.</span>
-      <span class="de block">Wenn Sie eine Organisationsversion oder Partnerschaft möchten, kontaktieren Sie uns direkt.</span>
-      <span class="en block">If you want an organization plan or partnership, contact us directly.</span>
-    </p>
-  </div>
-
-  <div class="contact-box">
-    <div class="contact-grid">
-      <input type="text" placeholder="Name">
-      <input type="email" placeholder="Email">
-      <input type="text" placeholder="Company / Organization">
-      <input type="text" placeholder="Plan">
-      <textarea placeholder="Message"></textarea>
-    </div>
-
-    <button class="contact-btn">
-      <span class="ar">إرسال الرسالة</span>
-      <span class="de">Nachricht senden</span>
-      <span class="en">Send Message</span>
-    </button>
-  </div>
-</section>
-
-<style>
-.contact-box {
-  background: linear-gradient(180deg, #121212, #0d0d0d);
-  border: 1px solid rgba(200,168,75,0.18);
-  border-radius: 22px;
-  padding: 28px;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.contact-grid input,
-.contact-grid textarea {
-  width: 100%;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: 1px solid rgba(200,168,75,0.14);
-  background: rgba(255,255,255,0.03);
-  color: #fff;
-  outline: none;
-}
-
-.contact-grid textarea {
-  min-height: 130px;
-  grid-column: 1 / -1;
-  resize: vertical;
-}
-
-.contact-btn {
-  width: 100%;
-  margin-top: 18px;
-  padding: 14px;
-  border-radius: 999px;
-  border: none;
-  background: linear-gradient(135deg, var(--gold), #e6c66a);
-  color: #000;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-@media (max-width: 760px) {
-  .contact-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-grid textarea {
-    grid-column: auto;
-  }
-}
-</style>
-
-<!-- ===== FOOTER ===== -->
-<footer class="site-footer">
-  <div class="footer-inner">
-    <div class="footer-brand">
-      <h3>BismarkVault</h3>
-      <p>by Malek Alsirreih · Made in Germany</p>
-    </div>
-
-    <div class="footer-links">
-      <span>AI</span>
-      <span>Vault</span>
-      <span>Security</span>
-      <span>Contact</span>
-    </div>
-
-    <div class="footer-copy">
-      © 2026 Malek Alsirreih · All Rights Reserved
-    </div>
-  </div>
-</footer>
-
-<style>
-.site-footer {
-  padding: 40px 20px 60px;
-  border-top: 1px solid rgba(200,168,75,0.12);
-  margin-top: 30px;
-}
-
-.footer-inner {
-  max-width: 1200px;
-  margin: auto;
-  display: grid;
-  gap: 18px;
-  text-align: center;
-}
-
-.footer-brand h3 {
-  color: var(--gold);
-  margin-bottom: 6px;
-}
-
-.footer-brand p {
-  color: #aaa;
-}
-
-.footer-links {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  color: #cfcfcf;
-  flex-wrap: wrap;
-}
-
-.footer-copy {
-  color: #8f8f8f;
-  font-size: 14px;
-}
-</style><!-- ===== APP / VAULT ===== -->
-<section id="app" class="app-shell" style="display:none;">
-  <div class="app-topbar">
-    <div class="app-brand">
-      <div class="app-logo">BV</div>
-      <div>
-        <strong>BismarkVault</strong>
-        <small>by Malek Alsirreih · Made in Germany</small>
-      </div>
-    </div>
-
-    <div class="app-actions">
-      <button class="app-action-btn" onclick="showLanding()">
-        <span class="ar">العودة للموقع</span>
-        <span class="de">Zur Website</span>
-        <span class="en">Back to Site</span>
-      </button>
-    </div>
-  </div>
-
-  <div class="app-layout">
-    <aside class="app-sidebar">
-      <button class="side-item active" onclick="switchTab('files', this)">
-        <span class="ar">📂 الملفات</span>
-        <span class="de">📂 Dateien</span>
-        <span class="en">📂 Files</span>
-      </button>
-
-      <button class="side-item" onclick="switchTab('ai', this)">
-        <span class="ar">🤖 الذكاء الاصطناعي</span>
-        <span class="de">🤖 KI Analyse</span>
-        <span class="en">🤖 AI Analysis</span>
-      </button>
-
-      <button class="side-item" onclick="switchTab('stats', this)">
-        <span class="ar">📊 الإحصائيات</span>
-        <span class="de">📊 Statistiken</span>
-        <span class="en">📊 Stats</span>
-      </button>
-    </aside>
-
-    <main class="app-main">
-      <!-- FILES TAB -->
-      <div id="tab-files" class="tab-panel">
-        <div class="panel-card">
-          <h3>
-            <span class="ar block">القبو الآمن للملفات</span>
-            <span class="de block">Sicherer Dateitresor</span>
-            <span class="en block">Secure File Vault</span>
-          </h3>
-
-          <p class="panel-desc">
-            <span class="ar block">ارفع ملفاتك وشاهدها داخل واجهة مرتبة وفاخرة.</span>
-            <span class="de block">Laden Sie Ihre Dateien hoch und verwalten Sie sie in einer eleganten Oberfläche.</span>
-            <span class="en block">Upload your files and manage them in an elegant organized interface.</span>
-          </p>
-
-          <div class="upload-zone">
-            <input type="file" id="fileInput" multiple onchange="addFiles(event)">
-            <div class="upload-zone-inner">
-              <div class="upload-icon">⬆️</div>
-              <div class="upload-text">
-                <span class="ar block">اسحب الملفات هنا أو اضغط للاختيار</span>
-                <span class="de block">Dateien hierher ziehen oder klicken</span>
-                <span class="en block">Drag files here or click to choose</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="stats-row">
-            <div class="mini-stat">
-              <strong id="statFiles">0</strong>
-              <span class="ar block">ملفات</span>
-              <span class="de block">Dateien</span>
-              <span class="en block">Files</span>
-            </div>
-
-            <div class="mini-stat">
-              <strong id="statTypes">0</strong>
-              <span class="ar block">أنواع</span>
-              <span class="de block">Typen</span>
-              <span class="en block">Types</span>
-            </div>
-
-            <div class="mini-stat">
-              <strong id="statSize">0 MB</strong>
-              <span class="ar block">الحجم</span>
-              <span class="de block">Größe</span>
-              <span class="en block">Size</span>
-            </div>
-          </div>
-
-          <div class="file-list" id="fileList"></div>
-        </div>
-      </div>
-
-      <!-- AI TAB -->
-      <div id="tab-ai" class="tab-panel" style="display:none;">
-        <div class="panel-card">
-          <h3>
-            <span class="ar block">BismarkVault AI</span>
-            <span class="de block">BismarkVault KI</span>
-            <span class="en block">BismarkVault AI</span>
-          </h3>
-
-          <p class="panel-desc">
-            <span class="ar block">اكتب سؤالاً عن ملفاتك أو اطلب تحليلًا ذكيًا.</span>
-            <span class="de block">Stellen Sie Fragen zu Ihren Dateien oder fordern Sie eine Analyse an.</span>
-            <span class="en block">Ask about your files or request a smart analysis.</span>
-          </p>
-
-          <div class="quick-prompts">
-            <button onclick="fillPrompt('صنّف ملفاتي وامنحني تقريراً سريعاً')">📊</button>
-            <button onclick="fillPrompt('اقترح هيكل مجلدات احترافي')">📁</button>
-            <button onclick="fillPrompt('ما المخاطر المحتملة في هذه الملفات؟')">⚠️</button>
-            <button onclick="fillPrompt('اكتب ملخصاً تنفيذياً')">🧠</button>
-          </div>
-
-          <textarea id="aiInput" class="ai-input" placeholder="Type here..."></textarea>
-
-          <button class="primary-full" onclick="runAI()">
-            <span class="ar">تحليل الآن</span>
-            <span class="de">Jetzt analysieren</span>
-            <span class="en">Analyze Now</span>
-          </button>
-
-          <div class="ai-output" id="aiOutput">
-            <span class="ar block">النتيجة ستظهر هنا...</span>
-            <span class="de block">Das Ergebnis erscheint hier...</span>
-            <span class="en block">The result will appear here...</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- STATS TAB -->
-      <div id="tab-stats" class="tab-panel" style="display:none;">
-        <div class="panel-card">
-          <h3>
-            <span class="ar block">نظرة عامة</span>
-            <span class="de block">Übersicht</span>
-            <span class="en block">Overview</span>
-          </h3>
-
-          <div class="dashboard-grid">
-            <div class="dash-box">
-              <strong>99%</strong>
-              <span class="ar block">دقة متوقعة</span>
-              <span class="de block">Erwartete Genauigkeit</span>
-              <span class="en block">Expected accuracy</span>
-            </div>
-
-            <div class="dash-box">
-              <strong>AR · DE · EN</strong>
-              <span class="ar block">دعم لغات</span>
-              <span class="de block">Sprachsupport</span>
-              <span class="en block">Language support</span>
-            </div>
-
-            <div class="dash-box">
-              <strong>24/7</strong>
-              <span class="ar block">جاهزية رقمية</span>
-              <span class="de block">Digitale Bereitschaft</span>
-              <span class="en block">Digital readiness</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</section>
-
-<style>
-.app-shell {
-  min-height: 100vh;
-  background: linear-gradient(180deg, #090909, #0d0d0d);
-  padding: 24px;
-}
-
-.app-topbar {
-  max-width: 1400px;
-  margin: 0 auto 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 14px;
-}
-
-.app-brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-
-.app-logo {
-  width: 54px;
-  height: 54px;
-  border-radius: 18px;
-  background: linear-gradient(135deg, #1c1508, #34270f);
-  border: 1px solid rgba(200,168,75,0.35);
-  color: var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 800;
-}
-
-.app-brand strong {
-  display: block;
-  color: var(--gold);
-  font-size: 18px;
-}
-
-.app-brand small {
-  color: #aaa;
-}
-
-.app-action-btn {
-  border: 1px solid rgba(200,168,75,0.28);
-  color: var(--gold);
-  background: transparent;
-  padding: 10px 16px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-
-.app-layout {
-  max-width: 1400px;
-  margin: auto;
-  display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 20px;
-}
-
-.app-sidebar {
-  background: linear-gradient(180deg, #101010, #0b0b0b);
-  border: 1px solid rgba(200,168,75,0.14);
-  border-radius: 22px;
-  padding: 18px;
-  height: fit-content;
-}
-
-.side-item {
-  width: 100%;
-  text-align: right;
-  padding: 14px 16px;
-  border-radius: 14px;
-  border: none;
-  background: rgba(255,255,255,0.03);
-  color: #d0d0d0;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-html[dir="ltr"] .side-item {
-  text-align: left;
-}
-
-.side-item.active {
-  background: rgba(200,168,75,0.13);
-  color: var(--gold);
-  border: 1px solid rgba(200,168,75,0.18);
-}
-
-.app-main {
-  min-width: 0;
-}
-
-.panel-card {
-  background: linear-gradient(180deg, #121212, #0d0d0d);
-  border: 1px solid rgba(200,168,75,0.16);
-  border-radius: 24px;
-  padding: 26px;
-  box-shadow: 0 18px 40px rgba(0,0,0,0.28);
-}
-
-.panel-card h3 {
-  color: var(--gold);
-  font-size: 28px;
-  margin-bottom: 10px;
-}
-
-.panel-desc {
-  color: #c5c5c5;
-  line-height: 1.9;
-  margin-bottom: 18px;
-}
-
-.upload-zone {
-  position: relative;
-  border: 2px dashed rgba(200,168,75,0.3);
-  border-radius: 20px;
-  padding: 34px 20px;
-  margin-bottom: 20px;
-  overflow: hidden;
-  background: rgba(255,255,255,0.02);
-}
-
-.upload-zone input {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.upload-zone-inner {
-  text-align: center;
-}
-
-.upload-icon {
-  font-size: 34px;
-  margin-bottom: 10px;
-}
-
-.upload-text {
-  color: #d0d0d0;
-  line-height: 1.8;
-}
-
-.stats-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-  margin-bottom: 20px;
-}
-
-.mini-stat {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(200,168,75,0.12);
-  border-radius: 18px;
-  padding: 18px;
-  text-align: center;
-}
-
-.mini-stat strong {
-  display: block;
-  color: var(--gold);
-  font-size: 26px;
-  margin-bottom: 8px;
-}
-
-.file-list {
-  display: grid;
-  gap: 12px;
-}
-
-.file-item {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  align-items: center;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(200,168,75,0.1);
-  border-radius: 16px;
-  padding: 14px 16px;
-}
-
-.file-meta {
-  color: #ccc;
-  font-size: 13px;
-}
-
-.file-name {
-  color: #fff;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.quick-prompts {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-  margin-bottom: 14px;
-}
-
-.quick-prompts button {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  border: 1px solid rgba(200,168,75,0.15);
-  background: rgba(255,255,255,0.03);
-  color: var(--gold);
-  cursor: pointer;
-}
-
-.ai-input {
-  width: 100%;
-  min-height: 140px;
-  resize: vertical;
-  border-radius: 18px;
-  border: 1px solid rgba(200,168,75,0.16);
-  background: rgba(255,255,255,0.03);
-  color: #fff;
-  padding: 16px;
-  outline: none;
-  margin-bottom: 14px;
-}
-
-.primary-full {
-  width: 100%;
-  border: none;
-  border-radius: 999px;
-  padding: 14px;
-  background: linear-gradient(135deg, var(--gold), #e7c860);
-  color: #000;
-  font-weight: 800;
-  cursor: pointer;
-}
-
-.ai-output {
-  margin-top: 16px;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(200,168,75,0.12);
-  border-radius: 18px;
-  padding: 18px;
-  color: #ddd;
-  line-height: 1.9;
-  min-height: 120px;
-}
-
-.dashboard-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.dash-box {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(200,168,75,0.12);
-  border-radius: 20px;
-  padding: 24px;
-  text-align: center;
-}
-
-.dash-box strong {
-  display: block;
-  color: var(--gold);
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-
-@media (max-width: 980px) {
-  .app-layout {
-    grid-template-columns: 1fr;
-  }
-
-  .stats-row,
-  .dashboard-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
-
-<script>
-function setLang(lang) {
-  document.documentElement.lang = lang;
-  document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-
-  document.querySelectorAll(".ar, .de, .en").forEach(el => {
-    el.style.display = "none";
-  });
-
-  document.querySelectorAll("." + lang).forEach(el => {
-    if (el.classList.contains("block")) {
-      el.style.display = "block";
-    } else {
-      el.style.display = "inline";
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BismarkVault AI – Smart Document Analyzer</title>
+  <meta name="description" content="AI-powered document and finance analysis platform. Analyze contracts, invoices, and risks instantly.">
+  <style>
+    :root {
+      --gold: #d4af37;
+      --gold-soft: rgba(212, 175, 55, 0.16);
+      --bg: #0b0b0b;
+      --panel: rgba(22, 22, 22, 0.96);
+      --panel-2: rgba(30, 30, 30, 0.98);
+      --text: #f7f1d0;
+      --muted: #b9b9b9;
+      --border: rgba(255, 255, 255, 0.08);
+      --success: #2ecc71;
+      --danger: #ff6b6b;
+      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
+      --radius: 22px;
     }
-  });
-}
 
-function showApp() {
-  document.querySelector(".hero")?.scrollIntoView({ behavior: "auto" });
-  const app = document.getElementById("app");
-  if (app) {
-    app.style.display = "block";
-    app.scrollIntoView({ behavior: "smooth" });
-  }
-}
+    * {
+      box-sizing: border-box;
+    }
 
-function showLanding() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(212,175,55,0.10) 0%, transparent 20%),
+        linear-gradient(180deg, #171717 0%, #0b0b0b 44%);
+      color: var(--text);
+      font-family: "Segoe UI", Tahoma, sans-serif;
+      padding: 28px 18px 56px;
+    }
 
-function switchTab(tab, btn) {
-  document.querySelectorAll(".tab-panel").forEach(panel => {
-    panel.style.display = "none";
-  });
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-  document.querySelectorAll(".side-item").forEach(item => {
-    item.classList.remove("active");
-  });
+    .hero {
+      text-align: center;
+      margin-bottom: 26px;
+    }
 
-  document.getElementById("tab-" + tab).style.display = "block";
-  btn.classList.add("active");
-}
+    .hero h1 {
+      margin: 0 0 8px;
+      color: var(--gold);
+      font-size: 56px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+    }
 
-function closeTopBar() {
-  const topbar = document.getElementById("topbar");
-  if (topbar) topbar.style.display = "none";
-}
+    .subtitle {
+      margin: 0;
+      font-size: 24px;
+      color: #efe3b6;
+      font-weight: 600;
+    }
 
-function goTo(id) {
-  const el = document.getElementById(id);
-  if (el) el.scrollIntoView({ behavior: "smooth" });
-}
+    .main-card {
+      background: var(--panel);
+      border: 1px solid var(--gold-soft);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
 
-function submitContact() {
-  alert("Message sent");
-}
+    textarea {
+      width: 100%;
+      min-height: 260px;
+      resize: vertical;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      background: #111;
+      color: white;
+      padding: 20px;
+      font-size: 17px;
+      line-height: 1.9;
+      outline: none;
+      transition: 0.2s ease;
+    }
 
-function fillPrompt(text) {
-  const input = document.getElementById("aiInput");
-  if (input) input.value = text;
-}
+    textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(212,175,55,0.09);
+    }
 
-const vaultFiles = [];
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
 
-function addFiles(event) {
-  const files = Array.from(event.target.files || []);
-  files.forEach(file => {
-    vaultFiles.push(file);
-  });
-  renderFiles();
-}
+    button {
+      min-width: 190px;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 22px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 800;
+      transition: 0.2s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+    }
 
-function formatSize(bytes) {
-  if (!bytes) return "0 MB";
-  return (bytes / 1024 / 1024).toFixed(2) + " MB";
-}
+    button:hover {
+      transform: translateY(-2px);
+    }
 
-function renderFiles() {
-  const list = document.getElementById("fileList");
-  const statFiles = document.getElementById("statFiles");
-  const statTypes = document.getElementById("statTypes");
-  const statSize = document.getElementById("statSize");
+    button:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
 
-  list.innerHTML = "";
+    .btn-primary {
+      background: linear-gradient(180deg, #f2d65f 0%, var(--gold) 100%);
+      color: #111;
+    }
 
-  if (!vaultFiles.length) {
-    list.innerHTML = `
-      <div class="file-item">
-        <div>
-          <div class="file-name">Empty Vault</div>
-          <div class="file-meta">No files uploaded yet.</div>
-        </div>
+    .btn-secondary {
+      background: linear-gradient(180deg, #ffffff 0%, #ececec 100%);
+      color: #111;
+    }
+
+    .status-bar {
+      margin-top: 22px;
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .loader-wrap {
+      display: none;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .loader-wrap.show {
+      display: block;
+    }
+
+    .loader {
+      width: 66px;
+      height: 66px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      border: 4px solid rgba(255,255,255,0.08);
+      border-top-color: var(--gold);
+      animation: spin 0.9s linear infinite;
+    }
+
+    .loader-text {
+      color: #e9ddb3;
+      font-size: 15px;
+    }
+
+    .summary-strip {
+      display: none;
+      margin-top: 24px;
+      background: var(--panel);
+      border: 1px solid var(--gold-soft);
+      border-radius: 18px;
+      padding: 16px;
+      box-shadow: 0 14px 34px rgba(0,0,0,0.18);
+    }
+
+    .summary-strip.show {
+      display: block;
+    }
+
+    .summary-tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      background: rgba(255,255,255,0.04);
+      color: white;
+      border: 1px solid transparent;
+    }
+
+    .tag.gold {
+      border-color: rgba(212,175,55,0.35);
+      background: rgba(212,175,55,0.10);
+      color: #f6e7ac;
+    }
+
+    .tag.green {
+      border-color: rgba(46,204,113,0.28);
+      background: rgba(46,204,113,0.12);
+      color: #d6ffe6;
+    }
+
+    .tag.red {
+      border-color: rgba(255,107,107,0.28);
+      background: rgba(255,107,107,0.12);
+      color: #ffdede;
+    }
+
+    .tag.blue {
+      border-color: rgba(93,173,226,0.28);
+      background: rgba(93,173,226,0.12);
+      color: #dff3ff;
+    }
+
+    .results-grid {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 24px;
+    }
+
+    .results-grid.show {
+      display: grid;
+    }
+
+    .result-card {
+      background: var(--panel-2);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      min-height: 230px;
+      box-shadow: 0 18px 44px rgba(0,0,0,0.22);
+    }
+
+    .card-summary {
+      border-top: 4px solid var(--gold);
+    }
+
+    .card-risks {
+      border-top: 4px solid var(--danger);
+    }
+
+    .card-action {
+      border-top: 4px solid var(--success);
+    }
+
+    .card-title {
+      font-size: 19px;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 12px;
+    }
+
+    .card-content {
+      white-space: pre-wrap;
+      line-height: 2;
+      font-size: 16px;
+      color: #f1f1f1;
+      min-height: 140px;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 22px;
+      color: #8d8d8d;
+      font-size: 13px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @media (max-width: 980px) {
+      .results-grid.show {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .subtitle {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      button {
+        width: 100%;
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .hero h1 {
+        font-size: 34px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      textarea {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="hero">
+      <h1>BISMARKVAULT AI</h1>
+      <p class="subtitle">Professional Document & Finance Auditor</p>
+    </div>
+
+    <div class="main-card">
+      <textarea id="docInput" placeholder="أدخل النص أو بيانات الفاتورة هنا..."></textarea>
+
+      <div class="btn-group">
+        <button id="auditBtn" class="btn-primary">🔍 تدقيق مزدوج</button>
+        <button id="financeBtn" class="btn-secondary">📊 محاسبة ومواعيد</button>
       </div>
-    `;
-  } else {
-    vaultFiles.forEach(file => {
-      const item = document.createElement("div");
-      item.className = "file-item";
-      item.innerHTML = `
-        <div>
-          <div class="file-name">${file.name}</div>
-          <div class="file-meta">${file.type || "unknown"} · ${formatSize(file.size)}</div>
-        </div>
-        <div style="color:var(--gold);font-weight:700;">Ready</div>
-      `;
-      list.appendChild(item);
-    });
-  }
 
-  statFiles.textContent = vaultFiles.length;
-  statTypes.textContent = new Set(vaultFiles.map(f => (f.type || "unknown").split("/")[0])).size;
-  statSize.textContent = formatSize(vaultFiles.reduce((acc, f) => acc + (f.size || 0), 0));
-}
+      <div id="status" class="status-bar">بانتظار المدخلات...</div>
 
-function runAI() {
-  const input = document.getElementById("aiInput");
-  const output = document.getElementById("aiOutput");
-  const q = (input.value || "").trim();
+      <div id="loaderWrap" class="loader-wrap">
+        <div class="loader"></div>
+        <div class="loader-text">BismarkVault AI يفحص المحتوى الآن...</div>
+      </div>
+    </div>
 
-  if (!q) {
-    output.innerHTML = `
-      <span class="ar block">اكتب طلباً أولاً.</span>
-      <span class="de block">Bitte zuerst eine Anfrage eingeben.</span>
-      <span class="en block">Please enter a request first.</span>
-    `;
-    setLang(document.documentElement.lang || "ar");
-    return;
-  }
+    <div id="summaryStrip" class="summary-strip">
+      <div class="summary-tags">
+        <div id="tagStatus" class="tag green">✅ جاهز</div>
+        <div id="tagMode" class="tag gold">🔍 وضع التحليل</div>
+        <div id="tagRisk" class="tag red">⚠️ مستوى المخاطر</div>
+        <div id="tagNext" class="tag blue">➡️ الإجراء التالي</div>
+      </div>
+    </div>
 
-  output.innerHTML = `
-    <div style="color:var(--gold); font-weight:700; margin-bottom:10px;">BismarkVault AI</div>
-    <span class="ar block">تم استلام الطلب بنجاح. في النسخة التالية سنربطه بالذكاء الاصطناعي الحقيقي لتحليل الملفات تلقائيًا.</span>
-    <span class="de block">Anfrage erfolgreich empfangen. In der nächsten Version verbinden wir dies mit echter KI für automatische Dateianalyse.</span>
-    <span class="en block">Request received successfully. In the next version this will connect to real AI for automatic file analysis.</span>
-  `;
-  setLang(document.documentElement.lang || "ar");
-}
+    <div id="resultsGrid" class="results-grid">
+      <div class="result-card card-summary">
+        <div class="card-title">📌 الملخص</div>
+        <div id="summaryBox" class="card-content">...</div>
+      </div>
 
-setLang("ar");
-renderFiles();
-</script>
+      <div class="result-card card-risks">
+        <div class="card-title">⚠️ المخاطر / الملاحظات</div>
+        <div id="risksBox" class="card-content">...</div>
+      </div>
 
-</body>
-</html>
+      <div class="result-card card-action">
+        <div class="card-title">✅ التوصية التالية</div>
+        <div id="actionBox" class="card-content">...</div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      BismarkVault Prototype • GitHub Pages Version
+    </div>
+  </div>
+
+  <script>
+    const auditBtn = document.getElementById("auditBtn");
+    const financeBtn = document.getElementById("financeBtn");
+    const input = document.getElementById("docInput");
+    const status = document.getElementById("status");
+    const loaderWrap = document.getElementById("loaderWrap");
+    const summaryStrip = document.getElementById("summaryStrip");
+    const resultsGrid = document.getElementById("resultsGrid");
+
+    const summaryBox = document.getElementById("summaryBox");
+    const risksBox = document.getElementById("risksBox");
+    const actionBox = document.getElementById("actionBox");
+
+    const tagStatus = document.getElementById("tagStatus");
+    const tagMode = document.getElementById("tagMode");
+    const tagRisk = document.getElementById("tagRisk");
+    const tagNext = document.getElementById("tagNext");
+
+    auditBtn.addEventListener("click", () => runLocalAnalysis("audit"));
+    financeBtn.addEventListener("click", () => runLocalAnalysis("finance"));
+
+    function runLocalAnalysis(mode) {
+      const text = input.value.trim();
+
+      if (!text) {
+        alert("يرجى إدخال نص أولاً");
+        return;
+      }
+
+      auditBtn.disabled = true;
+      financeBtn.disabled = true;
+      loaderWrap.classList.add("show");
+      summaryStrip.classList.remove("show");
+      resultsGrid.classList.remove("show");
+
+      status.textContent =
+        mode === "audit"
+          ? "جاري تنفيذ التدقيق المبدئي..."
+          : "جاري استخراج البيانات المالية...";
+
+      setTimeout(() => {
+        const cards = buildCards(mode, text);
+
+        loaderWrap.classList.remove("show");
+        summaryStrip.classList.add("show");
+        resultsGrid.classList.add("show");
+
+        tagStatus.textContent = "✅ تم التحليل";
+        tagMode.textContent =
+          mode === "audit"
+            ? "🔍 وضع: تدقيق قانوني"
+            : "📊 وضع: تحليل مالي";
+        tagRisk.textContent =
+          mode === "audit"
+            ? "⚠️ مستوى المخاطر: متوسط"
+            : "⚠️ مستوى المخاطر: منخفض";
+        tagNext.textContent =
+          mode === "audit"
+            ? "➡️ التالي: مراجعة قانونية"
+            : "➡️ التالي: مراجعة مالية";
+
+        status.textContent =
+          mode === "audit"
+            ? "✅ تم التدقيق المبدئي بنجاح"
+            : "✅ تم استخراج البيانات المالية بنجاح";
+
+        typeText(summaryBox, cards.summary);
+        setTimeout(() => typeText(risksBox, cards.risks), 250);
+        setTimeout(() => typeText(actionBox, cards.action), 500);
+
+        auditBtn.disabled = false;
+        financeBtn.disabled = false;
+      }, 1200);
+    }
+
+    function buildCards(mode, text) {
+      if (mode === "audit") {
+        return {
+          summary:
+            "تمت مراجعة النص مبدئيًا.\n\n" +
+            "النص المدخل: " + text + "\n\n" +
+            "يبدو المستند منظمًا مبدئيًا ويحتاج مراجعة بشرية نهائية قبل الاعتماد.",
+          risks:
+            "لا توجد تناقضات واضحة حاليًا.\nقد تكون هناك بنود قانونية تحتاج تدقيقًا أعمق عند الربط بالذكاء الحقيقي.",
+          action:
+            "الخطوة التالية: راجع البنود الأساسية يدويًا، ثم انتقل لاحقًا إلى نسخة السيرفر لربط التحليل بالذكاء الفعلي."
+        };
+      }
+
+      return {
+        summary:
+          "تم استخراج قراءة مالية أولية.\n\n" +
+          "النص المدخل: " + text + "\n\n" +
+          "تم التعرف على محتوى قد يحتوي على مبالغ أو تواريخ أو بيانات سداد.",
+        risks:
+          "القراءة الحالية مبدئية.\nقد تكون القيم أو الضرائب أو المواعيد غير مكتملة بدون تحليل AI فعلي.",
+        action:
+          "الخطوة التالية: استخدم هذه الواجهة كنسخة عرض، ثم اربطها لاحقًا بـ backend حقيقي لتحليل مالي دقيق."
+      };
+    }
+
+    function typeText(element, text) {
+      element.textContent = "";
+      let i = 0;
+
+      function typing() {
+        if (i < text.length) {
+          element.textContent += text.charAt(i);
+          i++;
+          setTimeout(typing, 10);
+        }
+      }
+
+      typing()
