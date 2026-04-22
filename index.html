@@ -1,487 +1,119 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BismarkVault AI – Smart Document Analyzer</title>
-  <meta name="description" content="AI-powered document and finance analysis platform. Analyze contracts, invoices, and risks instantly.">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BismarkVault AI</title>
+
   <style>
-    :root {
-      --gold: #d4af37;
-      --gold-soft: rgba(212, 175, 55, 0.16);
-      --bg: #0b0b0b;
-      --panel: rgba(22, 22, 22, 0.96);
-      --panel-2: rgba(30, 30, 30, 0.98);
-      --text: #f7f1d0;
-      --muted: #b9b9b9;
-      --border: rgba(255, 255, 255, 0.08);
-      --success: #2ecc71;
-      --danger: #ff6b6b;
-      --shadow: 0 24px 70px rgba(0, 0, 0, 0.35);
-      --radius: 22px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
     body {
       margin: 0;
-      min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(212,175,55,0.10) 0%, transparent 20%),
-        linear-gradient(180deg, #171717 0%, #0b0b0b 44%);
-      color: var(--text);
-      font-family: "Segoe UI", Tahoma, sans-serif;
-      padding: 28px 18px 56px;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .hero {
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: white;
       text-align: center;
-      margin-bottom: 26px;
+      padding: 50px 20px;
     }
 
-    .hero h1 {
-      margin: 0 0 8px;
-      color: var(--gold);
-      font-size: 56px;
-      font-weight: 900;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      text-shadow: 0 0 18px rgba(212, 175, 55, 0.18);
+    h1 {
+      color: gold;
+      font-size: 50px;
+      margin-bottom: 10px;
     }
 
-    .subtitle {
-      margin: 0;
-      font-size: 24px;
-      color: #efe3b6;
-      font-weight: 600;
-    }
-
-    .main-card {
-      background: var(--panel);
-      border: 1px solid var(--gold-soft);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
+    p {
+      color: #ccc;
+      font-size: 18px;
     }
 
     textarea {
-      width: 100%;
-      min-height: 260px;
-      resize: vertical;
-      border: 1px solid rgba(255,255,255,0.12);
-      border-radius: 18px;
+      width: 80%;
+      max-width: 800px;
+      height: 220px;
       background: #111;
       color: white;
-      padding: 20px;
-      font-size: 17px;
-      line-height: 1.9;
-      outline: none;
-      transition: 0.2s ease;
-    }
-
-    textarea:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 0 4px rgba(212,175,55,0.09);
-    }
-
-    .btn-group {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 18px;
+      border: 1px solid #444;
+      border-radius: 10px;
+      padding: 15px;
+      font-size: 16px;
+      margin-top: 20px;
     }
 
     button {
-      min-width: 190px;
+      padding: 12px 20px;
+      margin: 10px;
       border: none;
-      border-radius: 14px;
-      padding: 14px 22px;
+      border-radius: 10px;
       cursor: pointer;
-      font-size: 16px;
-      font-weight: 800;
-      transition: 0.2s ease;
-      box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+      font-weight: bold;
     }
 
-    button:hover {
-      transform: translateY(-2px);
+    .gold {
+      background: gold;
+      color: black;
     }
 
-    button:disabled {
-      opacity: 0.65;
-      cursor: not-allowed;
-      transform: none;
+    .white {
+      background: white;
+      color: black;
     }
 
-    .btn-primary {
-      background: linear-gradient(180deg, #f2d65f 0%, var(--gold) 100%);
-      color: #111;
-    }
-
-    .btn-secondary {
-      background: linear-gradient(180deg, #ffffff 0%, #ececec 100%);
-      color: #111;
-    }
-
-    .status-bar {
-      margin-top: 22px;
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 14px 18px;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .loader-wrap {
-      display: none;
-      margin-top: 18px;
-      text-align: center;
-    }
-
-    .loader-wrap.show {
-      display: block;
-    }
-
-    .loader {
-      width: 66px;
-      height: 66px;
-      margin: 0 auto 12px;
-      border-radius: 50%;
-      border: 4px solid rgba(255,255,255,0.08);
-      border-top-color: var(--gold);
-      animation: spin 0.9s linear infinite;
-    }
-
-    .loader-text {
-      color: #e9ddb3;
-      font-size: 15px;
-    }
-
-    .summary-strip {
-      display: none;
-      margin-top: 24px;
-      background: var(--panel);
-      border: 1px solid var(--gold-soft);
-      border-radius: 18px;
-      padding: 16px;
-      box-shadow: 0 14px 34px rgba(0,0,0,0.18);
-    }
-
-    .summary-strip.show {
-      display: block;
-    }
-
-    .summary-tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 10px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      font-weight: 700;
-      background: rgba(255,255,255,0.04);
-      color: white;
-      border: 1px solid transparent;
-    }
-
-    .tag.gold {
-      border-color: rgba(212,175,55,0.35);
-      background: rgba(212,175,55,0.10);
-      color: #f6e7ac;
-    }
-
-    .tag.green {
-      border-color: rgba(46,204,113,0.28);
-      background: rgba(46,204,113,0.12);
-      color: #d6ffe6;
-    }
-
-    .tag.red {
-      border-color: rgba(255,107,107,0.28);
-      background: rgba(255,107,107,0.12);
-      color: #ffdede;
-    }
-
-    .tag.blue {
-      border-color: rgba(93,173,226,0.28);
-      background: rgba(93,173,226,0.12);
-      color: #dff3ff;
-    }
-
-    .results-grid {
-      display: none;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-      margin-top: 24px;
-    }
-
-    .results-grid.show {
-      display: grid;
-    }
-
-    .result-card {
-      background: var(--panel-2);
-      border: 1px solid var(--border);
-      border-radius: 20px;
+    .result {
+      width: 80%;
+      max-width: 800px;
+      margin: 30px auto;
+      background: #151515;
       padding: 20px;
-      min-height: 230px;
-      box-shadow: 0 18px 44px rgba(0,0,0,0.22);
-    }
-
-    .card-summary {
-      border-top: 4px solid var(--gold);
-    }
-
-    .card-risks {
-      border-top: 4px solid var(--danger);
-    }
-
-    .card-action {
-      border-top: 4px solid var(--success);
-    }
-
-    .card-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: white;
-      margin-bottom: 12px;
-    }
-
-    .card-content {
-      white-space: pre-wrap;
+      border-radius: 10px;
+      text-align: right;
+      border-right: 5px solid gold;
       line-height: 2;
-      font-size: 16px;
-      color: #f1f1f1;
-      min-height: 140px;
-    }
-
-    .footer-note {
-      text-align: center;
-      margin-top: 22px;
-      color: #8d8d8d;
-      font-size: 13px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    @media (max-width: 980px) {
-      .results-grid.show {
-        grid-template-columns: 1fr;
-      }
-
-      .hero h1 {
-        font-size: 42px;
-      }
-
-      .subtitle {
-        font-size: 20px;
-      }
-    }
-
-    @media (max-width: 640px) {
-      button {
-        width: 100%;
-      }
-
-      .btn-group {
-        flex-direction: column;
-      }
-
-      .hero h1 {
-        font-size: 34px;
-      }
-
-      .subtitle {
-        font-size: 17px;
-      }
-
-      textarea {
-        min-height: 220px;
-      }
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <div class="hero">
-      <h1>BISMARKVAULT AI</h1>
-      <p class="subtitle">Professional Document & Finance Auditor</p>
-    </div>
 
-    <div class="main-card">
-      <textarea id="docInput" placeholder="أدخل النص أو بيانات الفاتورة هنا..."></textarea>
+  <h1>BISMARKVAULT AI</h1>
+  <p>تحليل احترافي للمستندات والبيانات المالية</p>
 
-      <div class="btn-group">
-        <button id="auditBtn" class="btn-primary">🔍 تدقيق مزدوج</button>
-        <button id="financeBtn" class="btn-secondary">📊 محاسبة ومواعيد</button>
-      </div>
+  <textarea id="input" placeholder="أدخل النص هنا..."></textarea>
 
-      <div id="status" class="status-bar">بانتظار المدخلات...</div>
+  <br>
 
-      <div id="loaderWrap" class="loader-wrap">
-        <div class="loader"></div>
-        <div class="loader-text">BismarkVault AI يفحص المحتوى الآن...</div>
-      </div>
-    </div>
+  <button class="gold" onclick="audit()">🔍 تدقيق</button>
+  <button class="white" onclick="finance()">📊 محاسبة</button>
 
-    <div id="summaryStrip" class="summary-strip">
-      <div class="summary-tags">
-        <div id="tagStatus" class="tag green">✅ جاهز</div>
-        <div id="tagMode" class="tag gold">🔍 وضع التحليل</div>
-        <div id="tagRisk" class="tag red">⚠️ مستوى المخاطر</div>
-        <div id="tagNext" class="tag blue">➡️ الإجراء التالي</div>
-      </div>
-    </div>
-
-    <div id="resultsGrid" class="results-grid">
-      <div class="result-card card-summary">
-        <div class="card-title">📌 الملخص</div>
-        <div id="summaryBox" class="card-content">...</div>
-      </div>
-
-      <div class="result-card card-risks">
-        <div class="card-title">⚠️ المخاطر / الملاحظات</div>
-        <div id="risksBox" class="card-content">...</div>
-      </div>
-
-      <div class="result-card card-action">
-        <div class="card-title">✅ التوصية التالية</div>
-        <div id="actionBox" class="card-content">...</div>
-      </div>
-    </div>
-
-    <div class="footer-note">
-      BismarkVault Prototype • GitHub Pages Version
-    </div>
-  </div>
+  <div id="output" class="result">بانتظار التحليل...</div>
 
   <script>
-    const auditBtn = document.getElementById("auditBtn");
-    const financeBtn = document.getElementById("financeBtn");
-    const input = document.getElementById("docInput");
-    const status = document.getElementById("status");
-    const loaderWrap = document.getElementById("loaderWrap");
-    const summaryStrip = document.getElementById("summaryStrip");
-    const resultsGrid = document.getElementById("resultsGrid");
-
-    const summaryBox = document.getElementById("summaryBox");
-    const risksBox = document.getElementById("risksBox");
-    const actionBox = document.getElementById("actionBox");
-
-    const tagStatus = document.getElementById("tagStatus");
-    const tagMode = document.getElementById("tagMode");
-    const tagRisk = document.getElementById("tagRisk");
-    const tagNext = document.getElementById("tagNext");
-
-    auditBtn.addEventListener("click", () => runLocalAnalysis("audit"));
-    financeBtn.addEventListener("click", () => runLocalAnalysis("finance"));
-
-    function runLocalAnalysis(mode) {
-      const text = input.value.trim();
-
+    function audit() {
+      const text = document.getElementById("input").value;
       if (!text) {
-        alert("يرجى إدخال نص أولاً");
+        alert("أدخل نص أولاً");
         return;
       }
 
-      auditBtn.disabled = true;
-      financeBtn.disabled = true;
-      loaderWrap.classList.add("show");
-      summaryStrip.classList.remove("show");
-      resultsGrid.classList.remove("show");
-
-      status.textContent =
-        mode === "audit"
-          ? "جاري تنفيذ التدقيق المبدئي..."
-          : "جاري استخراج البيانات المالية...";
-
-      setTimeout(() => {
-        const cards = buildCards(mode, text);
-
-        loaderWrap.classList.remove("show");
-        summaryStrip.classList.add("show");
-        resultsGrid.classList.add("show");
-
-        tagStatus.textContent = "✅ تم التحليل";
-        tagMode.textContent =
-          mode === "audit"
-            ? "🔍 وضع: تدقيق قانوني"
-            : "📊 وضع: تحليل مالي";
-        tagRisk.textContent =
-          mode === "audit"
-            ? "⚠️ مستوى المخاطر: متوسط"
-            : "⚠️ مستوى المخاطر: منخفض";
-        tagNext.textContent =
-          mode === "audit"
-            ? "➡️ التالي: مراجعة قانونية"
-            : "➡️ التالي: مراجعة مالية";
-
-        status.textContent =
-          mode === "audit"
-            ? "✅ تم التدقيق المبدئي بنجاح"
-            : "✅ تم استخراج البيانات المالية بنجاح";
-
-        typeText(summaryBox, cards.summary);
-        setTimeout(() => typeText(risksBox, cards.risks), 250);
-        setTimeout(() => typeText(actionBox, cards.action), 500);
-
-        auditBtn.disabled = false;
-        financeBtn.disabled = false;
-      }, 1200);
+      document.getElementById("output").innerText =
+        "✅ تم التدقيق\n\n" +
+        "النص: " + text + "\n\n" +
+        "لا توجد مشاكل واضحة حالياً.\n\n" +
+        "ننصح بمراجعة بشرية.";
     }
 
-    function buildCards(mode, text) {
-      if (mode === "audit") {
-        return {
-          summary:
-            "تمت مراجعة النص مبدئيًا.\n\n" +
-            "النص المدخل: " + text + "\n\n" +
-            "يبدو المستند منظمًا مبدئيًا ويحتاج مراجعة بشرية نهائية قبل الاعتماد.",
-          risks:
-            "لا توجد تناقضات واضحة حاليًا.\nقد تكون هناك بنود قانونية تحتاج تدقيقًا أعمق عند الربط بالذكاء الحقيقي.",
-          action:
-            "الخطوة التالية: راجع البنود الأساسية يدويًا، ثم انتقل لاحقًا إلى نسخة السيرفر لربط التحليل بالذكاء الفعلي."
-        };
+    function finance() {
+      const text = document.getElementById("input").value;
+      if (!text) {
+        alert("أدخل نص أولاً");
+        return;
       }
 
-      return {
-        summary:
-          "تم استخراج قراءة مالية أولية.\n\n" +
-          "النص المدخل: " + text + "\n\n" +
-          "تم التعرف على محتوى قد يحتوي على مبالغ أو تواريخ أو بيانات سداد.",
-        risks:
-          "القراءة الحالية مبدئية.\nقد تكون القيم أو الضرائب أو المواعيد غير مكتملة بدون تحليل AI فعلي.",
-        action:
-          "الخطوة التالية: استخدم هذه الواجهة كنسخة عرض، ثم اربطها لاحقًا بـ backend حقيقي لتحليل مالي دقيق."
-      };
+      document.getElementById("output").innerText =
+        "📊 تحليل مالي\n\n" +
+        "تم العثور على بيانات مالية محتملة.\n\n" +
+        "يرجى التحقق من الضرائب والمواعيد.";
     }
+  </script>
 
-    function typeText(element, text) {
-      element.textContent = "";
-      let i = 0;
-
-      function typing() {
-        if (i < text.length) {
-          element.textContent += text.charAt(i);
-          i++;
-          setTimeout(typing, 10);
-        }
-      }
-
-      typing()
+</body>
+</html>
