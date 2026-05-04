@@ -1781,5 +1781,47 @@ Lösung:
 
     setLanguage("ar");
   </script>
+  <!-- فقط الجزء المهم تم تعديله، الباقي كما هو -->
+<script>
+  const CONFIG = {
+    mode: "live",
+    liveApiUrl: "https://bismarkvault.onrender.com/api/analyze"
+  };
+
+  function toggleMode() {
+    CONFIG.mode = "live";
+    updateModeUI();
+  }
+
+  function updateModeUI() {
+    const isDemo = false;
+
+    const topText =
+      currentLanguage === "ar" ? `الوضع الحالي: Live Mode` :
+      currentLanguage === "en" ? `Current Mode: Live Mode` :
+      `Aktueller Modus: Live Mode`;
+
+    document.getElementById("modeBadgeTop").textContent = topText;
+
+    document.getElementById("modeChip").textContent =
+      currentLanguage === "ar" ? "Live Mode مفعل" :
+      currentLanguage === "en" ? "Live Mode Active" :
+      "Live Mode aktiv";
+
+    document.getElementById("backendChip").textContent =
+      currentLanguage === "ar"
+        ? "Backend متصل"
+        : currentLanguage === "en"
+        ? "Backend Connected"
+        : "Backend verbunden";
+
+    document.getElementById("aiStatusValue").textContent =
+      currentLanguage === "ar"
+        ? "مباشر"
+        : currentLanguage === "en"
+        ? "Live"
+        : "Live";
+  }
+</script>
 </body>
 </html>
